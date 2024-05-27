@@ -30,6 +30,7 @@ class PostResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         return $form
             ->schema([
                 Forms\Components\Section::make('Image')
@@ -49,15 +50,19 @@ class PostResource extends Resource
                             ->maxLength(255)
                             ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
 
+                      
                         Forms\Components\TextInput::make('slug')
                             ->disabled()
                             ->dehydrated()
                             ->required()
                             ->maxLength(255)
                             ->unique(Post::class, 'slug', ignoreRecord: true),
-
+                        
                         Forms\Components\Toggle::make('is_featured')
                             ->required(),
+
+                        Forms\Components\RichEditor::make('content')
+                            ->columnSpan('full'), 
 
                         Forms\Components\MarkdownEditor::make('content')
                             ->required()
@@ -89,6 +94,7 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        
             ->columns([
                 SpatieMediaLibraryImageColumn::make('media')->label('Image')
                     ->collection('blog/posts')
@@ -159,8 +165,5 @@ class PostResource extends Resource
         ];
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return __("menu.nav_group.blog");
-    }
+    
 }
