@@ -29,35 +29,49 @@ class CourseResource extends Resource
         ->schema([
             Section::make('')
             ->schema([
-                Forms\Components\TextInput::make('Name')->columnSpanFull(),
-                Forms\Components\TextInput::make('Slug')
+                Forms\Components\TextInput::make('name')
+                ->label('Name')
+                ->columnSpanFull(),
+                Forms\Components\TextInput::make('slug')
+                ->label('Slug')
                 ->disabled()
-                            ->dehydrated()
-                            ->required()
-                            ->maxLength(255),
-                Forms\Components\TagsInput::make('Course Period'),
+                ->dehydrated()
+                ->required()
+                ->maxLength(255),
+                Forms\Components\TagsInput::make('course_period')
+                ->label('Course Period'),
                 Forms\Components\Select::make('branch_id')
-             ->label('Branch')
-             ->options(Branch::all()->pluck('name', 'id'))
-             ->searchable(),
-                Forms\Components\Radio::make('Show on Website')
+                ->label('Branch')
+                ->options(Branch::all()->pluck('name', 'id'))
+                ->searchable(),
+                Forms\Components\Radio::make('max_software')
                 ->options([
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
                     '4 or more'=>'4 or more'
-                ]),
-                Forms\Components\Checkbox::make('Is Popular Course'),
-                Forms\Components\FileUpload::make('Image'),
-                Forms\Components\MarkdownEditor::make('Description'),
+                ])
+                ->label('Max Software'),
+                Forms\Components\TextInput::make('sub_title')
+                ->label('Sub Title'),
+                Forms\Components\Checkbox::make('popular_course')
+                ->label('Is Popular Course'),
+                Forms\Components\FileUpload::make('image')
+                ->label('Image'),
+                Forms\Components\MarkdownEditor::make('description')
+                ->label('Description'),
             ]),
                 
             Section::make('SCO')
             ->schema([
-                Forms\Components\TextInput::make('Site Title')->columnSpanFull(),
-                Forms\Components\Textarea::make('Meta Keywords')
+                Forms\Components\TextInput::make('site_title')
+                ->label('Site Title')
+                ->columnSpanFull(),
+                Forms\Components\Textarea::make('meta_keyword')
+                ->label('Meta Keywords')
                 ->autosize(),
-                Forms\Components\Textarea::make('Meta Description')
+                Forms\Components\Textarea::make('meta_description')
+                ->label('Meta Description')
                 ->autosize(),
                
             ])->columns(1),

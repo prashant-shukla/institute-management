@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('center_id');
             $table->string('name',255);
             $table->string('father_name',255);
-            $table->string('mother_name',255);
             $table->date('date_of_birth');
             $table->string('email');
             $table->text('correspondence_add');
@@ -35,9 +34,9 @@ return new class extends Migration
             $table->unsignedBigInteger('branch_id');
             $table->json('software_covered');
             $table->boolean('apply_gst');
-            $table->decimal('course_fee',8,2);
+            $table->decimal('course_fee',10,2);
             $table->unsignedTinyInteger('gst');
-            $table->decimal('total',8,2);
+            $table->decimal('total',10,2);
             $table->timestamps();
 
             $table->foreign('center_id')->references('id')->on('centers')->onDelete('cascade');

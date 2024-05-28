@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use PhpOption\None;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
@@ -18,12 +19,12 @@ class StudentFactory extends Factory
     {
         
         return [
-          
+        'reg_date' => $this->faker->date() ?: '28/05/2024',
         'reg_no' => $this->faker->biasedNumberBetween(1000, 9999),
-        'center_id' => 1,
+        'center_id' => $this->faker->numberBetween(1, 10),
         'name' => $this->faker->name(),
         'father_name' => $this->faker->name(),
-        'mother_name' => $this->faker->name(),
+        // 'mother_name' => $this->faker->name() ?: 'None',
         'date_of_birth' => $this->faker->date(),
         'email' => $this->faker->safeEmail(),
         'correspondence_add' => $this->faker->address(),
@@ -41,7 +42,6 @@ class StudentFactory extends Factory
         'course_fee' => $this->faker->numberBetween(1000, 10000), 
         'gst' => $this->faker->numberBetween(1, 100), 
         'total' => $this->faker->numberBetween(1000, 100000),
-        'reg_date' => $this->faker->date(),
         ];
     }
 }
