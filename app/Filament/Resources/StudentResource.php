@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\CheckboxList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -29,9 +30,9 @@ class StudentResource extends Resource
         ->schema([
             Section::make('REGISTRATION DETAILS')
        ->schema([
-        Forms\Components\DatePicker::make('date')
+        Forms\Components\DatePicker::make('reg_date')
         ->required()
-        ->label('Date')
+        ->label('Reg Date')
         ->columns(2),
         Forms\Components\TextInput::make('reg_no')
         ->required()
@@ -66,7 +67,7 @@ class StudentResource extends Resource
                 ->autosize()
                 ->required()
                 ->label('Correspondence_add'), 
-            Forms\Components\Textarea::make('permanent_address')
+            Forms\Components\Textarea::make('permanent_add')
                 ->autosize()  
                 ->required()
                 ->label('Permanent Address'),
@@ -75,7 +76,7 @@ class StudentResource extends Resource
             ->label('Qualification'),  
             Forms\Components\TextInput::make('college_workplace')
             ->required()
-            ->label('ollege/Workplace'), 
+            ->label('College/Workplace'), 
             Forms\Components\FileUpload::make('photo')
             ->required()
             ->label('Photo')
@@ -99,12 +100,12 @@ class StudentResource extends Resource
              ->label('Branch')
              ->options(Branch::all()->pluck('name', 'id'))
              ->searchable(),
-             Forms\Components\Select::make('Course')
-             ->label('Course')
+             Forms\Components\Select::make('course_id')
              ->options(Course::all()->pluck('name', 'id'))
              ->searchable()
              ->label('Course'),
-             Forms\Components\CheckboxList::make('software_covered ')
+            
+             Forms\Components\CheckboxList::make('software_covered')
              ->options([
               'AutoCAD' => 'AutoCAD',
               'Photoshop' => 'Photoshop',
@@ -134,13 +135,14 @@ class StudentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                    Tables\Columns\TextColumn::make(name:'name')
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(),
-    
-            ])
+        ->columns([
+            Tables\Columns\TextColumn::make(name:'name')
+            ->searchable()
+            ->sortable()
+            ->toggleable(),
+
+            
+        ])
             ->filters([
                 //
             ])

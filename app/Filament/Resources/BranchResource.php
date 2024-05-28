@@ -26,17 +26,26 @@ class BranchResource extends Resource
         ->schema([
             Section::make('')
             ->schema([
-                Forms\Components\TextInput::make('name')->columnSpanFull(),
+                Forms\Components\TextInput::make('name')
+                ->label('Name')
+                ->columnSpanFull(),
                 Forms\Components\TextInput::make('slug')
-                            ->dehydrated()
-                            ->required()
-                            ->maxLength(255),
-                Forms\Components\TagsInput::make('Software'),
-                Forms\Components\MarkdownEditor::make('Description'),
-                Forms\Components\TextInput::make('Sub Title'),
-                Forms\Components\FileUpload::make('Image'),
-                Forms\Components\TextInput::make('Order'),
-                Forms\Components\Radio::make('Show on Website')
+                ->dehydrated()
+                ->required()
+                ->label('Slug')
+                ->maxLength(255),
+                Forms\Components\TagsInput::make('software')
+                ->label('Software'),
+                Forms\Components\MarkdownEditor::make('description')
+                ->label('Description'),
+                Forms\Components\TextInput::make('sub_title')
+                ->label('Sub Title'),
+                Forms\Components\FileUpload::make('image')
+                ->label('Image'),
+                Forms\Components\TextInput::make('Order')
+                ->label('Order'),
+                Forms\Components\Radio::make('show_on_website')
+                ->label('Show on Website')
                 ->options([
                     'Show' => 'show',
                     'Hide' => 'hide',
@@ -45,10 +54,14 @@ class BranchResource extends Resource
                 
             Section::make('SCO')
             ->schema([
-                Forms\Components\TextInput::make('Site Title')->columnSpanFull(),
-                Forms\Components\Textarea::make('Meta Keywords')
+                Forms\Components\TextInput::make('site_title')
+                ->label('Site Title')
+                ->columnSpanFull(),
+                Forms\Components\Textarea::make('meta_keyword')
+                ->label('Meta Keywords')
                 ->autosize(),
-                Forms\Components\Textarea::make('Meta Description')
+                Forms\Components\Textarea::make('meta_description')
+                ->label('Meta Description')
                 ->autosize(),
             ]),
         ]);

@@ -11,4 +11,6 @@ class Student extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = ['software_covered' => 'array'];
+
 }
