@@ -7,6 +7,7 @@ use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
 use App\Models\Branch;
 use App\Models\Course;
+use App\Models\Center;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Section;
 use Filament\Forms;
@@ -19,7 +20,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Collection;
 
 class StudentResource extends Resource
 {
@@ -33,7 +35,7 @@ class StudentResource extends Resource
     {
         return $form
         ->schema([
-            Section::make('REGISTRATION DETAILS')
+       Section::make('REGISTRATION DETAILS')
        ->schema([
         Forms\Components\DatePicker::make('reg_date')
         ->required()
@@ -44,10 +46,11 @@ class StudentResource extends Resource
         ->label('Reg No')
         ->maxLength(255)
         ->columns(2),
-        Forms\Components\TextInput::make('center_id')
-        ->label('Center Code')
-        ->required(),
-        ])->columns(3),
+        Forms\Components\Select::make('center_id')
+             ->label('Center Code')
+             ->options(Center::all()->pluck('center_code', 'id'))
+             ->searchable()
+            ])->columns(3),
        
         Section::make('PERSONAL DETAILS') 
         ->schema([
@@ -104,9 +107,16 @@ class StudentResource extends Resource
              Forms\Components\Select::make('branch_id')
              ->label('Branch')
              ->options(Branch::all()->pluck('name', 'id'))
-             ->searchable(),
+             ->searchable()
+             ->live(), 
              Forms\Components\Select::make('course_id')
-             ->options(Course::all()->pluck('name', 'id'))
+             ->options(fn (Get $get): Collection => 
+                // Course::all()->pluck('name', 'id')
+                Course::query()
+                ->where('branch_id', $get('branch_id'))
+                ->pluck('name', 'id')
+                )
+            //  ->options(Course::all()->pluck('name', 'id'))
              ->searchable()
              ->label('Course'),
             
@@ -155,11 +165,19 @@ class StudentResource extends Resource
     {
         return $table
           ->columns([
-            Tables\Columns\TextColumn::make(name:'Name')
+            Tables\Columns\TextColumn::make(name:'reg_no')
             ->searchable()
             ->sortable()
             ->toggleable(),
-            Tables\Columns\TextColumn::make(name:'Reg No')
+            Tables\Columns\TextColumn::make(name:'name')
+            ->searchable()
+            ->sortable()
+            ->toggleable(),
+            Tables\Columns\TextColumn::make(name:'course.name')
+            ->searchable()
+            ->sortable()
+            ->toggleable(),
+            Tables\Columns\TextColumn::make(name:'reg_date')
             ->searchable()
             ->sortable()
             ->toggleable(),

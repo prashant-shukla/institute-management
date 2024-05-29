@@ -10,4 +10,9 @@ class Center extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function Center(): HasMany
+    {
+        return $this->hasMany(Center::class);
+    }
 }

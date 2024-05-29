@@ -40,7 +40,7 @@ class StudentFactory extends Factory
         'software_covered' => json_encode(["test"=>$this->faker->word()]),
         'apply_gst' => $this->faker->boolean(),
         'course_fee' => $this->faker->numberBetween(1000, 10000), 
-        'gst' => $this->faker->numberBetween(1, 100), 
+        'gst' => $this->faker->numberBetween(1, 10000), 
         'total' => $this->faker->numberBetween(1000, 100000),
         ];
     }

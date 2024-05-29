@@ -16,7 +16,7 @@ return new class extends Migration
             // $table->string('student_id', 255);
             $table->date('reg_date');
             $table->string('reg_no', 255);
-            $table->unsignedBigInteger('center_id');
+            $table->unsignedBigInteger('center_id')->default(null)->change();
             $table->string('name',255);
             $table->string('father_name',255);
             $table->date('date_of_birth');
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->json('software_covered');
             $table->boolean('apply_gst');
             $table->decimal('course_fee',10,2);
-            $table->unsignedTinyInteger('gst');
+            $table->decimal('gst',10,2);
             $table->decimal('total',10,2);
             $table->timestamps();
 

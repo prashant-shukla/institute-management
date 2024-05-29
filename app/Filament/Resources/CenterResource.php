@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CenterResource\Pages;
 use App\Filament\Resources\CenterResource\RelationManagers;
 use App\Models\Center;
-// use App\Models\Centers;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Forms\Components\Section;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -82,6 +82,7 @@ class CenterResource extends Resource
                 Forms\Components\Checkbox::make('nonatc')
                 ->label('INon ATC'),
                 ]),
+                
             ]);
     }
 
@@ -89,7 +90,27 @@ class CenterResource extends Resource
     {
         return $table
             ->columns([
-                //
+            
+                    Tables\Columns\TextColumn::make(name:'name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+                    Tables\Columns\TextColumn::make(name:'mobile_no')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+                    Tables\Columns\TextColumn::make(name:'city')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+                    // Tables\Columns\TextColumn::make(name:'nonatc')
+                    // ->searchable()
+                    // ->sortable()
+                    // ->toggleable(),
+                    Tables\Columns\IconColumn::make('nonatc')
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable()
             ])
             ->filters([
                 //

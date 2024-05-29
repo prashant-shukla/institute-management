@@ -6,7 +6,6 @@ use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers;
 use App\Models\Student;
 use App\Models\Branch;
-
 use App\Models\Course;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,6 +15,7 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\ToggleColumn;
 
 class CourseResource extends Resource
 {
@@ -88,22 +88,17 @@ class CourseResource extends Resource
             ->searchable()
             ->sortable()
             ->toggleable(),
-            Tables\Columns\TextColumn::make('Branch')
+            Tables\Columns\TextColumn::make('branch.name')
             ->searchable()
             ->sortable()
             ->toggleable(),
-            Tables\Columns\TextColumn::make('Popular Course')
-            ->searchable()
+            Tables\Columns\ToggleColumn::make('popular_course')
+            ->onIcon('heroicon-m-bolt')
+            ->offIcon('heroicon-m-user'),
+            Tables\Columns\TextColumn::make('max_software')
             ->sortable()
             ->toggleable(),
-            Tables\Columns\TextColumn::make('Max Software')
-            ->searchable()
-            ->sortable()
-            ->toggleable(),
-            Tables\Columns\TextColumn::make('Action')
-            ->searchable()
-            ->sortable()
-            ->toggleable(),
+            
             ])
             ->filters([
                 //
