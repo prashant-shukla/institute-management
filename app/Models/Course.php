@@ -9,4 +9,9 @@ class Course extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+   // protected $casts = ['max_software' => 'array'];
+    protected $casts = [
+        'max_software' => 'integer',
+    ];
 }

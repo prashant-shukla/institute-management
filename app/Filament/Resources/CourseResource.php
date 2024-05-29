@@ -23,6 +23,8 @@ class CourseResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
+    protected static ?string $navigationGroup = 'Institute';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -34,11 +36,10 @@ class CourseResource extends Resource
                 ->columnSpanFull(),
                 Forms\Components\TextInput::make('slug')
                 ->label('Slug')
-                ->disabled()
                 ->dehydrated()
                 ->required()
                 ->maxLength(255),
-                Forms\Components\TagsInput::make('course_period')
+                Forms\Components\TextInput::make('course_period')
                 ->label('Course Period'),
                 Forms\Components\Select::make('branch_id')
                 ->label('Branch')
@@ -49,7 +50,7 @@ class CourseResource extends Resource
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
-                    '4 or more'=>'4 or more'
+                    '4 or more' =>'4 or more',
                 ])
                 ->label('Max Software'),
                 Forms\Components\TextInput::make('sub_title')

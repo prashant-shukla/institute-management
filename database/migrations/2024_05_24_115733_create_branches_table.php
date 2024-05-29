@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('sub_title');
             $table->string('image')->nullable(); 
             $table->unsignedSmallInteger('order'); 
-            $table->boolean('show_on_website')->default(false);
+            $table->string('show_on_website')->default(false);
             $table->string('site_title', 255)->nullable();
             $table->string('meta_keyword')->nullable(); 
             $table->string('meta_description', 255)->nullable();

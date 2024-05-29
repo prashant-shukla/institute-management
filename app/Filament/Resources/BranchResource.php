@@ -20,6 +20,8 @@ class BranchResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
+    protected static ?string $navigationGroup = 'Institute';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -42,13 +44,13 @@ class BranchResource extends Resource
                 ->label('Sub Title'),
                 Forms\Components\FileUpload::make('image')
                 ->label('Image'),
-                Forms\Components\TextInput::make('Order')
+                Forms\Components\TextInput::make('order')
                 ->label('Order'),
                 Forms\Components\Radio::make('show_on_website')
                 ->label('Show on Website')
                 ->options([
-                    'Show' => 'show',
-                    'Hide' => 'hide',
+                    1 => 'show',
+                    0 => 'hide',
                 ])->inline(),
             ]),
                 
@@ -75,8 +77,6 @@ class BranchResource extends Resource
                 ->searchable()
                 ->sortable()
                 ->toggleable(),
-
-                
             ])
             ->filters([
                 //

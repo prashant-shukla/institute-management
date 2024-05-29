@@ -21,6 +21,8 @@ class CenterResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
+    protected static ?string $navigationGroup = 'Institute';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -62,6 +64,12 @@ class CenterResource extends Resource
                 Forms\Components\Textarea::make('address')
                 ->autosize()
                 ->label('Address')
+                ->columnSpanFull(),
+                Forms\Components\TextInput::make('state')
+                ->label('State')
+                ->columnSpanFull(),
+                Forms\Components\TextInput::make('city')
+                ->label('City')
                 ->columnSpanFull(),
                 // Forms\Components\Select::make('State')
                 // ->label('Author')

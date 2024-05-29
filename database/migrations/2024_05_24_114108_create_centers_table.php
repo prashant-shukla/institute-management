@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('mobile_no',25);
             $table->string('phone_no',25);
-            $table->unsignedTinyInteger('gstin');
-            $table->text('address');
+            $table->unsignedTinyInteger('gstin')->change();
+            $table->text('address',255);
             $table->text('state');
             $table->text('city');
             $table->boolean('nonatc')->nullable();

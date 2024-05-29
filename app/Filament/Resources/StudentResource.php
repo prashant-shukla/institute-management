@@ -17,12 +17,17 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\CheckboxList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+
 
 class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?string $navigationGroup = 'Institute';
 
     public static function form(Form $form): Form
     {
@@ -115,15 +120,29 @@ class StudentResource extends Resource
               'Fusion 360' => 'Fusion 360',
              ])
              ->label('Software Covered'),
-            Forms\Components\Checkbox::make('apply_gst')->label('Apply GST'),
             Forms\Components\TextInput::make('course_fee')
             ->label('Course Fee')
             ->required()
-            ->numeric(),
+            ->numeric()
+            ->live(onBlur: true) 
+            ->afterStateUpdated(function(Set $set, ?string $state, Get $get) {
+                $gst = 0;
+                if($get('apply_gst')) {
+                    $gst = $state*.18;
+                    $set('gst', $gst);
+                } 
+                $set('total', $state+$gst);
+                
+            }),
+
+            Forms\Components\Checkbox::make('apply_gst')
+                ->label('Apply GST')
+                ->live(),
             Forms\Components\TextInput::make('gst')
             ->label('GST')
             ->required()
-            ->numeric(),
+            ->numeric()
+            ->hidden(fn (Get $get): bool => ! $get('apply_gst')),
             Forms\Components\TextInput::make('total')
             ->label('Total')
             ->required()
@@ -135,14 +154,17 @@ class StudentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            Tables\Columns\TextColumn::make(name:'name')
+          ->columns([
+            Tables\Columns\TextColumn::make(name:'Name')
             ->searchable()
             ->sortable()
             ->toggleable(),
+            Tables\Columns\TextColumn::make(name:'Reg No')
+            ->searchable()
+            ->sortable()
+            ->toggleable(),
+            ])
 
-            
-        ])
             ->filters([
                 //
             ])
