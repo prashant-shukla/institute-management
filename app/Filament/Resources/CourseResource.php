@@ -16,6 +16,7 @@ use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Navigation\NavigationItem;
 
 class CourseResource extends Resource
 {
@@ -25,6 +26,8 @@ class CourseResource extends Resource
 
     protected static ?string $navigationGroup = 'Institute';
 
+    protected static ?int $navigationSort = 10;
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -33,7 +36,8 @@ class CourseResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Name')
-                ->columnSpanFull(),
+                ->columnSpanFull()
+                ->required(),
                 Forms\Components\TextInput::make('slug')
                 ->label('Slug')
                 ->dehydrated()
@@ -56,7 +60,8 @@ class CourseResource extends Resource
                 Forms\Components\TextInput::make('sub_title')
                 ->label('Sub Title'),
                 Forms\Components\Checkbox::make('popular_course')
-                ->label('Is Popular Course'),
+                ->label('Is Popular Course')
+                ->required(),
                 Forms\Components\FileUpload::make('image')
                 ->label('Image'),
                 Forms\Components\MarkdownEditor::make('description')
@@ -134,8 +139,5 @@ class CourseResource extends Resource
             'edit' => Pages\EditCourse::route('/{record}/edit'),
         ];
     }
-    public static function getNavigationGroup(): ?string
-    {
-        return __("menu.nav_group.blog");
-    }
+
 }

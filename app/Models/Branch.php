@@ -17,8 +17,8 @@ class Branch extends Model
     /**
      * Get the courses for the branch.
      */
-    // public function courses(): HasMany
-    // {
-    //     return $this->hasMany(Course::class);
-    // }
+    public function courses(): HasMany
+    {
+        return $this->hasMany(Course::class);
+    }
 }

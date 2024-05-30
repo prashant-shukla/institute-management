@@ -103,10 +103,7 @@ class CenterResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                    // Tables\Columns\TextColumn::make(name:'nonatc')
-                    // ->searchable()
-                    // ->sortable()
-                    // ->toggleable(),
+                    
                     Tables\Columns\IconColumn::make('nonatc')
                     ->boolean()
                     ->sortable()
