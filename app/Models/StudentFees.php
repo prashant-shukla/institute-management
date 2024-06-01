@@ -7,32 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Course;
-use App\Models\StudentFees as Fee;
+use App\Models\Student;
 
-class Student extends Model
+class StudentFees extends Model
 {
     use HasFactory;
-
+    
     protected $guarded = ['id'];
+    
+    public function courses(): HasMany
+    {
+        return $this->hasMany(Course::class);
+    }
 
-    protected $casts = ['software_covered' => 'array'];
 
-   
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
         
     }
-    
-    public function center(): HasMany
-    {
-        return $this->hasMany(Center::class);
-    }
-
-    public function fees(): HasMany
-    {
-        return $this->hasMany(Fee::class);
-    }
-
-    
 }

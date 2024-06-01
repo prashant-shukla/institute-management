@@ -110,15 +110,9 @@ class StudentResource extends Resource
              ->searchable()
              ->live(), 
              Forms\Components\Select::make('course_id')
-             ->options(fn (Get $get): Collection => 
-                // Course::all()->pluck('name', 'id')
-                Course::query()
-                ->where('branch_id', $get('branch_id'))
-                ->pluck('name', 'id')
-                )
-            //  ->options(Course::all()->pluck('name', 'id'))
-             ->searchable()
-             ->label('Course'),
+             ->label('Course')
+             ->options(Course::all()->pluck('name', 'id'))
+             ->searchable(),
             
              Forms\Components\CheckboxList::make('software_covered')
              ->options([
@@ -196,13 +190,13 @@ class StudentResource extends Resource
             ]);
     }
 
+   
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\StudentFeesRelationManager::class,
         ];
     }
-
     public static function getPages(): array
     {
         return [
