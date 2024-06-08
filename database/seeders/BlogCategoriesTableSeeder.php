@@ -22,7 +22,6 @@ class BlogCategoriesTableSeeder extends Seeder
         foreach (range(1, 6) as $index) {
             $name = $faker->words(3, true);
             DB::table('blog_categories')->insert([
-                'id' => (string) new Ulid(),
                 'name' => $name,
                 'slug' => Str::slug($name),
                 'description' => $faker->optional()->sentence($nbWords = 6, $variableNbWords = true),

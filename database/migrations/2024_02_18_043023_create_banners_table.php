@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('banners', function (Blueprint $table) {
-            $table->ulid('id')->primary();
-            $table->foreignUlid('banner_category_id')->nullable()->nullOnDelete();
+            $table->id();
+            $table->unsignedBigInteger('banner_category_id')->nullable()->nullOnDelete();
             $table->smallInteger('sort')->default(0)->index();
             $table->boolean('is_visible')->default(false)->index();
             $table->string('title', 255)->nullable();

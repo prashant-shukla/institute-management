@@ -15,7 +15,6 @@ class Course extends Model
 
    // protected $casts = ['max_software' => 'array'];
     protected $casts = [
-        'max_software' => 'integer',
         'popular_course' => 'boolean',
     ];
    

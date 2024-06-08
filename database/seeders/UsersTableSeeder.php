@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,9 +17,7 @@ class UsersTableSeeder extends Seeder
         $faker = Faker::create();
 
         // Superadmin user
-        $sid = Str::uuid();
         DB::table('users')->insert([
-            'id' => $sid,
             'username' => 'superadmin',
             'firstname' => 'Super',
             'lastname' => 'Admin',
@@ -30,14 +29,13 @@ class UsersTableSeeder extends Seeder
         ]);
 
         // Bind superadmin user to FilamentShield
-        Artisan::call('shield:super-admin', ['--user' => $sid]);
+        Artisan::call('shield:super-admin', ['--user' => 1]);
 
         $roles = DB::table('roles')->whereNot('name', 'super_admin')->get();
         foreach ($roles as $role) {
             for ($i = 0; $i < 10; $i++) {
-                $userId = Str::uuid();
+                $userId = $i+1;
                 DB::table('users')->insert([
-                    'id' => $userId,
                     'username' => $faker->unique()->userName,
                     'firstname' => $faker->firstName,
                     'lastname' => $faker->lastName,

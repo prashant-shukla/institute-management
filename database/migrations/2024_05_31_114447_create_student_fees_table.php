@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('student_fees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_course_id');
+             $table->unsignedBigInteger('student_id');
             $table->decimal('fee_amount',10,2);
             $table->timestamp('received_on');
             $table->string('payment_mode');
             $table->timestamps();
 
-            $table->foreign('student_course_id')->references('id')->on('student_courses')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('student_courses')->onDelete('cascade');
            
         });
     }

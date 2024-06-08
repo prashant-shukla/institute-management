@@ -29,7 +29,6 @@ class BlogPostsTableSeeder extends Seeder
             $content = $faker->randomHtml(); // Generate HTML content
 
             DB::table('blog_posts')->insert([
-                'id' => (string) new Ulid(),
                 'blog_author_id' => $faker->randomElement($authorIds),
                 'blog_category_id' => $faker->randomElement($categoryIds),
                 'is_featured' => $faker->boolean(30),

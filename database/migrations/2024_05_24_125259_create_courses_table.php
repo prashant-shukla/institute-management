@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('slug')->unique();
-            $table->string('course_period');
+            $table->string('course_duration');
             $table->unsignedBigInteger('branch_id');
-            $table->tinyInteger('max_software'); 
+            
             $table->string('sub_title')->nullable();
-            $table->string('popular_course'); 
+            $table->TINYINT('popular_course'); 
             $table->string('image')->nullable();
             $table->string('description', 160)->nullable(); 
             $table->string('site_title', 60)->nullable();

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers;
+use Filament\Tables\Columns\ToggleColumn;
 use App\Models\Student;
 use App\Models\Branch;
 use App\Models\Course;
@@ -15,7 +16,6 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Navigation\NavigationItem;
 
 class CourseResource extends Resource
@@ -43,23 +43,17 @@ class CourseResource extends Resource
                 ->dehydrated()
                 ->required()
                 ->maxLength(255),
-                Forms\Components\TextInput::make('course_period')
-                ->label('Course Period'),
+                Forms\Components\TextInput::make('course_duration')
+                ->label('Course Duration'),
                 Forms\Components\Select::make('branch_id')
                 ->label('Branch')
                 ->options(Branch::all()->pluck('name', 'id'))
                 ->searchable(),
-                Forms\Components\Radio::make('max_software')
-                ->options([
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4 or more' =>'4 or more',
-                ])
-                ->label('Max Software'),
+            
                 Forms\Components\TextInput::make('sub_title')
                 ->label('Sub Title'),
-                Forms\Components\Checkbox::make('popular_course')
+                
+                Forms\Components\ToggleColumn::make('popular_course')
                 ->label('Is Popular Course')
                 ->required(),
                 Forms\Components\FileUpload::make('image')
@@ -100,9 +94,7 @@ class CourseResource extends Resource
             Tables\Columns\ToggleColumn::make('popular_course')
             ->onIcon('heroicon-m-bolt')
             ->offIcon('heroicon-m-user'),
-            Tables\Columns\TextColumn::make('max_software')
-            ->sortable()
-            ->toggleable(),
+            
             
             ])
             ->filters([

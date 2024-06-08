@@ -2,26 +2,28 @@
 
 namespace App\Policies;
 
-use App\Models\StudentCourses;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\StudentCourses;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StudentCoursesPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view_any_student::courses');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Studentcourses $studentCourses): bool
+    public function view(User $user, StudentCourses $studentCourses): bool
     {
-        return true;
+        return $user->can('view_student::courses');
     }
 
     /**
@@ -29,38 +31,78 @@ class StudentCoursesPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create_student::courses');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Studentcourses $studentCourses): bool
+    public function update(User $user, StudentCourses $studentCourses): bool
     {
-        return true;
+        return $user->can('update_student::courses');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Studentcourses $studentCourses): bool
+    public function delete(User $user, StudentCourses $studentCourses): bool
     {
-        return true;
+        return $user->can('delete_student::courses');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Studentcourses $studentCourses): bool
+    public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->can('delete_any_student::courses');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Studentcourses $studentCourses): bool
+    public function forceDelete(User $user, StudentCourses $studentCourses): bool
     {
-        return true;
+        return $user->can('force_delete_student::courses');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_student::courses');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, StudentCourses $studentCourses): bool
+    {
+        return $user->can('restore_student::courses');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_student::courses');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, StudentCourses $studentCourses): bool
+    {
+        return $user->can('replicate_student::courses');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_student::courses');
     }
 }

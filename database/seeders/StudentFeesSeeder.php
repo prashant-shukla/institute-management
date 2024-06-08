@@ -12,6 +12,6 @@ class StudentFeesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Course::factory(count:10)->create();
     }
 }

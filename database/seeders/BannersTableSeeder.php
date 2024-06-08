@@ -17,7 +17,6 @@ class BannersTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $name = $faker->words(3, true);
             DB::table('banner_categories')->insert([
-                'id' => (string) new Ulid(),
                 'name' => $name,
                 'slug' => Str::slug($name),
                 'description' => $faker->text(200),
@@ -31,7 +30,6 @@ class BannersTableSeeder extends Seeder
 
         for ($i = 0; $i < 12; $i++) {
             DB::table('banners')->insert([
-                'id' => (string) new Ulid(),
                 'banner_category_id' => $faker->randomElement($bannerCategoryIds),
                 'sort' => $i,
                 'title' => $faker->sentence,

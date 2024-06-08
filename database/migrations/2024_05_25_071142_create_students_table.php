@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            // $table->string('student_id', 255);
+            
             $table->date('reg_date');
             $table->string('reg_no', 255);
-            $table->unsignedBigInteger('center_id')->default(null)->change();
-            $table->string('name',255);
+          
             $table->string('father_name',255);
             $table->date('date_of_birth');
-            $table->string('email');
+           
             $table->text('correspondence_add');
             $table->text('permanent_add');
             $table->string('qualification',255);
@@ -30,18 +29,11 @@ return new class extends Migration
             $table->string('office_no',25);
             $table->string('mobile_no',25);
             // $table->bigInteger('branch');
-            $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('branch_id');
-            $table->json('software_covered');
-            $table->boolean('apply_gst');
-            $table->decimal('course_fee',10,2);
-            $table->decimal('gst',10,2);
-            $table->decimal('total',10,2);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('center_id')->references('id')->on('centers')->onDelete('cascade');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+           
         });
     }
 

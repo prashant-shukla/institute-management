@@ -20,10 +20,16 @@ return new class extends Migration
         $table->timestamp('completion_at')->nullable();
         $table->timestamp('certificate_issued_at')->nullable();
         $table->string('remark')->notNull();
+        $table->json('software_covered');
+        $table->boolean('apply_gst');
+        $table->decimal('course_fee',10,2);
+        $table->decimal('gst',10,2);
+        $table->decimal('total',10,2);
         $table->timestamps();
 
         $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+        
    });
     }
 
