@@ -18,11 +18,11 @@ class BannerCategoryResource extends Resource
     protected static ?string $model = BannerCategory::class;
 
     protected static ?string $recordTitleAttribute = 'name';
-
-    protected static ?int $navigationSort = -1;
+    protected static ?string $navigationGroup = 'CMS';
+    protected static ?int $navigationSort = -110;
     protected static ?string $navigationIcon = 'fluentui-stack-20';
     protected static ?string $navigationLabel = 'Categories';
-    protected static ?string $navigationGroup = 'Banner';
+  
 
     public static function form(Form $form): Form
     {
@@ -97,7 +97,9 @@ class BannerCategoryResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
+                Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
+                Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

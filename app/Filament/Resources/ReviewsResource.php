@@ -19,7 +19,9 @@ class ReviewsResource extends Resource
     protected static ?string $model = Reviews::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Institute';
 
+    protected static ?int $navigationSort = -150;
     public static function form(Form $form): Form
     {
         return $form

@@ -20,8 +20,8 @@ class BranchResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
-    protected static ?string $navigationGroup = 'Institute';
-
+    protected static ?string $navigationGroup = 'Courses';
+    protected static ?int $navigationSort = -130;
     public static function form(Form $form): Form
     {
         return $form

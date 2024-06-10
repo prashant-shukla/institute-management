@@ -19,7 +19,9 @@ class EventsResource extends Resource
     protected static ?string $model = Events::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Institute';
 
+    protected static ?int $navigationSort = -160;
     public static function form(Form $form): Form
     {
         return $form

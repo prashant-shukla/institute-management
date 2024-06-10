@@ -19,8 +19,8 @@ class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
     protected static int $globalSearchResultsLimit = 20;
-
-    protected static ?int $navigationSort = -1;
+    protected static ?string $navigationGroup = 'CMS';
+    protected static ?int $navigationSort = -120;
     protected static ?string $navigationIcon = 'fluentui-image-shadow-24';
 
     public static function form(Form $form): Form
@@ -101,8 +101,9 @@ class BannerResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
+                Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
+                Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

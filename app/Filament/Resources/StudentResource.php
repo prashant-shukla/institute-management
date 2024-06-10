@@ -33,8 +33,14 @@ class StudentResource extends Resource
 
     // Other class methods...
 
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     //public static $model = Student::class; // Removed duplicate declaration
+
+    protected static ?string $navigationGroup = 'Users';
+
+    protected static ?int $navigationSort = -200;
+
 
     public static function form(Form $form): Form
     {
@@ -77,7 +83,9 @@ class StudentResource extends Resource
             ])
             ->filters([])
             ->actions([
-                EditAction::make(),
+                Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
+                Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
+                Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

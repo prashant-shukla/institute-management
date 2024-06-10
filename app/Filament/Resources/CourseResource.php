@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Forms\Components\Toggle;
 use App\Models\Student;
 use App\Models\Branch;
 use App\Models\Course;
@@ -18,15 +19,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Navigation\NavigationItem;
 
+
 class CourseResource extends Resource
 {
     protected static ?string $model = Course::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
-    protected static ?string $navigationGroup = 'Institute';
-
-    protected static ?int $navigationSort = 10;
+    protected static ?string $navigationGroup = 'Courses';
+    protected static ?int $navigationSort = -140;
     
     public static function form(Form $form): Form
     {
@@ -53,7 +54,7 @@ class CourseResource extends Resource
                 Forms\Components\TextInput::make('sub_title')
                 ->label('Sub Title'),
                 
-                Forms\Components\ToggleColumn::make('popular_course')
+                Forms\Components\Toggle::make('popular_course')
                 ->label('Is Popular Course')
                 ->required(),
                 Forms\Components\FileUpload::make('image')
@@ -100,10 +101,6 @@ class CourseResource extends Resource
             ->filters([
                 //
             ])
-           
-                ->filters([
-                    //
-                ])
             ->actions([
                 Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
                 Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),

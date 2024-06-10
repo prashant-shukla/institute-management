@@ -91,6 +91,7 @@ class CertificateResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

@@ -2,17 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Branch;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BrancheSeeder extends Seeder
+class StudyMaterialsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Branche::factory()->count(10)->create();
+        StudyMaterials::factory(count:10)->create();
     }
 }
