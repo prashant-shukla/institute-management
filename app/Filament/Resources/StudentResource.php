@@ -33,7 +33,7 @@ class StudentResource extends Resource
 
     // Other class methods...
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     //public static $model = Student::class; // Removed duplicate declaration
 

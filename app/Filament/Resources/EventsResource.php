@@ -18,7 +18,7 @@ class EventsResource extends Resource
 {
     protected static ?string $model = Events::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-gift-top';
     protected static ?string $navigationGroup = 'Institute';
 
     protected static ?int $navigationSort = -160;

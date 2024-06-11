@@ -21,7 +21,7 @@ class StudentFeesResource extends Resource
 {
     protected static ?string $model = StudentFees::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-rupee';
 
     public static function form(Form $form): Form
     {

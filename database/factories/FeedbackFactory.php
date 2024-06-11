@@ -18,6 +18,7 @@ class FeedbackFactory extends Factory
     {
         return [
             'reg_no' => $this->faker->text(10),
+            'name'=>$this->faker->name(30),
             'student_id' => $this->faker->randomNumber(),
             'description' => $this->faker->sentence(),
             'created_at' => $this->faker->dateTime(),

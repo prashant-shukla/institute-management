@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FeedbacksResource\Pages;
-use App\Filament\Resources\FeedbacksResource\RelationManagers;
-use App\Models\Feedback;
+use App\Filament\Resources\InquiriesResource\Pages;
+use App\Filament\Resources\InquiriesResource\RelationManagers;
+use App\Models\Inquiries;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,31 +12,30 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Models\Student;
 
-class FeedbacksResource extends Resource
+class InquiriesResource extends Resource
 {
-    protected static ?string $model = Feedback::class;
+    protected static ?string $model = Inquiries::class;
+    protected static ?string $navigationGroup = 'Users';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-check';
-    protected static ?string $navigationGroup = 'Institute';
+    protected static ?int $navigationSort = -300;
 
-    protected static ?int $navigationSort = -160;
+    protected static ?string $navigationIcon = 'heroicon-o-phone-arrow-up-right';
+
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                ->label('Name')
-                ->columnSpanFull()
-                ->required(),
-                Forms\Components\MarkdownEditor::make('description')
-                ->label('Description'),
-                Forms\Components\Select::make('student_id')
-                ->label('Student')
-                ->options(Student::all()->pluck('name', 'id'))
-                ->searchable()
-                ,
+        ->schema([
+            Forms\Components\TextInput::make('name')
+            ->label('Name')
+            ->required()
+            ->maxLength(255),
+            Forms\Components\TextInput::make('email')
+            ->required()
+            ->email(),
+            Forms\Components\TextInput::make('message')
+            ->required()
+            ->maxLength(255)
             ]);
     }
 
@@ -46,9 +45,6 @@ class FeedbacksResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                 ->label('Name')
-                ->searchable()
-                ->sortable(),
-                Tables\Columns\TextColumn::make('description')
                 ->searchable()
                 ->sortable(),
             ])
@@ -77,9 +73,9 @@ class FeedbacksResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFeedbacks::route('/'),
-            'create' => Pages\CreateFeedbacks::route('/create'),
-            'edit' => Pages\EditFeedbacks::route('/{record}/edit'),
+            'index' => Pages\ListInquiries::route('/'),
+            'create' => Pages\CreateInquiries::route('/create'),
+            'edit' => Pages\EditInquiries::route('/{record}/edit'),
         ];
     }
 }

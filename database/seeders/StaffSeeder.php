@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Staff;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StaffSeeder extends Seeder
 {
