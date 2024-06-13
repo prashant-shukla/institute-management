@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id'); // BIGINT
+            $table->unsignedBigInteger('user_id'); // BIGINT
             $table->string('department', 100); // VARCHAR(100)
             $table->string('phone', 10); // VARCHAR(10)
             $table->date('date_joined'); // DATE
             $table->decimal('salary', 10, 2);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

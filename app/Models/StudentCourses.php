@@ -14,6 +14,7 @@ class StudentCourses extends Model
 
     protected $guarded = ['id'];
     protected $casts = ['software_covered' => 'array'];
+    
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);

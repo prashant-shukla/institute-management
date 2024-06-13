@@ -7,9 +7,11 @@ use App\Models\Branch;
 use Filament\Pages\Page;
 use App\Models\Course;
 use App\Models\Student;
-
+use App\Models\StudentCourse;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form; // Corrected namespace for Form class
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -26,6 +28,8 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\StudentResource\Pages;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
+
 
 class StudentResource extends Resource
 {
@@ -53,21 +57,42 @@ class StudentResource extends Resource
                     ]),
                 Section::make('PERSONAL DETAILS')
                     ->schema([
-                        TextInput::make('name')->label('Name')->required()->maxLength(255),
-                        TextInput::make('father_name')->label('Father Name')->required()->maxLength(255),
-                        DatePicker::make('date_of_birth')->required()->label('Date of Birth'),
-                        TextInput::make('email')->required()->label('Email')->email(),
-                        Textarea::make('correspondence_add')->required()->label('Correspondence Add')->autosize(),
+
+                    Fieldset::make('User')
+                        ->relationship('user')
+                        ->schema([
+                            TextInput::make('firstname'),
+                            TextInput::make('lastname'),
+                            TextInput::make('username')->unique(ignoreRecord: true),
+                            TextInput::make('email')->unique(ignoreRecord: true),
+                            TextInput::make('password')
+                                ->password()
+                                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                ->dehydrated(fn ($state) => filled($state)),
+                        ]), 
+
+                        
+
+                        TextInput::make('father_name')->required()->maxLength(255),
+                        DatePicker::make('date_of_birth')->required(),
+                        Textarea::make('correspondence_add')->required()->label('Correspondence Address')->autosize(),
                         Textarea::make('permanent_add')->required()->label('Permanent Address')->autosize(),
-                        TextInput::make('qualification')->required()->label('Qualification'),
+                        TextInput::make('qualification')->required(),
                         TextInput::make('college_workplace')->required()->label('College/Workplace'),
-                        FileUpload::make('photo')->required()->label('Photo')->columnSpanFull(),
-                    ]),
-                Section::make('COURSE DETAILS')
-                    ->schema([
+                        FileUpload::make('photo')->required()->columnSpanFull(),
+                           
                         TextInput::make('residential_no')->required()->label('Residential No'),
                         TextInput::make('office_no')->required()->label('Office No'),
                         TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
+                    ]),
+                Section::make('COURSE DETAILS')
+                    ->schema([
+                        
+                        Select::make('name')->relationship('course', 'name'), 
+                        TextInput::make('course_fee')
+                            ->label('Course Fee')
+                            ->required()
+                            ->numeric(),
                       ]),
             ]);
     }
@@ -77,7 +102,7 @@ class StudentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('reg_no')->searchable()->sortable()->toggleable(),
-                TextColumn::make('name')->searchable()->sortable()->toggleable(),
+                TextColumn::make('user.name')->searchable()->sortable()->toggleable(),
                 TextColumn::make('course.name')->searchable()->sortable()->toggleable()->label('Course'),
                 TextColumn::make('reg_date')->searchable()->sortable()->toggleable(),
             ])

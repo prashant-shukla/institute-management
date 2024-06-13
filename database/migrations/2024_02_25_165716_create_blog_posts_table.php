@@ -15,7 +15,7 @@ return new class() extends Migration
     {
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('blog_author_id')->constrained('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('blog_author_id')->constrained('users')->nullable()->nullOnDelete();
             $table->unsignedBigInteger('blog_category_id')->nullable()->nullOnDelete();
             $table->boolean('is_featured')->default(false);
             $table->string('title');

@@ -6,13 +6,19 @@ use App\Filament\Resources\StaffResource\Pages;
 use App\Models\Staff;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Fieldset;
 
 class StaffResource extends Resource
 {
@@ -30,11 +36,22 @@ class StaffResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('user_id')
-                    ->label('User ID')
-                    ->numeric()
-                    ->required(),
+                Section::make('PERSONAL DETAILS')
+                    ->schema([
 
+                    Fieldset::make('User')
+                        ->relationship('user')
+                        ->schema([
+                            TextInput::make('firstname'),
+                            TextInput::make('lastname'),
+                            TextInput::make('username')->unique(ignoreRecord: true),
+                            TextInput::make('email')->unique(ignoreRecord: true),
+                            TextInput::make('password')
+                                ->password()
+                                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                ->dehydrated(fn ($state) => filled($state)),
+                           ]), 
+                        ]),
                 Select::make('department')
                     ->label('Department')
                     ->options([

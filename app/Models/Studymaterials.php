@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Course;
+use App\Models\User;
 
 class Studymaterials extends Model
 {
@@ -21,5 +22,8 @@ class Studymaterials extends Model
     {
         return $this->belongsTo(Course::class);
     }
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

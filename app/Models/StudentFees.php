@@ -15,24 +15,17 @@ class StudentFees extends Model
     
     protected $guarded = ['id'];
     
-    public function courses(): HasMany
-    {
-        return $this->hasMany(Course::class);
-    }
-
-
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
-
-    public function students(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(Student::class);
+        return $this->belongsTo(User::class);
     }
-    public function student(): BelongsTo
+    public function student()
     {
-        return $this->belongsTo(Student::class);
-        
+        return $this->belongsTo(Student::class, 'student_id');
     }
+  
 }

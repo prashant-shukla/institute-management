@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('branch_id');
             
             $table->string('sub_title')->nullable();
-            $table->TINYINT('popular_course'); 
+            $table->tinyInteger('popular_course'); 
             $table->string('image')->nullable();
             $table->string('description', 160)->nullable(); 
             $table->string('site_title', 60)->nullable();

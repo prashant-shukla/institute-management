@@ -11,12 +11,22 @@ use App\Models\Course;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Select;
+
 
 class StudentFeesResource extends Resource
 {
@@ -30,7 +40,12 @@ class StudentFeesResource extends Resource
             ->schema([
                 Forms\Components\Select::make('student_id')
                 ->label('Student')
-                ->options(Student::all()->pluck('name', 'id'))
+                ->options(Student::all()->mapWithKeys(function ($student) {
+                    // dd($student->user->firstname);
+                    $student_name = $student->user->firstname.' '.$student->user->lastname;
+                    // dd($student_name);
+                    return [$student->id => $student_name];
+                })->toArray())
                 ->searchable()
                 ->required(),
                 Forms\Components\Select::make('course_id')
@@ -38,7 +53,7 @@ class StudentFeesResource extends Resource
                 ->options(Course::all()->pluck('name', 'id'))
                 ->searchable()
                 ->required(),
-                Forms\Components\TextInput::make('course_fee')
+                Forms\Components\TextInput::make('fee_amount')
                 ->label('Course Fee')
                 ->required()
                 ->numeric(),
@@ -46,9 +61,14 @@ class StudentFeesResource extends Resource
                 Forms\Components\DatePicker::make('received_on')
                 ->label('Received On')
                 ->required(),
-                Forms\Components\TextInput::make('payment_mode')
-                ->label('Payment Mode')
-                ->required(),
+                Forms\Components\ToggleButtons::make('payment_mode')
+                    ->inline()
+                    ->options([
+                        'credit_card' => 'Credit Card',
+                        'bank_transfer' => 'Bank Transfer',
+                        'Online' => 'Online',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -56,8 +76,22 @@ class StudentFeesResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
+                
+                TextColumn::make('student.user.firstname')
+                ->label('Student First Name')
+                ->searchable()
+                ->sortable()
+                ->toggleable(),
+                TextColumn::make('student.user.lastname') 
+                ->label('Student Last Name')
+                ->searchable()
+                ->sortable()
+                ->toggleable(),
+                TextColumn::make('course.name')->searchable()->sortable()->toggleable()->label('Course'),
+                TextColumn::make('fee_amount')
+                    ->label('Course Fee')
+                    ->sortable(),
+                    ])
             ->filters([
                 //
             ])
