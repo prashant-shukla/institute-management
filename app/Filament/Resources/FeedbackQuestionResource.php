@@ -18,7 +18,7 @@ class FeedbackQuestionResource extends Resource
     protected static ?string $model = FeedbackQuestions::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
-
+    protected static ?string $navigationGroup = 'Institute';
     public static function form(Form $form): Form
     {
         return $form

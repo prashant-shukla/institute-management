@@ -26,6 +26,10 @@ class StudentFees extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);

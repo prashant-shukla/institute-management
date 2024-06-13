@@ -13,6 +13,8 @@ use App\Models\Student;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 
 class ReviewsResource extends Resource
 {
@@ -22,6 +24,7 @@ class ReviewsResource extends Resource
     protected static ?string $navigationGroup = 'Institute';
 
     protected static ?int $navigationSort = -150;
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -32,7 +35,7 @@ class ReviewsResource extends Resource
                 ->maxLength(255),
                 Forms\Components\Select::make('student_id')
                 ->label('Student')
-                ->options(Student::all()->pluck('name', 'id'))
+                ->options(Student::whereNotNull('name')->pluck('name', 'id'))
                 ->searchable()
                 ->required(),
                 Forms\Components\Toggle::make('status')

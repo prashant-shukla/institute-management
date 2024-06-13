@@ -24,6 +24,7 @@ use Filament\Forms\Components\Select;
 class CertificateResource extends Resource
 {
     protected static ?string $model = Certificate::class;
+    protected static ?string $navigationGroup = 'Institute';
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 

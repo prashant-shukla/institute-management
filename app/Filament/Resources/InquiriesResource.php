@@ -20,7 +20,7 @@ class InquiriesResource extends Resource
 
     protected static ?int $navigationSort = -300;
 
-    protected static ?string $navigationIcon = 'heroicon-o-phone-arrow-up-right';
+    protected static ?string $navigationIcon = 'center_communication_computer_icon';
 
     public static function form(Form $form): Form
     {

@@ -16,13 +16,14 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
 
 class StudentFeesResource extends Resource
 {
     protected static ?string $model = StudentFees::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-rupee';
-
+    protected static ?string $navigationGroup = 'Institute';
     public static function form(Form $form): Form
     {
         return $form
