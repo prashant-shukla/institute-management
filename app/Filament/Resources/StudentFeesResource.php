@@ -76,14 +76,8 @@ class StudentFeesResource extends Resource
     {
         return $table
             ->columns([
-                
-                TextColumn::make('student.user.firstname')
-                ->label('Student First Name')
-                ->searchable()
-                ->sortable()
-                ->toggleable(),
-                TextColumn::make('student.user.lastname') 
-                ->label('Student Last Name')
+                TextColumn::make('student.full_name')
+                ->label('Student Name')
                 ->searchable()
                 ->sortable()
                 ->toggleable(),

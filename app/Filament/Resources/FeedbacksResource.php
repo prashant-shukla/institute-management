@@ -34,9 +34,21 @@ class FeedbacksResource extends Resource
                 ->label('Description'),
                 Forms\Components\Select::make('student_id')
                 ->label('Student')
-                ->options(Student::all()->pluck('name', 'id'))
-                ->searchable()
-                ,
+                ->options(Student::all()->mapWithKeys(function ($student) {
+                    $student_name = $student->user->firstname . ' ' . $student->user->lastname;
+                    return [$student->id => $student_name];
+                })->toArray())
+                ->reactive()
+                ->afterStateUpdated(function (callable $set, $state) {
+                    $student = Student::find($state);
+                    $set('reg_no', $student ? $student->reg_no : null);
+                }),
+            
+            Forms\Components\TextInput::make('reg_no')
+                ->label('Reg No')
+                ->columnSpanFull()
+                ->required()
+                ->disabled(false)
             ]);
     }
 

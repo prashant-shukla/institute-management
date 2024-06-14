@@ -25,13 +25,14 @@ return new class extends Migration
             $table->string('qualification',255);
             $table->string('college_workplace',255);
             $table->string('photo',255);
-            $table->unsignedBigInteger('course_id');
             $table->decimal('course_fee');
             $table->string('residential_no',25);
             $table->string('office_no',25);
             $table->string('mobile_no',25);
+
             // $table->bigInteger('branch');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

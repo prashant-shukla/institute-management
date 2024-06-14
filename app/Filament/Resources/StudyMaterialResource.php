@@ -6,6 +6,7 @@ use App\Filament\Resources\StudyMaterialResource\Pages;
 use App\Filament\Resources\StudyMaterialResource\RelationManagers;
 use App\Models\Studymaterials;
 use App\Models\Course;
+use App\Models\Staff;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -59,11 +60,21 @@ class StudyMaterialResource extends Resource
                     ->label('File Path')
                     ->required()
                     ->maxLength(255),
-                
-                TextInput::make('uploaded_by')
+                // Select::make('uploaded_by')
+                //     ->label('Uploaded By')
+                //     ->options(Staff::all()->pluck('name', 'id'))
+                //     ->searchable()
+                //     ->required(),
+                Select::make('uploaded_by')
                     ->label('Uploaded By')
-                    ->required()
-                    ->numeric(),
+                    ->options(Staff::all()->mapWithKeys(function ($student) {
+                        // dd($student->user->firstname);
+                        $student_name = $student->user->firstname.' '.$student->user->lastname;
+                        // dd($student_name);
+                        return [$student->id => $student_name];
+                    })->toArray())
+                    ->searchable()
+                    ->required(),
                 
                 DatePicker::make('upload_date')
                     ->label('Upload Date')

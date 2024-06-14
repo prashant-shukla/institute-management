@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Textarea;
 
 class InquiriesResource extends Resource
 {
@@ -20,7 +21,7 @@ class InquiriesResource extends Resource
 
     protected static ?int $navigationSort = -300;
 
-    protected static ?string $navigationIcon = 'center_communication_computer_icon';
+    protected static ?string $navigationIcon = 'heroicon-o-phone';
 
     public static function form(Form $form): Form
     {
@@ -33,7 +34,7 @@ class InquiriesResource extends Resource
             Forms\Components\TextInput::make('email')
             ->required()
             ->email(),
-            Forms\Components\TextInput::make('message')
+            Forms\Components\Textarea::make('message')
             ->required()
             ->maxLength(255)
             ]);

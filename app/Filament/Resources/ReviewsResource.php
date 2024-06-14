@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
 
 class ReviewsResource extends Resource
 {
@@ -35,7 +36,12 @@ class ReviewsResource extends Resource
                 ->maxLength(255),
                 Forms\Components\Select::make('student_id')
                 ->label('Student')
-                ->options(Student::whereNotNull('name')->pluck('name', 'id'))
+                ->options(Student::all()->mapWithKeys(function ($student) {
+                    // dd($student->user->firstname);
+                    $student_name = $student->user->firstname.' '.$student->user->lastname;
+                    // dd($student_name);
+                    return [$student->id => $student_name];
+                })->toArray())
                 ->searchable()
                 ->required(),
                 Forms\Components\Toggle::make('status')
@@ -51,8 +57,14 @@ class ReviewsResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
+                TextColumn::make('student.full_name')
+                ->label('Student Name')
+                ->searchable()
+                ->sortable()
+                ->toggleable(),
+                TextColumn::make('review')
+                ->sortable(),
+                ])
             ->filters([
                 //
             ])

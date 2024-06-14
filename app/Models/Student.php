@@ -43,5 +43,8 @@ class Student extends Model
     {
         return $this->belongsTo(StudentFees::class);
     }
-    
+    public function getFullNameAttribute()
+    {
+    return $this->user->firstname . ' ' . $this->user->lastname;
+    }
 }

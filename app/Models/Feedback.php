@@ -11,6 +11,7 @@ class feedback extends Model
     use HasFactory;
        protected $fillable = [
         'reg_no',
+        'name',
         'student_id',
         'description',
     ];
@@ -22,4 +23,16 @@ class feedback extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    // public function updatedStudentId($value)
+    // {
+    //     $student = Student::find($value);
+    //     $this->reg_no = $student ? $student->reg_no : '';
+    // }
+    public function updatedStudentId($value)
+    {
+        $student = Student::find($value);
+        $this->form->fill(['reg_no' => $student ? $student->reg_no : '']);
+    }
+
 }

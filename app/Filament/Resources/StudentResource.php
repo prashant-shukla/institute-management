@@ -88,7 +88,7 @@ class StudentResource extends Resource
                 Section::make('COURSE DETAILS')
                     ->schema([
                         
-                        Select::make('name')->relationship('course', 'name'), 
+                        Select::make('course_id')->relationship('course', 'name'), 
                         TextInput::make('course_fee')
                             ->label('Course Fee')
                             ->required()
