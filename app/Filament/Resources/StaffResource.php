@@ -84,9 +84,11 @@ class StaffResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->label('User ID')
-                    ->sortable(),
+                TextColumn::make('user.name')
+                ->label('Name')
+                ->searchable()
+                ->sortable()
+                ->toggleable(),
                 TextColumn::make('department')
                     ->label('Department')
                     ->sortable(),

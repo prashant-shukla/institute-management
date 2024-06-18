@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudy_materialsRequest;
 use App\Http\Requests\UpdateStudy_materialsRequest;
 use App\Models\Studymaterials;
-
+use Illuminate\Support\Facades\Storage;
 class StudyMaterialsController extends Controller
 {
     /**
@@ -37,7 +37,26 @@ class StudyMaterialsController extends Controller
      */
     public function show(Studymaterials $study_materials)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'file' => 'required|string',
+            'file' => 'required|file|mimes:doc,docx,pdf,mp3,wav,aac,ogg,mp4,avi,mkv|max:10240',
+        ]);
+    
+        $filePath = $request->file('file')->store('study_materials', 'public');
+    
+        StudyMaterial::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'file' => $request->input('file'),
+            'file' => $filePath,
+            'uploaded_by' => $request->input('uploaded_by'),
+            'course_id' => $request->input('course_id'),
+            'upload_date' => now(),
+        ]);
+    
+        return redirect()->route('studymaterials.index')->with('success', 'Study material uploaded successfully.');
     }
 
     /**

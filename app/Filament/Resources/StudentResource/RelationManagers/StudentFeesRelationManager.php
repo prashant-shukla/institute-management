@@ -7,12 +7,11 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use App\Models\Student;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class StudentFeesRelationManager extends RelationManager
+class FeesRelationManager extends RelationManager
 {
     protected static string $relationship = 'fees';
     
@@ -40,6 +39,10 @@ class StudentFeesRelationManager extends RelationManager
                         'bank_transfer' => 'Bank Transfer',
                         'paypal' => 'PayPal',
                     ])
+                    ->required(),
+                    Forms\Components\Select::make('course_id')
+                    ->label('Course')
+                    ->relationship('course', 'name')
                     ->required(),
             ]);
     }
@@ -81,4 +84,3 @@ class StudentFeesRelationManager extends RelationManager
             ]);
     }
 }
-

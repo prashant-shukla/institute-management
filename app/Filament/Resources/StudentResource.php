@@ -2,109 +2,203 @@
 
 namespace App\Filament\Resources;
 
-
-use App\Models\Branch;
-use Filament\Pages\Page;
-use App\Models\Course;
+use App\Filament\Resources\StudentResource\Pages;
+use App\Filament\Resources\StudentResource\RelationManagers\FeesRelationManager; // Correct reference
 use App\Models\Student;
-use App\Models\StudentCourse;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Form; // Corrected namespace for Form class
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\ToggleButtons;
-use Filament\Forms\Components\CheckboxList;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
+use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Illuminate\Support\Facades\Hash;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\StudentResource\Pages;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Hash;
-
 
 class StudentResource extends Resource
 {
     public static ?string $model = Student::class;
 
-    // Other class methods...
-
     protected static ?string $navigationIcon = 'heroicon-o-user';
-
-    //public static $model = Student::class; // Removed duplicate declaration
 
     protected static ?string $navigationGroup = 'Users';
 
     protected static ?int $navigationSort = -200;
 
 
-    public static function form(Form $form): Form
-    {
+    public static function form(Form $form): Form {
         return $form
             ->schema([
-                Section::make('REGISTRATION DETAILS')
+                Forms\Components\Group::make()
                     ->schema([
-                        DatePicker::make('reg_date')->required()->label('Reg Date')->columns(2),
-                        TextInput::make('reg_no')->required()->label('Reg No')->maxLength(255)->columns(2),
-                    ]),
-                Section::make('PERSONAL DETAILS')
-                    ->schema([
+                        Forms\Components\Section::make('User')
+                   // Fieldset::make('User')
+                    ->relationship('user')
+                            ->schema([
+                                TextInput::make('firstname')->required(),
+                                TextInput::make('lastname')->required(),
+                                TextInput::make('username')->required()->unique(ignoreRecord: true),
+                                TextInput::make('email')->required()->unique(ignoreRecord: true),
+                                TextInput::make('password')
 
-                    Fieldset::make('User')
-                        ->relationship('user')
-                        ->schema([
-                            TextInput::make('firstname'),
-                            TextInput::make('lastname'),
-                            TextInput::make('username')->unique(ignoreRecord: true),
-                            TextInput::make('email')->unique(ignoreRecord: true),
-                            TextInput::make('password')
-                                ->password()
-                                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                                ->dehydrated(fn ($state) => filled($state)),
-                        ]), 
-
-                        
-
-                        TextInput::make('father_name')->required()->maxLength(255),
-                        DatePicker::make('date_of_birth')->required(),
-                        Textarea::make('correspondence_add')->required()->label('Correspondence Address')->autosize(),
-                        Textarea::make('permanent_add')->required()->label('Permanent Address')->autosize(),
-                        TextInput::make('qualification')->required(),
-                        TextInput::make('college_workplace')->required()->label('College/Workplace'),
-                        FileUpload::make('photo')->required()->columnSpanFull(),
-                           
-                        TextInput::make('residential_no')->required()->label('Residential No'),
-                        TextInput::make('office_no')->required()->label('Office No'),
-                        TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
-                    ]),
-                Section::make('COURSE DETAILS')
-                    ->schema([
-                        
-                        Select::make('course_id')->relationship('course', 'name'), 
-                        TextInput::make('course_fee')
-                            ->label('Course Fee')
                             ->required()
-                            ->numeric(),
-                      ]),
-            ]);
+                            ->password()
+                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                            ->dehydrated(fn ($state) => filled($state))
+                            ])
+                            ->columns(2),
+
+                        Forms\Components\Section::make('PERSONAL DETAILS')
+                            ->schema([
+                                FileUpload::make('photo')
+                                ->image()
+                                ->imageEditor(),
+                                TextInput::make('father_name')->required()->maxLength(255),
+                                DatePicker::make('date_of_birth')
+                                    ->label('Date of Birth')
+                                    ->required(),
+                                TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
+                                Textarea::make('correspondence_add')->required()->label('Correspondence Address')
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, callable $set, $get) {
+                                    if ($get('is_admin')) {
+                                        $set('permanent_add', $state);
+                                    }
+                                })
+                                ->autosize(),
+                                Checkbox::make('is_admin')
+                                    ->inline(false)
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set, $get) {
+                                        if ($state) {
+                                            $set('permanent_add', $get('correspondence_add'));
+                                        }
+                                    }),
+                                Textarea::make('permanent_add')
+                                ->required()
+                                ->label('Permanent Address')
+                                ->autosize(),
+                                TextInput::make('qualification')->required(),
+                                TextInput::make('college_workplace')->label('College/Workplace'),
+                                TextInput::make('residential_no')->label('Residential No'),
+                                TextInput::make('office_no')->label('Office No'),
+                                
+                            ])
+                            ->columns(2),
+                    ])
+                    ->columnSpan(['lg' => 2]),
+
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('REGISTRATION DETAILS')
+                            ->schema([
+                                DatePicker::make('reg_date')->label('Reg Date'),
+                                TextInput::make('reg_no')->label('Reg No')->maxLength(255),            
+                            ]),
+
+                        Forms\Components\Section::make('COURSE DETAILS')
+                            ->schema([
+                                Select::make('course_id')->required()->relationship('course', 'name'),
+                                TextInput::make('course_fee')
+                                   ->label('Course Fee')
+                                   ->required()
+                                   ->numeric(),
+       
+                            ]),
+                    ])
+                    ->columnSpan(['lg' => 1]),
+            ])
+            ->columns(3);
+        
     }
 
-    public static function table(Tables\Table $table): Tables\Table
+   // public static function form_old(Form $form): Form
+    //{
+        //return $form
+          //  ->schema([
+               
+
+                //     Section::make('User')
+                //    // Fieldset::make('User')
+                //     ->relationship('user')
+                //     ->schema([
+                //         TextInput::make('firstname')->required(),
+                //         TextInput::make('lastname')->required(),
+                //         TextInput::make('username')->required()->unique(ignoreRecord: true),
+                //         TextInput::make('email')->required()->unique(ignoreRecord: true),
+                //         TextInput::make('password')
+                //             ->required()
+                //             ->password()
+                //             ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                //             ->dehydrated(fn ($state) => filled($state)),                        
+                //     ])->columns(1)->columnSpan(['lg' => 2]),
+                //     Section::make('REGISTRATION DETAILS')
+                //     ->schema([
+                // ])->columns(1)->columnSpan(['lg' => 1]),
+                // Section::make('PERSONAL DETAILS')
+                //     ->schema([
+                            
+                //         TextInput::make('father_name')->required()->maxLength(255),
+                //         DatePicker::make('date_of_birth')
+                //             ->label('Date of Birth')
+                //             ->required(),
+                //         TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
+                //         Textarea::make('correspondence_add')->required()->label('Correspondence Address')
+                //         ->reactive()
+                //         ->afterStateUpdated(function ($state, callable $set, $get) {
+                //             if ($get('is_admin')) {
+                //                 $set('permanent_add', $state);
+                //             }
+                //         })
+                //         ->autosize(),
+                //         Checkbox::make('is_admin')
+                //             ->inline(false)
+                //             ->reactive()
+                //             ->afterStateUpdated(function ($state, callable $set, $get) {
+                //                 if ($state) {
+                //                     $set('permanent_add', $get('correspondence_add'));
+                //                 }
+                //             }),
+                //         Textarea::make('permanent_add')
+                //         ->required()
+                //         ->label('Permanent Address')
+                //         ->autosize(),
+                //         TextInput::make('qualification')->required(),
+                //         TextInput::make('college_workplace')->label('College/Workplace'),
+                //         TextInput::make('residential_no')->label('Residential No'),
+                //         TextInput::make('office_no')->label('Office No'),
+                        
+                //         ])->columns(2)->columnSpan(['lg' => 2]),
+
+                // Section::make('Photo')
+                //         ->schema([
+                //         FileUpload::make('photo')
+                //         ->image()
+                //         ->imageEditor()
+                //         ])->columns(1)->columnSpan(['lg' => 1]),
+
+                // Section::make('COURSE DETAILS')
+                //          ->schema([
+                //          ])->columns(2)->columnSpan(['lg' => 2]),
+
+                //         ]) ->columns(3);;
+   // }
+
+    public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('reg_no')->searchable()->sortable()->toggleable(),
-                TextColumn::make('user.name')->searchable()->sortable()->toggleable(),
-                TextColumn::make('course.name')->searchable()->sortable()->toggleable()->label('Course'),
-                TextColumn::make('reg_date')->searchable()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('reg_no')->searchable()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('user.name')->label('Name')->searchable()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('course.name')->searchable()->sortable()->toggleable()->label('Course'),
+                Tables\Columns\TextColumn::make('reg_date')->searchable()->sortable()->toggleable(),
             ])
             ->filters([])
             ->actions([
@@ -125,6 +219,13 @@ class StudentResource extends Resource
             'index' => Pages\ListStudents::route('/'),
             'create' => Pages\CreateStudent::route('/create'),
             'edit' => Pages\EditStudent::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            FeesRelationManager::class,
         ];
     }
 }

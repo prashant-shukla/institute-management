@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             
             $table->date('reg_date');
-            $table->string('reg_no', 255);
+            $table->string('reg_no', 255)->unique()->change();
           
             $table->string('father_name',255);
             $table->date('date_of_birth');

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('file_path', 255); 
             $table->unsignedBigInteger('uploaded_by'); 
             $table->timestamp('upload_date'); 
+            
             $table->unsignedBigInteger('course_id'); 
             $table->timestamps();
             

@@ -23,6 +23,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Get;
 
 class StudyMaterialResource extends Resource
 {
@@ -30,7 +32,7 @@ class StudyMaterialResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Institute';
-
+    protected static ?string $navigationLabel = 'Study Materials';
     protected static ?int $navigationSort = -180;
 
     public static function form(Form $form): Form
@@ -47,24 +49,33 @@ class StudyMaterialResource extends Resource
                     ->required()
                     ->maxLength(255),
                 
-                Select::make('file_type')
-                    ->label('File Type')
-                    ->options([
-                        'doc' => 'Document',
-                        'audio' => 'Audio',
-                        'video' => 'Video',
-                    ])
-                    ->required(),
                 
-                TextInput::make('file_path')
-                    ->label('File Path')
-                    ->required()
-                    ->maxLength(255),
-                // Select::make('uploaded_by')
-                //     ->label('Uploaded By')
-                //     ->options(Staff::all()->pluck('name', 'id'))
-                //     ->searchable()
-                //     ->required(),
+                  Section::make('FILE DETAILS')
+                ->schema([
+                    ToggleButtons::make('file_type')
+                        ->label('File Type')
+                        ->inline()
+                        ->options([
+                            'doc' => 'Document',
+                            'audio' => 'Audio',
+                            'video' => 'Video',
+                        ])
+                        ->required()
+                        ->reactive(),
+
+                    FileUpload::make('file_path')
+                        ->label('Upload File')
+                        ->required()
+                        ->acceptedFileTypes(['application/pdf'])
+                        ->hidden(fn (Get $get): bool => $get('file_type') != 'doc'),
+
+
+                    FileUpload::make('file_path')
+                        ->label('Upload File')
+                        ->required()
+                        ->acceptedFileTypes(['audio/mpeg', 'audio/wav', 'audio/aac', 'audio/ogg'])
+                        ->hidden(fn (Get $get): bool => $get('file_type') != 'audio'),
+                ]),
                 Select::make('uploaded_by')
                     ->label('Uploaded By')
                     ->options(Staff::all()->mapWithKeys(function ($student) {
@@ -76,9 +87,9 @@ class StudyMaterialResource extends Resource
                     ->searchable()
                     ->required(),
                 
-                DatePicker::make('upload_date')
+                    DatePicker::make('upload_date')
                     ->label('Upload Date')
-                    ->required(),
+                    ->disabled(),
                 
                     Forms\Components\Select::make('course_id')
                     ->label('Course')

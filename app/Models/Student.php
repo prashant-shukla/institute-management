@@ -17,7 +17,11 @@ class Student extends Model
     protected $guarded = ['id'];
 
     protected $casts = ['software_covered' => 'array'];
-
+  //  protected $fillable = [
+    //    'photo','user_id', 'reg_no', 'reg_date'
+        
+  //  ];
+    // protected $fillable = [];
    
     public function course(): BelongsTo
     {
@@ -43,8 +47,27 @@ class Student extends Model
     {
         return $this->belongsTo(StudentFees::class);
     }
+    
     public function getFullNameAttribute()
     {
-    return $this->user->firstname . ' ' . $this->user->lastname;
+        return $this->user->firstname . ' ' . $this->user->lastname;
+    }
+    // public function storePhoto($photo)
+    // {
+    //     $this->photo = $photo->store('photos', 'public');
+    //     $this->save();
+    // }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($student) {
+            $latestStudent = Student::orderBy('reg_no', 'desc')->first();
+            $student->reg_no = $latestStudent ? $latestStudent->reg_no + 1 : 10000;
+            if (empty($student->reg_date)) {
+                $student->reg_date = now();
+            }
+        });
     }
 }
