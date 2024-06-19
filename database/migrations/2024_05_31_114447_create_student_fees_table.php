@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('fee_amount',10,2);
             $table->timestamp('received_on');
             $table->string('payment_mode');
+            $table->string('remark', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

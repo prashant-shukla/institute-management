@@ -67,14 +67,14 @@ class NewResource extends Resource
                 }),
                     
             ])
-            // ->filters([
+             ->filters([
             //         SelectFilter::make('status')
             //             ->options([
             //                 'Draft' => '0',
             //                 'Reviewing' => '1',
             //                 'Published' => '2',
             //             ]),
-            // ])
+             ])
             ->actions([
                 Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
                 Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),

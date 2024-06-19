@@ -47,11 +47,9 @@ class StudentResource extends Resource
                                 TextInput::make('username')->required()->unique(ignoreRecord: true),
                                 TextInput::make('email')->required()->unique(ignoreRecord: true),
                                 TextInput::make('password')
-
-                            ->required()
-                            ->password()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn ($state) => filled($state))
+                                ->password()
+                                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                ->dehydrated(fn ($state) => filled($state)), 
                             ])
                             ->columns(2),
 
@@ -68,12 +66,13 @@ class StudentResource extends Resource
                                 Textarea::make('correspondence_add')->required()->label('Correspondence Address')
                                 ->reactive()
                                 ->afterStateUpdated(function ($state, callable $set, $get) {
-                                    if ($get('is_admin')) {
+                                    if ($get('same_Address')) {
                                         $set('permanent_add', $state);
                                     }
                                 })
                                 ->autosize(),
-                                Checkbox::make('is_admin')
+                                Checkbox::make('same_Address')
+                                ->label('Same Address')
                                     ->inline(false)
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, callable $set, $get) {

@@ -13,6 +13,7 @@ class CertificateFieldsSeeder extends Seeder
      */
     public function run(): void
     {
+
         $fields = [
             ['field_name' => 'student_name', 'table_name' => 'students', 'column_name' => 'name'],
             ['field_name' => 'father_name', 'table_name' => 'students', 'column_name' => 'father_name'],
@@ -28,4 +29,7 @@ class CertificateFieldsSeeder extends Seeder
 
         DB::table('certificate_fields')->insert($fields);
     }
+    
+   
+
 }
