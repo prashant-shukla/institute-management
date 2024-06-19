@@ -21,6 +21,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Hash;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -38,6 +39,9 @@ class StudentFeesResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Group::make(),
+                Forms\Components\Section::make('Fees')
+                ->schema([
                 Forms\Components\Select::make('student_id')
                 ->label('Student')
                 ->options(Student::all()->mapWithKeys(function ($student) {
@@ -61,6 +65,8 @@ class StudentFeesResource extends Resource
                 Forms\Components\DatePicker::make('received_on')
                 ->label('Received On')
                 ->required(),
+                Forms\Components\TextInput::make('remark')
+                    ->required(),
                 Forms\Components\ToggleButtons::make('payment_mode')
                     ->inline()
                     ->options([
@@ -69,6 +75,7 @@ class StudentFeesResource extends Resource
                         'Online' => 'Online',
                     ])
                     ->required(),
+                    ])->columnSpan(['lg' => 2])->columns(2),
             ]);
     }
 

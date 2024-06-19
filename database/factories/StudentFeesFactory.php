@@ -22,7 +22,7 @@ class StudentFeesFactory extends Factory
             'fee_amount' => $this->faker->randomFloat(2, 1000, 5000),
             'received_on' => $this->faker->date(),
             'payment_mode' => $this->faker->randomElement(['cash', 'credit_card', 'bank_transfer']),
-
+            'remark' => $this->faker->text(),
         ];
     }
 }

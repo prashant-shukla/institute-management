@@ -51,11 +51,26 @@ class StudentFeesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStudent_feesRequest $request, Student_fees $student_fees)
-    {
+    //public function update(UpdateStudent_feesRequest $request, Student_fees $student_fees)
+   // {
         //
+   // }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'received_on' => 'nullable|date',
+            'remark' => 'nullable|string|max:255',
+        ]);
+    
+        $studentFee = StudentFee::find($id);
+        $studentFee->received_on = $request->input('received_on') ?? now();
+        $studentFee->remark = $request->input('remark') ?? '';
+        $studentFee->updated_at = now();
+    
+        $studentFee->save();
+    
+        return redirect()->route('student_fees.index')->with('success', 'Record updated successfully');
     }
-
     /**
      * Remove the specified resource from storage.
      */
