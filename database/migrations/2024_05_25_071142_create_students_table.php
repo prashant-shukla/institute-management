@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('permanent_add');
             $table->string('qualification',255);
             $table->string('college_workplace',255);
-            $table->string('photo',255);
+            $table->string('photo')->nullable();
             $table->decimal('course_fee');
             $table->string('residential_no',25);
             $table->string('office_no',25);

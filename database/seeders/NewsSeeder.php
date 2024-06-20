@@ -1,18 +1,14 @@
 <?php
 
 namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\News;
 class NewsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        News::factory(count:10)->create();
+        News::factory()->count(10)->create();
+        
     }
 }

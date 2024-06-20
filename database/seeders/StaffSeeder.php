@@ -5,20 +5,16 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Staff;
-use Illuminate\Database\Eloquent\Factories\Factory;
+
 
 class StaffSeeder extends Seeder
 {
    
     public function run(): void
     {
-        
-        Staff::factory()->count(8)->create();
-
-        
         DB::table('staff')->insert([
             [
-                'user_id' => 1,
+                'user_id' => 3,
                 'department' => 'HR',
                 'phone' => '1234567890',
                 'date_joined' => '2022-01-15',
@@ -27,7 +23,7 @@ class StaffSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 2,
+                'user_id' => 4,
                 'department' => 'Finance',
                 'phone' => '0987654321',
                 'date_joined' => '2021-03-12',
