@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBrancheRequest;
-use App\Http\Requests\UpdateBrancheRequest;
-use App\Models\Branche;
+use App\Http\Requests\StoreCourseCategoryRequest;
+use App\Http\Requests\UpdateCourseCategoryRequest;
+use App\Models\CourseCategories;
 
-class BrancheController extends Controller
+class CourseCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class BrancheController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBrancheRequest $request)
+    public function store(StoreCourseCategoryRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class BrancheController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Branche $branche)
+    public function show(CourseCategory $branche)
     {
         //
     }
@@ -43,7 +43,7 @@ class BrancheController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Branche $branche)
+    public function edit(CourseCategory $branche)
     {
         //
     }
@@ -51,7 +51,7 @@ class BrancheController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrancheRequest $request, Branche $branche)
+    public function update(UpdateCourseCategoryRequest $request, CourseCategory $branche)
     {
         //
     }
@@ -59,7 +59,7 @@ class BrancheController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Branche $branche)
+    public function destroy(CourseCategory $branche)
     {
         //
     }

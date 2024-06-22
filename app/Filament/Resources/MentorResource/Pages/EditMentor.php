@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BranchResource\Pages;
+namespace App\Filament\Resources\MentorResource\Pages;
 
-use App\Filament\Resources\BranchResource;
+use App\Filament\Resources\MentorResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditBranch extends EditRecord
+class EditMentor extends EditRecord
 {
-    protected static string $resource = BranchResource::class;
+    protected static string $resource = MentorResource::class;
 
     protected function getHeaderActions(): array
     {

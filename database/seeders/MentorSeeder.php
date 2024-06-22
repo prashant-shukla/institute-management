@@ -4,14 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Mentor;
 
-class FeedbackQuestionsSeeder extends Seeder
+class MentorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        FeedbackQuestions::factory()->count(10)->create();
+        Mentor::factory()->count(10)->create();
     }
 }

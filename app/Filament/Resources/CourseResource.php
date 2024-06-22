@@ -7,7 +7,7 @@ use App\Filament\Resources\CourseResource\RelationManagers;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\Toggle;
 use App\Models\Student;
-use App\Models\Branch;
+use App\Models\CourseCategory;
 use App\Models\Course;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -46,9 +46,8 @@ class CourseResource extends Resource
                 ->maxLength(255),
                 Forms\Components\TextInput::make('course_duration')
                 ->label('Course Duration'),
-                Forms\Components\Select::make('branch_id')
-                ->label('Branch')
-                ->options(Branch::all()->pluck('name', 'id'))
+                Forms\Components\Select::make('coursecategory_id')
+                ->options(CourseCategory::all()->pluck('name', 'id'))
                 ->searchable(),
             
                 Forms\Components\TextInput::make('sub_title')

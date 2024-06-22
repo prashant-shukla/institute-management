@@ -17,7 +17,7 @@ class CourseSeeder extends Seeder
                 'name' => 'Computer Science',
                 'slug' => 'computer-science',
                 'course_duration' => '4 Years',
-                'branch_id' => 1, // Example branch_id
+                'CourseCategories_id' => 1, // Example branch_id
                 'sub_title' => 'B.Tech in Computer Science',
                 'popular_course' => 1,
                 'image' => 'path/to/image.jpg',
@@ -32,7 +32,7 @@ class CourseSeeder extends Seeder
                 'name' => 'Mechanical Engineering',
                 'slug' => 'mechanical-engineering',
                 'course_duration' => '4 Years',
-                'branch_id' => 2, // Example branch_id
+                'CourseCategories_id' => 2, // Example branch_id
                 'sub_title' => 'B.Tech in Mechanical Engineering',
                 'popular_course' => 0,
                 'image' => 'path/to/image.jpg',

@@ -20,7 +20,7 @@ class CourseFactory extends Factory
             'name' =>$this->faker->name(),
             'slug'=>$this->faker->slug(),
             'course_period'=>$this->faker->word(),
-            'branch_id'=>$this->faker->numberBetween(1, 10),
+            'CourseCategories_id'=>$this->faker->numberBetween(1, 10),
             'max_software'=>$this->faker->numberBetween(1, 5),
             'popular_course'=>$this->faker->boolean(),
             'image' =>$this->faker->imageUrl(),

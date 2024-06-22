@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BranchResource\Pages;
-use App\Filament\Resources\BranchResource\RelationManagers;
-use App\Models\Branch;
+use App\Filament\Resources\CourseCategoriesResource\Pages;
+use App\Filament\Resources\CourseCategoriesResource\RelationManagers;
+use App\Models\CourseCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Section;
@@ -14,9 +14,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BranchResource extends Resource
+class CourseCategoriesResource extends Resource
 {
-    protected static ?string $model = Branch::class;
+    protected static ?string $model = CourseCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
@@ -106,9 +106,9 @@ class BranchResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBranches::route('/'),
-            'create' => Pages\CreateBranch::route('/create'),
-            'edit' => Pages\EditBranch::route('/{record}/edit'),
+            'index' => Pages\ListCourseCategories::route('/'),
+            'create' => Pages\CreateCourseCategories::route('/create'),
+            'edit' => Pages\EditCourseCategories::route('/{record}/edit'),
         ];
     }
 }
