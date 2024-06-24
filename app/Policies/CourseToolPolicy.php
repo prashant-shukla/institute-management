@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\CourseCategory;
+use App\Models\CourseTool;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CourseCategoryPolicy
+class CourseToolPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class CourseCategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_course::categories');
+        return $user->can('view_any_course::tool');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, CourseCategory $courseCategory): bool
+    public function view(User $user, CourseTool $courseTool): bool
     {
-        return $user->can('view_course::categories');
+        return $user->can('view_course::tool');
     }
 
     /**
@@ -31,23 +31,23 @@ class CourseCategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_course::categories');
+        return $user->can('create_course::tool');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, CourseCategory $courseCategory): bool
+    public function update(User $user, CourseTool $courseTool): bool
     {
-        return $user->can('update_course::categories');
+        return $user->can('update_course::tool');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, CourseCategory $courseCategory): bool
+    public function delete(User $user, CourseTool $courseTool): bool
     {
-        return $user->can('delete_course::categories');
+        return $user->can('delete_course::tool');
     }
 
     /**
@@ -55,15 +55,15 @@ class CourseCategoryPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_course::categories');
+        return $user->can('delete_any_course::tool');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, CourseCategory $courseCategory): bool
+    public function forceDelete(User $user, CourseTool $courseTool): bool
     {
-        return $user->can('force_delete_course::categories');
+        return $user->can('force_delete_course::tool');
     }
 
     /**
@@ -71,15 +71,15 @@ class CourseCategoryPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_course::categories');
+        return $user->can('force_delete_any_course::tool');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, CourseCategory $courseCategory): bool
+    public function restore(User $user, CourseTool $courseTool): bool
     {
-        return $user->can('restore_course::categories');
+        return $user->can('restore_course::tool');
     }
 
     /**
@@ -87,15 +87,15 @@ class CourseCategoryPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_course::categories');
+        return $user->can('restore_any_course::tool');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, CourseCategory $courseCategory): bool
+    public function replicate(User $user, CourseTool $courseTool): bool
     {
-        return $user->can('replicate_course::categories');
+        return $user->can('replicate_course::tool');
     }
 
     /**
@@ -103,6 +103,6 @@ class CourseCategoryPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_course::categories');
+        return $user->can('reorder_course::tool');
     }
 }

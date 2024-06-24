@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('slug')->unique();
             $table->string('course_duration');
-            $table->unsignedBigInteger('coursecategories_id');
+            $table->unsignedBigInteger('course_categories_id'); // Corrected column name
             $table->string('sub_title')->nullable();
             $table->tinyInteger('popular_course'); 
             $table->string('image')->nullable();
@@ -25,16 +25,15 @@ return new class extends Migration
             $table->string('meta_keyword')->nullable(); 
             $table->string('meta_description', 255)->nullable();
             $table->enum('mode', ['online', 'offline', 'both']);
-            $table->tinyInteger('sessions');
+            $table->tinyInteger('sessions')->default(0);
             $table->tinyInteger('projects');
             $table->decimal('fee', 10, 2);
             $table->decimal('offer_fee', 10, 2);
-            $table->text('who_should_join');
+            $table->text('faqs');
 
             $table->timestamps();
 
-            $table->foreign('CourseCategories_id')->references('id')->on('CourseCategories')->onDelete('cascade');
-        
+            $table->foreign('course_categories_id')->references('id')->on('course_categories')->onDelete('cascade'); // Corrected column name and table name
         });
     }
 

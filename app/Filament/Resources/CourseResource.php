@@ -87,7 +87,7 @@ class CourseResource extends Resource
             ->searchable()
             ->sortable()
             ->toggleable(),
-            Tables\Columns\TextColumn::make('branch.name')
+            Tables\Columns\TextColumn::make('CourseCategory.name')
             ->searchable()
             ->sortable()
             ->toggleable(),

@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'superadmin@unnatischoolofdesign.com',
             'email_verified_at' => now(),
             'password' => Hash::make('superadmin'),
+            'status' => 'active',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -42,6 +43,7 @@ class UsersTableSeeder extends Seeder
                     'email' => $faker->unique()->safeEmail,
                     'email_verified_at' => now(),
                     'password' => Hash::make('password'),
+                    'status' => 'active',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
