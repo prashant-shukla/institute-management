@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('slug')->unique();
-            $table->json('software'); 
             $table->string('sub_title');
             $table->string('image')->nullable(); 
+            $table->text('description', 160)->nullable();
             $table->unsignedSmallInteger('order'); 
             $table->string('show_on_website')->default(false);
             $table->string('site_title', 255)->nullable();
-            $table->string('meta_keyword')->nullable(); 
-            $table->string('meta_description', 255)->nullable();
+            $table->text('meta_keyword')->nullable(); 
+            $table->text('meta_description', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CourseFactory extends Factory
             'coursecategories_id' => \App\Models\CourseCategory::factory(), // Assuming you have a CourseCategory factory
             'sub_title' => $this->faker->sentence,
             'popular_course' => $this->faker->boolean,
-            'description' => $this->faker->text(160),
+            'description' => $this->faker->text(255),
             'site_title' => $this->faker->words(3, true),
             'meta_keyword' => $this->faker->words(5, true),
             'meta_description' => $this->faker->text(255),
@@ -29,6 +29,7 @@ class CourseFactory extends Factory
             'fee' => $this->faker->randomFloat(2, 1000, 10000),
             'offer_fee' => $this->faker->randomFloat(2, 500, 9000),
             'faqs' => $this->faker->paragraph,
+            'status' => $this->faker()->boolean,
         ];
     }
 }

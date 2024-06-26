@@ -20,12 +20,12 @@ return new class extends Migration
             $table->DATETIME('end_date');
             $table->DECIMAL('paid',10, 2);
             $table->string('photo')->nullable(); 
-            $table->TEXT('address',255); 
-            $table->TEXT('location',255)->nullable();
-            $table->string('description', 255)->nullable(); 
+            $table->text('address',255); 
+            $table->text('location',255)->nullable();
+            $table->text('description', 255)->nullable(); 
             $table->string('site_title', 255)->nullable();
-            $table->string('meta_keyword')->nullable(); 
-            $table->string('meta_description', 255)->nullable();
+            $table->text('meta_keyword')->nullable(); 
+            $table->text('meta_description', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -3,7 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
-use App\Filament\Resources\CourseResource\RelationManagers;
+use App\Filament\Resources\CourseResource\RelationManagers\CourseMentorRelationManager;
+use App\Filament\Resources\CourseResource\RelationManagers\MentorRelationManager;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\Toggle;
 use App\Models\Student;
@@ -14,11 +15,16 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Navigation\NavigationItem;
-
+use Filament\Forms\Components\Repeater;
 
 class CourseResource extends Resource
 {
@@ -46,9 +52,10 @@ class CourseResource extends Resource
                 ->maxLength(255),
                 Forms\Components\TextInput::make('course_duration')
                 ->label('Course Duration'),
-                Forms\Components\Select::make('coursecategory_id')
+                Forms\Components\Select::make('course_category_id')
                 ->options(CourseCategory::all()->pluck('name', 'id'))
-                ->searchable(),
+                ->searchable()
+                ->label('Course Category'),
             
                 Forms\Components\TextInput::make('sub_title')
                 ->label('Sub Title'),
@@ -60,6 +67,52 @@ class CourseResource extends Resource
                 ->label('Image'),
                 Forms\Components\MarkdownEditor::make('description')
                 ->label('Description'),
+                TextInput::make('site_title')
+                ->label('Site Title')
+                ->nullable(),
+                Textarea::make('meta_keyword')
+                ->label('Meta Keywords')
+                ->nullable(),
+                Textarea::make('meta_description')
+                ->label('Meta Description')
+                ->nullable(),
+                Select::make('mode')
+                ->label('Mode')
+                ->options([
+                    'online' => 'Online',
+                    'offline' => 'Offline',
+                    'both' => 'Both',
+                ])
+                ->nullable(),
+                TextInput::make('sessions')
+                ->label('Sessions')
+                ->default(0)
+                ->numeric(),
+                TextInput::make('projects')
+                ->label('Projects')
+                ->numeric(),
+                TextInput::make('fee')
+                ->label('Fee')
+                ->numeric(),
+                TextInput::make('offer_fee')
+                ->label('Offer Fee')
+                ->numeric(),
+
+                Repeater::make('faqs')
+                    ->schema([
+                        TextInput::make('question')
+                            ->required()
+                            ->live(onBlur: true),
+                        TextInput::make('answer')
+                            ->required()
+                            ->live(onBlur: true),
+                    ])
+                    ->columns(2)
+                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
+
+                TextInput::make('status')
+                    ->label('Status')
+                    ->default('active'),
             ]),
                 
             Section::make('SCO')
@@ -78,7 +131,6 @@ class CourseResource extends Resource
             ]);
     }
 
-
     public static function table(Table $table): Table
     {
         return $table
@@ -87,14 +139,13 @@ class CourseResource extends Resource
             ->searchable()
             ->sortable()
             ->toggleable(),
-            Tables\Columns\TextColumn::make('CourseCategory.name')
+            Tables\Columns\TextColumn::make('courseCategory.name')
             ->searchable()
             ->sortable()
             ->toggleable(),
             Tables\Columns\ToggleColumn::make('popular_course')
             ->onIcon('heroicon-m-bolt')
             ->offIcon('heroicon-m-user'),
-            
             
             ])
             ->filters([
@@ -115,8 +166,11 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CourseMentorRelationManager::class,
         ];
+        // return [
+        //    MentorRelationManager::class,
+        // ];
     }
 
     public static function getPages(): array
@@ -127,5 +181,4 @@ class CourseResource extends Resource
             'edit' => Pages\EditCourse::route('/{record}/edit'),
         ];
     }
-
 }

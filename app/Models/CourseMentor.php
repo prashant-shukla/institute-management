@@ -16,8 +16,9 @@ class CourseMentor extends Model
         return $this->belongsTo(Mentor::class);
     }
 
-    public function course()
+    public function courses()
     {
         return $this->belongsTo(Course::class);
     }
+   
 }

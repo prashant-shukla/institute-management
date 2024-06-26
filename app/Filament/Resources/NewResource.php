@@ -30,13 +30,11 @@ class NewResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('Title')
-                ->label('Title')
+                Forms\Components\TextInput::make('title')
                 ->columnSpanFull()
                 ->required(),
-                Forms\Components\FileUpload::make('Attachment')
-                ->label('Attachment'),
-                Forms\Components\Radio::make('Status')
+                Forms\Components\FileUpload::make('attachment'),
+                Forms\Components\Radio::make('status')
                 ->options([
                 '0' => 'Draft',
                 '1' => 'Scheduled',

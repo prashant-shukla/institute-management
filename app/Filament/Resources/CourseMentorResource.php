@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CourseMentorResource\Pages;
 use App\Filament\Resources\CourseMentorResource\RelationManagers;
 use App\Models\CourseMentor;
+use App\Models\Mentor;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;

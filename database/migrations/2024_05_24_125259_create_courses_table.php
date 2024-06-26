@@ -20,16 +20,17 @@ return new class extends Migration
             $table->string('sub_title')->nullable();
             $table->tinyInteger('popular_course'); 
             $table->string('image')->nullable();
-            $table->string('description', 160)->nullable(); 
-            $table->string('site_title', 60)->nullable();
+            $table->text('description', 255)->nullable(); 
+            $table->string('site_title', 255)->nullable();
             $table->string('meta_keyword')->nullable(); 
-            $table->string('meta_description', 255)->nullable();
+            $table->text('meta_description', 255)->nullable();
             $table->enum('mode', ['online', 'offline', 'both']);
             $table->tinyInteger('sessions')->default(0);
             $table->tinyInteger('projects');
             $table->decimal('fee', 10, 2);
             $table->decimal('offer_fee', 10, 2);
-            $table->text('faqs');
+            $table->json('faqs');
+            $table->string('status')->default('active');
 
             $table->timestamps();
 

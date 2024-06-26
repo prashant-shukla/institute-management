@@ -20,7 +20,6 @@ class CourseCategoriesFactory extends Factory
         return [
             'name' =>$this->faker-> name(),
             'slug'=>$this->faker->slug(),
-            'software'=>json_encode(["test"=>$this->faker->word()]),
             'description'=>$this->faker->sentence(),
             'sub_title'=>$this->faker->sentence(),
             'image' =>$this->faker->imageUrl(),
