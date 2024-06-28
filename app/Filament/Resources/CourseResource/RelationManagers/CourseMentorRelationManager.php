@@ -33,7 +33,7 @@ class CourseMentorRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+               
                 Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
@@ -43,11 +43,11 @@ class CourseMentorRelationManager extends RelationManager
                 Tables\Actions\AttachAction::make(),
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DetachAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DetachBulkAction::make(),
+                Tables\Actions\DetachBulkAction::make(),
                 ]),
             ]);
     }

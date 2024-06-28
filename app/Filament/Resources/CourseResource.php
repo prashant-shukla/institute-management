@@ -3,13 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
-use App\Filament\Resources\CourseResource\RelationManagers\CourseMentorRelationManager;
-use App\Filament\Resources\CourseResource\RelationManagers\MentorRelationManager;
+
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\Toggle;
 use App\Models\Student;
 use App\Models\CourseCategory;
 use App\Models\Course;
+use App\Models\CourseTool;
+use App\Models\CourseSyllabuses; 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Textarea;
@@ -25,6 +27,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Navigation\NavigationItem;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\ToggleButtons;
+
 
 class CourseResource extends Resource
 {
@@ -52,7 +56,7 @@ class CourseResource extends Resource
                 ->maxLength(255),
                 Forms\Components\TextInput::make('course_duration')
                 ->label('Course Duration'),
-                Forms\Components\Select::make('course_category_id')
+                Forms\Components\Select::make('course_categories_id')
                 ->options(CourseCategory::all()->pluck('name', 'id'))
                 ->searchable()
                 ->label('Course Category'),
@@ -67,6 +71,15 @@ class CourseResource extends Resource
                 ->label('Image'),
                 Forms\Components\MarkdownEditor::make('description')
                 ->label('Description'),
+
+                Select::make('tools')
+                ->relationship('tools', 'name')
+                ->multiple()
+                ->preload(),
+
+
+
+
                 TextInput::make('site_title')
                 ->label('Site Title')
                 ->nullable(),
@@ -166,7 +179,9 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CourseMentorRelationManager::class,
+            CourseResource\RelationManagers\CourseMentorRelationManager::class,
+            CourseResource\RelationManagers\CourseSyllabusesResourceRelationManager::class,
+            // CourseResource\RelationManagers\CourseToolResourceRelationManager::class,
         ];
         // return [
         //    MentorRelationManager::class,

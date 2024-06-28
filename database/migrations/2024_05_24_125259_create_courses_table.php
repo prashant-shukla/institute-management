@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('meta_keyword')->nullable(); 
             $table->text('meta_description', 255)->nullable();
             $table->enum('mode', ['online', 'offline', 'both']);
-            $table->tinyInteger('sessions')->default(0);
-            $table->tinyInteger('projects');
+            $table->tinyInteger('sessions')->default(0)->nullable();;
+            $table->tinyInteger('projects')->nullable();;
             $table->decimal('fee', 10, 2);
             $table->decimal('offer_fee', 10, 2);
             $table->json('faqs');

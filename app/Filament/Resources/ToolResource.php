@@ -12,12 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
 
 class ToolResource extends Resource
 {
     protected static ?string $model = Tool::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
 
     public static function form(Form $form): Form
     {
@@ -30,9 +31,10 @@ class ToolResource extends Resource
                 ->required(),
             Forms\Components\TextInput::make('version')
                 ->required(),
-            Forms\Components\TextInput::make('image')
-                ->required()
-                ->maxLength(255),
+                FileUpload::make('image')
+                ->label('Upload Image')  
+                ->image()  
+                ->required(),
             ]);
     }
 

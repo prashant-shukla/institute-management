@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course_mentors', function (Blueprint $table) {
+        Schema::create('course_mentor', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mentor_id');
             $table->unsignedBigInteger('course_id');
             $table->integer('order')->nullable();
-            $table->timestamps();
+           
 
             // Define foreign key constraints
             $table->foreign('mentor_id')->references('id')->on('mentors')->onDelete('cascade');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_mentors');
+        Schema::dropIfExists('course_mentor');
     }
 };
