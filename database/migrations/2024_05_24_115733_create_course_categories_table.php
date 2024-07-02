@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('slug')->unique();
-            $table->string('sub_title');
+            $table->string('sub_title')->nullable();
             $table->string('image')->nullable(); 
             $table->text('description', 160)->nullable();
             $table->unsignedSmallInteger('order'); 
             $table->string('show_on_website')->default(false);
             $table->string('site_title', 255)->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->text('meta_keyword')->nullable(); 
             $table->text('meta_description', 255)->nullable();
             $table->timestamps();

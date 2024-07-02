@@ -29,7 +29,7 @@ class CourseFactory extends Factory
             'fee' => $this->faker->randomFloat(2, 1000, 10000),
             'offer_fee' => $this->faker->randomFloat(2, 500, 9000),
             'faqs' => $this->faker->paragraph,
-            'status' => $this->faker()->boolean,
+            'status' => $this->faker->boolean,
         ];
     }
 }

@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
             BlogCategoriesTableSeeder::class,
             BlogPostsTableSeeder::class,
             CertificateFieldsSeeder::class,
+            CourseCategorySeeder::class,
+            MentorSeeder::class,
+            ToolSeeder::class,
+            CourseSeeder::class,
+            StudentSeeder::class,
+            
         ]);
 
         Artisan::call('shield:generate --all');

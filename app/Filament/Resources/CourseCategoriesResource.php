@@ -36,7 +36,7 @@ class CourseCategoriesResource extends Resource
                 ->required()
                 ->label('Slug')
                 ->maxLength(255),
-                Forms\Components\TagsInput::make('software'),
+               // Forms\Components\TagsInput::make('software'),
                 Forms\Components\MarkdownEditor::make('description'),
                 Forms\Components\TextInput::make('sub_title'),
                 Forms\Components\FileUpload::make('image'),
