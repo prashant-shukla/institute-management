@@ -5,10 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Institite</title>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    crossorigin="anonymous"> -->
+  
     @vite(['resources/sass/app.scss','resources/js/app.js'])
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+  
 <style>
   /* Custom styling for counters */
   .counter-section {
@@ -16,7 +18,10 @@
       padding: 50px 0;
       text-align: center;
     }
-
+    .slick-prev:before, .slick-next:before
+{
+color:#000;
+}
     .counter {
       font-size: 36px;
       font-weight: bold;
@@ -28,8 +33,22 @@
       font-size: 18px;
       color: #666;
     }
-    .scroll-container{
-      white-space: nowrap;
+    
+.testimonial{
+  width: 450px;
+}
+.slick-slide {
+      margin: 0 10px;
+  }
+  
+    footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background-color: #343a40;
+    }
+    footer .bg-secondary {
+        background-color: #6c757d;
     }
 
 
@@ -38,7 +57,7 @@
 
 <body>
   <div class="main w-100 ">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary  bg-info px-3">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary  bg-#0834d8 px-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Logo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -105,7 +124,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <section class="featured-one alert bg-info mt-5">
+    <section class="featured-one alert bg-primary text-light mt-5">
       <div class="auto-container">
         <div class="inner-container">
           <div class="row clearfix text-center ">
@@ -116,7 +135,7 @@
             <div class="row clearfix ">
             
                <div class="d-flex  justify-content-center">
-                  <div class=" ms-5 text-center" style="width: 20rem;">
+                  <div class=" ms-5 text-center" style="width: 21rem;">
                    <div><i class="fa-solid fa-graduation-cap fa-2xl m-4"></i></div>
                     <div class="card-body text-center">
                       <h3>TRAINING / PROFESSIONAL CERTIFICATION</h3>
@@ -124,7 +143,7 @@
                     </div>
                   </div>
   
-                  <div class=" ms-5 text-center" style="width: 20rem;">
+                  <div class=" ms-5 text-center" style="width: 17rem;">
                     <div><i class="fa-solid fa-briefcase fa-2xl m-4"></i></div>
                      <div class="card-body text-center">
                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -133,7 +152,7 @@
                      </div>
                    </div>
   
-                   <div class=" ms-5 text-center" style="width: 20rem;">
+                   <div class=" ms-5 text-center" style="width: 16rem;">
                     <div><i class="fa-solid fa-gears fa-2xl m-4"></i></div>
                      <div class="card-body text-center">
                      <h3>CONSULTANCY</h3>
@@ -153,7 +172,7 @@
       <p>Build a career you love, live a life you love. <br>
         pen_spark
       </p>
-      <div class="d-flex justify-content-center ">
+      <div class="d-flex justify-content-center  ">
         <div class="card " style="width: 18rem;">
           <img src="{{ url('/storage/mechcad.jpg')}}" style="height: 280px;" class="card-img-top" alt="...">
           <div class="card-body">
@@ -254,37 +273,18 @@
       </div>
     </div>
   </div>
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="text-center">OUR CLIENTS</h2>
-  
-        <div class="scroll-container  p-2 overflow-auto nowrap-example p-1 bg-info">
-          <img src="{{ url('/storage/7163_MayurakshiInstituteofEngineeringandTechnologyMIET_1429267328_medium1 (1).jpg')}}" class="img-fluid p-1" alt="Cinque Terre" width="250" height="100">
-          <img src="{{ url('/storage/logo1 (1).jpg')}}" class="img-fluid p-1" alt="Forest" width="250" height="100">
-          <img src="{{ url('/storage/about_jiet1.png')}}" class="img-fluid p-1" alt="Northern Lights" width="250" height="100">
-          <img src="{{ url('/storage/M_B_M__Engineering_College_-_Logo1.png')}}" class="img-fluid p-1" alt="Mountains" width="250" height="100">
-          <img src="{{ url('/storage/logo2.png')}}" class="img-fluid p-1" alt="Forest" width="250" height="100">
-          <img src="{{ url('/storage/logo1.jpg')}}" class="img-fluid p-1" alt="Northern Lights" width="250" height="100">
-          <img src="{{ url('/storage/web-logo11.png')}}" class="img-fluid p-1" alt="Mountains" width="250" height="100">
-          <img src="{{ url('/storage/basant_handicraft.jpg')}}" class="img-fluid p-1" alt="Mountains" width="250" height="100">
-        </div>
-      </div>
-      
-    </div>
-   
-   <section class="counter-section w-100 bg-info text-light mt-5">
+ 
+   <section class="counter-section  bg-primary text-light mt-5">
     <div class="container">
       <div class="row">
         
         <div class="col-lg-4 mb-2">
-          <div class=" text-light counter" data-target="3000">0 </div><i class="fa-solid fa-plus fa-l" style="color: #ffffff;"></i>
+          <div class=" text-light counter" data-target="3000">0</div>
           <div class=" text-light counter-description">Happy Students</div>
         </div>
   
         <div class="col-lg-4 mb-2">
           <div class="counter text-light" data-target="20">0
-            <br><p>Active Courses</p>
           </div>
           
           <div class="counter-description text-light">Active Courses</div>
@@ -298,23 +298,302 @@
       </div>
     </div>
   </section>
-    <section>
+  <section class="featured-one alert bg-primary text-light mt-5">
+      <div class="auto-container">
+        <div class="inner-container">
+          <div class="row clearfix text-center ">
+            <div class="text-center">
+              <h2>CADADDA JODHPUR NEW FEATURES</h2>
+            <p>We Shared some Awesome new features for you</p>
+            </div>
+            <div class="row clearfix ">
+            
+               <div class="d-flex  justify-content-center">
+                  <div class=" ms-5 text-center" style="width: 21rem;">
+                   <div><i class="fa-solid fa-book-open fa-2xl m-4"></i></div>
+                    <div class="card-body text-center">
+                      <h3>ONLINE PRACTICE SHEETS AND BOOKS</h3>
+                      <p>we at Cadadda provides you books and practice books online in your CADADDA student pannel</p>
+                    </div>
+                  </div>
+  
+                  <div class=" ms-5 text-center" style="width: 17rem;">
+                    <div><i class="fa-solid fa-mobile-screen-button fa-2xl m-4"></i></div>
+                     <div class="card-body text-center">
+                       <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                       <h3>MOBILE APP</h3>
+                       <p>CADADDA having mobile app for you so that you can access your profile and data anytime anywhere</p>
+                     </div>
+                   </div>
+  
+                   <div class=" ms-5 text-center" style="width: 16rem;">
+                    <div><i class="fa-solid fa-circle-play fa-2xl m-4"></i></div>
+                     <div class="card-body text-center">
+                     <h3>ONLINE COURSE VIDEO</h3>
+                       <p>CADADDA online course videos is totally free for the students passed from here. you can access it from your student pannel</p>
+                     </div>
+                   </div>
+                </div>
+                
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <section>
     <div class="container mt-5">
         <div class="text-center">
-        <h2>TESTIMONIALS</h2>
-        <p>What Our Students Say About CADADDA</p>
-
+            <h2>TESTIMONIALS</h2>
+            <p>What Our Students Say About CADADDA</p>
         </div>
-       <div>
-        <img src="{{ url('/storage/106031.png') }}" style="height: 100px; with:16%;"   class="border-5  order-success" alt="">
+      <div class="testimonials">
+        <div class=" d-flex  m-1 ">
+          <div class="d-flex border testimonial m-1 w-100 border-primary rounded-4 ">
+            <img class="rounded-circle m-1 text-center " src="https://via.placeholder.com/80" alt="">
+            <div class="content m-2 mt-5">
+                    <p>"Great institution I ever have.. Faculty are very good in teaching manner."</p>
+                    <h3>Payal Jain</h3>
+            </div>
+          </div>
+          <div class="d-flex border m-1 border-primary w-100 rounded-4 testimonial ">
+            <img class="rounded-circle m-1 text-center border-primary " src="https://via.placeholder.com/80" alt="">
+            <div class="content m-2 mt-5">
+                    <p>"Great institution I ever have.. Faculty are very good in teaching manner."</p>
+                    <h3>Payal Jain</h3>
+            </div>
+          </div>
+        </div>
+       
+        </div>
        </div>
-    </div> 
-    </section>
+    </div>
+    
+</section>
+
+<section class="bg-primary mt-5 pt-3 pb-3">
+  <div class="blog "> 
+    <!-- //d-flex justify-content-center -->
+    <div class="heading text-center text-light mt-3  ">
+      <h2 class="mt-3">FROM OUR BLOG</h2>
+      <p>We Shared Awesome Articles for Your Next Sites</p>
+    </div>
+    <div class=" slick-class  p-2 responsives">
+     <div class="card m-3" >
+      <iframe  src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX" 
+        title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional" 
+        class="card-img-top"  allowfullscreen></iframe>
+      <div class="card-body">
+        <h4>
+        DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE
+        </h4>
+       <p class="card-text"><i class="bi bi-person"></i> By Site Administrato</p>
+      </div>
+     </div>
+     <div class="card m-3" >
+      <iframe  src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX" 
+        title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional" 
+        class="card-img-top"  allowfullscreen></iframe>
+      <div class="card-body">
+        <h4>
+        DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE
+        </h4>
+       <p class="card-text"><i class="bi bi-person"></i> By Site Administrato</p>
+      </div>
+     </div>
+     <div class="card m-3" >
+      <iframe  src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX" 
+        title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional" 
+        class="card-img-top"  allowfullscreen></iframe>
+      <div class="card-body">
+        <h4>
+        DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE
+        </h4>
+       <p class="card-text"><i class="bi bi-person"></i> By Site Administrato</p>
+      </div>
+     </div>
+     <div class="card m-3" >
+      <iframe  src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX" 
+        title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional" 
+        class="card-img-top"  allowfullscreen></iframe>
+      <div class="card-body">
+        <h4>
+        DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE
+        </h4>
+       <p class="card-text"><i class="bi bi-person"></i> By Site Administrato</p>
+      </div>
+     </div>
+     <div class="card m-3" >
+      <iframe  src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX" 
+        title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional" 
+        class="card-img-top"  allowfullscreen></iframe>
+      <div class="card-body">
+        <h4>
+        DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE
+        </h4>
+       <p class="card-text"><i class="bi bi-person"></i> By Site Administrato</p>
+      </div>
+     </div>
+     <div class="card m-3">
+      <iframe  src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX" 
+        title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional" 
+        class="card-img-top"  allowfullscreen></iframe>
+      <div class="card-body">
+        <h4>
+        DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE
+        </h4>
+       <p class="card-text"><i class="bi bi-person"></i> By Site Administrato</p>
+      </div>
+     </div>
+    </div>
+  </div>
+</section>
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center">OUR CLIENTS</h2>
+  
+        <div class="slick-class  p-2 responsive">
+          <img src="{{ url('/storage/7163_MayurakshiInstituteofEngineeringandTechnologyMIET_1429267328_medium1 (1).jpg')}}" class="img-fluid p-1" alt="Cinque Terre" width="250" height="100">
+          <img src="{{ url('/storage/logo1 (1).jpg')}}" class="img-fluid p-1" alt="Forest" width="250" height="100">
+          <img src="{{ url('/storage/about_jiet1.png')}}" class="img-fluid p-1" alt="Northern Lights" width="250" height="100">
+          <img src="{{ url('/storage/M_B_M__Engineering_College_-_Logo1.png')}}" class="img-fluid p-1" alt="Mountains" width="250" height="100">
+          <img src="{{ url('/storage/logo2.png')}}" class="img-fluid p-1" alt="Forest" width="250" height="100">
+          <img src="{{ url('/storage/logo1.jpg')}}" class="img-fluid p-1" alt="Northern Lights" width="250" height="100">
+          <img src="{{ url('/storage/web-logo11.png')}}" class="img-fluid p-1" alt="Mountains" width="250" height="100">
+          <img src="{{ url('/storage/basant_handicraft.jpg')}}" class="img-fluid p-1" alt="Mountains" width="250" height="100">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+    <footer class="bg-dark text-white pt-4">
+    <div class="container">
+      <div class="row">
+       <div class="col-md-4">
+         <h5 class="mb-3" >Contact Us</h5>
+         <div class="add d-flex  my-3">
+          <i class="fa-solid fa-envelope fa-xl mt-2"></i> 
+          <a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"> info@cadadda.com</a>
+         </div>
+         <div class="add d-flex my-3">
+          <i class="fa-solid fa-phone fa-xl mt-2"></i> 
+          <a href="#" class="text-white ms-2 text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">9261077888</a>
+         </div> 
+         <div class="add d-flex my-3">
+          <i class="fa-solid fa-location-dot fa-xl mt-3"></i> 
+          <a href="#" class="text-white ms-2 text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">PL No-8, Behind mahaveer complex, Opp. Bheru bagh jain Mandir, C road, Sardarpura, Jodhpur, Rajasthan, 342001</a>
+         </div>
+       </div>
+       <div class="col-md-4 ">
+         <h5 class="mb-3" > Company</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">About Us</a></li>
+                    <li><a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Contact</a></li>
+                    <li><a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Courses</a></li>
+                    <li><a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Blog</a></li>
+                    <li><a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Events</a></li>
+                </ul>
+       </div>
+       <div class="col-md-4">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled">
+                    <li >
+                    <i class="fa-brands fa-facebook fa-xl" style="color: #f1f2f4;"></i>
+                      <a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Facebook</a></li>
+                    <li >
+                    <i class="fa-brands fa-twitter fa-xl" style="color: #f7f7f8;"></i>
+                    <a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Twitter</a></li>
+                    <li >
+                    <i class="fa-brands fa-instagram fa-xl" style="color: #f7f7f8;"></i>  
+                    <a href="#" class="text-white ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Instagram</a></li>
+                </ul>
+       </div>
+       </div>
+      </div>
+     </div>
+    <div class="bg-secondary text-center py-2">
+        <p class="mb-0">&copy; 2024 Your Company. All rights reserved.</p>
+    </div>
+</footer>
+
   </div>
  
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+<script>
+  $('.responsive').slick({
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    
+  ]
+});
 
+
+$('.responsives').slick({
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    
+  ]
+});
+
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Select all counters
@@ -356,6 +635,7 @@
     });
   });
 </script>
+
 
 
 </html>
