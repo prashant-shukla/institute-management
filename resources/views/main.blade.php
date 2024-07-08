@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -146,11 +146,11 @@
 .cards{
     position: relative;
     width: 300px;
-    height: 100px;
+    height: 150px;
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgba(0,0,0,0.5) ;
     transition: 0.3s;
-    background: #1212e0;
+    background:rgb(13 110 253);
     cursor: pointer;
 }
 .imgbox{
@@ -161,9 +161,13 @@
 
 }
 .imgbox img{
-    width: 100%;
+    width: 90%;
+    align-items: center;
+    justify-content:center;
+    margin-left:5%;
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgba(0,0,0,0.5) ;
+    z-index: 90;
 }
 .cards:hover{
     height: 280px;
@@ -348,8 +352,8 @@
                     mentorship from our accomplished faculty,<br>
                     shaping the leaders of tomorrow</p>
             </div>
-            <div class="flexboxs mt-4">
-            <div class="d-flex justify-content-center  ">
+            <div class="flexboxs mt-5">
+            <div class="d-flex justify-content-center mt-5 ">
                 <div class="cards ms-5 mt-5">
                     <div class="imgbox">
                      <img class="imgs" src="{{ url('/storage/pexels-moose-photos-170195-1036623.jpg') }}" alt="">
@@ -919,4 +923,4 @@
 
 
 
-</html>
+</html> -->
