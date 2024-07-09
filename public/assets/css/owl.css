@@ -167,7 +167,7 @@
   background: url("owl.video.play.png") no-repeat;
   cursor: pointer;
   z-index: 1;
-  /* -webkit-backface-visibility: hidden; */
+  
   transition: transform 100ms ease; }
 
 .owl-carousel .owl-video-play-icon:hover {
@@ -243,6 +243,7 @@
   background: #fff;
   border-top: 2px solid #ddd;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: -5px;
 }
 
 .guide-img img {
