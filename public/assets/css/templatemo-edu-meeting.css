@@ -1694,7 +1694,11 @@ section.meetings-page .pagination ul li a:hover {
 .templatemo-item-col {
 	width: 31%;
 }
-
+.testimonial-img img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
 @media (max-width: 992px) {
 	.templatemo-item-col {
 		width: 45%;

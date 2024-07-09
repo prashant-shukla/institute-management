@@ -254,7 +254,9 @@ https://templatemo.com/tm-569-edu-meeting
                   <div class="price">
                     <span>$48.00</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-04.jpg" alt="Student Training"></a>
+                  <a href="meeting-details.html">
+                    <img src="assets/images/meeting-04.jpg" alt="Student Training">
+                  </a>
                 </div>
                 <div class="down-content">
                   <div class="date">
@@ -834,6 +836,156 @@ https://templatemo.com/tm-569-edu-meeting
   </section>
 
 
+<!-- Testimonial Section Start -->
+<div class="container-fluid py-5 bg-light testimonial ">
+  <div class="container py-5">
+      <div class="text-center mb-5">
+          <h5 class="section-title text-light">Testimonial</h5>
+          <h1 class="mb-0 text-light">Our Clients Say!!!</h1>
+      </div>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <div class="testimonial-item text-center rounded pb-4">
+                      <div class="testimonial-comment bg-white rounded p-4 mb-4">
+                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis.</p>
+                      </div>
+                      <div class="testimonial-img p-1">
+                          <img src="{{ url('assets/images/testimonial-1.jpg') }}" class="img-fluid rounded-circle" alt="John Abraham">
+                      </div>
+                      <div>
+                          <h5 class="mb-0">John Abraham</h5>
+                          <p class="mb-0">New York, USA</p>
+                          <div class="d-flex justify-content-center mt-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="testimonial-item text-center rounded pb-4">
+                      <div class="testimonial-comment bg-white rounded p-4 mb-4">
+                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis.</p>
+                      </div>
+                      <div class="testimonial-img p-1">
+                          <img src="{{ url('assets/images/testimonial-2.jpg') }}" class="img-fluid rounded-circle" alt="Jane Doe">
+                      </div>
+                      <div>
+                          <h5 class="mb-0">Jane Doe</h5>
+                          <p class="mb-0">Los Angeles, USA</p>
+                          <div class="d-flex justify-content-center mt-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="testimonial-item text-center rounded pb-4">
+                      <div class="testimonial-comment bg-white rounded p-4 mb-4">
+                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis.</p>
+                      </div>
+                      <div class="testimonial-img p-1">
+                          <img src="{{ url('assets/images/testimonial-3.jpg') }}" class="img-fluid rounded-circle" alt="Michael Smith">
+                      </div>
+                      <div>
+                          <h5 class="mb-0">Michael Smith</h5>
+                          <p class="mb-0">Chicago, USA</p>
+                          <div class="d-flex justify-content-center mt-2">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+          </button>
+      </div>
+  </div>
+</div>
+
+<!-- Testimonial Section End -->
+
+<!-- Include Bootstrap 5 CSS and JS -->
+<!-- Travel Guide Start -->
+<div class="container-fluid monter py-5">
+  <div class="container py-5">
+    <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+      
+      <h2 class="mb-0 text-light">Meet Our Faculty</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="guide-item">
+          <div class="guide-img">
+            <div class="guide-img-efects">
+              <img src="{{ url('/storage/pexels-moose-photos-170195-1036623.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+            </div>
+            
+          </div>
+          <div class="guide-title text-center rounded-bottom p-4">
+            <div class="guide-title-inner">
+              <h4 class="mt-3">Ranu Kanwar</h4>
+              <p class="mb-0">Designation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="guide-item">
+          <div class="guide-img">
+            <div class="guide-img-efects">
+              <img src="{{ url('/storage/240_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+            </div>
+            
+          </div>
+          <div class="guide-title text-center rounded-bottom p-4">
+            <div class="guide-title-inner">
+              <h4 class="mt-3">Saloni</h4>
+              <p class="mb-0">Designation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="guide-item">
+          <div class="guide-img">
+            <div class="guide-img-efects">
+              <img src="{{ url('/storage/cheerful-dark-skinned-woman-smiling-broadly-rejoicing-her-victory-competition-among-young-writers-standing-isolated-against-grey-wall-people-success-youth-happiness-concept_273609-1246.avif') }}" class="img-fluid w-100 rounded-top" alt="Image">
+            </div>
+           
+          </div>
+          <div class="guide-title text-center rounded-bottom p-4">
+            <div class="guide-title-inner">
+              <h4 class="mt-3">Jyoti Kanwar</h4>
+              <p class="mb-0">Designation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat for other guide items -->
+    </div>
+  </div>
+</div>
+<!-- Travel Guide End -->
+
 
   <section class="contact-us" id="contact">
     <div class="container">
@@ -920,63 +1072,64 @@ https://templatemo.com/tm-569-edu-meeting
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+</body>
 
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/lightbox.js"></script>
-    <script src="assets/js/tabs.js"></script>
-    <script src="assets/js/video.js"></script>
-    <script src="assets/js/slick-slider.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script>
-        //according to loftblog tut
-        $('.nav li:first').addClass('active');
+</body>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        var showSection = function showSection(section, isAnimate) {
+<script src="assets/js/isotope.min.js"></script>
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/lightbox.js"></script>
+<script src="assets/js/tabs.js"></script>
+<script src="assets/js/video.js"></script>
+<script src="assets/js/slick-slider.js"></script>
+<script src="assets/js/custom.js"></script>
+<script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+      direction = section.replace(/#/, ''),
+      reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+      reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos },
+        800);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+        $this = $(this),
+        topEdge = $this.offset().top - 80,
+        bottomEdge = topEdge + $this.height(),
+        wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
           var
-          direction = section.replace(/#/, ''),
-          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
-          reqSectionPos = reqSection.offset().top - 0;
+          currentId = $this.data('section'),
+          reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+          siblings().removeClass('active');
+        }
+      });
+    };
 
-          if (isAnimate) {
-            $('body, html').animate({
-              scrollTop: reqSectionPos },
-            800);
-          } else {
-            $('body, html').scrollTop(reqSectionPos);
-          }
+    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+      e.preventDefault();
+      showSection($(this).attr('href'), true);
+    });
 
-        };
-
-        var checkSection = function checkSection() {
-          $('.section').each(function () {
-            var
-            $this = $(this),
-            topEdge = $this.offset().top - 80,
-            bottomEdge = topEdge + $this.height(),
-            wScroll = $(window).scrollTop();
-            if (topEdge < wScroll && bottomEdge > wScroll) {
-              var
-              currentId = $this.data('section'),
-              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
-              reqLink.closest('li').addClass('active').
-              siblings().removeClass('active');
-            }
-          });
-        };
-
-        $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
-          e.preventDefault();
-          showSection($(this).attr('href'), true);
-        });
-
-        $(window).scroll(function () {
-          checkSection();
-        });
-    </script>
-</body>
-
-</body>
+    $(window).scroll(function () {
+      checkSection();
+    });
+</script>
 </html>
