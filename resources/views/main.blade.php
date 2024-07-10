@@ -71,7 +71,7 @@ https://templatemo.com/tm-569-edu-meeting
                        <!--**   <li><a href="meetings.html">Meetings</a></li> **-->
                           <li class="scroll-to-section"><a href="#apply">About us</a></li>
                           <li class="scroll-to-section"><a href="#courses">Events</a></li> 
-                          <li class="scroll-to-section"><a href="#courses">Courses</a></li> 
+                          <li class="scroll-to-section"><a href="{{route('courses')}}">Courses</a></li>
                           <li class="scroll-to-section"><a href="#contact">Contact Us</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
@@ -711,14 +711,14 @@ https://templatemo.com/tm-569-edu-meeting
             <p class="secondary-font fs-6 m-0">Feb</p>
 
           </div>
-          <div class="card position-relative">
+          <div class="card position-relative rounded-4">
             <a href="single-post.html">
                
                 <iframe src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX"
                 title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional"
                 class="card-img-top img-fluid rounded-4" allowfullscreen></iframe>
             </a>
-            <div class="card-body p-0">
+            <div class="card-body p-1">
               <a href="single-post.html">
                 <h3 class="card-title pt-4 pb-3 m-0">DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE</h3>
               </a>
@@ -737,13 +737,13 @@ https://templatemo.com/tm-569-edu-meeting
             <p class="secondary-font fs-6 m-0">Feb</p>
 
           </div>
-          <div class="card position-relative">
+          <div class="card position-relative rounded-4">
             <a href="single-post.html">
                 <iframe src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX"
                 title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional"
                 class="card-img-top img-fluid rounded-4" allowfullscreen></iframe>
             </a>
-            <div class="card-body p-0">
+            <div class="card-body p-1">
               <a href="single-post.html">
                 <h3 class="card-title pt-4 pb-3 m-0">DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE</h3>
               </a>
@@ -762,13 +762,13 @@ https://templatemo.com/tm-569-edu-meeting
             <p class="secondary-font fs-6 m-0">Feb</p>
 
           </div>
-          <div class="card position-relative">
+          <div class="card position-relative rounded-4">
             <a href="single-post.html">
                 <iframe src="https://www.youtube.com/embed/c6GbkT10hZ8?list=PLAbrVBfQCyagjLHpIbNDp9XcROK5wKEwX"
                 title="Primavera P6 R19 project management in hindi | Online Primavera Training | primavera p6 professional"
                 class="card-img-top img-fluid rounded-4" allowfullscreen></iframe>
             </a>
-            <div class="card-body p-0">
+            <div class="card-body p-2">
               <a href="single-post.html">
                 <h3 class="card-title pt-4 pb-3 m-0">DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE</h3>
               </a>
@@ -932,6 +932,8 @@ https://templatemo.com/tm-569-edu-meeting
       <h2 class="mb-0 text-light">Meet Our Faculty</h2>
     </div>
     <div class="row g-4">
+      
+     
       <div class="col-md-6 col-lg-4">
         <div class="guide-item">
           <div class="guide-img">
@@ -942,12 +944,13 @@ https://templatemo.com/tm-569-edu-meeting
           </div>
           <div class="guide-title text-center rounded-bottom p-4">
             <div class="guide-title-inner">
-              <h4 class="mt-3">Ranu Kanwar</h4>
+              <h4 class="mt-3">Renu Kanwar</h4>
               <p class="mb-0">Designation</p>
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-md-6 col-lg-4">
         <div class="guide-item">
           <div class="guide-img">

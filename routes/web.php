@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('/main', function () {
     return view('main');
 });
+Route::get('/courses', function () {
+    return view('courses'); // Ensure the view file is named correctly, e.g., resources/views/courses.blade.php
+})->name('courses');
 Route::get('/storage-link', [CacheController::class, 'storageLink']);
 Route::get('/clear-cache', [CacheController::class, 'clearCache']);
 
