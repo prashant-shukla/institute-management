@@ -23,6 +23,11 @@ Route::get('/main', function () {
 Route::get('/courses', function () {
     return view('courses'); // Ensure the view file is named correctly, e.g., resources/views/courses.blade.php
 })->name('courses');
+
+Route::get('/course-details', function () {
+    return view('course-details'); // Ensure the view file is named correctly, e.g., resources/views/courses.blade.php
+})->name('ccourse-details');
+
 Route::get('/storage-link', [CacheController::class, 'storageLink']);
 Route::get('/clear-cache', [CacheController::class, 'clearCache']);
 
