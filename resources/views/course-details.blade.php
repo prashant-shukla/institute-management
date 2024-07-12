@@ -27,6 +27,24 @@ TemplateMo 569 Edu Meeting
 https://templatemo.com/tm-569-edu-meeting
 
 -->
+<style>
+          .accordion-button {
+            display: flex;
+            justify-content: space-between;
+            /* align-items: center; */
+        }
+        .accordion-button span {
+            margin-left: auto;
+        }
+        .accordion-body {
+            /* padding: 1rem;
+            font-size: 1rem;
+            margin-bottom: 1rem; Add bottom margin */
+            padding: 1rem; 
+            margin-bottom:1rem;
+        }
+
+</style>
   </head>
 
 <body>
@@ -163,9 +181,155 @@ https://templatemo.com/tm-569-edu-meeting
                 </div>
               </div>
             </div>
+
+            <div class="container mt-5">
+              <h2 class="text-center mb-4">Accordion Example</h2>
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingOne">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                              Accordion Item #1
+                              <span class="ml-auto">live class : 5</span>
+                          </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                              Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingTwo">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                              Accordion Item #2
+                              <span class="ml-auto">live class : 3</span>
+                          </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                              Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                              Accordion Item #3
+                              <span class="ml-auto">live class : 2</span>
+                          </button>
+                      </h2>
+                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                              Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body.
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="container-fluid monter py-5">
+              <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                  
+                  <h2 class="mb-0 text-light">Meet Our Faculty</h2>
+                </div>
+                <div class="row g-4">
+                  
+                 
+                  <div class="col-md-6 col-lg-4">
+                    <div class="guide-item">
+                      <div class="guide-img">
+                        <div class="guide-img-efects">
+                          <img src="{{ url('/storage/pexels-moose-photos-170195-1036623.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+                        </div>
+                        
+                      </div>
+                      <div class="guide-title text-center rounded-bottom p-4">
+                        <div class="guide-title-inner">
+                          <h4 class="mt-3">Renu Kanwar</h4>
+                          <p class="mb-0">Designation</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <div class="col-md-6 col-lg-4">
+                    <div class="guide-item">
+                      <div class="guide-img">
+                        <div class="guide-img-efects">
+                          <img src="{{ url('/storage/240_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+                        </div>
+                        
+                      </div>
+                      <div class="guide-title text-center rounded-bottom p-4">
+                        <div class="guide-title-inner">
+                          <h4 class="mt-3">Saloni</h4>
+                          <p class="mb-0">Designation</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4">
+                    <div class="guide-item">
+                      <div class="guide-img">
+                        <div class="guide-img-efects">
+                          <img src="{{ url('/storage/cheerful-dark-skinned-woman-smiling-broadly-rejoicing-her-victory-competition-among-young-writers-standing-isolated-against-grey-wall-people-success-youth-happiness-concept_273609-1246.avif') }}" class="img-fluid w-100 rounded-top" alt="Image">
+                        </div>
+                       
+                      </div>
+                      <div class="guide-title text-center rounded-bottom p-4">
+                        <div class="guide-title-inner">
+                          <h4 class="mt-3">Jyoti Kanwar</h4>
+                          <p class="mb-0">Designation</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Repeat for other guide items -->
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Accordion Item #1
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Accordion Item #2
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Accordion Item #3
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                </div>
+              </div>
+            </div>
+          <!-- FAQ END -->
+
+
+
             <div class="col-lg-12">
               <div class="main-button-red">
-                <a href="meetings.html">Back To Course List</a>
+                <a href="{{url('/courses')}}">Back To Course List</a>
               </div>
             </div>
           </div>

@@ -120,13 +120,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$14.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-01.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>12</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>AUTOCAD</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>AUTOCAD</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -137,13 +137,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$22.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-02.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>14</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>V-RAY</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>V-RAY</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -154,13 +154,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$24.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-03.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>16</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>CREO</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>CREO</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -171,13 +171,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$32.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-04.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-04.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>18</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>PLC & SCADA</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>PLC & SCADA</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -188,13 +188,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$34.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-02.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>22</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>AUTOCAD</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>AUTOCAD</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -205,13 +205,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$45.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-03.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>24</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>REVIT ARCHITECTURE</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>REVIT ARCHITECTURE</h4></a>
                       <p>TemplateMo is the best website<br>when it comes to Free CSS.</p>
                     </div>
                   </div>
@@ -222,13 +222,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$52.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-01.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>27</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>PHOTOSHOP</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>PHOTOSHOP</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -239,13 +239,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$64.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-02.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>28</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>SOLID WORKS</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>SOLID WORKS</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
@@ -256,13 +256,13 @@ https://templatemo.com/tm-569-edu-meeting
                       <div class="price">
                         <span>$74.00</span>
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt=""></a>
+                      <a href="{{url('/course-details')}}"><img src="assets/images/meeting-03.jpg" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
                         <h6>Nov <span>30</span></h6>
                       </div>
-                      <a href="meeting-details.html"><h4>FUSION 360</h4></a>
+                      <a href="{{url('/course-details')}}"><h4>FUSION 360</h4></a>
                       <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>

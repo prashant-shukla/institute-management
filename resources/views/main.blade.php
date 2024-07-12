@@ -117,6 +117,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="owl-service-item owl-carousel">
           
             <div class="item">
+              <a href="{{route('courses')}}">
               <div class="icon">
                 <img src="assets/images/service-icon-01.png" alt="">
               </div>
@@ -124,6 +125,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <h4>Best Education</h4>
                 <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
               </div>
+            </a>
             </div>
             
             <div class="item">
