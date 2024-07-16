@@ -725,7 +725,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <h3 class="card-title pt-4 pb-3 m-0">DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE</h3>
               </a>
 
-              <div class="card-text">
+              <div class="card-text p-2">
                 <p class="blog-paragraph fs-6">By Site Administrato.</p>
                 <a href="single-post.html" class="blog-read">read more</a>
               </div>
@@ -750,7 +750,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <h3 class="card-title pt-4 pb-3 m-0">DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE</h3>
               </a>
 
-              <div class="card-text">
+              <div class="card-text p-2">
                 <p class="blog-paragraph fs-6">By Site Administrato</p>
                 <a href="single-post.html" class="blog-read">read more</a>
               </div>
@@ -775,7 +775,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <h3 class="card-title pt-4 pb-3 m-0">DOWNLOAD PRIMAVERA P6 R20 PROJECT MANAGEMENT IN HINDI | INSTALL PRIMAVERA P6 FREE</h3>
               </a>
 
-              <div class="card-text">
+              <div class="card-text p-2">
                 <p class="blog-paragraph fs-6">By Site Administrato</p>
                 <a href="single-post.html" class="blog-read">read more</a>
               </div>
@@ -940,7 +940,7 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="guide-item">
           <div class="guide-img">
             <div class="guide-img-efects">
-              <img src="{{ url('/storage/pexels-moose-photos-170195-1036623.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+              <img src="{{ url('assets/images/pexels-moose-photos-170195-1036623.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
             </div>
             
           </div>
@@ -957,7 +957,7 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="guide-item">
           <div class="guide-img">
             <div class="guide-img-efects">
-              <img src="{{ url('/storage/240_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+              <img src="{{ url('assets/images/240_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
             </div>
             
           </div>
@@ -973,7 +973,7 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="guide-item">
           <div class="guide-img">
             <div class="guide-img-efects">
-              <img src="{{ url('/storage/cheerful-dark-skinned-woman-smiling-broadly-rejoicing-her-victory-competition-among-young-writers-standing-isolated-against-grey-wall-people-success-youth-happiness-concept_273609-1246.avif') }}" class="img-fluid w-100 rounded-top" alt="Image">
+              <img src="{{ url('assets/images/cheerful-dark-skinned-woman-smiling-broadly-rejoicing-her-victory-competition-among-young-writers-standing-isolated-against-grey-wall-people-success-youth-happiness-concept_273609-1246.avif') }}" class="img-fluid w-100 rounded-top" alt="Image">
             </div>
            
           </div>
@@ -1066,12 +1066,12 @@ https://templatemo.com/tm-569-edu-meeting
       </div>
     </div>
     <div class="footer">
-      <p>Copyright © 2022 Edu Meeting Co., Ltd. All Rights Reserved. 
-          <br>
-          Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-          <br>
-          Distibuted By: <a href="https://themewagon.com" target="_blank" title="Build Better UI, Faster">ThemeWagon</a>
-        </p>
+      <p>Copyright © 2024 Edu Course Co., Ltd. All Rights Reserved. 
+        <br>
+        developer: <a href="https://templatemo.com" target="_parent" title="free css templates">Deependra singh</a>
+        <br>
+        Distibuted By: <a href="https://themewagon.com" target="_blank" title="Build Better UI, Faster">INSTITUTE-MANAGEMENT</a>
+      </p>
     </div>
   </section>
 

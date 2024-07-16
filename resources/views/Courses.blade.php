@@ -284,12 +284,12 @@ https://templatemo.com/tm-569-edu-meeting
       </div>
     </div>
     <div class="footer">
-      <p>Copyright © 2022 Edu Meeting Co., Ltd. All Rights Reserved. 
-          <br>
-          Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-          <br>
-          Distibuted By: <a href="https://themewagon.com" target="_blank" title="Build Better UI, Faster">ThemeWagon</a>
-        </p>
+      <p>Copyright © 2024 Edu Course Co., Ltd. All Rights Reserved. 
+        <br>
+        developer: <a href="https://templatemo.com" target="_parent" title="free css templates">Deependra singh</a>
+        <br>
+        Distibuted By: <a href="https://themewagon.com" target="_blank" title="Build Better UI, Faster">INSTITUTE-MANAGEMENT</a>
+      </p>
     </div>
   </section>
 
