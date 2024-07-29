@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CacheController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,11 @@ use App\Http\Controllers\CacheController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/main', function () {
-    return view('main');
-});
-Route::get('/courses', function () {
-    return view('courses'); // Ensure the view file is named correctly, e.g., resources/views/courses.blade.php
-})->name('courses');
+Route::get('/main', [HomeController::class, 'main']);
+Route::get('/courses', [HomeController::class, 'courses'])->name('courses');
+// Route::get('/courses', function () {
+//     return view('courses'); // Ensure the view file is named correctly, e.g., resources/views/courses.blade.php
+// })->name('courses');
 
 Route::get('/course-details', function () {
     return view('course-details'); // Ensure the view file is named correctly, e.g., resources/views/courses.blade.php

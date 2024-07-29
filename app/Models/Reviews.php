@@ -16,14 +16,17 @@ class Reviews extends Model
         'review',
         'status',
     ];
-    public function student(): BelongsTo
+    // public function student(): BelongsTo
+    // {
+    //     return $this->belongsTo(Student::class);
+    // }
+    public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'student_id');
     }
-
-    public function students(): HasMany
-    {
-        return $this->hasMany(Student::class);
-    }
+    // public function students(): HasMany
+    // {
+    //     return $this->hasMany(Student::class);
+    // }
     
 }

@@ -71,7 +71,7 @@ https://templatemo.com/tm-569-edu-meeting
                        <!--**   <li><a href="meetings.html">Meetings</a></li> **-->
                           <li class="scroll-to-section"><a href="#apply">About us</a></li>
                           <li class="scroll-to-section"><a href="#courses">Events</a></li> 
-                          <li class="scroll-to-section"><a href="{{route('courses')}}">Courses</a></li>
+                          <li class="scroll-to-section"><a href="{{ route('courses') }}">Courses</a></li>
                           <li class="scroll-to-section"><a href="#contact">Contact Us</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
@@ -199,76 +199,27 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
         <div class="col-lg-8">
           <div class="row">
+            @foreach($events as $event)
             <div class="col-lg-6">
               <div class="meeting-item">
                 <div class="thumb">
                   <div class="price">
-                    <span>$22.00</span>
+                    <span>{{$event->paid}}</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt="New Lecturer Meeting"></a>
+                  <a href="meeting-details.html"><img src="{{ url('storage/'  .  $event->photo) }}" alt="New Lecturer Meeting"></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
+                    <!-- <h6>{{$date = strtok( $event->start_date, " ")}}</h6>  -->
                     <h6>Nov <span>10</span></h6>
                   </div>
-                  <a href="meeting-details.html"><h4>New Lecturers Meeting</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                  <a class="text-center" href="meeting-details.html"><h4>{{$event->name}}</h4></a>
+                  <p >{{$event->meta_description}}</p>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$36.00</span>
-                  </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt="Online Teaching"></a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>24</span></h6>
-                  </div>
-                  <a href="meeting-details.html"><h4>Online Teaching Techniques</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$14.00</span>
-                  </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt="Higher Education"></a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>26</span></h6>
-                  </div>
-                  <a href="meeting-details.html"><h4>Higher Education Conference</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="meeting-item">
-                <div class="thumb">
-                  <div class="price">
-                    <span>$48.00</span>
-                  </div>
-                  <a href="meeting-details.html">
-                    <img src="assets/images/meeting-04.jpg" alt="Student Training">
-                  </a>
-                </div>
-                <div class="down-content">
-                  <div class="date">
-                    <h6>Nov <span>30</span></h6>
-                  </div>
-                  <a href="meeting-details.html"><h4>Student Training Meetup</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                </div>
-              </div>
-            </div>
+            @endforeach
+          
           </div>
         </div>
       </div>
@@ -373,10 +324,11 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
         <div class="col-lg-12">
           <div class="owl-courses-item owl-carousel">
+            @foreach($courses as $course)
             <div class="item">
               <img src="assets/images/course-01.jpg" alt="Course One">
               <div class="down-content">
-                <h4>Morbi tincidunt elit vitae justo rhoncus</h4>
+                <h4>{{$course->name}}</h4>
                 <div class="info">
                   <div class="row">
                     <div class="col-8">
@@ -389,251 +341,15 @@ https://templatemo.com/tm-569-edu-meeting
                       </ul>
                     </div>
                     <div class="col-4">
-                       <span>$160</span>
+                       <span>{{$course->fee}}</span>
+                       <!-- offer fees: {{$course->offer_fee}} -->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="item">
-              <img src="assets/images/course-02.jpg" alt="Course Two">
-              <div class="down-content">
-                <h4>Curabitur molestie dignissim purus vel</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$180</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-03.jpg" alt="">
-              <div class="down-content">
-                <h4>Nulla at ipsum a mauris egestas tempor</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$140</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-04.jpg" alt="">
-              <div class="down-content">
-                <h4>Aenean molestie quis libero gravida</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$120</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-01.jpg" alt="">
-              <div class="down-content">
-                <h4>Lorem ipsum dolor sit amet adipiscing elit</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$250</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-02.jpg" alt="">
-              <div class="down-content">
-                <h4>TemplateMo is the best website for Free CSS</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$270</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-03.jpg" alt="">
-              <div class="down-content">
-                <h4>Web Design Templates at your finger tips</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$340</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-04.jpg" alt="">
-              <div class="down-content">
-                <h4>Please visit our website again</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$360</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-01.jpg" alt="">
-              <div class="down-content">
-                <h4>Responsive HTML Templates for you</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$400</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-02.jpg" alt="">
-              <div class="down-content">
-                <h4>Download Free CSS Layouts for your business</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$430</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-03.jpg" alt="">
-              <div class="down-content">
-                <h4>Morbi in libero blandit lectus cursus</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$480</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-04.jpg" alt="">
-              <div class="down-content">
-                <h4>Curabitur molestie dignissim purus</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$560</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @endforeach
+           
           </div>
         </div>
       </div>
@@ -839,77 +555,42 @@ https://templatemo.com/tm-569-edu-meeting
 
 
 <!-- Testimonial Section Start -->
-<div class="container-fluid py-5 bg-light testimonial ">
+
+
+
+<div class="container-fluid py-5 bg-light testimonial">
   <div class="container py-5">
       <div class="text-center mb-5">
-          <h5 class="section-title text-light">Testimonial</h5>
-          <h1 class="mb-0 text-light">Our Clients Say!!!</h1>
+          <h5 class="section-title text-dark">Testimonial</h5>
+          <h1 class="mb-0 text-dark">Our Clients Say!!!</h1>
       </div>
-      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div id="testimonialCarousel" class="carousel  slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-              <div class="carousel-item active">
+              @foreach($reviews as $index => $review)
+             
+  
+              <div class="carousel-item @if($index == 0) active @endif">
                   <div class="testimonial-item text-center rounded pb-4">
                       <div class="testimonial-comment bg-white rounded p-4 mb-4">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis.</p>
+                          <p>{{ $review->review }}</p>
                       </div>
                       <div class="testimonial-img p-1">
-                          <img src="{{ url('assets/images/testimonial-1.jpg') }}" class="img-fluid rounded-circle" alt="John Abraham">
+                          <img src="{{ url('assets/images/testimonial-1.jpg') }}" class="img-fluid rounded-circle" alt="Testimonial Image">
                       </div>
                       <div>
-                          <h5 class="mb-0">John Abraham</h5>
+                          <h5 class="mb-0">{{ $review->student->user->name }}</h5>
                           <p class="mb-0">New York, USA</p>
                           <div class="d-flex justify-content-center mt-2">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
                           </div>
                       </div>
                   </div>
               </div>
-              <div class="carousel-item">
-                  <div class="testimonial-item text-center rounded pb-4">
-                      <div class="testimonial-comment bg-white rounded p-4 mb-4">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis.</p>
-                      </div>
-                      <div class="testimonial-img p-1">
-                          <img src="{{ url('assets/images/testimonial-2.jpg') }}" class="img-fluid rounded-circle" alt="Jane Doe">
-                      </div>
-                      <div>
-                          <h5 class="mb-0">Jane Doe</h5>
-                          <p class="mb-0">Los Angeles, USA</p>
-                          <div class="d-flex justify-content-center mt-2">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="carousel-item">
-                  <div class="testimonial-item text-center rounded pb-4">
-                      <div class="testimonial-comment bg-white rounded p-4 mb-4">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis nostrum cupiditate, eligendi repellendus saepe illum earum architecto dicta quisquam quasi porro officiis. Vero reiciendis.</p>
-                      </div>
-                      <div class="testimonial-img p-1">
-                          <img src="{{ url('assets/images/testimonial-3.jpg') }}" class="img-fluid rounded-circle" alt="Michael Smith">
-                      </div>
-                      <div>
-                          <h5 class="mb-0">Michael Smith</h5>
-                          <p class="mb-0">Chicago, USA</p>
-                          <div class="d-flex justify-content-center mt-2">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+              @endforeach
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -923,9 +604,11 @@ https://templatemo.com/tm-569-edu-meeting
   </div>
 </div>
 
+
+
 <!-- Testimonial Section End -->
 
-<!-- Include Bootstrap 5 CSS and JS -->
+
 <!-- Travel Guide Start -->
 <div class="container-fluid monter py-5">
   <div class="container py-5">
@@ -933,58 +616,27 @@ https://templatemo.com/tm-569-edu-meeting
       
       <h2 class="mb-0 text-light">Meet Our Faculty</h2>
     </div>
-    <div class="row g-4">
+    <div class="row g-4 ">
       
-     
+      @foreach($mentors as $mentor)
+  
       <div class="col-md-6 col-lg-4">
         <div class="guide-item">
           <div class="guide-img">
             <div class="guide-img-efects">
-              <img src="{{ url('assets/images/pexels-moose-photos-170195-1036623.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
+              <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid w-100 rounded-top" alt="Image">
             </div>
             
           </div>
           <div class="guide-title text-center rounded-bottom p-4">
             <div class="guide-title-inner">
-              <h4 class="mt-3">Renu Kanwar</h4>
-              <p class="mb-0">Designation</p>
+              <h4 class="mt-3"> <h4 class="mt-3">{{ $mentor->name }}</h4>
+              <p class="mb-0">{{$mentor->short_description}}</p>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="guide-item">
-          <div class="guide-img">
-            <div class="guide-img-efects">
-              <img src="{{ url('assets/images/240_F_191850653_IkzN9vZTtOtJ8NTKLKOp8PlaY8iCk6Ls.jpg') }}" class="img-fluid w-100 rounded-top" alt="Image">
-            </div>
-            
-          </div>
-          <div class="guide-title text-center rounded-bottom p-4">
-            <div class="guide-title-inner">
-              <h4 class="mt-3">Saloni</h4>
-              <p class="mb-0">Designation</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="guide-item">
-          <div class="guide-img">
-            <div class="guide-img-efects">
-              <img src="{{ url('assets/images/cheerful-dark-skinned-woman-smiling-broadly-rejoicing-her-victory-competition-among-young-writers-standing-isolated-against-grey-wall-people-success-youth-happiness-concept_273609-1246.avif') }}" class="img-fluid w-100 rounded-top" alt="Image">
-            </div>
-           
-          </div>
-          <div class="guide-title text-center rounded-bottom p-4">
-            <div class="guide-title-inner">
-              <h4 class="mt-3">Jyoti Kanwar</h4>
-              <p class="mb-0">Designation</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      @endforeach
       <!-- Repeat for other guide items -->
     </div>
   </div>
@@ -1136,5 +788,6 @@ https://templatemo.com/tm-569-edu-meeting
     $(window).scroll(function () {
       checkSection();
     });
+ 
 </script>
 </html>
