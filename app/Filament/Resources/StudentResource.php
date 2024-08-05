@@ -32,6 +32,7 @@ class StudentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationGroup = 'Users';
+    
 
     public static function form(Form $form): Form
     {
@@ -124,7 +125,7 @@ class StudentResource extends Resource
         return $table
         ->columns([
             Tables\Columns\TextColumn::make('reg_no')->searchable()->sortable()->toggleable(),
-            Tables\Columns\TextColumn::make('user.name')->label('Name')->searchable()->sortable()->toggleable(),
+            Tables\Columns\TextColumn::make('user.full_name')->label('Full Name')->searchable()->sortable()->toggleable(),
             Tables\Columns\TextColumn::make('course.name')->searchable()->sortable()->toggleable()->label('Course'),
             Tables\Columns\TextColumn::make('reg_date')->searchable()->sortable()->toggleable(),
         ])

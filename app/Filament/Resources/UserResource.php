@@ -126,8 +126,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('media')->label('Avatar')->square()
-                    ->wrap(),
+                // Tables\Columns\TextColumn::make('user.full_name')->label('Full Name')->searchable()->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('username')->label('Username')
                     ->description(fn (Model $record) => $record->firstname.' '.$record->lastname)
                     ->searchable(),

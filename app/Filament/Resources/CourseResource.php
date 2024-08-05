@@ -8,9 +8,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\Toggle;
 use App\Models\CourseCategory;
 use App\Models\Course;
-// use App\Models\Student;
-// use App\Models\CourseTool;
-// use App\Models\CourseSyllabuses; 
+use App\Models\CourseMentor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,7 +16,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Textarea;
@@ -170,7 +167,7 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-        
+            CourseResource\RelationManagers\CourseMentorRelationManager::class,
          ];
        
     }
