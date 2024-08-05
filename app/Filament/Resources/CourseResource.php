@@ -6,11 +6,11 @@ use App\Filament\Resources\CourseResource\Pages;
 
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\Toggle;
-use App\Models\Student;
 use App\Models\CourseCategory;
 use App\Models\Course;
-use App\Models\CourseTool;
-use App\Models\CourseSyllabuses; 
+// use App\Models\Student;
+// use App\Models\CourseTool;
+// use App\Models\CourseSyllabuses; 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -71,15 +71,6 @@ class CourseResource extends Resource
                 ->label('Image'),
                 Forms\Components\MarkdownEditor::make('description')
                 ->label('Description'),
-
-                Select::make('tools')
-                ->relationship('tools', 'name')
-                ->multiple()
-                ->preload(),
-
-
-
-
                 TextInput::make('site_title')
                 ->label('Site Title')
                 ->nullable(),
@@ -179,13 +170,9 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CourseResource\RelationManagers\CourseMentorRelationManager::class,
-            CourseResource\RelationManagers\CourseSyllabusesResourceRelationManager::class,
-            // CourseResource\RelationManagers\CourseToolResourceRelationManager::class,
-        ];
-        // return [
-        //    MentorRelationManager::class,
-        // ];
+        
+         ];
+       
     }
 
     public static function getPages(): array

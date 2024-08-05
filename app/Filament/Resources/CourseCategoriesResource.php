@@ -7,21 +7,21 @@ use App\Filament\Resources\CourseCategoriesResource\RelationManagers;
 use App\Models\CourseCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CourseCategoriesResource extends Resource
 {
     protected static ?string $model = CourseCategory::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
-
     protected static ?string $navigationGroup = 'Courses';
-    protected static ?int $navigationSort = -130;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -86,8 +86,6 @@ class CourseCategoriesResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-            
-
     }
 
     public static function getRelations(): array

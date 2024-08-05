@@ -13,6 +13,13 @@ return [
     | This will allow your users to receive real-time notifications.
     |
     */
+   
+        'auth' => [
+            'guard' => 'web',
+            'username' => 'username', // Change this to the attribute you want to use
+        ],
+    
+    
 
     'broadcasting' => [
 
@@ -82,7 +89,19 @@ return [
     | Livewire's standard 200ms delay.
     |
     */
+// config/filament.php
+
+    'auth' => [
+        'guard' => 'web',
+        'user_model' => App\Models\User::class,
+    ],
+
 
     'livewire_loading_delay' => 'default',
+   
+        // Other configuration...
+    
+        'user_model' => App\Models\User::class,
+  
 
 ];

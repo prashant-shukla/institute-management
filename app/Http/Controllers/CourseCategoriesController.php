@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCourseCategoryRequest;
-use App\Http\Requests\UpdateCourseCategoryRequest;
-use App\Models\CourseCategories;
+use Illuminate\Http\Request;
 
 class CourseCategoriesController extends Controller
 {
@@ -27,7 +25,7 @@ class CourseCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCourseCategoryRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +33,7 @@ class CourseCategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CourseCategory $branche)
+    public function show(string $id)
     {
         //
     }
@@ -43,7 +41,7 @@ class CourseCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CourseCategory $branche)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +49,7 @@ class CourseCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourseCategoryRequest $request, CourseCategory $branche)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,7 +57,7 @@ class CourseCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CourseCategory $branche)
+    public function destroy(string $id)
     {
         //
     }

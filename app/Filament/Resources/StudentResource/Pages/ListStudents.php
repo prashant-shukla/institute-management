@@ -17,4 +17,3 @@ class ListStudents extends ListRecords
         ];
     }
 }
-

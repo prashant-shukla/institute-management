@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Course;
 use App\Models\User;
-use App\Models\StudentFees as Fee;
 
 class Student extends Model
 {
@@ -17,20 +16,15 @@ class Student extends Model
     protected $guarded = ['id'];
 
     protected $casts = ['software_covered' => 'array'];
-  //  protected $fillable = [
-    //    'photo','user_id', 'reg_no', 'reg_date'
-        
-  //  ];
-    // protected $fillable = [];
    
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);        
     }
 
-    public function fees(): HasMany
+    public function student_fees(): HasMany
     {
-        return $this->hasMany(Fee::class);
+        return $this->hasMany(StudentFees::class);
     }
 
     public function user(): BelongsTo
@@ -43,20 +37,20 @@ class Student extends Model
         return $this->belongsTo(StudentCourse::class);
     }
 
-    public function student_fees(): BelongsTo
-    {
-        return $this->belongsTo(StudentFees::class);
-    }
+    // public function student_fees(): BelongsTo
+    // {
+    //     return $this->belongsTo(StudentFees::class);
+    // }
     
     public function getFullNameAttribute()
     {
         return $this->user->firstname . ' ' . $this->user->lastname;
     }
-    // public function storePhoto($photo)
-    // {
-    //     $this->photo = $photo->store('photos', 'public');
-    //     $this->save();
-    // }
+    public function storePhoto($photo)
+    {
+        $this->photo = $photo->store('photos', 'public');
+        $this->save();
+    }
 
     protected static function boot()
     {
@@ -71,3 +65,5 @@ class Student extends Model
         });
     }
 }
+
+

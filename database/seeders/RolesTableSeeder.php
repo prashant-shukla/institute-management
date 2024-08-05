@@ -1,9 +1,8 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class RolesTableSeeder extends Seeder
 {
@@ -12,17 +11,14 @@ class RolesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ["super_admin", "admin", "teacher","student"];
+        // Create or update the super-admin role
+        Role::updateOrCreate(['name' => 'super-admin'], ['guard_name' => 'web']);
 
-        foreach ($roles as $key => $role) {
-            DB::table('roles')->insert(
-                [
-                    'name' => $role,
-                    'guard_name' => 'web',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
-            );
+        // Other roles
+        $roles = ["admin", "teacher", "student"];
+        
+        foreach ($roles as $role) {
+            Role::updateOrCreate(['name' => $role], ['guard_name' => 'web']);
         }
     }
 }

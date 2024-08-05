@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\CourseCategory;
-use App\Models\CourseMentor;
-use App\Models\Mentor; 
-use App\Models\Tool; 
-use App\Models\CourseSyllabuses; 
+// use App\Models\CourseMentor;
+// use App\Models\Mentor; 
+// use App\Models\Tool; 
+// use App\Models\CourseSyllabuses; 
 
 class Course extends Model
 {
@@ -26,24 +26,8 @@ class Course extends Model
    
     public function coursecategory(): BelongsTo
     {
-        return $this->belongsTo(CourseCategory::class, 'course_category_id');
+        return $this->belongsTo(CourseCategory::class, 'id');
     }
 
-    public function tools(): BelongsToMany
-    {
-        return $this->BelongsToMany(Tool::class);
-    }
-
-    public function mentors(): BelongsToMany
-    {
-        return $this->BelongsToMany(Mentor::class);
-    }
-    public function courseSyllabuses()
-    {
-        return $this->hasMany(CourseSyllabuses::class);
-    }
-    public function courseTool()
-    {
-        return $this->hasMany(CourseTool::class);
-    }
+   
 }

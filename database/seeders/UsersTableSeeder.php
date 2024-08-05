@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Artisan;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 
 class UsersTableSeeder extends Seeder
@@ -16,9 +16,10 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Superadmin user
-        DB::table('users')->insert([
-            'username' => 'superadmin',
+        // Create or update the superadmin user
+        User::updateOrCreate([
+            'username' => 'superadmin'
+        ], [
             'firstname' => 'Super',
             'lastname' => 'Admin',
             'email' => 'superadmin@unnatischoolofdesign.com',
@@ -29,31 +30,45 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Bind superadmin user to FilamentShield
-        Artisan::call('shield:super-admin', ['--user' => 1]);
+        // Call the custom command to create or update the super admin
+        Artisan::call('shield:super-admin', [
+            '--user' => 'superadmin@unnatischoolofdesign.com'
+        ]);
 
-        $roles = DB::table('roles')->whereNot('name', 'super_admin')->get();
+        // Ensure that all roles exist
+        $roles = Role::whereNot('name', 'super-admin')->get();
+
         foreach ($roles as $role) {
             for ($i = 0; $i < 10; $i++) {
-                $userId = $i+1;
-                DB::table('users')->insert([
+                // Create or update users
+                $user = User::updateOrCreate([
+                    'email' => $faker->unique()->safeEmail
+                ], [
                     'username' => $faker->unique()->userName,
                     'firstname' => $faker->firstName,
                     'lastname' => $faker->lastName,
-                    'email' => $faker->unique()->safeEmail,
                     'email_verified_at' => now(),
                     'password' => Hash::make('password'),
                     'status' => 'active',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-                DB::table('model_has_roles')->insert([
-                    'role_id' => $role->id,
-                    'model_type' => 'App\Models\User',
-                    'model_id' => $userId,
-                ]);
+
+                // Check if the role-user relationship already exists
+                $roleUserExists = DB::table('model_has_roles')
+                    ->where('role_id', $role->id)
+                    ->where('model_type', User::class)
+                    ->where('model_id', $user->id)
+                    ->exists();
+
+                if (!$roleUserExists) {
+                    DB::table('model_has_roles')->insert([
+                        'role_id' => $role->id,
+                        'model_type' => User::class,
+                        'model_id' => $user->id,
+                    ]);
+                }
             }
         }
     }
 }
-

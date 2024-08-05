@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
-    use HasUlids;
+  
 
     /**
      * @var string
      */
     protected $table = 'blog_categories';
-
+    protected  $primarykey = 'id';
     /**
      * @var array<int, string>
      */
@@ -25,6 +25,7 @@ class Category extends Model
         'slug',
         'description',
         'is_visible',
+        'is_active', 
         'seo_title',
         'seo_description',
     ];

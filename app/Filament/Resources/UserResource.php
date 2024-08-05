@@ -10,13 +10,13 @@ use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Form;
 use Filament\Notifications\Auth\VerifyEmail;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -28,9 +28,7 @@ use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-    protected static int $globalSearchResultsLimit = 20;
 
-    protected static ?int $navigationSort = -1;
     protected static ?string $navigationIcon = 'heroicon-s-users';
     protected static ?string $navigationGroup = 'Access';
 
@@ -42,10 +40,11 @@ class UserResource extends Resource
                     ->schema([
                         Forms\Components\Grid::make()
                             ->schema([
-                                SpatieMediaLibraryFileUpload::make('media')
+                                  
+                                Forms\Components\FileUpload::make('media')
+                                    ->image()
                                     ->hiddenLabel()
                                     ->avatar()
-                                    ->collection('avatars')
                                     ->alignCenter()
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('username')
@@ -127,8 +126,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('media')->label('Avatar')
-                    ->collection('avatars')
+                Tables\Columns\ImageColumn::make('media')->label('Avatar')->square()
                     ->wrap(),
                 Tables\Columns\TextColumn::make('username')->label('Username')
                     ->description(fn (Model $record) => $record->firstname.' '.$record->lastname)
@@ -157,7 +155,7 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Impersonate::make(), // <---
+                // Impersonate::make(), // <---
 
             ])
             ->bulkActions([
@@ -200,10 +198,10 @@ class UserResource extends Resource
         ];
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return __("menu.nav_group.access");
-    }
+    // public static function getNavigationGroup(): ?string
+    // {
+    //     return __("menu.nav_group.access");
+    // }
 
     public static function doResendEmailVerification($settings = null, $user): void
     {
@@ -220,9 +218,6 @@ class UserResource extends Resource
 
         $user->notify($notification);
 
-        Notification::make()
-            ->title(__('resource.user.notifications.notification_resent.title'))
-            ->success()
-            ->send();
+        
     }
 }
