@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\CourseCategory;
 use App\Models\CourseMentor;
 use App\Models\Mentor; 
-// use App\Models\Tool; 
-// use App\Models\CourseSyllabuses; 
+use App\Models\Tool; 
+use App\Models\CourseSyllabuses; 
 
 class Course extends Model
 {
@@ -23,7 +23,10 @@ class Course extends Model
         'faqs' => 'array',
     ];
 
-   
+    public function courseSyllabuses()
+    {
+        return $this->hasMany(CourseSyllabuses::class);
+    }
     public function coursecategory(): BelongsTo
     {
         return $this->belongsTo(CourseCategory::class, 'id');
@@ -36,5 +39,9 @@ class Course extends Model
     public function courseMentor(): BelongsToMany
     {
         return $this->BelongsToMany(CourseMentor::class, 'mentor_id');
+    }
+    public function courseTool()
+    {
+        return $this->hasMany(CourseTool::class);
     }
 }

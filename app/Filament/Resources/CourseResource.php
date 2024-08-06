@@ -8,7 +8,9 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\Toggle;
 use App\Models\CourseCategory;
 use App\Models\Course;
+use App\Models\CourseTool;
 use App\Models\CourseMentor;
+use App\Models\CourseSyllabuses;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -168,6 +170,9 @@ class CourseResource extends Resource
     {
         return [
             CourseResource\RelationManagers\CourseMentorRelationManager::class,
+            CourseResource\RelationManagers\CourseSyllabusesRelationManager::class,
+            CourseResource\RelationManagers\CourseToolRelationManager::class,
+            
          ];
        
     }
