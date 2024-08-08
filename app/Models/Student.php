@@ -12,6 +12,8 @@ use App\Models\User;
 class Student extends Model
 {
     use HasFactory;
+    
+    protected $table = 'students';
 
     protected $guarded = ['id'];
 
@@ -31,10 +33,14 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function review(): BelongsTo
+    public function review()
     {
-        return $this->belongsTo(Reviews::class);
+        return $this->hasMany(Reviews::class);
     }
+    // public function review(): BelongsTo
+    // {
+    //     return $this->belongsTo(Reviews::class);
+    // }
     public function student_courses(): BelongsTo
     {
         return $this->belongsTo(StudentCourse::class);

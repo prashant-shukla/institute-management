@@ -465,9 +465,11 @@
             <p class="text-secondary ">Learn more about us</p>
             <h2 class="display-6 fw-semibold">About Us</h2>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem molestiae nam commodi dolore vitae?
-            Numquam minima cum asperiores deleniti possimus provident, officia itaque esse eius, delectus incidunt
-            laudantium adipisci laboriosam!</p>
+          <p>
+            CADADDA is a registered company and only Autodesk Authorized Training center in Jodhpur.
+            CADADDA is a one of the experienced Center in Jodhpur.Providing training on software’s related to CAD/CAM in the streams of mechanical,
+             Civil, Electrical and Architecture.
+            </p>
           <div class="d-flex">
             <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px">
               <use href="#tick-circle" class="text-secondary" />
@@ -506,6 +508,21 @@
         </div>
       </div>
       <div class="row g-md-3 mt-2">
+        @foreach($coursecategories as $coursecategory)
+        <div class="col-md-4">
+          <div class="primary rounded-3 p-4 my-3">
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
+                <use href="#pencil-box" class="svg-primary" />
+              </svg>
+              <div class="ps-4">
+                <p class="category-paragraph fw-bold text-uppercase mb-1">{{$coursecategory->name}}</p>
+                <p class="category-paragraph m-0">39 courses</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endforeach
         <div class="col-md-4">
           <div class="primary rounded-3 p-4 my-3">
             <div class="d-flex align-items-center">
@@ -625,6 +642,7 @@
       </div>
 
       <div class="row">
+        @foreach($courses as $course)
         <div class="col-sm-6 col-lg-4 col-xl-3 mb-5">
           <div class="z-1 position-absolute m-4">
             <span class="badge text-white bg-secondary">New</span>
@@ -634,17 +652,17 @@
             <div class="card-body p-0">
 
               <div class="d-flex justify-content-between my-3">
-                <p class="text-black-50 fw-bold text-uppercase m-0">Digital Marketing</p>
+                <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->name}}</p>
                 <div class="d-flex align-items-center">
-                  <svg width="20" height="20">
+                  <svg width="30" height="30">
                     <use xlink:href="#clock" class="text-black-50"></use>
                   </svg>
-                  <p class="text-black-50 fw-bold text-uppercase m-0">1h 50m</p>
+                  <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->course_duration}}</p>
                 </div>
               </div>
 
               <a href="courses-details.html">
-                <h5 class="course-title py-2 m-0">Mastering the Art of Digital Communication</h5>
+                <h5 class="course-title py-2 m-0">{{$course->site_title}}</h5>
               </a>
 
               <div class="card-text">
@@ -661,7 +679,8 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-lg-4 col-xl-3 mb-5">
+        @endforeach
+        {{-- <div class="col-sm-6 col-lg-4 col-xl-3 mb-5">
           <div class="z-1 position-absolute m-4">
             <span class="badge text-white bg-secondary">New</span>
           </div>
@@ -913,7 +932,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <div class="text-center mt-4">
         <a href="courses.html" class="btn btn-primary px-5 py-3">View all courses</a>
@@ -933,7 +952,7 @@
         <div class="offset-md-1 col-md-10">
           <div class="swiper testimonial-swiper">
             <div class="swiper-wrapper">
-                @foreach($reviews as $index => $review)
+                @foreach($reviews  as $review)
               <div class="swiper-slide pe-md-5">
                 <div class="my-4">
                   <p class="text-muted">{{ $review->review }} </p>
@@ -943,7 +962,8 @@
                     <div class="col-9">
                         {{-- ->user->firstname ->user->lastname --}}
                         {{-- {{dd( $review->student_id)}} --}}
-                    <h5 class="m-0 mt-2">{{ $review->student_id }}</h5>
+                        {{-- {{$review->student_id}} --}}
+                    <h5 class="m-0 mt-2">{{$review->student->user->firstname}}{{$review->student->user->lastname}}</h5>
                       <p class="text-muted">Web Developer</p>
                     </div>
 
@@ -1284,6 +1304,7 @@
       </div>
     </div>
   </section>
+  
 
   <footer id="footer">
     <div class="container padding-medium ">

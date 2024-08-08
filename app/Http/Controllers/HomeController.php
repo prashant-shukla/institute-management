@@ -30,9 +30,9 @@ class HomeController extends Controller
    
     public function Home()
     {
+       
         $reviews = Reviews::all();
-        $reviews = Reviews::with('student')->get();
-        $mentors = Mentor::all(); 
+        $mentors = Mentor::all();
         $courses = Course::all();
         $coursecategories = CourseCategory::all();
 
@@ -43,5 +43,11 @@ class HomeController extends Controller
             'courses' => $courses,
         ]); 
     }
-   
+    public function category()
+    {
+        $courses = Course::all();
+        $coursecategories = CourseCategory::all();
+        //  dd($courses); // For debugging, remove this line in production
+        return view('category', ['courses' => $courses,'coursecategories'=>$coursecategories]);
+    }
 }

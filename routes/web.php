@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/Home', [HomeController::class, 'Home']);
-Route::get('/courses', [HomeController::class, 'courses'])->name('courses');
+Route::get('/category', [HomeController::class, 'category'])->name('category');

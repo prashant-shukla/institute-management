@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Student;
 class Reviews extends Model
 {
     use HasFactory;
@@ -16,7 +16,7 @@ class Reviews extends Model
         'review',
         'status',
     ];
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
