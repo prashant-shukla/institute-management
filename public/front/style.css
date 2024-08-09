@@ -610,6 +610,7 @@ h5.course-title:hover {
   -webkit-transition: 0.6s ease-out;
   -moz-transition: 0.6s ease-out;
   transition: 0.6s ease-out;
+  width: 100%;
 }
 
 .zoom-effect:hover img {
@@ -783,9 +784,34 @@ Single Product page style start
   height: 660px;
 }
 
+/*--------------------------------------------------------------
+program-work-card
+--------------------------------------------------------------*/
+.mar_top{
+  margin-top: 22%;
+}
+/* .dashed{
+ border: dashed;
+  border-right: none;
 
-
-
+}
+.dashed-1{
+  border-top: none;
+  border-left: none;
+  border: dashed;
+}
+.dashed-2{
+  border-top: none;
+  border-left: none;
+  
+  border: dashed;
+}
+.dashed_3{
+ 
+  border-top: none;
+  border-left: none;
+  border: dashed;
+} */
 /*--------------------------------------------------------------
   Shop page style
   --------------------------------------------------------------*/

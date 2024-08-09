@@ -31,6 +31,8 @@ class Course extends Model
     {
         return $this->belongsTo(CourseCategory::class, 'id');
     }
+   
+
     public function mentors(): BelongsToMany
     {
         return $this->BelongsToMany(Mentor::class);

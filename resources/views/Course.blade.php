@@ -385,28 +385,14 @@
     </div>
   </nav>
 
-  <section id="hero" style="background-image:url(images/billboard-bg.png); background-repeat: no-repeat; ">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6 pe-5 mt-5 mt-md-0">
-          <h2 class="display-1 text-uppercase">Master Your Skills Online</h2>
-          <p class="fs-4 my-4 pb-2">Online Courses Taught by Industry Titans!</p>
-          <div>
-            <form id="form" class="d-flex align-items-center position-relative ">
-              <input type="text" name="email" placeholder="what are you trying to learn?"
-                class="form-control bg-white border-0 rounded-4 shadow-none px-4 py-3 w-100">
-              <button class="btn btn-primary rounded-4 px-3 py-2 position-absolute align-items-center m-1 end-0"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="22px" height="22px">
-                  <use href="#search" />
-                </svg></button>
-            </form>
-
-          </div>
-        </div>
-        <div class="col-md-6 mt-5">
-          <img src="front/images/billboard-img.jpg" alt="img" class="img-fluid">
-        </div>
-      </div>
+  <section id="hero" >
+    <div class="container d-flex align-items-center justify-content-center" style="background-image: url('/front/images/banner2.jpeg'); background-repeat: no-repeat; background-size: cover; background-position: center;  height: 300px;">
+        <div class="row align-items-center  ">
+            <div class="col text-center ">
+                <h2 class="  text-light">Courses-details</h2>
+            
+            </div>
+        </div>    
     </div>
   </section>
 
@@ -414,88 +400,81 @@
 
 
 
-
-
-
-
-<section class="category" id="category">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="filters">
-                <ul>
-                  <li data-filter="*"  class="active">All Courses</li>
-                  @foreach($coursecategories as $coursecategory)
-  
-                  <li data-filter="{{$coursecategory->id}}">{{$coursecategory->name}}</li>
-                  {{-- <li data-filter=".soon">Soon</li>
-                  <li data-filter=".imp">Important</li>
-                  <li data-filter=".att">Attractive</li> --}}
-                  @endforeach
-                </ul>
+  <section class="py-lg-5 py-4 overflow-hidden">
+    <div class="container-xl">
+      <div class="row gx-lg-5 gx-3 mb-lg-0 mb-4">
+        <div class="col-lg-6 mb-lg-0 mb-4 text-lg-start  text-center">
+          <h2 class="fs-4 fw-bold  mb-3  mar_top">How Does This Digital Marketing Course in Jaipur Work?</h2>
+          <p class="fs-6 text-muted mb-4"></p>
+          <button class="btn btn-primary py-3 px-4 fs-5 fw-bold rounded-3 hover-shadow mx-lg-0 mx-auto d-lg-block d-none">Apply Now</button>
+        </div>
+        <div class="col-lg-6">
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col w-100 " >
+              <div class="dashed p-4  rounded-start  border border-dark  border-end-0  position-relative">
+                <div class="card-body d-flex align-items-center">
+                  <div class="d-flex align-items-center me-md-3 text-center position-relative">
+                    <img alt="Learn" width="85" height="85" src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/learn-icon.svg" class="img-fluid">
+                  </div>
+                  <div class="content">
+                    <h3 class="fs-5 fw-bold mb-2">Learn <span class="badge bg-primary text-light ms-2">Live Classes <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/ellipse-icon.svg" alt="ellips-icon" width="4" height="4" class="ms-1"></span></h3>
+                    <p class="fs-6 text-muted mb-0">Upskill yourself by gaining insights from leading professionals' vast experience.</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-lg-12">
-              <div class="row grid " id="course">
-                <div class="row">
-                 @foreach($courses as $course)
-                  <div class="col-sm-6 col-lg-4 col-xl-3 mb-5 ">                  
-                   <div class="z-1 position-absolute m-4">
-                     <span class="badge text-white bg-secondary">New</span>
-                   </div>
-                   <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
-                     <a href="courses-details.html">
-                       <img src="{{ $course->image ? url('storage/' . $course->image) : 'front/images/item1.jpg' }}" class="img-fluid rounded-3" alt="image">
-                     </a>
-                  <div class="card-body p-0">
-                   <div class="d-flex justify-content-between my-3">
-                    <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->name}}</p>
-                    <div class="d-flex align-items-center">
-                     <svg width="30" height="30">
-                      <use xlink:href="#clock" class="text-black-50"></use>
-                     </svg>
-                     <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->course_duration}}</p>
-                    </div>
-                   </div>
-                   <a href="courses-details.html">
-                    <h5 class="course-title py-2 m-0">{{$course->site_title}}</h5>
-                   </a>
-                   <div class="card-text">
-                     <span class="rating d-flex align-items-center mt-3">
-                       <p class="text-muted fw-semibold m-0 me-2">By: James Willam</p>
-                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                       <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                     </span>
-                   </div>
+            <div class="col  w-100 " style="translate: 4px 0px; margin-top: -1px;">
+              <div class="dashed p-4  border-start-0 rounded-end border-bottom border-end border-dark position-relative">
+                <div class="card-body d-flex align-items-center">
+                  <div class="d-flex align-items-center me-md-3 text-center position-relative">
+                    <img alt="Practice" width="85" height="85" src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/practice-icon.svg" class="img-fluid">
                   </div>
+                  <div class="content">
+                    <h3 class="fs-5 fw-bold mb-2">Practice</h3>
+                    <p class="fs-6 text-muted mb-0">Sharpen your skills by learning through course assignments, live projects, and regular assessments and quizzes.</p>
                   </div>
-                 </div>
-                @endforeach
-
-               
+                </div>
               </div>
             </div>
-            {{-- <div class="col-lg-12">
-              <div class="pagination">
-                <ul>
-                  <li><a href="#">1</a></li>
-                  <li class="active"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
+            <div class="col mt-0 w-100">
+              <div class="dashed p-4  border-start rounded-start border-bottom border-dark position-relative">
+                <div class="card-body d-flex align-items-center">
+                  <div class="d-flex align-items-center me-md-3 text-center position-relative">
+                    <img alt="Ask" width="85" height="85" src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/build-icon.svg" class="img-fluid">
+                  </div>
+                  <div class="content">
+                    <h3 class="fs-5 fw-bold mb-2">Ask</h3>
+                    <p class="fs-6 text-muted mb-0">Resolve your queries from industry experts with our dedicated one-to-one doubt-clearing sessions.</p>
+                  </div>
+                </div>
               </div>
-            </div> --}}
+            </div>
+            <div class="col mt-0 w-100" style="translate: 4px 0px; margin-top: -1px;">
+              <div class="dashed p-4 border-start-0 rounded-end border-bottom border-end border-dark position-relative">
+                <div class="card-body d-flex align-items-center">
+                  <div class="d-flex align-items-center me-md-3 text-center position-relative">
+                    <img alt="Build" width="85" height="85" src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/success-icon.svg" class="img-fluid">
+                  </div>
+                  <div class="content">
+                    <h3 class="fs-5 fw-bold mb-2">Build</h3>
+                    <p class="fs-6 text-muted mb-0">Craft a diverse portfolio and appealing resume, and optimize LinkedIn to showcase your data analytics skills.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <button class="btn btn-primary py-3 px-4 fs-5 fw-bold rounded-3 hover-shadow mx-lg-0 mx-auto d-lg-none d-block">Apply Now</button>
     </div>
+  </section>
+  
+  
+  
 
-</Section>
+
+
+
 
 
   <section id="testimonial" class="padding-medium bg-primary-subtle">
@@ -599,6 +578,155 @@
   </section>
 
 
+
+
+
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            What is Bootstrap 5?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Bootstrap 5 is a popular open-source front-end framework for building responsive and mobile-first websites and applications. It includes pre-designed components and utilities for styling.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            How do I install Bootstrap 5?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            You can install Bootstrap 5 using npm with the command `npm install bootstrap`. Alternatively, you can include Bootstrap via a CDN by adding the following link to your HTML file:
+            <pre><code>&lt;link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingfour">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+            What is Bootstrap 5?
+          </button>
+        </h2>
+        <div id="collapsefour" class="accordion-collapse collapse show" aria-labelledby="headingfour" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Bootstrap 5 is a popular open-source front-end framework for building responsive and mobile-first websites and applications. It includes pre-designed components and utilities for styling.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingfive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+            How do I install Bootstrap 5?
+          </button>
+        </h2>
+        <div id="collapsefive" class="accordion-collapse collapse" aria-labelledby="headingfive" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            You can install Bootstrap 5 using npm with the command `npm install bootstrap`. Alternatively, you can include Bootstrap via a CDN by adding the following link to your HTML file:
+            <pre><code>&lt;link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingsix">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapsesix" class="accordion-collapse collapse" aria-labelledby="headingsix" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingseven">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseseven" aria-expanded="false" aria-controls="collapseseven">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapseseven" class="accordion-collapse collapse" aria-labelledby="headingseven" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingsix">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapsesix" class="accordion-collapse collapse" aria-labelledby="headingsix" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingeight">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapseeight" class="accordion-collapse collapse" aria-labelledby="headingeight" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingnine">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapsenine" class="accordion-collapse collapse" aria-labelledby="headingnine" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingten">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseten" aria-expanded="false" aria-controls="collapseten">
+            Where can I find Bootstrap 5 documentation?
+          </button>
+        </h2>
+        <div id="collapseten" class="accordion-collapse collapse" aria-labelledby="headingten" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            You can install Bootstrap 5 using npm with the command `npm install bootstrap`. Alternatively, you can include Bootstrap via a CDN by adding the following link to your HTML file:
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
 
   
 
@@ -748,35 +876,6 @@
           </div>
         </div>
       </div>
-    
-    
-    
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-        $(document).ready(function() {
-          $('.filters li').click(function() {
-            var filter = $(this).data('filter');
-        
-            // Add active class to the clicked filter
-            $('.filters li').removeClass('active');
-            $(this).addClass('active');
-        
-            $.ajax({
-              url: '{{ route('filter.courses') }}', // Route to your AJAX handler
-              type: 'GET',
-              data: {
-                filter: filter
-              },
-              success: function(response) {
-                $('#course').html(response); // Update the grid with the new courses
-              },
-              error: function(xhr) {
-                console.log('Error:', xhr.responseText);
-              }
-            });
-          });
-        });
-        </script>
     
     
       <script src="front/js/jquery-1.11.0.min.js"></script>
