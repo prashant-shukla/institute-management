@@ -253,9 +253,9 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
-                data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
+                data-bs-toggle="dropdown" aria-expanded="false" >Courses</a>
               <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="courses.html" class="dropdown-item">Course<span
+                <li><a href="url(/Course)" class="dropdown-item">Course<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
                 <li><a href="courses-details.html" class="dropdown-item">Courses Detail<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
@@ -404,7 +404,7 @@
     <div class="container-xl">
       <div class="row gx-lg-5 gx-3 mb-lg-0 mb-4">
         <div class="col-lg-6 mb-lg-0 mb-4 text-lg-start  text-center">
-          <h2 class="fs-4 fw-bold  mb-3  mar_top">How Does This Digital Marketing Course in Jaipur Work?</h2>
+          <h2 class="fs-4 fw-bold  mb-3  mar_top">How Does This Architectural Assistant course in cadadda Jodhpur Work?</h2>
           <p class="fs-6 text-muted mb-4"></p>
           <button class="btn btn-primary py-3 px-4 fs-5 fw-bold rounded-3 hover-shadow mx-lg-0 mx-auto d-lg-block d-none">Apply Now</button>
         </div>
@@ -472,52 +472,308 @@
   
   
 
-
-
-
-
-
-  <section id="testimonial" class="padding-medium bg-primary-subtle">
+  <section class="py-lg-5 py-4 bg-light overflow-hidden">
     <div class="container">
-      <div class="text-center mb-4">
-        <p class="text-secondary ">What our students say about us</p>
-        <h2 class="display-6 fw-semibold">Reviews</h2>
-      </div>
-    
-      <div class="row">
-        <div class="offset-md-1 col-md-10">
-          <div class="swiper testimonial-swiper">
-            <div class="swiper-wrapper">
-                @foreach($reviews  as $review)
-              <div class="swiper-slide pe-md-5">
-                <div class="my-4">
-                  <p class="text-muted">{{ $review->review }} </p>
-                  <div class="row">
-                    <div class="col-3"> <img src="front/images/reviwer1.jpg" alt="img" class="img-fluid rounded-circle">
-                    </div>
-                    <div class="col-9">
-                        {{-- ->user->firstname ->user->lastname --}}
-                        {{-- {{dd( $review->student_id)}} --}}
-                        {{-- {{$review->student_id}} --}}
-                    <h5 class="m-0 mt-2">{{$review->student->user->firstname}}{{$review->student->user->lastname}}</h5>
-                      <p class="text-muted">Web Developer</p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              @endforeach
+        <div class="d-lg-flex justify-content-between align-items-start text-dark mb-lg-5 mb-4">
+            <div class="mb-lg-0 mb-4 text-lg-start text-center">
+                <h2 class="fs-3 fw-bold">Architectural Assistant course in cadadda Jodhpur</h2>
+                <p class="fs-6 text-muted mb-0">A detailed overview of the course, including key topics, objectives, and module sequence.</p>
             </div>
-
-            <div class="swiper-pagination"></div>
-
-          </div>
+            <button class="btn btn-primary rounded-pill min-h-56 py-3 px-4 fw-bold shadow-sm">Download Curriculum</button>
         </div>
-      </div>
+        <div class="mb-5 d-flex ">
+            <div class="d-flex col-9 rounded-pill justify-content-between border border-dark align-self-center p-5" style="height: 100px;">
+                <div class="d-flex align-items-center mb-4">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/duration-icon.svg" alt="duration" width="16" height="16" class="me-2">
+                    <div>
+                        <span class="text-muted">Duration</span>
+                        <h6 class="mb-0 fw-bold">20 Weeks</h6>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/mode-icon.svg" alt="mode" width="16" height="16" class="me-2">
+                    <div>
+                        <span class="text-muted">Mode</span>
+                        <h6 class="mb-0 fw-bold">Offline</h6>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/live-sessions-icon.svg" alt="live sessions" width="16" height="16" class="me-2">
+                    <div>
+                        <span class="text-muted">Live Sessions</span>
+                        <h6 class="mb-0 fw-bold">99+ hrs</h6>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/projects-icon.svg" alt="projects" width="16" height="16" class="me-2">
+                    <div>
+                        <span class="text-muted">Projects</span>
+                        <h6 class="mb-0 fw-bold">14+</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none col-3  d-xl-block rounded-pill border border-dark  text-center">
+                <img src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/placement-img.svg" alt="placement support" width="85" height="105" class="me-3">
+                <span class="fs-5 fw-bold">Placement Support</span>
+            </div>
+        </div>
+        <div class="accordion" id="curriculumAccordion">
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+             
+                    <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                      <h4 class="accordion-header fw-bold">
+                           Module 1: Fundamentals of Architectural Assistant 
+                      </h4>
+                        <ul class="d-flex">
+                          <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                          <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                          <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                          <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                      </ul>
+                    </button>
+                  
+                <div id="module1" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                            <li>What is Digital Marketing?</li>
+                            <li>Scope &amp; Latest Trends</li>
+                            <li>Career and Jobs in Digital Marketing</li>
+                            <li>Understanding Channels in Digital Marketing</li>
+                            <li>Setting marketing objectives</li>
+                            <li>Business Models &amp; Competitor Research</li>
+                            <li>Marketing funnel &amp; customer journey</li>
+                            <li>Identifying target audience segments</li>
+                            <li>Developing a value proposition</li>
+                            <li>Important terms &amp; metrics in Digital Marketing</li>
+                            <li>Understanding Media- Paid, Shared, Owned, and, Earned</li>
+                            <li>Overview of digital marketing channels-Inorganic and Organic</li>
+                            <li>Choosing the right channel mix for your business</li>
+                            <li>Creating a Buyer Persona</li>
+                            <li>How to think like Marketer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                <h4 class="accordion-header fw-bold">
+                     Module 1: Fundamentals of Architectural Assistant 
+                </h4>
+                  <ul class="d-flex">
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                </ul>
+              </button>
+                <div id="module2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                            <li>What is Domain Marketing</li>
+                            <li>Importance of Domain</li>
+                            <li>Types of Domain &amp; Extensions</li>
+                            <li>Domain connecting to Hosting</li>
+                            <li>Niche related domain</li>
+                            <li>How to Buy a Right Domain</li>
+                            <li>How to Sell a Domain with higher price</li>
+                            <li>Listing Domains for Sale</li>
+                            <li>Finding domain with AI tool</li>
+                            <li>WordPress Installation</li>
+                            <li>Business website creation</li>
+                            <li>Blog website creation</li>
+                            <li>Portfolio Building</li>
+                            <li>Ecommerce website Creation</li>
+                            <li>Use of WooCommerce Plugin</li>
+                            <li>Payment gateway</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                <h4 class="accordion-header fw-bold">
+                     Module 1: Fundamentals of Architectural Assistant 
+                </h4>
+                  <ul class="d-flex">
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                </ul>
+              </button>
+                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                          <li>What is Domain Marketing</li>
+                          <li>Importance of Domain</li>
+                          <li>Types of Domain &amp; Extensions</li>
+                          <li>Domain connecting to Hosting</li>
+                          <li>Niche related domain</li>
+                          <li>How to Buy a Right Domain</li>
+                          <li>How to Sell a Domain with higher price</li>
+                          <li>Listing Domains for Sale</li>
+                          <li>Finding domain with AI tool</li>
+                          <li>WordPress Installation</li>
+                          <li>Business website creation</li>
+                          <li>Blog website creation</li>
+                          <li>Portfolio Building</li>
+                          <li>Ecommerce website Creation</li>
+                          <li>Use of WooCommerce Plugin</li>
+                          <li>Payment gateway</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                <h4 class="accordion-header fw-bold">
+                     Module 1: Fundamentals of Architectural Assistant 
+                </h4>
+                  <ul class="d-flex">
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                </ul>
+              </button>
+                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                          <li>What is Domain Marketing</li>
+                          <li>Importance of Domain</li>
+                          <li>Types of Domain &amp; Extensions</li>
+                          <li>Domain connecting to Hosting</li>
+                          <li>Niche related domain</li>
+                          <li>How to Buy a Right Domain</li>
+                          <li>How to Sell a Domain with higher price</li>
+                          <li>Listing Domains for Sale</li>
+                          <li>Finding domain with AI tool</li>
+                          <li>WordPress Installation</li>
+                          <li>Business website creation</li>
+                          <li>Blog website creation</li>
+                          <li>Portfolio Building</li>
+                          <li>Ecommerce website Creation</li>
+                          <li>Use of WooCommerce Plugin</li>
+                          <li>Payment gateway</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                <h4 class="accordion-header fw-bold">
+                     Module 1: Fundamentals of Architectural Assistant 
+                </h4>
+                  <ul class="d-flex">
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                </ul>
+              </button>
+                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                          <li>What is Domain Marketing</li>
+                          <li>Importance of Domain</li>
+                          <li>Types of Domain &amp; Extensions</li>
+                          <li>Domain connecting to Hosting</li>
+                          <li>Niche related domain</li>
+                          <li>How to Buy a Right Domain</li>
+                          <li>How to Sell a Domain with higher price</li>
+                          <li>Listing Domains for Sale</li>
+                          <li>Finding domain with AI tool</li>
+                          <li>WordPress Installation</li>
+                          <li>Business website creation</li>
+                          <li>Blog website creation</li>
+                          <li>Portfolio Building</li>
+                          <li>Ecommerce website Creation</li>
+                          <li>Use of WooCommerce Plugin</li>
+                          <li>Payment gateway</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                <h4 class="accordion-header fw-bold">
+                     Module 1: Fundamentals of Architectural Assistant 
+                </h4>
+                  <ul class="d-flex">
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                </ul>
+              </button>
+                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                          <li>What is Domain Marketing</li>
+                          <li>Importance of Domain</li>
+                          <li>Types of Domain &amp; Extensions</li>
+                          <li>Domain connecting to Hosting</li>
+                          <li>Niche related domain</li>
+                          <li>How to Buy a Right Domain</li>
+                          <li>How to Sell a Domain with higher price</li>
+                          <li>Listing Domains for Sale</li>
+                          <li>Finding domain with AI tool</li>
+                          <li>WordPress Installation</li>
+                          <li>Business website creation</li>
+                          <li>Blog website creation</li>
+                          <li>Portfolio Building</li>
+                          <li>Ecommerce website Creation</li>
+                          <li>Use of WooCommerce Plugin</li>
+                          <li>Payment gateway</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item mb-3 rounded-5 border border-dark">
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                <h4 class="accordion-header fw-bold">
+                     Module 1: Fundamentals of Architectural Assistant 
+                </h4>
+                  <ul class="d-flex">
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
+                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
+                </ul>
+              </button>
+                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                    <div class="accordion-body">
+                        <ul class="list-unstyled">
+                          <li>What is Domain Marketing</li>
+                          <li>Importance of Domain</li>
+                          <li>Types of Domain &amp; Extensions</li>
+                          <li>Domain connecting to Hosting</li>
+                          <li>Niche related domain</li>
+                          <li>How to Buy a Right Domain</li>
+                          <li>How to Sell a Domain with higher price</li>
+                          <li>Listing Domains for Sale</li>
+                          <li>Finding domain with AI tool</li>
+                          <li>WordPress Installation</li>
+                          <li>Business website creation</li>
+                          <li>Blog website creation</li>
+                          <li>Portfolio Building</li>
+                          <li>Ecommerce website Creation</li>
+                          <li>Use of WooCommerce Plugin</li>
+                          <li>Payment gateway</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional modules would follow the same pattern -->
+        </div>
     </div>
+</section>
 
 
-  </section>
+
+
+
+ 
 
 
   <section id="teacher" class="padding-medium">
@@ -587,7 +843,7 @@
     <div class="accordion" id="faqAccordion">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             What is Bootstrap 5?
           </button>
         </h2>
@@ -599,7 +855,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             How do I install Bootstrap 5?
           </button>
         </h2>
@@ -612,7 +868,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -624,7 +880,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingfour">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
             What is Bootstrap 5?
           </button>
         </h2>
@@ -636,7 +892,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingfive">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
             How do I install Bootstrap 5?
           </button>
         </h2>
@@ -649,7 +905,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingsix">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -661,7 +917,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingseven">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseseven" aria-expanded="false" aria-controls="collapseseven">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseseven" aria-expanded="false" aria-controls="collapseseven">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -673,7 +929,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingsix">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -685,7 +941,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingeight">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
+          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -697,7 +953,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingnine">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
+          <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -709,7 +965,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingten">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseten" aria-expanded="false" aria-controls="collapseten">
+          <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseten" aria-expanded="false" aria-controls="collapseten">
             Where can I find Bootstrap 5 documentation?
           </button>
         </h2>
@@ -727,7 +983,47 @@
 
 
   
+ <section id="testimonial" class="padding-medium bg-primary-subtle">
+    <div class="container">
+      <div class="text-center mb-4">
+        <p class="text-secondary ">What our students say about us</p>
+        <h2 class="display-6 fw-semibold">Reviews</h2>
+      </div>
+    
+      <div class="row">
+        <div class="offset-md-1 col-md-10">
+          <div class="swiper testimonial-swiper">
+            <div class="swiper-wrapper">
+                @foreach($reviews  as $review)
+              <div class="swiper-slide pe-md-5">
+                <div class="my-4">
+                  <p class="text-muted">{{ $review->review }} </p>
+                  <div class="row">
+                    <div class="col-3"> <img src="front/images/reviwer1.jpg" alt="img" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="col-9">
+                        {{-- ->user->firstname ->user->lastname --}}
+                        {{-- {{dd( $review->student_id)}} --}}
+                        {{-- {{$review->student_id}} --}}
+                    <h5 class="m-0 mt-2">{{$review->student->user->firstname}}{{$review->student->user->lastname}}</h5>
+                      <p class="text-muted">Web Developer</p>
+                    </div>
 
+                  </div>
+                </div>
+              </div>
+              @endforeach
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
   
 
     <footer id="footer">
