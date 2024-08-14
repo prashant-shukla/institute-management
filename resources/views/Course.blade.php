@@ -472,305 +472,91 @@
   
   
 
-  <section class="py-lg-5 py-4 bg-light overflow-hidden">
+  <section class="py-lg-5 py-4 bg-light ">
     <div class="container">
         <div class="d-lg-flex justify-content-between align-items-start text-dark mb-lg-5 mb-4">
             <div class="mb-lg-0 mb-4 text-lg-start text-center">
                 <h2 class="fs-3 fw-bold">Architectural Assistant course in cadadda Jodhpur</h2>
                 <p class="fs-6 text-muted mb-0">A detailed overview of the course, including key topics, objectives, and module sequence.</p>
             </div>
-            <button class="btn btn-primary rounded-pill min-h-56 py-3 px-4 fw-bold shadow-sm">Download Curriculum</button>
+            <button class="btn btn-primary  py-3 px-4 fw-bold rounded-3 shadow-sm">Download Curriculum</button>
         </div>
-        <div class="mb-5 d-flex ">
-            <div class="d-flex col-9 rounded-pill justify-content-between border border-dark align-self-center p-5" style="height: 100px;">
-                <div class="d-flex align-items-center mb-4">
-                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/duration-icon.svg" alt="duration" width="16" height="16" class="me-2">
+        <div class="mb-5 d-flex  ">
+            <div class="d-flex col-12 detel justify-content-between border border-dark align-self-center p-2 " >
+                <div class="d-flex align-items-center py-2 ">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/duration-icon.svg" alt="duration" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Duration</span>
                         <h6 class="mb-0 fw-bold">20 Weeks</h6>
                     </div>
                 </div>
-                <div class="d-flex align-items-center mb-4">
-                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/mode-icon.svg" alt="mode" width="16" height="16" class="me-2">
+                <div class="d-flex align-items-center py-2">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/mode-icon.svg" alt="mode" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Mode</span>
                         <h6 class="mb-0 fw-bold">Offline</h6>
                     </div>
                 </div>
-                <div class="d-flex align-items-center mb-4">
-                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/live-sessions-icon.svg" alt="live sessions" width="16" height="16" class="me-2">
+                <div class="d-flex align-items-center py-2">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/live-sessions-icon.svg" alt="live sessions" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Live Sessions</span>
                         <h6 class="mb-0 fw-bold">99+ hrs</h6>
                     </div>
                 </div>
-                <div class="d-flex align-items-center mb-4">
-                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/projects-icon.svg" alt="projects" width="16" height="16" class="me-2">
+                <div class="d-flex align-items-center py-2">
+                    <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/projects-icon.svg" alt="projects" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Projects</span>
                         <h6 class="mb-0 fw-bold">14+</h6>
                     </div>
                 </div>
             </div>
-            <div class="d-none col-3  d-xl-block rounded-pill border border-dark  text-center">
+            {{-- <div class="d-none col-3  d-xl-block  border border-dark  text-center">
                 <img src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/placement-img.svg" alt="placement support" width="85" height="105" class="me-3">
                 <span class="fs-5 fw-bold">Placement Support</span>
-            </div>
+            </div> --}}
         </div>
         <div class="accordion" id="curriculumAccordion">
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-             
-                    <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                     <div class="d-flex justify-content-between w-100">
-                      <h4 class="accordion-header fw-bold">
-                        Module 1: html
-                   </h4>
-                     <ul class="d-flex">
-                       <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
-                       <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
-                       <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
-                     </ul>
-                     </div>
-                    </button>
-                  
-                <div id="module1" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li>What is Digital Marketing?</li>
-                            <li>Scope &amp; Latest Trends</li>
-                            <li>Career and Jobs in Digital Marketing</li>
-                            <li>Understanding Channels in Digital Marketing</li>
-                            <li>Setting marketing objectives</li>
-                            <li>Business Models &amp; Competitor Research</li>
-                            <li>Marketing funnel &amp; customer journey</li>
-                            <li>Identifying target audience segments</li>
-                            <li>Developing a value proposition</li>
-                            <li>Important terms &amp; metrics in Digital Marketing</li>
-                            <li>Understanding Media- Paid, Shared, Owned, and, Earned</li>
-                            <li>Overview of digital marketing channels-Inorganic and Organic</li>
-                            <li>Choosing the right channel mix for your business</li>
-                            <li>Creating a Buyer Persona</li>
-                            <li>How to think like Marketer</li>
-                        </ul>
-                    </div>
+         
+          @foreach($coursesyllabuses as $syllabuses)
+          <div class="accordion-item mb-3 rounded-3 border border-dark  bg-white">
+            <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ $syllabuses->id }}" aria-expanded="false">
+                <div class="d-lg-flex align-items-center justify-content-between w-100">
+                    <h4 class="fs-16 fw-500 text-color-1 mb-0">
+                        <span class="d-lg-inline-block d-none">Module {{ $loop->iteration }}</span>
+                        <span class="d-lg-none d-inline-block">Module {{ $loop->iteration }}.</span> 
+                        {{ $syllabuses->title }}
+                    </h4>
+                    <ul class="d-flex align-items-center mb-0 mr-10 flex-wrap ">
+                      <?php
+                      $colors = ['bg-warning', 'bg-info', 'bg-primary-subtle'];
+                      ?>
+                       
+                        @foreach($syllabuses->extra_info as $index => $info)
+                            @if($info['name'] && $info['value'])
+                                <li class="px-2 py-1 text-nowrap d-flex align-items-center">
+                                    <div class="text-color-2 min-w-19 min-h-19 sullybus-btn mx-1 text-center {{ $colors[$index % count($colors)] }}">
+                                        {{ $info['value'] }}
+                                    </div>
+                                    <div>{{ $info['name'] }}</div>
+                                </li>
+                            @endif
+                        @endforeach
+                    
+                    </ul>
+                </div>
+            </button>
+            <div id="module{{ $syllabuses->id }}" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                <div class="accordion-body px-3 py-2 star-list">
+                    {!! $syllabuses->description !!}
                 </div>
             </div>
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module2" aria-expanded="false">
-                <div class="d-flex justify-content-between w-100">
-                  <h4 class="accordion-header fw-bold">
-                    Module 2: css
-               </h4>
-               <ul class="d-flex">
-                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
-              </ul>
-                 </div>
-              </button>
-                <div id="module2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li>What is Domain Marketing</li>
-                            <li>Importance of Domain</li>
-                            <li>Types of Domain &amp; Extensions</li>
-                            <li>Domain connecting to Hosting</li>
-                            <li>Niche related domain</li>
-                            <li>How to Buy a Right Domain</li>
-                            <li>How to Sell a Domain with higher price</li>
-                            <li>Listing Domains for Sale</li>
-                            <li>Finding domain with AI tool</li>
-                            <li>WordPress Installation</li>
-                            <li>Business website creation</li>
-                            <li>Blog website creation</li>
-                            <li>Portfolio Building</li>
-                            <li>Ecommerce website Creation</li>
-                            <li>Use of WooCommerce Plugin</li>
-                            <li>Payment gateway</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module3" aria-expanded="false">
-                <div class="d-flex justify-content-between w-100">
-                  <h4 class="accordion-header fw-bold">
-                    Module 3: js
-               </h4>
-               <ul class="d-flex">
-                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
-              </ul>
-                 </div>
-              </button>
-                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                          <li>What is Domain Marketing</li>
-                          <li>Importance of Domain</li>
-                          <li>Types of Domain &amp; Extensions</li>
-                          <li>Domain connecting to Hosting</li>
-                          <li>Niche related domain</li>
-                          <li>How to Buy a Right Domain</li>
-                          <li>How to Sell a Domain with higher price</li>
-                          <li>Listing Domains for Sale</li>
-                          <li>Finding domain with AI tool</li>
-                          <li>WordPress Installation</li>
-                          <li>Business website creation</li>
-                          <li>Blog website creation</li>
-                          <li>Portfolio Building</li>
-                          <li>Ecommerce website Creation</li>
-                          <li>Use of WooCommerce Plugin</li>
-                          <li>Payment gateway</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module4" aria-expanded="false">
-                <div class="d-flex justify-content-between w-100">
-                  <h4 class="accordion-header fw-bold">
-                    Module 4: js
-               </h4>
-               <ul class="d-flex">
-                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
-              </ul>
-                 </div>
-              </button>
-                <div id="module4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                          <li>What is Domain Marketing</li>
-                          <li>Importance of Domain</li>
-                          <li>Types of Domain &amp; Extensions</li>
-                          <li>Domain connecting to Hosting</li>
-                          <li>Niche related domain</li>
-                          <li>How to Buy a Right Domain</li>
-                          <li>How to Sell a Domain with higher price</li>
-                          <li>Listing Domains for Sale</li>
-                          <li>Finding domain with AI tool</li>
-                          <li>WordPress Installation</li>
-                          <li>Business website creation</li>
-                          <li>Blog website creation</li>
-                          <li>Portfolio Building</li>
-                          <li>Ecommerce website Creation</li>
-                          <li>Use of WooCommerce Plugin</li>
-                          <li>Payment gateway</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module6" aria-expanded="false">
-                <div class="d-flex justify-content-between w-100">
-                  <h4 class="accordion-header fw-bold">
-                    Module 5: html
-               </h4>
-               <ul class="d-flex">
-                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
-              </ul>
-                 </div>
-              </button>
-                <div id="module6" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                          <li>What is Domain Marketing</li>
-                          <li>Importance of Domain</li>
-                          <li>Types of Domain &amp; Extensions</li>
-                          <li>Domain connecting to Hosting</li>
-                          <li>Niche related domain</li>
-                          <li>How to Buy a Right Domain</li>
-                          <li>How to Sell a Domain with higher price</li>
-                          <li>Listing Domains for Sale</li>
-                          <li>Finding domain with AI tool</li>
-                          <li>WordPress Installation</li>
-                          <li>Business website creation</li>
-                          <li>Blog website creation</li>
-                          <li>Portfolio Building</li>
-                          <li>Ecommerce website Creation</li>
-                          <li>Use of WooCommerce Plugin</li>
-                          <li>Payment gateway</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module7" aria-expanded="false">
-                <div class="d-flex justify-content-between w-100">
-                  <h4 class="accordion-header fw-bold">
-                    Module 6: html
-               </h4>
-               <ul class="d-flex">
-                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
-                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
-              </ul>
-                 </div>
-              </button>
-                <div id="module7" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                          <li>What is Domain Marketing</li>
-                          <li>Importance of Domain</li>
-                          <li>Types of Domain &amp; Extensions</li>
-                          <li>Domain connecting to Hosting</li>
-                          <li>Niche related domain</li>
-                          <li>How to Buy a Right Domain</li>
-                          <li>How to Sell a Domain with higher price</li>
-                          <li>Listing Domains for Sale</li>
-                          <li>Finding domain with AI tool</li>
-                          <li>WordPress Installation</li>
-                          <li>Business website creation</li>
-                          <li>Blog website creation</li>
-                          <li>Portfolio Building</li>
-                          <li>Ecommerce website Creation</li>
-                          <li>Use of WooCommerce Plugin</li>
-                          <li>Payment gateway</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module8" aria-expanded="false">
-                <div class="d-flex justify-content-between w-100">
-                  <h4 class="accordion-header fw-bold">
-                    Module 7: html
-               </h4>
-                 <ul class="d-flex">
-                   <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mr-4 text-center d-flex align-items-center justify-content-center bg-warning">1</div>live classes</li>
-                   <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mr-4 text-center d-flex align-items-center justify-content-center bg-info">1</div>Projects</li>
-                   <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mr-4 text-center d-flex align-items-center justify-content-center bg-success">1</div>Assignment</li>
-               </ul>
-                 </div>
-              </button>
-                <div id="module8" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                          <li>What is Domain Marketing</li>
-                          <li>Importance of Domain</li>
-                          <li>Types of Domain &amp; Extensions</li>
-                          <li>Domain connecting to Hosting</li>
-                          <li>Niche related domain</li>
-                          <li>How to Buy a Right Domain</li>
-                          <li>How to Sell a Domain with higher price</li>
-                          <li>Listing Domains for Sale</li>
-                          <li>Finding domain with AI tool</li>
-                          <li>WordPress Installation</li>
-                          <li>Business website creation</li>
-                          <li>Blog website creation</li>
-                          <li>Portfolio Building</li>
-                          <li>Ecommerce website Creation</li>
-                          <li>Use of WooCommerce Plugin</li>
-                          <li>Payment gateway</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        </div>
+        
+      @endforeach
+      
+      
             <!-- Additional modules would follow the same pattern -->
         </div>
         <div class="tool mt-5  container ">
@@ -779,12 +565,9 @@
           </div>
           <div class="slider-container">
             <div class="logo-slider">
-              <img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg" class="logo-image"  alt="Client Logo 1">
-              <img src="https://image.freepik.com/free-vector/blue-tech-logo_1103-822.jpg" class="logo-image" src="path_to_logo_image2" alt="Client Logo 2">
-              <img src="https://image.freepik.com/free-vector/3d-box-logo_1103-876.jpg" class="logo-image">
-                <img src="https://image.freepik.com/free-vector/colors-curl-logo-template_23-2147536125.jpg" class="logo-image">
-                {{-- <img src="ttps://image.freepik.com/free-vector/abstract-cross-logo_23-2147536124.jpg" class="logo-image">
-                    <img src="slide"><img src="https://image.freepik.com/free-vector/football-logo-background_1195-244.jpg" class="logo-image"> --}}
+              @foreach($coursetool as $tool)
+              <img src="{{ url('storage/' . $tool->Tool->image) }}" class="logo-image"  alt="Client Logo 1">
+              @endforeach
             </div>
           </div>
         </div>
@@ -813,7 +596,7 @@
             @foreach($mentors as $mentor)
              <li>
               <figure class="active">
-                <div>
+                <div class="rounded-3 ">
                   <div>
                     <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image">
                   </div>
@@ -841,19 +624,24 @@
   <div class="container mb-5">
     <h2 class="mb-4">Frequently Asked Questions</h2>
     <div class="accordion" id="faqAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            What is Bootstrap 5?
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Bootstrap 5 is a popular open-source front-end framework for building responsive and mobile-first websites and applications. It includes pre-designed components and utilities for styling.
+      @foreach($courses as $course)
+      @foreach($course->faqs as $faq)
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="heading{{ $loop->parent->index }}-{{ $loop->index }}">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->parent->index }}-{{ $loop->index }}" aria-expanded="false" aria-controls="collapse{{ $loop->parent->index }}-{{ $loop->index }}">
+                      {{ $faq['question'] }}
+                  </button>
+              </h2>
+              <div id="collapse{{ $loop->parent->index }}-{{ $loop->index }}" class="accordion-collapse collapse " aria-labelledby="heading{{ $loop->parent->index }}-{{ $loop->index }}" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                      {{ $faq['answer'] }}
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
-      <div class="accordion-item">
+      @endforeach
+  @endforeach
+  
+      {{-- <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             How do I install Bootstrap 5?
@@ -880,11 +668,11 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingfour">
-          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
             What is Bootstrap 5?
           </button>
         </h2>
-        <div id="collapsefour" class="accordion-collapse collapse show" aria-labelledby="headingfour" data-bs-parent="#faqAccordion">
+        <div id="collapsefour" class="accordion-collapse collapse " aria-labelledby="headingfour" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
             Bootstrap 5 is a popular open-source front-end framework for building responsive and mobile-first websites and applications. It includes pre-designed components and utilities for styling.
           </div>
@@ -975,7 +763,7 @@
             <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   </div>
 
@@ -1000,7 +788,7 @@
                   <p class="text-muted">{{ $review->review }} </p>
                   <div class="row">
                   
-                    <div class="col-3"> <img src="/storage/{{$review->student->photo}}" alt="img" class="img-fluid rounded-circle">
+                    <div class="col-3"> <img src="{{ url('storage/' . $review->student->photo) }}" alt="img" class="img-fluid rounded-circle">
                     </div>
                     <div class="col-9">
                     <h5 class="m-0 mt-2">{{$review->student->user->firstname}}{{$review->student->user->lastname}}</h5>

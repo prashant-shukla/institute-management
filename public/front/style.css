@@ -943,10 +943,17 @@ Sullybus--------------------------------------*/
 .min-w-19 {
   min-width: 35px; 
 }*/
+.detel{
+  border-radius: 10px;
+}
 .sullybus-btn{
-  max-width: 45px;
+ border-radius: 50%;
+ align-content: center;
   width: 20px;
   height: 20px;
+}
+.star-list li {
+  list-style:disc;
 }
 /*---------------------------------------------
 tool-----------------------------------------*/
@@ -1068,14 +1075,13 @@ ul li {
   margin: 2rem auto;
   width: 200px;
   height: 200px;
-  overflow: hidden;
   transform: rotate(45deg) translateZ(0px);
 }
 
 #list li figure > div > div {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/953/teams.jpg) no-repeat;
+  /* background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/953/teams.jpg) no-repeat;
   background-size: cover;
-  background-position: 0px 0px;
+  background-position: 0px 0px; */
   position: absolute;
   top: 50%;
   left: 50%;

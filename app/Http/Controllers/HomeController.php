@@ -7,6 +7,8 @@ use App\Models\Course;
 use App\Models\Mentor;
 use App\Models\Reviews;
 use App\Models\Student;
+use App\Models\CourseSyllabuses;
+use App\Models\CourseTool;
 
 use Illuminate\Http\Request;
 
@@ -75,7 +77,10 @@ class HomeController extends Controller
         
         $mentors = Mentor::all();
         $reviews = Reviews::all();
+        $coursesyllabuses = CourseSyllabuses::all();
+        $coursetool = CourseTool::all();
+        // dd($coursesyllabuses);
         //  dd($courses); // For debugging, remove this line in production
-        return view('Course', ['courses' => $courses,'mentors' => $mentors,'reviews' => $reviews]);
+        return view('Course', ['courses' => $courses,'mentors' => $mentors,'reviews' => $reviews,'coursesyllabuses'=>$coursesyllabuses,'coursetool'=>$coursetool]);
     }
 }
