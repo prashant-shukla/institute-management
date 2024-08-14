@@ -217,7 +217,7 @@
 
           <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
             <li class="nav-item">
-              <a href="index.html" class="nav-link mx-2 active">Home</a>
+              <a href="/Home" class="nav-link mx-2 active">Home</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -255,9 +255,9 @@
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
                 data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
               <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="courses.html" class="dropdown-item">Course<span
+                <li><a href="/category" class="dropdown-item">Course<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="courses-details.html" class="dropdown-item">Courses Detail<span
+                <li><a href="/Course" class="dropdown-item">Courses Detail<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
             </li>
@@ -459,7 +459,7 @@
                      <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->course_duration}}</p>
                     </div>
                    </div>
-                   <a href="courses-details.html">
+                   <a href="/Course">
                     <h5 class="course-title py-2 m-0">{{$course->site_title}}</h5>
                    </a>
                    <div class="card-text">

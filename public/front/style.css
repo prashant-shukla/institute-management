@@ -272,8 +272,8 @@ a {
 }
 
 .padding-medium {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
 }
 
 .padding-medium-2 {
@@ -281,15 +281,15 @@ a {
   padding-bottom: 8rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1140px) {
   .padding-large {
-    padding-top: 10rem;
-    padding-bottom: 5rem;
+    padding-top: rem;
+    padding-bottom: 2rem;
   }
 
   .padding-medium {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
   }
 
   .padding-medium-2 {
@@ -926,4 +926,215 @@ iconify-icon.video-icon {
 
 iconify-icon.video-icon:hover {
   font-size: 35px;
+}
+/*---------------------------------------------
+Sullybus--------------------------------------*/
+/* .max-h-19 {
+  max-height: 1.1875rem!important
+}
+
+.min-h-19 {
+  min-height: 1.1875rem!important;
+}
+.max-w-19 {
+  max-width: 35px;
+}
+
+.min-w-19 {
+  min-width: 35px; 
+}*/
+.sullybus-btn{
+  max-width: 45px;
+  width: 20px;
+  height: 20px;
+}
+/*---------------------------------------------
+tool-----------------------------------------*/
+tool {
+  align-items: center;
+  background: #E3E3E3;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+/* Styles for the client logo slider container */
+.slider-container {
+  width: auto; /* Adjusted to auto to fit the content */
+  overflow: hidden;
+  white-space: nowrap; /* Prevents the content from wrapping */
+}
+
+/* Styles for the logo slider */
+.logo-slider {
+  display: inline-flex;
+  animation: slide 20s infinite linear; /* Adjusted animation duration */
+  box-sizing: border-box; /* Ensures the box size includes padding and border */
+  position: relative; /* Added relative positioning */
+}
+
+/* Animation keyframes for the logo slider */
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(calc(-100% + 200px)); /* Adjusted to account for logo width and prevent gaps */
+  }
+}
+
+/* Styles for the client logo images */
+.logo-image {
+  width: 200px;
+  height: 150px;
+  object-fit: contain;
+  margin: 10px;
+}
+
+
+.slide {
+  height: 100px;
+  width: 250px;
+}
+
+/* Ease */
+.easeInOutBack {
+  cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.easeOutBack {
+  cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.easeInOutSine {
+  cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+ß
+
+
+
+ul li {
+  list-style-type: none;
+}
+
+.slider--teams {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  /* max-width: 1140px; */
+  opacity: 0;
+  transform: translate(-50%, -10%);
+}
+
+.slider--teams .slider--teams__team {
+  position: relative;
+  overflow: hidden;
+}
+
+#list {
+  position: relative;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+#list li {
+  position: relative;
+  display: inline-block;
+  float: left;
+  text-align: center;
+}
+
+#list li figure {
+  cursor: pointer;
+  margin: 1em;
+  opacity: 0.5;
+  backface-visibility: hidden;
+  transition: transform 450ms cubic-bezier(0.445, 0.05, 0.55, 0.95), opacity 450ms ease-in-out;
+  transform: scale(0.5) translateZ(0px);
+}
+
+#list li figure:hover {
+  opacity: 0.8;
+  transform: scale(0.6) translateZ(0px);
+}
+
+#list li figure:active {
+  opacity: 1;
+  transform: scale(0.7) translateZ(0px);
+}
+
+#list li figure > div {
+  border-radius: 5px;
+  position: relative;
+  margin: 2rem auto;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  transform: rotate(45deg) translateZ(0px);
+}
+
+#list li figure > div > div {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/953/teams.jpg) no-repeat;
+  background-size: cover;
+  background-position: 0px 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 170px;
+  height: 170px;
+  transform: rotate(-45deg) translate(0%, -70%);
+}
+
+#list li figure figcaption h2 {
+  color: #333;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+#list li figure figcaption p {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+#list li:nth-child(1) figure > div > div {
+  background-position: 0px 0px !important;
+}
+
+#list li:nth-child(2) figure > div > div {
+  background-position: 0px 20% !important;
+}
+
+#list li:nth-child(3) figure > div > div {
+  background-position: 0px 40% !important;
+}
+
+#list li:nth-child(4) figure > div > div {
+  background-position: 0px 60% !important;
+}
+
+#list li:nth-child(5) figure > div > div {
+  background-position: 0px 80% !important;
+}
+
+#list li:nth-child(6) figure > div > div {
+  background-position: 0px 100% !important;
+}
+
+.active {
+  opacity: 1 !important;
+  transform: scale(1) translateZ(0px) !important;
+}
+
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  *zoom: 1;
 }

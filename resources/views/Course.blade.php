@@ -217,7 +217,7 @@
 
           <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
             <li class="nav-item">
-              <a href="index.html" class="nav-link mx-2 active">Home</a>
+              <a href="/Home" class="nav-link mx-2 active">Home</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -255,9 +255,9 @@
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
                 data-bs-toggle="dropdown" aria-expanded="false" >Courses</a>
               <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="url(/Course)" class="dropdown-item">Course<span
+                <li><a href="/category" class="dropdown-item">Course<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="courses-details.html" class="dropdown-item">Courses Detail<span
+                <li><a href="/Course" class="dropdown-item">Courses Detail<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
             </li>
@@ -521,15 +521,16 @@
             <div class="accordion-item mb-3 rounded-5 border border-dark">
              
                     <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
+                     <div class="d-flex justify-content-between w-100">
                       <h4 class="accordion-header fw-bold">
-                           Module 1: Fundamentals of Architectural Assistant 
-                      </h4>
-                        <ul class="d-flex">
-                          <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                          <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                          <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                          <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                      </ul>
+                        Module 1: html
+                   </h4>
+                     <ul class="d-flex">
+                       <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
+                       <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
+                       <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
+                     </ul>
+                     </div>
                     </button>
                   
                 <div id="module1" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
@@ -555,16 +556,17 @@
                 </div>
             </div>
             <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                <h4 class="accordion-header fw-bold">
-                     Module 1: Fundamentals of Architectural Assistant 
-                </h4>
-                  <ul class="d-flex">
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                </ul>
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module2" aria-expanded="false">
+                <div class="d-flex justify-content-between w-100">
+                  <h4 class="accordion-header fw-bold">
+                    Module 2: css
+               </h4>
+               <ul class="d-flex">
+                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
+              </ul>
+                 </div>
               </button>
                 <div id="module2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
                     <div class="accordion-body">
@@ -590,16 +592,17 @@
                 </div>
             </div>
             <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                <h4 class="accordion-header fw-bold">
-                     Module 1: Fundamentals of Architectural Assistant 
-                </h4>
-                  <ul class="d-flex">
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                </ul>
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module3" aria-expanded="false">
+                <div class="d-flex justify-content-between w-100">
+                  <h4 class="accordion-header fw-bold">
+                    Module 3: js
+               </h4>
+               <ul class="d-flex">
+                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
+              </ul>
+                 </div>
               </button>
                 <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
                     <div class="accordion-body">
@@ -625,18 +628,19 @@
                 </div>
             </div>
             <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                <h4 class="accordion-header fw-bold">
-                     Module 1: Fundamentals of Architectural Assistant 
-                </h4>
-                  <ul class="d-flex">
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                </ul>
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module4" aria-expanded="false">
+                <div class="d-flex justify-content-between w-100">
+                  <h4 class="accordion-header fw-bold">
+                    Module 4: js
+               </h4>
+               <ul class="d-flex">
+                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
+              </ul>
+                 </div>
               </button>
-                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                <div id="module4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
                     <div class="accordion-body">
                         <ul class="list-unstyled">
                           <li>What is Domain Marketing</li>
@@ -660,18 +664,19 @@
                 </div>
             </div>
             <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                <h4 class="accordion-header fw-bold">
-                     Module 1: Fundamentals of Architectural Assistant 
-                </h4>
-                  <ul class="d-flex">
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                </ul>
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module6" aria-expanded="false">
+                <div class="d-flex justify-content-between w-100">
+                  <h4 class="accordion-header fw-bold">
+                    Module 5: html
+               </h4>
+               <ul class="d-flex">
+                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
+              </ul>
+                 </div>
               </button>
-                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                <div id="module6" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
                     <div class="accordion-body">
                         <ul class="list-unstyled">
                           <li>What is Domain Marketing</li>
@@ -695,18 +700,19 @@
                 </div>
             </div>
             <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                <h4 class="accordion-header fw-bold">
-                     Module 1: Fundamentals of Architectural Assistant 
-                </h4>
-                  <ul class="d-flex">
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                </ul>
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module7" aria-expanded="false">
+                <div class="d-flex justify-content-between w-100">
+                  <h4 class="accordion-header fw-bold">
+                    Module 6: html
+               </h4>
+               <ul class="d-flex">
+                <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-warning">1</div><div>live classes</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-info">1</div><div>Projects</div></li>
+                <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mx-1 text-center d-flex align-items-center justify-content-center bg-success">1</div><div>Assignment</div></li>
+              </ul>
+                 </div>
               </button>
-                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                <div id="module7" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
                     <div class="accordion-body">
                         <ul class="list-unstyled">
                           <li>What is Domain Marketing</li>
@@ -730,18 +736,19 @@
                 </div>
             </div>
             <div class="accordion-item mb-3 rounded-5 border border-dark">
-              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module1" aria-expanded="false">
-                <h4 class="accordion-header fw-bold">
-                     Module 1: Fundamentals of Architectural Assistant 
-                </h4>
-                  <ul class="d-flex">
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Projects</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>Assignment</li>
-                    <li class="d-flex px-1"><div class="number px-2">1</div>live classes</li>
-                </ul>
+              <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#module8" aria-expanded="false">
+                <div class="d-flex justify-content-between w-100">
+                  <h4 class="accordion-header fw-bold">
+                    Module 7: html
+               </h4>
+                 <ul class="d-flex">
+                   <li class="d-flex px-1"><div class=" sullybus-btn rounded-circle mr-4 text-center d-flex align-items-center justify-content-center bg-warning">1</div>live classes</li>
+                   <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mr-4 text-center d-flex align-items-center justify-content-center bg-info">1</div>Projects</li>
+                   <li class="d-flex px-1"><div class="sullybus-btn rounded-circle mr-4 text-center d-flex align-items-center justify-content-center bg-success">1</div>Assignment</li>
+               </ul>
+                 </div>
               </button>
-                <div id="module3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                <div id="module8" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
                     <div class="accordion-body">
                         <ul class="list-unstyled">
                           <li>What is Domain Marketing</li>
@@ -766,7 +773,23 @@
             </div>
             <!-- Additional modules would follow the same pattern -->
         </div>
+        <div class="tool mt-5  container ">
+          <div class="text-center mb-5">
+            <h2>Tools you will master</h2>
+          </div>
+          <div class="slider-container">
+            <div class="logo-slider">
+              <img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg" class="logo-image"  alt="Client Logo 1">
+              <img src="https://image.freepik.com/free-vector/blue-tech-logo_1103-822.jpg" class="logo-image" src="path_to_logo_image2" alt="Client Logo 2">
+              <img src="https://image.freepik.com/free-vector/3d-box-logo_1103-876.jpg" class="logo-image">
+                <img src="https://image.freepik.com/free-vector/colors-curl-logo-template_23-2147536125.jpg" class="logo-image">
+                {{-- <img src="ttps://image.freepik.com/free-vector/abstract-cross-logo_23-2147536124.jpg" class="logo-image">
+                    <img src="slide"><img src="https://image.freepik.com/free-vector/football-logo-background_1195-244.jpg" class="logo-image"> --}}
+            </div>
+          </div>
+        </div>
     </div>
+    
 </section>
 
 
@@ -783,54 +806,31 @@
         <h2 class="display-6 fw-semibold">Meet Our Team</h2>
         <p class="text-secondary">We build CADADDA with professional and love</p>
       </div>
-
-      <div class="row">
-        @foreach($mentors as $mentor)
-        <div class="col mb-5">
-          <div class="team-member position-relative card rounded-4 border-0 shadow-sm p-3">
-            <div class="image-holder zoom-effect rounded-3">
-              <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image">
-              <ul class="social-links list-unstyled position-absolute">
-                <li>
-                  <a href="#">
-                    <svg class="facebook text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#facebook" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="twitter text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#twitter" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="instagram text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#instagram" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="linkedin text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#linkedin" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body p-0">
-              <div class="text-center mt-3">
-                <p class="fw-bold m-0">{{ $mentor->name }}</p>
-                <p class="text-secondary m-0">{{$mentor->short_description}}</p>
-              </div>
-            </div>
-          </div>
+     <div class="team">
+       <div class="slider--teams">
+        <div class="slider--teams__team">
+          <ul id="list" class="cf">
+            @foreach($mentors as $mentor)
+             <li>
+              <figure class="active">
+                <div>
+                  <div>
+                    <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image">
+                  </div>
+                </div>
+              <figcaption>
+                  <h2>{{ $mentor->name }}</h2>
+                  <p>{{$mentor->short_description}}</p>
+                </figcaption>
+              </figure>
+             </li>
+            @endforeach
+          </ul>
         </div>
-        @endforeach
+       </div>
+
       </div>
+    </div>
   </section>
 
 
@@ -838,7 +838,7 @@
 
 
 
-  <div class="container mt-5">
+  <div class="container mb-5">
     <h2 class="mb-4">Frequently Asked Questions</h2>
     <div class="accordion" id="faqAccordion">
       <div class="accordion-item">
@@ -999,12 +999,10 @@
                 <div class="my-4">
                   <p class="text-muted">{{ $review->review }} </p>
                   <div class="row">
-                    <div class="col-3"> <img src="front/images/reviwer1.jpg" alt="img" class="img-fluid rounded-circle">
+                  
+                    <div class="col-3"> <img src="/storage/{{$review->student->photo}}" alt="img" class="img-fluid rounded-circle">
                     </div>
                     <div class="col-9">
-                        {{-- ->user->firstname ->user->lastname --}}
-                        {{-- {{dd( $review->student_id)}} --}}
-                        {{-- {{$review->student_id}} --}}
                     <h5 class="m-0 mt-2">{{$review->student->user->firstname}}{{$review->student->user->lastname}}</h5>
                       <p class="text-muted">Web Developer</p>
                     </div>
@@ -1023,8 +1021,9 @@
     </div>
 
 
-  </section>
-  
+ </section>
+
+ 
 
     <footer id="footer">
         <div class="container padding-medium ">
@@ -1172,7 +1171,182 @@
           </div>
         </div>
       </div>
-    
+    <script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sliderContainer = document.querySelector('.slider-container');
+  const logoSlider = document.querySelector('.logo-slider');
+  const logoImages = document.querySelectorAll('.logo-image');
+  
+  // Calculate the total width of the slider
+  const logoWidth = logoImages[0].offsetWidth;
+  const totalWidth = logoWidth * logoImages.length;
+
+  // Set the width of the slider to the total width of logos
+  logoSlider.style.width = totalWidth + 'px';
+
+  // Pause animation on hover
+  sliderContainer.addEventListener('mouseover', () => {
+    logoSlider.style.animationPlayState = 'paused';
+  });
+
+  sliderContainer.addEventListener('mouseout', () => {
+    logoSlider.style.animationPlayState = 'running';
+  });
+
+  // Clone the logo images to create a continuous sliding effect
+  const clonedImages = Array.from(logoImages).map(img => img.cloneNode(true));
+  clonedImages.forEach(img => logoSlider.appendChild(img));
+});
+
+
+
+
+
+      var sliderTeam = (function(document) {
+
+'use strict';
+
+var sliderTeams = document.querySelector('.slider--teams'),
+    list = document.querySelector('#list'),
+    listItems = document.querySelectorAll('#list li'),
+    nItems = listItems.length,
+    nView = 3,
+    autoSlider,
+    current = 0,
+    isAuto = true,
+    acAuto = 2500,
+
+    init = function() {
+      initWidth();
+      eventInit();
+    },
+
+    initWidth = function() {
+      list.style.marginLeft = Math.floor(100 / nView) + '%';
+      list.style.width = Math.floor(100 * (nItems / nView)) + '%';
+      listItems.forEach(function(item) {
+        item.style.width = 100 / nItems + '%';
+      });
+      sliderTeams.style.opacity = 1;
+      sliderTeams.style.display = 'block';
+      setTimeout(function() {
+        sliderTeams.style.opacity = 1;
+      }, 1000);
+    },
+
+    eventInit = function() {
+
+      window.requestAnimFrame = (function() {
+        return window.requestAnimationFrame       || 
+               window.webkitRequestAnimationFrame || 
+               window.mozRequestAnimationFrame    || 
+               window.oRequestAnimationFrame      || 
+               window.msRequestAnimationFrame     || 
+               function(callback) {
+                 window.setTimeout(callback, 1000 / 60);
+               };
+      })();
+
+      window.requestInterval = function(fn, delay) {
+        if (!window.requestAnimationFrame && 
+            !window.webkitRequestAnimationFrame && 
+            !window.mozRequestAnimationFrame && 
+            !window.oRequestAnimationFrame && 
+            !window.msRequestAnimationFrame) {
+          return window.setInterval(fn, delay);
+        }
+        var start = new Date().getTime(),
+            handle = {};
+
+        function loop() {
+          var current = new Date().getTime(),
+              delta = current - start;
+          if (delta >= delay) {
+            fn.call();
+            start = new Date().getTime();
+          }
+          handle.value = requestAnimFrame(loop);
+        }
+        handle.value = requestAnimFrame(loop);
+        return handle;
+      }
+
+      window.clearRequestInterval = function(handle) {
+        if (window.cancelAnimationFrame) {
+          window.cancelAnimationFrame(handle.value);
+        } else if (window.webkitCancelRequestAnimationFrame) {
+          window.webkitCancelRequestAnimationFrame(handle.value);
+        } else if (window.mozCancelRequestAnimationFrame) {
+          window.mozCancelRequestAnimationFrame(handle.value);
+        } else if (window.oCancelRequestAnimationFrame) {
+          window.oCancelRequestAnimationFrame(handle.value);
+        } else if (window.msCancelRequestAnimationFrame) {
+          window.msCancelRequestAnimationFrame(handle.value);
+        } else {
+          clearInterval(handle);
+        }
+      };
+
+      listItems.forEach(function(item, i) {
+        item.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          stopMove(i);
+          moveIt(item, i);
+        });
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          stopMove(i);
+          moveIt(item, i);
+        });
+      });
+
+      autoSlider = requestInterval(autoMove, acAuto);
+    },
+
+    moveIt = function(obj, x) {
+      var n = x;
+
+      obj.querySelector('figure').classList.add('active');
+      Array.from(listItems).forEach(function(item) {
+        if (item !== obj) {
+          item.querySelector('figure').classList.remove('active');
+        }
+      });
+
+      list.style.transform = 'translateX(' + Math.floor((-(100 / nItems)) * n) + '%) translateZ(0)';
+      list.style.transition = 'transform 1000ms cubic-bezier(0.4, 0, 0.26, 1)';
+    },
+
+    autoMove = function(currentSlide) {
+      if (isAuto) { 
+        current = Math.floor((current + 1) % nItems);
+      } else {
+        current = currentSlide;
+      }
+      console.log(current);
+      moveIt(listItems[current], current);
+    },
+
+    stopMove = function(x) {
+      clearRequestInterval(autoSlider);
+      isAuto = false;
+      autoMove(x);
+    };
+
+return {
+  init: init
+};
+
+})(document);
+
+window.addEventListener('load', function() {
+'use strict';
+sliderTeam.init();
+});
+
+    </script>
     
       <script src="front/js/jquery-1.11.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
