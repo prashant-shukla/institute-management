@@ -122,7 +122,7 @@
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-4">
           <span>Your Cart</span>
-          <span class="badge bg-primary rounded-circle pt-2 text-white">3</span>
+          <span class="badge bg-primary rounded-circle pt-2  text-white">3</span>
         </h4>
 
         <ul class="list-group mb-4">
