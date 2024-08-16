@@ -193,7 +193,7 @@
     <div class="container-fluid">
       <div class="main-logo d-lg-none">
         <a href="index.html">
-          <img src="images/logo.png" alt="logo" class="img-fluid">
+          <img src="front/images/logo.png" alt="logo" class="img-fluid">
         </a>
       </div>
 
@@ -211,7 +211,7 @@
         <div class="offcanvas-body justify-content-between">
           <div class="main-logo">
             <a href="index.html">
-              <img src="images/logo.png" alt="logo" class="img-fluid">
+              <img src="front/images/logo.png" alt="logo" class="img-fluid">
             </a>
           </div>
 
@@ -257,7 +257,7 @@
               <ul class="dropdown-menu" aria-labelledby="courses">
                 <li><a href="/category" class="dropdown-item">Course<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="/Course" class="dropdown-item">Courses Detail<span
+                <li><a href="/course" class="dropdown-item">Courses Detail<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
             </li>
@@ -385,7 +385,7 @@
     </div>
   </nav>
 
-  <section id="hero" style="background-image:url(images/billboard-bg.png); background-repeat: no-repeat; ">
+  <section id="hero" style="background-image:url(front/images/billboard-bg.png); background-repeat: no-repeat; ">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6 pe-5 mt-5 mt-md-0">
@@ -648,7 +648,7 @@
             <span class="badge text-white bg-secondary">New</span>
           </div>
           <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
-            <a href="courses-details.html"><img src="front/images/item1.jpg" class="img-fluid rounded-3" alt="image"></a>
+            <a href="{{ url('/course'.'/'.$course->id) }}"><img src="front/images/item1.jpg" class="img-fluid rounded-3" alt="image"></a>
             <div class="card-body p-0">
 
               <div class="d-flex justify-content-between my-3">
@@ -661,7 +661,7 @@
                 </div>
               </div>
 
-              <a href="courses-details.html">
+              <a href="{{ url('/course'.'/'.$course->id) }}">
                 <h5 class="course-title py-2 m-0">{{$course->site_title}}</h5>
               </a>
 

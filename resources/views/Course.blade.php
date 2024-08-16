@@ -15,13 +15,13 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-<link rel="stylesheet" type="text/css" href="front/icomoon/icomoon.css">
+<link rel="stylesheet" type="text/css" href="../front/icomoon/icomoon.css">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="front/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="front/style.css">
+<link rel="stylesheet" type="text/css" href="../front/css/vendor.css">
+<link rel="stylesheet" type="text/css" href="../front/style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -193,7 +193,7 @@
     <div class="container-fluid">
       <div class="main-logo d-lg-none">
         <a href="index.html">
-          <img src="images/logo.png" alt="logo" class="img-fluid">
+          <img src="../front/images/logo.png" alt="logo" class="img-fluid">
         </a>
       </div>
 
@@ -211,13 +211,13 @@
         <div class="offcanvas-body justify-content-between">
           <div class="main-logo">
             <a href="index.html">
-              <img src="images/logo.png" alt="logo" class="img-fluid">
+              <img src="../front/images/logo.png" alt="logo" class="img-fluid">
             </a>
           </div>
 
           <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
             <li class="nav-item">
-              <a href="/Home" class="nav-link mx-2 active">Home</a>
+              <a href="/" class="nav-link mx-2 active">Home</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -484,33 +484,38 @@
         <div class="mb-5 d-flex  ">
             <div class="d-flex col-12 detel justify-content-between border border-dark align-self-center p-2 " >
                 <div class="d-flex align-items-center py-2 ">
+                 
                     <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/duration-icon.svg" alt="duration" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Duration</span>
-                        <h6 class="mb-0 fw-bold">20 Weeks</h6>
+                        <?php  
+                     
+                        ?>
+                        <h6 class="mb-0 fw-bold">{{$course->course_duration}}</h6>
                     </div>
                 </div>
                 <div class="d-flex align-items-center py-2">
                     <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/mode-icon.svg" alt="mode" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Mode</span>
-                        <h6 class="mb-0 fw-bold">Offline</h6>
+                        <h6 class="mb-0 fw-bold">{{$course->mode}}</h6>
                     </div>
                 </div>
                 <div class="d-flex align-items-center py-2">
                     <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/live-sessions-icon.svg" alt="live sessions" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Live Sessions</span>
-                        <h6 class="mb-0 fw-bold">99+ hrs</h6>
+                        <h6 class="mb-0 fw-bold">{{$course->sessions}}+ hrs</h6>
                     </div>
                 </div>
                 <div class="d-flex align-items-center py-2">
                     <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/projects-icon.svg" alt="projects" width="25" height="25" class="me-2">
                     <div>
                         <span class="text-muted">Projects</span>
-                        <h6 class="mb-0 fw-bold">14+</h6>
+                        <h6 class="mb-0 fw-bold">{{$course->projects}}+</h6>
                     </div>
                 </div>
+               
             </div>
             {{-- <div class="d-none col-3  d-xl-block  border border-dark  text-center">
                 <img src="https://d2kr1rbctelohj.cloudfront.net/images/courses-details/placement-img.svg" alt="placement support" width="85" height="105" class="me-3">
@@ -593,17 +598,17 @@
        <div class="slider--teams">
         <div class="slider--teams__team">
           <ul id="list" class="cf">
-            @foreach($mentors as $mentor)
+            @foreach($coursementors as $coursementor)
              <li>
               <figure class="active">
                 <div class="rounded-3 ">
                   <div>
-                    <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image">
+                    <img src="{{ url('storage/' . $coursementor->mentor->image) }}" class="img-fluid rounded-3" alt="image">
                   </div>
                 </div>
               <figcaption>
-                  <h2>{{ $mentor->name }}</h2>
-                  <p>{{$mentor->short_description}}</p>
+                  <h2>{{ $coursementor->mentor->name }}</h2>
+                  <p>{{$coursementor->mentor->short_description}}</p>
                 </figcaption>
               </figure>
              </li>
@@ -624,146 +629,23 @@
   <div class="container mb-5">
     <h2 class="mb-4">Frequently Asked Questions</h2>
     <div class="accordion" id="faqAccordion">
-      @foreach($courses as $course)
+    
       @foreach($course->faqs as $faq)
           <div class="accordion-item">
-              <h2 class="accordion-header" id="heading{{ $loop->parent->index }}-{{ $loop->index }}">
-                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->parent->index }}-{{ $loop->index }}" aria-expanded="false" aria-controls="collapse{{ $loop->parent->index }}-{{ $loop->index }}">
+              <h2 class="accordion-header" id="heading{{ $loop->index }}">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="false" aria-controls="collapse{{ $loop->index }}">
                       {{ $faq['question'] }}
                   </button>
               </h2>
-              <div id="collapse{{ $loop->parent->index }}-{{ $loop->index }}" class="accordion-collapse collapse " aria-labelledby="heading{{ $loop->parent->index }}-{{ $loop->index }}" data-bs-parent="#faqAccordion">
+              <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse " aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#faqAccordion">
                   <div class="accordion-body">
                       {{ $faq['answer'] }}
                   </div>
               </div>
           </div>
       @endforeach
-  @endforeach
-  
-      {{-- <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            How do I install Bootstrap 5?
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            You can install Bootstrap 5 using npm with the command `npm install bootstrap`. Alternatively, you can include Bootstrap via a CDN by adding the following link to your HTML file:
-            <pre><code>&lt;link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"&gt;</code></pre>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingfour">
-          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-            What is Bootstrap 5?
-          </button>
-        </h2>
-        <div id="collapsefour" class="accordion-collapse collapse " aria-labelledby="headingfour" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Bootstrap 5 is a popular open-source front-end framework for building responsive and mobile-first websites and applications. It includes pre-designed components and utilities for styling.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingfive">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
-            How do I install Bootstrap 5?
-          </button>
-        </h2>
-        <div id="collapsefive" class="accordion-collapse collapse" aria-labelledby="headingfive" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            You can install Bootstrap 5 using npm with the command `npm install bootstrap`. Alternatively, you can include Bootstrap via a CDN by adding the following link to your HTML file:
-            <pre><code>&lt;link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"&gt;</code></pre>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingsix">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapsesix" class="accordion-collapse collapse" aria-labelledby="headingsix" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingseven">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseseven" aria-expanded="false" aria-controls="collapseseven">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapseseven" class="accordion-collapse collapse" aria-labelledby="headingseven" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingsix">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapsesix" class="accordion-collapse collapse" aria-labelledby="headingsix" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingeight">
-          <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapseeight" class="accordion-collapse collapse" aria-labelledby="headingeight" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingnine">
-          <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapsenine" class="accordion-collapse collapse" aria-labelledby="headingnine" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            The official Bootstrap 5 documentation can be found on the Bootstrap website at <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingten">
-          <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseten" aria-expanded="false" aria-controls="collapseten">
-            Where can I find Bootstrap 5 documentation?
-          </button>
-        </h2>
-        <div id="collapseten" class="accordion-collapse collapse" aria-labelledby="headingten" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            You can install Bootstrap 5 using npm with the command `npm install bootstrap`. Alternatively, you can include Bootstrap via a CDN by adding the following link to your HTML file:
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap Documentation</a>.
-          </div>
-        </div>
-      </div> --}}
+ 
+ 
     </div>
   </div>
 
@@ -819,7 +701,7 @@
             <div class="col-sm-6 col-lg-4 my-3">
               <div class="footer-menu">
                 <a href="index.html">
-                  <img src="front/images/logo.png" alt="logo" class="img-fluid">
+                  <img src="../front/images/logo.png" alt="logo" class="img-fluid">
                 </a>
                 <div class="social-links mt-4">
                   <ul class="d-flex list-unstyled ">
@@ -959,10 +841,10 @@
           </div>
         </div>
       </div>
-    <script>
 
-
-document.addEventListener('DOMContentLoaded', () => {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
   const sliderContainer = document.querySelector('.slider-container');
   const logoSlider = document.querySelector('.logo-slider');
   const logoImages = document.querySelectorAll('.logo-image');
@@ -1113,7 +995,7 @@ var sliderTeams = document.querySelector('.slider--teams'),
       } else {
         current = currentSlide;
       }
-      console.log(current);
+      // console.log(current);
       moveIt(listItems[current], current);
     },
 
@@ -1136,13 +1018,13 @@ sliderTeam.init();
 
     </script>
     
-      <script src="front/js/jquery-1.11.0.min.js"></script>
+      <script src="../front/js/jquery-1.11.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-      <script src="front/js/plugins.js"></script>
-      <script src="front/js/script.js"></script>
+      <script src="../front/js/plugins.js"></script>
+      <script src="../front/js/script.js"></script>
       <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
     </body>

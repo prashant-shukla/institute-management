@@ -193,7 +193,7 @@
     <div class="container-fluid">
       <div class="main-logo d-lg-none">
         <a href="index.html">
-          <img src="images/logo.png" alt="logo" class="img-fluid">
+          <img src="front/images/logo.png" alt="logo" class="img-fluid">
         </a>
       </div>
 
@@ -211,13 +211,13 @@
         <div class="offcanvas-body justify-content-between">
           <div class="main-logo">
             <a href="index.html">
-              <img src="images/logo.png" alt="logo" class="img-fluid">
+              <img src="front/images/logo.png" alt="logo" class="img-fluid">
             </a>
           </div>
 
           <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
             <li class="nav-item">
-              <a href="/Home" class="nav-link mx-2 active">Home</a>
+              <a href="/" class="nav-link mx-2 active">Home</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -385,7 +385,7 @@
     </div>
   </nav>
 
-  <section id="hero" style="background-image:url(images/billboard-bg.png); background-repeat: no-repeat; ">
+  <section id="hero" style="background-image:url(front/images/billboard-bg.png); background-repeat: no-repeat; ">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6 pe-5 mt-5 mt-md-0">
@@ -446,7 +446,7 @@
                      <span class="badge text-white bg-secondary">New</span>
                    </div>
                    <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
-                     <a href="courses-details.html">
+                     <a href="{{ url('/course'.'/'.$course->id) }}">
                        <img src="{{ $course->image ? url('storage/' . $course->image) : 'front/images/item1.jpg' }}" class="img-fluid rounded-3" alt="image">
                      </a>
                   <div class="card-body p-0">
@@ -459,7 +459,7 @@
                      <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->course_duration}}</p>
                     </div>
                    </div>
-                   <a href="/Course">
+                   <a href="{{ url('/course'.'/'.$course->id) }}">
                     <h5 class="course-title py-2 m-0">{{$course->site_title}}</h5>
                    </a>
                    <div class="card-text">
@@ -554,8 +554,9 @@
         <div class="col mb-5">
           <div class="team-member position-relative card rounded-4 border-0 shadow-sm p-3">
             <div class="image-holder zoom-effect rounded-3">
-              <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image">
-              <ul class="social-links list-unstyled position-absolute">
+                <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image"> 
+
+               <ul class="social-links list-unstyled position-absolute">
                 <li>
                   <a href="#">
                     <svg class="facebook text-dark" width="25" height="25" aria-hidden="true">
@@ -751,7 +752,7 @@
     
     
     
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
       <script>
         $(document).ready(function() {
           $('.filters li').click(function() {

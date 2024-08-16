@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class CourseMentor extends Model
 {
     use HasFactory;
-    
+    protected $table = 'course_mentor';
     protected $guarded = ['id'];
 
     public function mentor()

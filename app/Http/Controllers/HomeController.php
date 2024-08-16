@@ -9,6 +9,7 @@ use App\Models\Reviews;
 use App\Models\Student;
 use App\Models\CourseSyllabuses;
 use App\Models\CourseTool;
+use App\Models\CourseMentor;
 
 use Illuminate\Http\Request;
 
@@ -38,7 +39,7 @@ class HomeController extends Controller
         $courses = Course::all();
         $coursecategories = CourseCategory::all();
 
-        return view('Home', [
+        return view('home', [
             'reviews' => $reviews,
             'mentors' => $mentors,
             'coursecategories'=>$coursecategories,
@@ -71,16 +72,26 @@ class HomeController extends Controller
     $reviews = Reviews::all();
     return view('ajax', ['courses' => $courses,'coursecategories'=>$coursecategories,'mentors' => $mentors,'reviews' => $reviews])->render();
   }
-  public function Course()
-    {
-        $courses = Course::all();
-        
-        $mentors = Mentor::all();
-        $reviews = Reviews::all();
-        $coursesyllabuses = CourseSyllabuses::all();
-        $coursetool = CourseTool::all();
-        // dd($coursesyllabuses);
-        //  dd($courses); // For debugging, remove this line in production
-        return view('Course', ['courses' => $courses,'mentors' => $mentors,'reviews' => $reviews,'coursesyllabuses'=>$coursesyllabuses,'coursetool'=>$coursetool]);
-    }
+
+  public function Course($id)
+  {
+      // Retrieve the specific course by its ID
+      $course = Course::findOrFail($id);
+  
+      // Fetch related data specific to this course
+      $coursementors = CourseMentor::where('course_id', $id)->get();
+      $reviews = Reviews::get()->all();
+      $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
+      $coursetool = CourseTool::where('course_id', $id)->get();
+  
+      // Pass the specific data to the view
+      return view('course', [
+          'course' => $course,  // Pass single course object
+          'coursementors' => $coursementors,
+          'reviews' => $reviews,
+          'coursesyllabuses' => $coursesyllabuses,
+          'coursetool' => $coursetool,
+      ]);
+  }
+  
 }
