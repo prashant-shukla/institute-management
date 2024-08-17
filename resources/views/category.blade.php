@@ -192,8 +192,9 @@
   <nav class="main-menu d-flex navbar navbar-expand-lg p-2 py-3 p-lg-4 py-lg-4 ">
     <div class="container-fluid">
       <div class="main-logo d-lg-none">
-        <a href="index.html">
-          <img src="front/images/logo.png" alt="logo" class="img-fluid">
+        <a href="/">
+          {{-- <img src="front/images/logo.png" alt="logo" class="img-fluid"> --}}
+          <h5 class="img-fluid">Institute</h5>
         </a>
       </div>
 
@@ -210,8 +211,9 @@
 
         <div class="offcanvas-body justify-content-between">
           <div class="main-logo">
-            <a href="index.html">
-              <img src="front/images/logo.png" alt="logo" class="img-fluid">
+            <a href="/">
+              {{-- <img src="front/images/logo.png" alt="logo" class="img-fluid"> --}}
+              <h2 class="img-fluid">Institute</h2>
             </a>
           </div>
 
@@ -220,7 +222,10 @@
               <a href="/" class="nav-link mx-2 active">Home</a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item ">
+                <a href="/category" class="dropdown-item">Course </a>
+            </li>
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="pages"
                 data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
               <ul class="dropdown-menu" aria-labelledby="pages">
@@ -301,7 +306,7 @@
             <li class="nav-item">
               <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
                 class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
-            </li>
+            </li> --}}
           </ul>
 
           <div class="d-none d-lg-flex align-items-center">
@@ -609,7 +614,8 @@
             <div class="col-sm-6 col-lg-4 my-3">
               <div class="footer-menu">
                 <a href="index.html">
-                  <img src="front/images/logo.png" alt="logo" class="img-fluid">
+                  {{-- <img src="front/images/logo.png" alt="logo" class="img-fluid"> --}}
+                  <h2 class="img-fluid">Institute</h2>
                 </a>
                 <div class="social-links mt-4">
                   <ul class="d-flex list-unstyled ">
@@ -741,10 +747,10 @@
               <p>© 2024 TemplatesJungle. All rights reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
-              <p>Free HTML Template by: <a href="https://templatesjungle.com/" target="_blank" class="fw-bold">
+              {{-- <p>Free HTML Template by: <a href="https://templatesjungle.com/" target="_blank" class="fw-bold">
                   TemplatesJungle</a> Distributed by: <a href="https://themewagon.com" target="_blank" class="fw-bold">
                     ThemeWagon
-                  </a></p>
+                  </a></p> --}}
             </div>
           </div>
         </div>

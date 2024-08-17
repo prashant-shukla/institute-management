@@ -219,7 +219,7 @@
             <li class="nav-item">
               <a href="index.html" class="nav-link mx-2 active">Home</a>
             </li>
-
+{{-- 
             <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="pages"
                 data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
@@ -249,20 +249,21 @@
                 <li><a href="styles.html" class="dropdown-item">Styles<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
-            </li>
+            </li> --}}
 
-            <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
-                data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
-              <ul class="dropdown-menu" aria-labelledby="courses">
+            <li class="nav-item ">
+                <a href="/category" class="dropdown-item">Course </a>
+              {{-- <a  class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
+                data-bs-toggle="dropdown" aria-expanded="false">Courses</a> --}}
+              {{-- <ul class="dropdown-menu" aria-labelledby="courses">
                 <li><a href="/category" class="dropdown-item">Course<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
                 <li><a href="/course" class="dropdown-item">Courses Detail<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
+              </ul> --}}
             </li>
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="events"
                 data-bs-toggle="dropdown" aria-expanded="false">events</a>
               <ul class="dropdown-menu" aria-labelledby="courses">
@@ -271,9 +272,9 @@
                 <li><a href="event-details.html" class="dropdown-item">event details<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
-            </li>
+            </li> --}}
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="blog"
                 data-bs-toggle="dropdown" aria-expanded="false">blog</a>
               <ul class="dropdown-menu" aria-labelledby="blog">
@@ -282,9 +283,9 @@
                 <li><a href="single-post.html" class="dropdown-item">single post<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
-            </li>
+            </li> --}}
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="shop"
                 data-bs-toggle="dropdown" aria-expanded="false">shop</a>
               <ul class="dropdown-menu" aria-labelledby="shop">
@@ -301,7 +302,7 @@
             <li class="nav-item">
               <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
                 class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
-            </li>
+            </li> --}}
           </ul>
 
           <div class="d-none d-lg-flex align-items-center">
@@ -523,112 +524,7 @@
           </div>
         </div>
         @endforeach
-        <div class="col-md-4">
-          <div class="primary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#pencil-box" class="svg-primary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Graphic Design</p>
-                <p class="category-paragraph m-0">39 courses</p>
-              </div>
-            </div>
-          </div>
-          <div class="tertiary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#speakerphone" class="svg-tertiary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">SEO & Marketing</p>
-                <p class="category-paragraph m-0">24 courses</p>
-              </div>
-            </div>
-          </div>
-          <div class="secondary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#handshake" class="svg-secondary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Business & Finance</p>
-                <p class="category-paragraph m-0">16 courses</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="gray rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#camera" class="svg-gray" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Video & Photography</p>
-                <p class="category-paragraph m-0">39 courses</p>
-              </div>
-            </div>
-          </div>
-          <div class="secondary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#laptop" class="svg-secondary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Computer Science</p>
-                <p class="category-paragraph m-0">16 courses</p>
-              </div>
-            </div>
-          </div>
-          <div class="tertiary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#fitness" class="svg-tertiary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Health & Fitness</p>
-                <p class="category-paragraph m-0">24 courses</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-md-4">
-          <div class="tertiary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#speakerphone" class="svg-tertiary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">SEO & Marketing</p>
-                <p class="category-paragraph m-0">24 courses</p>
-              </div>
-            </div>
-          </div>
-          <div class="primary rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#pencil-box" class="svg-primary" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Graphic Design</p>
-                <p class="category-paragraph m-0">39 courses</p>
-              </div>
-            </div>
-          </div>
-          <div class="gray rounded-3 p-4 my-3">
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px">
-                <use href="#pencil-box" class="svg-gray" />
-              </svg>
-              <div class="ps-4">
-                <p class="category-paragraph fw-bold text-uppercase mb-1">Graphic Design</p>
-                <p class="category-paragraph m-0">39 courses</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      
 
       </div>
     </div>
@@ -790,7 +686,7 @@
       </div>
   </section>
 
-  <section id="points" class="padding-medium pt-0">
+  {{-- <section id="points" class="padding-medium pt-0">
     <div class="container">
       <div class="text-center">
         <p class="text-secondary ">What features we provide</p>
@@ -855,7 +751,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <section id="register">
     <div class="container padding-medium">

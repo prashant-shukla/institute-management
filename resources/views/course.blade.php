@@ -219,8 +219,10 @@
             <li class="nav-item">
               <a href="/" class="nav-link mx-2 active">Home</a>
             </li>
-
-            <li class="nav-item dropdown">
+            <li class="nav-item ">
+              <a href="/category" class="dropdown-item">Course </a>
+            </li>
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="pages"
                 data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
               <ul class="dropdown-menu" aria-labelledby="pages">
@@ -301,7 +303,7 @@
             <li class="nav-item">
               <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
                 class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
-            </li>
+            </li> --}}
           </ul>
 
           <div class="d-none d-lg-flex align-items-center">
@@ -590,7 +592,6 @@
   <section id="teacher" class="padding-medium">
     <div class="container">
       <div class="text-center mb-5">
-       
         <h2 class="display-6 fw-semibold">Meet Our Team</h2>
         <p class="text-secondary">We build CADADDA with professional and love</p>
       </div>
