@@ -220,90 +220,9 @@
               <a href="/" class="nav-link mx-2 active">Home</a>
             </li>
             <li class="nav-item ">
-              <a href="/category" class="dropdown-item">Course </a>
+              <a href="/categories" class="dropdown-item">Course </a>
             </li>
-            {{-- <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="pages"
-                data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-              <ul class="dropdown-menu" aria-labelledby="pages">
-                <li><a href="about.html" class="dropdown-item">About Us<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="instructors.html" class="dropdown-item">Instructors<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="cart.html" class="dropdown-item">Cart<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="wishlist.html" class="dropdown-item">Wishlist<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="checkout.html" class="dropdown-item">Checkout<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="price-plan.html" class="dropdown-item">Price Plan<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="contact.html" class="dropdown-item">Contact<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="faqs.html" class="dropdown-item">FAQs<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="account.html" class="dropdown-item">Account<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="thank-you.html" class="dropdown-item">Thankyou<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="error.html" class="dropdown-item">Error 404<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="styles.html" class="dropdown-item">Styles<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
-                data-bs-toggle="dropdown" aria-expanded="false" >Courses</a>
-              <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="/category" class="dropdown-item">Course<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="/Course" class="dropdown-item">Courses Detail<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="events"
-                data-bs-toggle="dropdown" aria-expanded="false">events</a>
-              <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="event.html" class="dropdown-item">event<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="event-details.html" class="dropdown-item">event details<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="blog"
-                data-bs-toggle="dropdown" aria-expanded="false">blog</a>
-              <ul class="dropdown-menu" aria-labelledby="blog">
-                <li><a href="blog.html" class="dropdown-item">blog<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="single-post.html" class="dropdown-item">single post<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="shop"
-                data-bs-toggle="dropdown" aria-expanded="false">shop</a>
-              <ul class="dropdown-menu" aria-labelledby="shop">
-                <li><a href="shop.html" class="dropdown-item">Shop<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="single-product.html" class="dropdown-item">Single Product<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link mx-2">contact</a>
-            </li>
-            <li class="nav-item">
-              <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
-                class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
-            </li> --}}
+          
           </ul>
 
           <div class="d-none d-lg-flex align-items-center">
@@ -750,13 +669,13 @@
                 <h5 class=" fw-bold mb-4">Quick Links</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">Home</a>
+                    <a href="/" class="footer-link">Home</a>
                   </li>
                   <li class="menu-item mb-2">
                     <a href="#" class="footer-link">About us</a>
                   </li>
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">Courses</a>
+                    <a href="/categories" class="footer-link">Courses</a>
                   </li>
                   <li class="menu-item mb-2">
                     <a href="#" class="footer-link">Blogs</a>
@@ -831,20 +750,20 @@
         <div class="container">
           <div class="row py-3">
             <div class="col-md-6 copyright">
-              <p>© 2024 TemplatesJungle. All rights reserved.</p>
+              <p>© 2024 . All rights reserved.</p>
             </div>
-            <div class="col-md-6 text-md-end">
+            {{-- <div class="col-md-6 text-md-end">
               <p>Free HTML Template by: <a href="https://templatesjungle.com/" target="_blank" class="fw-bold">
                   TemplatesJungle</a> Distributed by: <a href="https://themewagon.com" target="_blank" class="fw-bold">
                     ThemeWagon
                   </a></p>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script>
+<script> 
  document.addEventListener('DOMContentLoaded', () => {
   const sliderContainer = document.querySelector('.slider-container');
   const logoSlider = document.querySelector('.logo-slider');
@@ -869,17 +788,16 @@
   // Clone the logo images to create a continuous sliding effect
   const clonedImages = Array.from(logoImages).map(img => img.cloneNode(true));
   clonedImages.forEach(img => logoSlider.appendChild(img));
-});
+ });
 
 
 
 
+  var sliderTeam = (function(document) {
 
-      var sliderTeam = (function(document) {
+ 'use strict';
 
-'use strict';
-
-var sliderTeams = document.querySelector('.slider--teams'),
+ var sliderTeams = document.querySelector('.slider--teams'),
     list = document.querySelector('#list'),
     listItems = document.querySelectorAll('#list li'),
     nItems = listItems.length,
@@ -1006,18 +924,18 @@ var sliderTeams = document.querySelector('.slider--teams'),
       autoMove(x);
     };
 
-return {
+ return {
   init: init
-};
+ };
 
-})(document);
+ })(document);
 
-window.addEventListener('load', function() {
-'use strict';
-sliderTeam.init();
-});
+ window.addEventListener('load', function() {
+ 'use strict';
+  sliderTeam.init();
+ });
 
-    </script>
+</script>
     
       <script src="../front/js/jquery-1.11.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

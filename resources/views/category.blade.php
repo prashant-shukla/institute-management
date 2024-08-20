@@ -549,59 +549,34 @@
   <section id="teacher" class="padding-medium">
     <div class="container">
       <div class="text-center mb-5">
-       
         <h2 class="display-6 fw-semibold">Meet Our Team</h2>
         <p class="text-secondary">We build CADADDA with professional and love</p>
       </div>
-
-      <div class="row">
-        @foreach($mentors as $mentor)
-        <div class="col mb-5">
-          <div class="team-member position-relative card rounded-4 border-0 shadow-sm p-3">
-            <div class="image-holder zoom-effect rounded-3">
-                <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image"> 
-
-               <ul class="social-links list-unstyled position-absolute">
-                <li>
-                  <a href="#">
-                    <svg class="facebook text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#facebook" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="twitter text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#twitter" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="instagram text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#instagram" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="linkedin text-dark" width="25" height="25" aria-hidden="true">
-                      <use xlink:href="#linkedin" class="text-white"></use>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body p-0">
-              <div class="text-center mt-3">
-                <p class="fw-bold m-0">{{ $mentor->name }}</p>
-                <p class="text-secondary m-0">{{$mentor->short_description}}</p>
-              </div>
-            </div>
-          </div>
+     <div class="team">
+       <div class="slider--teams">
+        <div class="slider--teams__team">
+          <ul id="list" class="cf">
+            @foreach($mentors as $mentor)
+             <li>
+              <figure class="active">
+                <div class="rounded-3 ">
+                  <div>
+                    <img src="{{ url('storage/' . $mentor->image) }}" class="img-fluid rounded-3" alt="image">
+                  </div>
+                </div>
+              <figcaption>
+                  <h2>{{ $mentor->name }}</h2>
+                  <p>{{$mentor->short_description}}</p>
+                </figcaption>
+              </figure>
+             </li>
+            @endforeach
+          </ul>
         </div>
-        @endforeach
+       </div>
+
       </div>
+    </div>
   </section>
 
 
@@ -663,7 +638,7 @@
                 <h5 class=" fw-bold mb-4">Quick Links</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">Home</a>
+                    <a href="/" class="footer-link">Home</a>
                   </li>
                   <li class="menu-item mb-2">
                     <a href="#" class="footer-link">About us</a>
@@ -744,7 +719,7 @@
         <div class="container">
           <div class="row py-3">
             <div class="col-md-6 copyright">
-              <p>© 2024 TemplatesJungle. All rights reserved.</p>
+              <p>© 2024 . All rights reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
               {{-- <p>Free HTML Template by: <a href="https://templatesjungle.com/" target="_blank" class="fw-bold">
@@ -759,6 +734,180 @@
     
     
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+     
+  <script> 
+   document.addEventListener('DOMContentLoaded', () => {
+    const sliderContainer = document.querySelector('.slider-container');
+    const logoSlider = document.querySelector('.logo-slider');
+    const logoImages = document.querySelectorAll('.logo-image');
+    
+    // Calculate the total width of the slider
+    const logoWidth = logoImages[0].offsetWidth;
+    const totalWidth = logoWidth * logoImages.length;
+  
+    // Set the width of the slider to the total width of logos
+    logoSlider.style.width = totalWidth + 'px';
+  
+    // Pause animation on hover
+    sliderContainer.addEventListener('mouseover', () => {
+      logoSlider.style.animationPlayState = 'paused';
+    });
+  
+    sliderContainer.addEventListener('mouseout', () => {
+      logoSlider.style.animationPlayState = 'running';
+    });
+  
+    // Clone the logo images to create a continuous sliding effect
+    const clonedImages = Array.from(logoImages).map(img => img.cloneNode(true));
+    clonedImages.forEach(img => logoSlider.appendChild(img));
+   });
+  
+  
+  
+  
+    var sliderTeam = (function(document) {
+  
+   'use strict';
+  
+   var sliderTeams = document.querySelector('.slider--teams'),
+      list = document.querySelector('#list'),
+      listItems = document.querySelectorAll('#list li'),
+      nItems = listItems.length,
+      nView = 3,
+      autoSlider,
+      current = 0,
+      isAuto = true,
+      acAuto = 2500,
+  
+      init = function() {
+        initWidth();
+        eventInit();
+      },
+  
+      initWidth = function() {
+        list.style.marginLeft = Math.floor(100 / nView) + '%';
+        list.style.width = Math.floor(100 * (nItems / nView)) + '%';
+        listItems.forEach(function(item) {
+          item.style.width = 100 / nItems + '%';
+        });
+        sliderTeams.style.opacity = 1;
+        sliderTeams.style.display = 'block';
+        setTimeout(function() {
+          sliderTeams.style.opacity = 1;
+        }, 1000);
+      },
+  
+      eventInit = function() {
+  
+        window.requestAnimFrame = (function() {
+          return window.requestAnimationFrame       || 
+                 window.webkitRequestAnimationFrame || 
+                 window.mozRequestAnimationFrame    || 
+                 window.oRequestAnimationFrame      || 
+                 window.msRequestAnimationFrame     || 
+                 function(callback) {
+                   window.setTimeout(callback, 1000 / 60);
+                 };
+        })();
+  
+        window.requestInterval = function(fn, delay) {
+          if (!window.requestAnimationFrame && 
+              !window.webkitRequestAnimationFrame && 
+              !window.mozRequestAnimationFrame && 
+              !window.oRequestAnimationFrame && 
+              !window.msRequestAnimationFrame) {
+            return window.setInterval(fn, delay);
+          }
+          var start = new Date().getTime(),
+              handle = {};
+  
+          function loop() {
+            var current = new Date().getTime(),
+                delta = current - start;
+            if (delta >= delay) {
+              fn.call();
+              start = new Date().getTime();
+            }
+            handle.value = requestAnimFrame(loop);
+          }
+          handle.value = requestAnimFrame(loop);
+          return handle;
+        }
+  
+        window.clearRequestInterval = function(handle) {
+          if (window.cancelAnimationFrame) {
+            window.cancelAnimationFrame(handle.value);
+          } else if (window.webkitCancelRequestAnimationFrame) {
+            window.webkitCancelRequestAnimationFrame(handle.value);
+          } else if (window.mozCancelRequestAnimationFrame) {
+            window.mozCancelRequestAnimationFrame(handle.value);
+          } else if (window.oCancelRequestAnimationFrame) {
+            window.oCancelRequestAnimationFrame(handle.value);
+          } else if (window.msCancelRequestAnimationFrame) {
+            window.msCancelRequestAnimationFrame(handle.value);
+          } else {
+            clearInterval(handle);
+          }
+        };
+  
+        listItems.forEach(function(item, i) {
+          item.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            stopMove(i);
+            moveIt(item, i);
+          });
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            stopMove(i);
+            moveIt(item, i);
+          });
+        });
+  
+        autoSlider = requestInterval(autoMove, acAuto);
+      },
+  
+      moveIt = function(obj, x) {
+        var n = x;
+  
+        obj.querySelector('figure').classList.add('active');
+        Array.from(listItems).forEach(function(item) {
+          if (item !== obj) {
+            item.querySelector('figure').classList.remove('active');
+          }
+        });
+  
+        list.style.transform = 'translateX(' + Math.floor((-(100 / nItems)) * n) + '%) translateZ(0)';
+        list.style.transition = 'transform 1000ms cubic-bezier(0.4, 0, 0.26, 1)';
+      },
+  
+      autoMove = function(currentSlide) {
+        if (isAuto) { 
+          current = Math.floor((current + 1) % nItems);
+        } else {
+          current = currentSlide;
+        }
+        // console.log(current);
+        moveIt(listItems[current], current);
+      },
+  
+      stopMove = function(x) {
+        clearRequestInterval(autoSlider);
+        isAuto = false;
+        autoMove(x);
+      };
+  
+   return {
+    init: init
+   };
+  
+   })(document);
+  
+   window.addEventListener('load', function() {
+   'use strict';
+    sliderTeam.init();
+   });
+  
+  </script>
       <script>
         $(document).ready(function() {
           $('.filters li').click(function() {

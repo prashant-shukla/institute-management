@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\CourseSyllabuses;
 use App\Models\CourseTool;
 use App\Models\CourseMentor;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 
@@ -73,10 +74,13 @@ class HomeController extends Controller
     return view('ajax', ['courses' => $courses,'coursecategories'=>$coursecategories,'mentors' => $mentors,'reviews' => $reviews])->render();
   }
 
-  public function Course($id)
+  public function Course( $id)
   {
       // Retrieve the specific course by its ID
-      $course = Course::findOrFail($id);
+    //   dd($slug, $id);
+      $course = Course::where('id', $id)->firstOrFail();
+  
+     
   
       // Fetch related data specific to this course
       $coursementors = CourseMentor::where('course_id', $id)->get();

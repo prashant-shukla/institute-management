@@ -6,6 +6,7 @@ use App\Filament\Resources\ReviewsResource\Pages;
 use App\Filament\Resources\ReviewsResource\RelationManagers;
 use App\Models\Reviews;
 use App\Models\Student;
+use App\Models\Course;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
@@ -40,6 +41,12 @@ class ReviewsResource extends Resource
             })->toArray())
                ->searchable()
                ->required(),
+               Forms\Components\Select::make('course_id')
+               ->label('Course')
+               ->options(Course::all()->pluck('name', 'id'))
+               ->searchable()
+               ->required(),
+           
             Forms\Components\Toggle::make('status')
                ->label('Status')
                ->onColor('success')
