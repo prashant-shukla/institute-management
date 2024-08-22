@@ -19,8 +19,8 @@ class CourseCategoriesResource extends Resource
 {
     protected static ?string $model = CourseCategory::class;
     protected static ?string $navigationGroup = 'Courses';
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = -180;
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
     public static function form(Form $form): Form
     {

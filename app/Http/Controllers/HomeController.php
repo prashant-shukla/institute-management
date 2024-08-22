@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\CourseSyllabuses;
 use App\Models\CourseTool;
 use App\Models\CourseMentor;
+use App\Models\Banner;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
@@ -39,12 +40,15 @@ class HomeController extends Controller
         $mentors = Mentor::all();
         $courses = Course::all();
         $coursecategories = CourseCategory::all();
-
+        $banners = Banner::where('banner_page', 'home')->get();
+// dd($banner[0]->image_url);
         return view('home', [
             'reviews' => $reviews,
             'mentors' => $mentors,
             'coursecategories'=>$coursecategories,
             'courses' => $courses,
+            'banners'=>$banners,
+            
         ]); 
     }
     public function category()
@@ -53,8 +57,10 @@ class HomeController extends Controller
         $coursecategories = CourseCategory::all();
         $mentors = Mentor::all();
         $reviews = Reviews::all();
+        $banners = Banner::where('banner_page', 'categories')->get();
+        // dd($banners[0]->image_url);
         //  dd($courses); // For debugging, remove this line in production
-        return view('category', ['courses' => $courses,'coursecategories'=>$coursecategories,'mentors' => $mentors,'reviews' => $reviews]);
+        return view('category', ['courses' => $courses,'coursecategories'=>$coursecategories,'mentors' => $mentors,'reviews' => $reviews,   'banners'=>$banners,]);
     }
     // In your controller
   public function filterCourses(Request $request) {
@@ -74,20 +80,22 @@ class HomeController extends Controller
     return view('ajax', ['courses' => $courses,'coursecategories'=>$coursecategories,'mentors' => $mentors,'reviews' => $reviews])->render();
   }
 
-  public function Course( $id)
+  public function Course($slug , $id)
   {
+    $slug= $slug;
       // Retrieve the specific course by its ID
-    //   dd($slug, $id);
+    //   dd($id);
       $course = Course::where('id', $id)->firstOrFail();
   
-     
+      $banners = Banner::where('banner_page', 'course')->get();
   
       // Fetch related data specific to this course
       $coursementors = CourseMentor::where('course_id', $id)->get();
       $reviews = Reviews::get()->all();
       $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
       $coursetool = CourseTool::where('course_id', $id)->get();
-  
+//    dd($banners[0]->image_url[0]);
+
       // Pass the specific data to the view
       return view('course', [
           'course' => $course,  // Pass single course object
@@ -95,6 +103,7 @@ class HomeController extends Controller
           'reviews' => $reviews,
           'coursesyllabuses' => $coursesyllabuses,
           'coursetool' => $coursetool,
+          'banners'=>$banners,
       ]);
   }
   

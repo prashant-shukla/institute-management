@@ -32,7 +32,7 @@ class StudentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationGroup = 'Users';
-    
+    protected static ?int $navigationSort = -40;
 
     public static function form(Form $form): Form
     {

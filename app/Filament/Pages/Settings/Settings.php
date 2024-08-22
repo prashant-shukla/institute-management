@@ -13,6 +13,8 @@ use Outerweb\FilamentSettings\Filament\Pages\Settings as BaseSettings;
 class Settings extends BaseSettings
 {
     use HasPageShield;
+    protected static ?string $navigationGroup = 'Settings';
+    protected static ?int $navigationSort = -0;
     public function schema(): array|Closure
     {
         return [
@@ -21,6 +23,7 @@ class Settings extends BaseSettings
                     Tabs\Tab::make('General')
                         ->schema([
                             TextInput::make('general.institute_name'),
+                           
                             FileUpload::make('general.institute_logo')->directory('setting_images'),
                             FileUpload::make('general.institute_favicon')->directory('setting_images'),
                         ]),

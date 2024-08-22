@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Jubilee - Free Online Course HTML Website Template</title>
+  <title>Online Course </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +15,15 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-<link rel="stylesheet" type="text/css" href="../front/icomoon/icomoon.css">
-
+{{-- <link rel="stylesheet" type="text/css" href="../front/icomoon/icomoon.css"> --}}
+<link rel="stylesheet" href="{{ asset('front/icomoon/icomoon.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/vendor.css') }}">
+<link rel="stylesheet" href="{{ asset('front/style.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="../front/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="../front/style.css">
+{{-- <link rel="stylesheet" type="text/css" href="../front/css/vendor.css">
+<link rel="stylesheet" type="text/css" href="../front/style.css"> --}}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -192,8 +194,12 @@
   <nav class="main-menu d-flex navbar navbar-expand-lg p-2 py-3 p-lg-4 py-lg-4 ">
     <div class="container-fluid">
       <div class="main-logo d-lg-none">
-        <a href="index.html">
-          <img src="../front/images/logo.png" alt="logo" class="img-fluid">
+        <a href="/">
+          @if(setting('general.institute_logo') != null)
+          <img src="{{ '/storage'.'/' . setting('general.institute_logo') }}" alt="logo" class="img-fluid">
+      @else
+          <span>{{ setting('general.institute_name') }}</span>
+      @endif
         </a>
       </div>
 
@@ -211,7 +217,8 @@
         <div class="offcanvas-body justify-content-between">
           <div class="main-logo">
             <a href="index.html">
-              <img src="../front/images/logo.png" alt="logo" class="img-fluid">
+              {{-- <img src="../front/images/logo.png" alt="logo" class="img-fluid"> --}}
+              <img src="{{ asset('front/images/logo.png') }}" alt="logo">
             </a>
           </div>
 
@@ -305,19 +312,19 @@
       </div>
     </div>
   </nav>
-
+  @foreach($banners as $banner)
   <section id="hero" >
-    <div class="container d-flex align-items-center justify-content-center" style="background-image: url('/front/images/banner2.jpeg'); background-repeat: no-repeat; background-size: cover; background-position: center;  height: 300px;">
+    <div class="container d-flex align-items-center justify-content-center" style="background-image: url({{'/storage'.'/'.$banner->image_url[0]}}); background-repeat: no-repeat; background-size: cover; background-position: center;  height: 300px;">
         <div class="row align-items-center  ">
             <div class="col text-center ">
-                <h2 class="  text-light">Courses-details</h2>
+                <h2 class="  text-light">{{$banner->title}}</h2>
             
             </div>
         </div>    
     </div>
   </section>
 
-
+@endforeach 
 
 
 
@@ -621,7 +628,8 @@
             <div class="col-sm-6 col-lg-4 my-3">
               <div class="footer-menu">
                 <a href="index.html">
-                  <img src="../front/images/logo.png" alt="logo" class="img-fluid">
+                  {{-- <img src="../front/images/logo.png" alt="logo" class="img-fluid"> --}}
+                  <img src="{{ asset('front/images/logo.png') }}" alt="logo">
                 </a>
                 <div class="social-links mt-4">
                   <ul class="d-flex list-unstyled ">
@@ -937,13 +945,15 @@
 
 </script>
     
-      <script src="../front/js/jquery-1.11.0.min.js"></script>
+<script src="{{ asset('front/js/jquery-1.11.0.min.js') }}"></script>
+<script src="{{ asset('front/js/plugins.js') }}"></script>
+<script src="{{ asset('front/js/script.js') }}"></script>
+
       <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-      <script src="../front/js/plugins.js"></script>
-      <script src="../front/js/script.js"></script>
+   
       <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
     </body>

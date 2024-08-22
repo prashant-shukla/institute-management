@@ -19,7 +19,7 @@ class Banner extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'banner_category_id',
+        'banner_page',
         'sort',
         'title',
         'description',
@@ -30,13 +30,15 @@ class Banner extends Model
         'start_date',
         'end_date',
     ];
+    protected $casts = [
+        'is_visible' => 'boolean',
+        'image_url' => 'array', // Casts the image_url field as an array
+    ];
 
     /**
      * @var array<string, string>
      */
-    protected $casts = [
-        'is_visible' => 'boolean',
-    ];
+    
 
     public function category(): BelongsTo
     {

@@ -21,7 +21,7 @@ class InquiriesResource extends Resource
     protected static ?string $navigationGroup = 'Users';
 
     protected static ?string $navigationIcon = 'heroicon-o-phone';
-
+    protected static ?int $navigationSort = -30;
     public static function form(Form $form): Form
     {
         return $form

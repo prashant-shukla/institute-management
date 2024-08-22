@@ -19,17 +19,21 @@ class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
     protected static ?string $navigationGroup = 'CMS';
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = -150;
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('banner_category_id')
-                ->options(BannerCategory::all()->pluck('name', 'id'))
-                ->searchable()
-                ->required(),
+            Forms\Components\Select::make('banner_page')
+                ->options([
+                    'home' => 'Home',
+                    'categories' => 'Categories',
+                    'course' => 'Course',
+                    'about us' => 'About us',
+                    'contact us' => 'Contact us',
+                ])->required(),
             Forms\Components\TextInput::make('sort')
                 ->required()
                 ->numeric()
@@ -38,7 +42,8 @@ class BannerResource extends Resource
                 ->maxLength(255),
             Forms\Components\TextInput::make('description')
                 ->maxLength(500),
-                Forms\Components\FileUpload::make('media')
+                Forms\Components\FileUpload::make('image_url')
+                ->directory('banner_images')
                 ->multiple()
                 ->reorderable()
                 ->required(),
@@ -67,10 +72,7 @@ class BannerResource extends Resource
                     ->lineClamp(2)
                     ->description(fn (Model $record): string => \Illuminate\Support\Str::limit($record->description, 50) ?? '')->wrap()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->searchable()
-                    ->alignCenter()
-                    ->lineClamp(1),
+              
                 Tables\Columns\IconColumn::make('is_visible')->label('Active')
                     ->boolean()
                     ->alignCenter(),

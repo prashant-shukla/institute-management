@@ -211,7 +211,12 @@
         <div class="offcanvas-body justify-content-between">
           <div class="main-logo">
             <a href="/">
-              <img src="front/images/logo.png" alt="logo" class="img-fluid">
+              {{-- <img src="front/images/logo.png" alt="logo" class="img-fluid"> --}}
+              @if(setting('general.institute_logo') != null)
+                  <img src="{{ '/storage'.'/' . setting('general.institute_logo') }}" alt="logo" class="img-fluid">
+              @else
+                  <span>{{ setting('general.institute_name') }}</span>
+              @endif
             </a>
           </div>
 
@@ -385,13 +390,14 @@
       </div>
     </div>
   </nav>
-
-  <section id="hero" style="background-image:url(front/images/billboard-bg.png); background-repeat: no-repeat; ">
+  @foreach($banners as $banner)
+  <section id="hero" style="background-image:url({{'storage/'.$banner->image_url[0]}}); background-repeat: no-repeat; ">
+    
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6 pe-5 mt-5 mt-md-0">
-          <h2 class="display-1 text-uppercase">Master Your Skills Online</h2>
-          <p class="fs-4 my-4 pb-2">Online Courses Taught by Industry Titans!</p>
+          <h2 class="display-1 text-uppercase">{{$banner->title}}</h2>
+          <p class="fs-4 my-4 pb-2">{{$banner->description}}</p>
           <div>
             <form id="form" class="d-flex align-items-center position-relative ">
               <input type="text" name="email" placeholder="what are you trying to learn?"
@@ -410,7 +416,7 @@
       </div>
     </div>
   </section>
-
+  @endforeach 
   <section id="features">
     <div class="feature-box container">
       <div class="row ">

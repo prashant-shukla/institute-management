@@ -33,7 +33,7 @@ class StudyMaterialResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Institute';
     protected static ?string $navigationLabel = 'Study Materials';
-    
+    protected static ?int $navigationSort = -110;
 
     public static function form(Form $form): Form
     {
@@ -75,7 +75,13 @@ class StudyMaterialResource extends Resource
                         ->required()
                         ->acceptedFileTypes(['audio/mpeg', 'audio/wav', 'audio/aac', 'audio/ogg'])
                         ->hidden(fn (Get $get): bool => $get('file_type') != 'audio'),
-                         ]),
+                         
+                    FileUpload::make('file_path')
+                         ->label('Upload Video')
+                         ->required()
+                         ->acceptedFileTypes(['video/mp4', 'video/avi', 'video/mpeg', 'video/quicktime', 'video/x-ms-wmv', 'video/x-matroska', 'video/webm', 'video/ogg'])
+                         ->hidden(fn (Get $get): bool => $get('file_type') != 'video'),
+                     ]),
                 Select::make('uploaded_by')
                         ->label('Uploaded By')
                         ->options(Staff::with('user')->get()->mapWithKeys(function ($staff) {
@@ -88,9 +94,9 @@ class StudyMaterialResource extends Resource
                         })->toArray())
                         ->searchable()
                         ->required(),
-                   Forms\Components\DatePicker::make('upload_date')
-                    ->label('Upload Date')
-                    ->disabled(),
+                //    Forms\Components\DatePicker::make('upload_date')
+                //     ->label('Upload Date')
+                //     ->disabled(),
                 
                     Forms\Components\Select::make('course_id')
                     ->label('Course')
