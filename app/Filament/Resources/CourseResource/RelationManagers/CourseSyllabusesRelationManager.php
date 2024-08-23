@@ -31,11 +31,13 @@ class CourseSyllabusesRelationManager extends RelationManager
                     ->required(),
                 RichEditor::make('description')
                     ->label('Description')
-                    ->nullable(),
+                    ->nullable()
+                    ->columnSpan('full'),
                 TextInput::make('order')
                     ->label('Order')
                     ->nullable()
-                    ->numeric(),
+                    ->numeric()
+                    ->columnSpan('full'),
                 Repeater::make('extra_info')
                     ->schema([
                         TextInput::make('name'),

@@ -46,7 +46,6 @@ class CourseResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Name')
-                ->columnSpanFull()
                 ->required(),
                 Forms\Components\TextInput::make('slug')
                 ->label('Slug')
@@ -62,14 +61,16 @@ class CourseResource extends Resource
             
                 Forms\Components\TextInput::make('sub_title')
                 ->label('Sub Title'),
-                
-                Forms\Components\Toggle::make('popular_course')
-                ->label('Is Popular Course')
-                ->required(),
+                Forms\Components\TextInput::make('status')
+                ->label('Status')
+                ->default('active'),
+               
                 Forms\Components\FileUpload::make('image')
-                ->label('Image'),
+                ->label('Image')
+                ->columnSpan('full'),
                 Forms\Components\MarkdownEditor::make('description')
-                ->label('Description'),
+                ->label('Description')
+                ->columnSpan('full'),
                 TextInput::make('site_title')
                 ->label('Site Title')
                 ->nullable(),
@@ -110,13 +111,13 @@ class CourseResource extends Resource
                             ->required()
                             ->live(onBlur: true),
                     ])
-                    ->columns(2)
+                    ->columnSpan('full')
                     ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
 
-                TextInput::make('status')
-                    ->label('Status')
-                    ->default('active'),
-            ]),
+                    Forms\Components\Toggle::make('popular_course')
+                    ->label('Is Popular Course')
+                    ->required(),
+            ])->columns(2),
                 
             Section::make('SCO')
             ->schema([

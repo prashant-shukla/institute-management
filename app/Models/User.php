@@ -45,6 +45,10 @@ class User extends Authenticatable
     {
         return $this->getAttributeValue('username');
     }
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
     /**
      * Get the attributes that should be cast.
      *

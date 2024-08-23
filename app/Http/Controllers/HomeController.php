@@ -91,7 +91,7 @@ class HomeController extends Controller
   
       // Fetch related data specific to this course
       $coursementors = CourseMentor::where('course_id', $id)->get();
-      $reviews = Reviews::get()->all();
+      $reviews = Reviews::where('course_id', $id)->get();
       $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
       $coursetool = CourseTool::where('course_id', $id)->get();
 //    dd($banners[0]->image_url[0]);

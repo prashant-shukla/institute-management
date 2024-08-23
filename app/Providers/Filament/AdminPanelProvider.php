@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Outerweb\FilamentSettings\Filament\Plugins\FilamentSettingsPlugin;
 use App\Filament\Pages\Settings\Settings;
+use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -59,7 +60,8 @@ class AdminPanelProvider extends PanelProvider
                 FilamentSettingsPlugin::make()->pages([
                     Settings::class,
                 ]),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                FilamentFabricatorPlugin::make(),
             ]);
     }
 }

@@ -15,6 +15,7 @@ class Reviews extends Model
         'id',
         'student_id',
         'review',
+        'course_id',
         'status',
     ];
     public function student(): BelongsTo
