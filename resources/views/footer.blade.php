@@ -73,7 +73,7 @@
                     <a href="#" class="footer-link">Blogs</a>
                   </li>
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">Contact</a>
+                    <a href="/contact" class="footer-link">Contact</a>
                   </li>
                 </ul>
               </div>

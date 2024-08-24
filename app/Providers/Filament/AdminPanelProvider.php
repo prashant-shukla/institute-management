@@ -20,6 +20,10 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Outerweb\FilamentSettings\Filament\Plugins\FilamentSettingsPlugin;
 use App\Filament\Pages\Settings\Settings;
 use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
+use TomatoPHP\FilamentMenus\FilamentMenuLoader;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -62,6 +66,10 @@ class AdminPanelProvider extends PanelProvider
                 ]),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentFabricatorPlugin::make(),
-            ]);
+                \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar']),
+                \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
+            ])
+           ;
+            
     }
 }

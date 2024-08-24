@@ -5,7 +5,7 @@
         <span class="badge text-white bg-secondary">New</span>
       </div>
       <div class="card rounded-4 border-0 shadow-sm p-3 position-relative">
-        <a href="courses-details.html">
+        <a href="{{ url('/course'.'/'.$course->slug.'/'.$course->id)}}">
           <img src="{{ $course->image ? url('storage/' . $course->image) : 'front/images/item1.jpg' }}" class="img-fluid rounded-3" alt="image">
         </a>
      <div class="card-body p-0">
@@ -18,7 +18,7 @@
         <p class="text-black-50 fw-bold text-uppercase m-0">{{$course->course_duration}}</p>
        </div>
       </div>
-      <a href="courses-details.html">
+      <a href="{{ url('/course'.'/'.$course->slug.'/'.$course->id)}}">
        <h5 class="course-title py-2 m-0">{{$course->site_title}}</h5>
       </a>
       <div class="card-text">

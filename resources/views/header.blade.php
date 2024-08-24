@@ -308,6 +308,9 @@
               <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
                 class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
             </li> --}}
+            <li class="nav-item">
+              <a href="/contact" class="nav-link mx-2">contact</a>
+            </li>
           </ul>
 
           <div class="d-none d-lg-flex align-items-center">

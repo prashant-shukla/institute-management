@@ -7,3 +7,4 @@ Route::get('/', [HomeController::class, 'Home']);
 Route::get('/categories', [HomeController::class, 'category'])->name('category');
 Route::get('/filter-courses', [HomeController::class, 'filterCourses'])->name('filter.courses');
 Route::get('/course/{slug}/{id}', [HomeController::class, 'Course'])->name('course');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');

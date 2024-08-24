@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.9",
         "outerweb/filament-settings": "^1.2",
         "spatie/laravel-permission": "^6.9",
+        "tomatophp/filament-menus": "^1.0",
         "z3d0x/filament-fabricator": "^2.2"
     },
     "require-dev": {

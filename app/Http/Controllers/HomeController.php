@@ -106,5 +106,13 @@ class HomeController extends Controller
           'banners'=>$banners,
       ]);
   }
+  public function contact()
+  {
+      
+      $banners = Banner::where('banner_page', 'contact us')->get();
+    
+     return view('contact', ['banners' => $banners,]);
+  
+ }
   
 }

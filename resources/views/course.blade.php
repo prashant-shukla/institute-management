@@ -397,9 +397,6 @@
     </div>
   </section>
   
-  
-  
-
   <section class="py-lg-5 py-4 bg-light ">
     <div class="container">
         <div class="d-lg-flex justify-content-between align-items-start text-dark mb-lg-5 mb-4">
@@ -507,13 +504,6 @@
     </div>
     
 </section>
-
-
-
-
-
- 
-
 
   <section id="teacher" class="padding-medium">
     <div class="container">
@@ -689,7 +679,7 @@
                     <a href="#" class="footer-link">Blogs</a>
                   </li>
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">Contact</a>
+                    <a href="/contact" class="footer-link">Contact</a>
                   </li>
                 </ul>
               </div>
