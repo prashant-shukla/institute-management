@@ -226,6 +226,9 @@
             <li class="nav-item">
               <a href="/" class="nav-link mx-2 active">Home</a>
             </li>
+            <li class="nav-item">
+              <a href="/about-us" class="nav-link mx-2">About Us</a>
+            </li>
             <li class="nav-item ">
               <a href="/categories" class="dropdown-item">Course </a>
             </li>
@@ -670,7 +673,7 @@
                     <a href="/" class="footer-link">Home</a>
                   </li>
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">About us</a>
+                    <a href="/about-us" class="footer-link">About us</a>
                   </li>
                   <li class="menu-item mb-2">
                     <a href="/categories" class="footer-link">Courses</a>

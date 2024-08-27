@@ -31,6 +31,7 @@ class BannerResource extends Resource
                     'home' => 'Home',
                     'categories' => 'Categories',
                     'course' => 'Course',
+                    'event'=>'Event',
                     'about us' => 'About us',
                     'contact us' => 'Contact us',
                 ])->required(),

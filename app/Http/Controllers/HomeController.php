@@ -11,6 +11,7 @@ use App\Models\CourseSyllabuses;
 use App\Models\CourseTool;
 use App\Models\CourseMentor;
 use App\Models\Banner;
+use App\Models\Events;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
@@ -114,5 +115,21 @@ class HomeController extends Controller
      return view('contact', ['banners' => $banners,]);
   
  }
+ public function about()
+  {
+      
+      $banners = Banner::where('banner_page', 'about us')->get();
+      $mentors = Mentor::all();
+     return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors,]);
+  
+ }
+ public function event()
+ {
+     
+     $banners = Banner::where('banner_page', 'event')->get();
+     $events = Events::all();
+    return view('event', ['banners' => $banners, 'events' => $events,]);
+ 
+}
   
 }

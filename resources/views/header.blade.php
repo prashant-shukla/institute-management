@@ -222,8 +222,12 @@
 
           <ul class="navbar-nav menu-list list-unstyled align-items-lg-center d-flex gap-md-3 mb-0">
             <li class="nav-item">
-              <a href="/" class="nav-link mx-2 active">Home</a>
+              <a href="/" class="nav-link mx-2 ">Home</a>
             </li>
+            <li class="nav-item">
+              <a href="/about-us" class="nav-link mx-2">About Us</a>
+            </li>
+           
 {{-- 
             <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="pages"
@@ -255,18 +259,20 @@
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
               </ul>
             </li> --}}
-
-            <li class="nav-item ">
+            <li class="nav-item">
+              <a href="/categories" class="nav-link mx-2">Courses</a>
+            </li>
+            {{-- <li class="nav-item ">
                 <a href="/categories" class="dropdown-item">Course </a>
-              {{-- <a  class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
-                data-bs-toggle="dropdown" aria-expanded="false">Courses</a> --}}
-              {{-- <ul class="dropdown-menu" aria-labelledby="courses">
+              <a  class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
+                data-bs-toggle="dropdown" aria-expanded="false">Courses</a> 
+              <ul class="dropdown-menu" aria-labelledby="courses">
                 <li><a href="/category" class="dropdown-item">Course<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
                 <li><a href="/course" class="dropdown-item">Courses Detail<span
                       class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul> --}}
-            </li>
+              </ul>
+            </li> --}}
 
             {{-- <li class="nav-item dropdown">
               <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="events"
@@ -308,6 +314,9 @@
               <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
                 class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
             </li> --}}
+            <li class="nav-item">
+              <a href="/event" class="nav-link mx-2">Events</a>
+            </li>
             <li class="nav-item">
               <a href="/contact" class="nav-link mx-2">contact</a>
             </li>

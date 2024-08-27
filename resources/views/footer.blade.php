@@ -64,13 +64,13 @@
                     <a href="/" class="footer-link">Home</a>
                   </li>
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">About us</a>
+                    <a href="/about-us" class="footer-link">About us</a>
                   </li>
                   <li class="menu-item mb-2">
                     <a href="#" class="footer-link">Courses</a>
                   </li>
                   <li class="menu-item mb-2">
-                    <a href="#" class="footer-link">Blogs</a>
+                    <a href="/event" class="footer-link">Events</a>
                   </li>
                   <li class="menu-item mb-2">
                     <a href="/contact" class="footer-link">Contact</a>
