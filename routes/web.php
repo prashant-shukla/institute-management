@@ -10,3 +10,4 @@ Route::get('/course/{slug}/{id}', [HomeController::class, 'Course'])->name('cour
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/about-us', [HomeController::class, 'about'])->name('about');
 Route::get('/event', [HomeController::class, 'event'])->name('event');
+Route::post('/register-event', [App\Http\Controllers\EventRegistrationController::class, 'store'])->name('event.register');

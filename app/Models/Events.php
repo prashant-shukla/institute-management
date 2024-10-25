@@ -23,4 +23,15 @@ class Events extends Model
         'meta_keyword',
         'meta_description',
     ];
+    // In your Event model
+public function getFormattedStartDateAttribute()
+{
+    return \Carbon\Carbon::parse($this->start_date)->format('Y-m-d');
+}
+
+public function getFormattedEndDateAttribute()
+{
+    return \Carbon\Carbon::parse($this->end_date)->format('Y-m-d');
+}
+
 }

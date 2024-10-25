@@ -27,10 +27,11 @@ class Course extends Model
     {
         return $this->hasMany(CourseSyllabuses::class);
     }
-    public function coursecategory(): BelongsTo
+    public function courseCategory(): BelongsTo
     {
-        return $this->belongsTo(CourseCategory::class, 'id');
+        return $this->belongsTo(CourseCategory::class, 'course_categories_id'); // Assuming this is the correct foreign key
     }
+    
    
 
     public function mentors(): BelongsToMany

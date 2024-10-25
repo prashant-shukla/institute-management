@@ -280,6 +280,53 @@ a {
   padding-top: 11rem;
   padding-bottom: 8rem;
 }
+.timeline {
+  position: relative;
+  padding-left: 40px; /* Adjust to fit your layout */
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 0px;
+}
+
+.timeline-date {
+  position: absolute;
+  left: -96px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  top: 50%;
+}
+
+.timeline-date .date {
+  font-weight: bold;
+  color: red;
+}
+
+.timeline-date::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: red;
+  top: 50%;
+  right: -19px;
+  transform: translateY(-50%);
+}
+
+.timeline-bar {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: red;
+  left: 6px;
+  top: 0;
+  z-index: -1;
+}
+
 
 @media only screen and (max-width: 1140px) {
   .padding-large {
