@@ -1050,6 +1050,7 @@ tool {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  margin-top: 10px;
   background: url(images/bg.jpg) var(--bs-primary-bg-subtle)  no-repeat center;
 }
 .slider-wrapper {

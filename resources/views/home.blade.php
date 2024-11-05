@@ -223,26 +223,23 @@
                         @foreach ($reviews as $review)
                             <div class="swiper-slide pe-md-5">
                                 <div class="my-4">
-                                    <p class="text-muted">{{ $review->review }} </p>
+                                    <p class="text-muted">{{ $review->review }}</p>
                                     <div class="row">
-                                        <div class="col-3"> <img src="front/images/reviwer1.jpg" alt="img"
-                                                class="img-fluid rounded-circle">
+                                        <div class="col-3">
+                                            <img src="{{ url('storage/' . $review->student->photo) }}" alt="Reviewer Image" class="img-fluid rounded-circle">
                                         </div>
                                         <div class="col-9">
-                                            {{-- ->user->firstname ->user->lastname --}}
-                                            {{-- {{dd( $review->student_id)}} --}}
-                                            {{-- {{$review->student_id}} --}}
                                             <h5 class="m-0 mt-2">
-                                                {{ $review->student->user->firstname }}{{ $review->student->user->lastname }}
+                                                {{ $review->student->user->firstname }} {{ $review->student->user->lastname }}
                                             </h5>
                                             <p class="text-muted">Web Developer</p>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
+                    
 
                     <div class="swiper-pagination"></div>
 
