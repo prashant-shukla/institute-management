@@ -117,38 +117,32 @@
 
 
 
-<section id="teacher" class="padding-medium">
+
+<section id="teachers" class="padding-medium">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="display-6 fw-semibold">Meet Our Team</h2>
             <p class="text-secondary">We build CADADDA with professional and love</p>
         </div>
-        <div class="team">
-            <div class="slider--teams">
-                <div class="slider--teams__team">
-                    <ul id="list" class="cf">
-                        @foreach ($mentors as $mentor)
-                            <li>
-                                <figure class="active">
-                                    <div class="rounded-3 ">
-                                        <div>
-                                            <img src="{{ url('storage/' . $mentor->image) }}"
-                                                class="img-fluid rounded-3" alt="image">
-                                        </div>
-                                    </div>
-                                    <figcaption>
-                                        <h2>{{ $mentor->name }}</h2>
-                                        <p>{{ $mentor->short_description }}</p>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+     <div class="container swiper">
+      <div class="slider-wrapper">
+        <div class="card-list swiper-wrapper">
+            @foreach ($mentors as $mentor)
+            <div class="card-item swiper-slide">
+                <img src="{{ url('storage/' . $mentor->image) }}" alt="User Image" class="user-image">
+                <h2 class="user-name">{{  $mentor->name  }}</h2>
+                <p class="user-profession">{{ $mentor->short_description }}</p>
+               
             </div>
-
+            @endforeach
         </div>
-    </div>
+     <!-- Swiper Pagination and Navigation Buttons -->
+     <div class="swiper-pagination"></div>
+     <div class="swiper-button-prev"></div>
+     <div class="swiper-button-next"></div>
+   </div>
+  </div>
+ </div>
 </section>
 
 

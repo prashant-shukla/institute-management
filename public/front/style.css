@@ -1045,149 +1045,99 @@ tool {
   margin: 10px;
 }
 
-
-.slide {
-  height: 100px;
-  width: 250px;
+#teachers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url(images/bg.jpg) var(--bs-primary-bg-subtle)  no-repeat center;
+}
+.slider-wrapper {
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto 2px;
 }
 
-/* Ease */
-.easeInOutBack {
-  cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.easeOutBack {
-  cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.easeInOutSine {
-  cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
-
-ß
-
-
-
-ul li {
-  list-style-type: none;
+.card-list .card-item {
+    height: auto;
+    color: #fff;
+    user-select: none;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    backdrop-filter: blur(30px);
+    background: rgb(74 103 187 / 30%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.slider--teams {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  /* max-width: 1140px; */
-  opacity: 0;
-  transform: translate(-50%, -10%);
+.card-list .card-item .user-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 40px;
+    border: 3px solid #fff;
+    padding: 4px;
 }
 
-.slider--teams .slider--teams__team {
-  position: relative;
-  overflow: hidden;
+.card-list .card-item .user-profession {
+    font-size: 1.15rem;
+    color: #fff;
+    font-weight: 500;
+    margin: 14px 0 40px;
 }
 
-#list {
-  position: relative;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+.card-list .card-item .message-button {
+    font-size: 1.25rem;
+    padding: 10px 35px;
+    color: #030728;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid transparent;
+    transition: 0.2s ease;
 }
 
-#list li {
-  position: relative;
-  display: inline-block;
-  float: left;
-  text-align: center;
+.card-list .card-item .message-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #fff;
+    color: #fff;
 }
 
-#list li figure {
-  cursor: pointer;
-  margin: 1em;
-  opacity: 0.5;
-  backface-visibility: hidden;
-  transition: transform 450ms cubic-bezier(0.445, 0.05, 0.55, 0.95), opacity 450ms ease-in-out;
-  transform: scale(0.5) translateZ(0px);
+.slider-wrapper .swiper-pagination-bullet {
+    background: #fff;
+    height: 13px;
+    width: 13px;
+    opacity: 0.5;
 }
 
-#list li figure:hover {
-  opacity: 0.8;
-  transform: scale(0.6) translateZ(0px);
+.slider-wrapper .swiper-pagination-bullet-active {
+    opacity: 1;
 }
 
-#list li figure:active {
-  opacity: 1;
-  transform: scale(0.7) translateZ(0px);
+.slider-wrapper .swiper-button-prev, 
+.slider-wrapper .swiper-button-next {
+    color: #fff;
+    margin-top: -55px;
+    transition: 0.2s ease;
 }
 
-#list li figure > div {
-  border-radius: 5px;
-  position: relative;
-  margin: 2rem auto;
-  width: 200px;
-  height: 200px;
-  transform: rotate(45deg) translateZ(0px);
+.slider-wrapper .swiper-button-prev:hover, 
+.slider-wrapper .swiper-button-next:hover {
+    color: #4658ff;
 }
 
-#list li figure > div > div {
-  /* background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/953/teams.jpg) no-repeat;
-  background-size: cover;
-  background-position: 0px 0px; */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 170px;
-  height: 170px;
-  transform: rotate(-45deg) translate(0%, -70%);
+@media (max-width: 768px) {
+    .slider-wrapper {
+        margin: 0 10px 40px;
+    }
+
+    .swiper-button-prev, 
+    .swiper-button-next {
+        display: none;
+    }
 }
 
-#list li figure figcaption h2 {
-  color: #333;
-  font-size: 1.6rem;
-  font-weight: 800;
-}
-
-#list li figure figcaption p {
-  color: #666;
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-#list li:nth-child(1) figure > div > div {
-  background-position: 0px 0px !important;
-}
-
-#list li:nth-child(2) figure > div > div {
-  background-position: 0px 20% !important;
-}
-
-#list li:nth-child(3) figure > div > div {
-  background-position: 0px 40% !important;
-}
-
-#list li:nth-child(4) figure > div > div {
-  background-position: 0px 60% !important;
-}
-
-#list li:nth-child(5) figure > div > div {
-  background-position: 0px 80% !important;
-}
-
-#list li:nth-child(6) figure > div > div {
-  background-position: 0px 100% !important;
-}
-
-.active {
-  opacity: 1 !important;
-  transform: scale(1) translateZ(0px) !important;
-}
-
-.cf:before,
-.cf:after {
-  content: " ";
-  display: table;
-}
-
-.cf:after {
-  clear: both;
-}
-
-.cf {
-  *zoom: 1;
-}

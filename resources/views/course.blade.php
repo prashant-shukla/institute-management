@@ -445,7 +445,7 @@
                 <button class="btn btn-primary  py-3 px-4 fw-bold rounded-3 shadow-sm">Download Curriculum</button>
             </div>
             <div class="mb-5 d-flex  ">
-                <div class="d-flex col-12 detel justify-content-between border border-dark align-self-center p-2 ">
+                <div class="d-flex  flex-wrap col-12 detel justify-content-between border border-dark align-self-center p-2 ">
                     <div class="d-flex align-items-center py-2 ">
 
                         <img src="https://d2kr1rbctelohj.cloudfront.net/images/icons/duration-icon.svg" alt="duration"
@@ -551,42 +551,34 @@
 
     </section>
 
-    <section id="teacher" class="padding-medium">
+
+    <section id="teachers" class="padding-medium">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="display-6 fw-semibold">Meet Our Team</h2>
                 <p class="text-secondary">We build CADADDA with professional and love</p>
             </div>
-            <div class="team">
-                <div class="slider--teams">
-                    <div class="slider--teams__team">
-                        <ul id="list" class="cf">
-                            @foreach ($coursementors as $coursementor)
-                                <li>
-                                    <figure class="active">
-                                        <div class="rounded-3 ">
-                                            <div>
-                                                <img src="{{ url('storage/' . $coursementor->mentor->image) }}"
-                                                    class="img-fluid rounded-3" alt="image">
-                                            </div>
-                                        </div>
-                                        <figcaption>
-                                            <h2>{{ $coursementor->mentor->name }}</h2>
-                                            <p>{{ $coursementor->mentor->short_description }}</p>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+         <div class="container swiper">
+          <div class="slider-wrapper">
+            <div class="card-list swiper-wrapper">
+                @foreach ($coursementors as $coursementor)
+                <div class="card-item swiper-slide">
+                    <img src="{{ url('storage/' . $coursementor->mentor->image) }}" alt="User Image" class="user-image">
+                    <h2 class="user-name">{{ $coursementor->mentor->name }}</h2>
+                    <p class="user-profession">{{ $coursementor->mentor->short_description }}</p>
+                   
                 </div>
-
+                @endforeach
             </div>
+    
+            <!-- Swiper Pagination and Navigation Buttons -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+         </div>
         </div>
     </section>
-
-
-
 
 
 
@@ -842,150 +834,6 @@
             clonedImages.forEach(img => logoSlider.appendChild(img));
         });
 
-
-
-
-        var sliderTeam = (function(document) {
-
-            'use strict';
-
-            var sliderTeams = document.querySelector('.slider--teams'),
-                list = document.querySelector('#list'),
-                listItems = document.querySelectorAll('#list li'),
-                nItems = listItems.length,
-                nView = 3,
-                autoSlider,
-                current = 0,
-                isAuto = true,
-                acAuto = 2500,
-
-                init = function() {
-                    initWidth();
-                    eventInit();
-                },
-
-                initWidth = function() {
-                    list.style.marginLeft = Math.floor(100 / nView) + '%';
-                    list.style.width = Math.floor(100 * (nItems / nView)) + '%';
-                    listItems.forEach(function(item) {
-                        item.style.width = 100 / nItems + '%';
-                    });
-                    sliderTeams.style.opacity = 1;
-                    sliderTeams.style.display = 'block';
-                    setTimeout(function() {
-                        sliderTeams.style.opacity = 1;
-                    }, 1000);
-                },
-
-                eventInit = function() {
-
-                    window.requestAnimFrame = (function() {
-                        return window.requestAnimationFrame ||
-                            window.webkitRequestAnimationFrame ||
-                            window.mozRequestAnimationFrame ||
-                            window.oRequestAnimationFrame ||
-                            window.msRequestAnimationFrame ||
-                            function(callback) {
-                                window.setTimeout(callback, 1000 / 60);
-                            };
-                    })();
-
-                    window.requestInterval = function(fn, delay) {
-                        if (!window.requestAnimationFrame &&
-                            !window.webkitRequestAnimationFrame &&
-                            !window.mozRequestAnimationFrame &&
-                            !window.oRequestAnimationFrame &&
-                            !window.msRequestAnimationFrame) {
-                            return window.setInterval(fn, delay);
-                        }
-                        var start = new Date().getTime(),
-                            handle = {};
-
-                        function loop() {
-                            var current = new Date().getTime(),
-                                delta = current - start;
-                            if (delta >= delay) {
-                                fn.call();
-                                start = new Date().getTime();
-                            }
-                            handle.value = requestAnimFrame(loop);
-                        }
-                        handle.value = requestAnimFrame(loop);
-                        return handle;
-                    }
-
-                    window.clearRequestInterval = function(handle) {
-                        if (window.cancelAnimationFrame) {
-                            window.cancelAnimationFrame(handle.value);
-                        } else if (window.webkitCancelRequestAnimationFrame) {
-                            window.webkitCancelRequestAnimationFrame(handle.value);
-                        } else if (window.mozCancelRequestAnimationFrame) {
-                            window.mozCancelRequestAnimationFrame(handle.value);
-                        } else if (window.oCancelRequestAnimationFrame) {
-                            window.oCancelRequestAnimationFrame(handle.value);
-                        } else if (window.msCancelRequestAnimationFrame) {
-                            window.msCancelRequestAnimationFrame(handle.value);
-                        } else {
-                            clearInterval(handle);
-                        }
-                    };
-
-                    listItems.forEach(function(item, i) {
-                        item.addEventListener('touchstart', function(e) {
-                            e.preventDefault();
-                            stopMove(i);
-                            moveIt(item, i);
-                        });
-                        item.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            stopMove(i);
-                            moveIt(item, i);
-                        });
-                    });
-
-                    autoSlider = requestInterval(autoMove, acAuto);
-                },
-
-                moveIt = function(obj, x) {
-                    var n = x;
-
-                    obj.querySelector('figure').classList.add('active');
-                    Array.from(listItems).forEach(function(item) {
-                        if (item !== obj) {
-                            item.querySelector('figure').classList.remove('active');
-                        }
-                    });
-
-                    list.style.transform = 'translateX(' + Math.floor((-(100 / nItems)) * n) + '%) translateZ(0)';
-                    list.style.transition = 'transform 1000ms cubic-bezier(0.4, 0, 0.26, 1)';
-                },
-
-                autoMove = function(currentSlide) {
-                    if (isAuto) {
-                        current = Math.floor((current + 1) % nItems);
-                    } else {
-                        current = currentSlide;
-                    }
-                    // console.log(current);
-                    moveIt(listItems[current], current);
-                },
-
-                stopMove = function(x) {
-                    clearRequestInterval(autoSlider);
-                    isAuto = false;
-                    autoMove(x);
-                };
-
-            return {
-                init: init
-            };
-
-        })(document);
-
-        window.addEventListener('load', function() {
-            'use strict';
-            sliderTeam.init();
-        });
     </script>
 
     <script src="{{ asset('front/js/jquery-1.11.0.min.js') }}"></script>
@@ -999,6 +847,43 @@
 
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+         const swiper = new Swiper('.slider-wrapper', {
+           loop: true,
+           grabCursor: true,
+           spaceBetween: 30,
+
+        // Pagination bullets
+           pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              dynamicBullets: true
+           },
+
+        // Navigation arrows
+         navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+         },
+
+        // Responsive breakpoints
+         breakpoints: {
+            0: {
+                slidesPerView: 1
+            },
+            768: {
+                slidesPerView: 2
+            },
+            1024: {
+                slidesPerView: 3
+            }
+         }
+      });
+     });
+
+    </script>
 </body>
 
 </html>
