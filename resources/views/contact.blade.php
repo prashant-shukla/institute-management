@@ -29,7 +29,7 @@
                                     </div>
                                     <div>
                                         <h4>Address</h4>
-                                        <p class="mb-0">123 Street New York.USA</p>
+                                        <p class="mb-0">{{ setting('address.name') }} {{ setting('address.city') }} {{ setting('address.state') }} {{ setting('address.zip_code') }} </p>
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     </div>
                                     <div>
                                         <h4>Mail Us</h4>
-                                        <p class="mb-0">info@example.com</p>
+                                        <p class="mb-0">{{ setting('contact.email') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                     </div>
                                     <div>
                                         <h4>Telephone</h4>
-                                        <p class="mb-0">(+012) 3456 7890</p>
+                                        <p class="mb-0">{{ setting('contact.phone_number') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@
                                         <i class="fab fa-firefox-browser fa-2x"></i>
                                     </div>
                                     <div>
-                                        <h4>Yoursite@ex.com</h4>
-                                        <p class="mb-0">(+012) 3456 7890</p>
+                                        <h4>{{ setting('contact.email') }}</h4>
+                                        <p class="mb-0">{{ setting('contact.phone_number') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -74,55 +74,21 @@
                             form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and
                             you're done. <a class="text-primary fw-bold"
                                 href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                        <form>
-                            <div class="row g-4">
-                                <div class="col-lg-12 col-xl-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="name"
-                                            placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-xl-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control border-0" id="email"
-                                            placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-xl-6">
-                                    <div class="form-floating">
-                                        <input type="phone" class="form-control border-0" id="phone"
-                                            placeholder="Phone">
-                                        <label for="phone">Your Phone</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-xl-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="Course"
-                                            placeholder="Course">
-                                        <label for="Course">Your Course Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="education"
-                                            placeholder="education">
-                                        <label for="education">Education</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 160px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3">Send Message</button>
-                                </div>
-                            </div>
-                        </form>
+                                <form id="contactForm">
+                                    <label for="name">Name:</label>
+                                    <input type="text" name="name" id="name" required>
+                                
+                                    <label for="email">Email:</label>
+                                    <input type="email" name="email" id="email" required>
+                                
+                                    <label for="phone">Phone:</label>
+                                    <input type="text" name="phone" id="phone" required>
+                                
+                                    <label for="message">Message:</label>
+                                    <textarea name="message" id="message" required></textarea>
+                                
+                                    <button type="submit">Submit</button>
+                                </form>
                     </div>
                 </div>
             </div>
@@ -136,4 +102,38 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            message: document.getElementById('message').value
+        };
+    
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+    
+            const data = await response.json();
+    
+            if (data.success) {
+                alert('Form submitted successfully!');
+            } else {
+                alert('Form submission failed.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    });
+    </script>
 @include('footer')

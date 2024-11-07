@@ -124,7 +124,7 @@
             <h2 class="display-6 fw-semibold">Meet Our Team</h2>
             <p class="text-secondary">We build CADADDA with professional and love</p>
         </div>
-     <div class="container swiper">
+     <div class="container swiper"> 
       <div class="slider-wrapper">
         <div class="card-list swiper-wrapper">
             @foreach ($mentors as $mentor)
@@ -144,6 +144,7 @@
   </div>
  </div>
 </section>
+
 
 
 @include('footer')

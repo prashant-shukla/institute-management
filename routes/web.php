@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Api\ContactController;
+
 
 Route::get('/', [HomeController::class, 'Home']);
 Route::get('/categories', [HomeController::class, 'category'])->name('category');
@@ -11,3 +13,4 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/about-us', [HomeController::class, 'about'])->name('about');
 Route::get('/event', [HomeController::class, 'event'])->name('event');
 Route::post('/register-event', [App\Http\Controllers\EventRegistrationController::class, 'store'])->name('event.register');
+Route::post('/contact', [ContactController::class, 'store']);
