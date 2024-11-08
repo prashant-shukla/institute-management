@@ -272,7 +272,7 @@ a {
 }
 
 .padding-medium {
-  padding-top: 3rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
@@ -1049,7 +1049,6 @@ tool {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
   margin-top: 10px;
   background: url(images/bg.jpg) var(--bs-primary-bg-subtle)  no-repeat center;
 }

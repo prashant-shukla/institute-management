@@ -68,26 +68,48 @@
                             </div>
                         </div>
                     </div>
+                    @if(session('success'))
+                       <div class="alert alert-success">
+                         {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="bg-light p-5 rounded h-100 wow fadeInUp" data-wow-delay="0.2s">
                         <h4 class="text-primary">Send Your Message</h4>
                         <p class="mb-4">The contact form is currently inactive. Get a functional and working contact
                             form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and
                             you're done. <a class="text-primary fw-bold"
                                 href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                                <form id="contactForm">
-                                    <label for="name">Name:</label>
-                                    <input type="text" name="name" id="name" required>
-                                
-                                    <label for="email">Email:</label>
-                                    <input type="email" name="email" id="email" required>
-                                
-                                    <label for="phone">Phone:</label>
-                                    <input type="text" name="phone" id="phone" required>
-                                
-                                    <label for="message">Message:</label>
-                                    <textarea name="message" id="message" required></textarea>
-                                
-                                    <button type="submit">Submit</button>
+                                <form action="{{ route('contact.submit') }}" method="POST" id="contactForm">
+                                    @csrf
+                                    <div class="row g-4">
+                                        <div class="col-lg-12 col-xl-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control border-0" name="name" id="name" placeholder="Your Name" required>
+                                                <label for="name">Your Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-xl-6">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control border-0" name="email" id="email" placeholder="Your Email" required>
+                                                <label for="email">Your Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-xl-6">
+                                            <div class="form-floating">
+                                                <input type="tel" class="form-control border-0" name="phone" id="phone" placeholder="Your Phone" required>
+                                                <label for="phone">Your Phone</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control border-0" placeholder="Leave a message here" name="message" id="message" style="height: 160px" required></textarea>
+                                                <label for="message">Message</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                        </div>
+                                    </div>
                                 </form>
                     </div>
                 </div>
@@ -102,38 +124,5 @@
         </div>
     </div>
 </div>
-<script>
-    document.getElementById('contactForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-    
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            message: document.getElementById('message').value
-        };
-    
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-    
-            const data = await response.json();
-    
-            if (data.success) {
-                alert('Form submitted successfully!');
-            } else {
-                alert('Form submission failed.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    });
-    </script>
+
 @include('footer')
