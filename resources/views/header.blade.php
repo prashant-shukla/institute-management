@@ -237,92 +237,11 @@
                             <a href="/about-us" class="nav-link mx-2">About Us</a>
                         </li>
 
-                        {{-- 
-            <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="pages"
-                data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-              <ul class="dropdown-menu" aria-labelledby="pages">
-                <li><a href="about.html" class="dropdown-item">About Us<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="instructors.html" class="dropdown-item">Instructors<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="cart.html" class="dropdown-item">Cart<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="wishlist.html" class="dropdown-item">Wishlist<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="checkout.html" class="dropdown-item">Checkout<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="price-plan.html" class="dropdown-item">Price Plan<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="contact.html" class="dropdown-item">Contact<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="faqs.html" class="dropdown-item">FAQs<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="account.html" class="dropdown-item">Account<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="thank-you.html" class="dropdown-item">Thankyou<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="error.html" class="dropdown-item">Error 404<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="styles.html" class="dropdown-item">Styles<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li> --}}
+                    
                         <li class="nav-item">
                             <a href="/categories" class="nav-link mx-2">Courses</a>
                         </li>
-                        {{-- <li class="nav-item ">
-                <a href="/categories" class="dropdown-item">Course </a>
-              <a  class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="courses"
-                data-bs-toggle="dropdown" aria-expanded="false">Courses</a> 
-              <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="/category" class="dropdown-item">Course<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="/course" class="dropdown-item">Courses Detail<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li> --}}
-
-                        {{-- <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="events"
-                data-bs-toggle="dropdown" aria-expanded="false">events</a>
-              <ul class="dropdown-menu" aria-labelledby="courses">
-                <li><a href="event.html" class="dropdown-item">event<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="event-details.html" class="dropdown-item">event details<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li> --}}
-
-                        {{-- <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="blog"
-                data-bs-toggle="dropdown" aria-expanded="false">blog</a>
-              <ul class="dropdown-menu" aria-labelledby="blog">
-                <li><a href="blog.html" class="dropdown-item">blog<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="single-post.html" class="dropdown-item">single post<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li> --}}
-
-                        {{-- <li class="nav-item dropdown">
-              <a class="nav-link mx-2 dropdown-toggle align-items-center" role="button" id="shop"
-                data-bs-toggle="dropdown" aria-expanded="false">shop</a>
-              <ul class="dropdown-menu" aria-labelledby="shop">
-                <li><a href="shop.html" class="dropdown-item">Shop<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-                <li><a href="single-product.html" class="dropdown-item">Single Product<span
-                      class="badge bg-secondary text-white ms-2">PRO</span></a></li>
-              </ul>
-            </li>
-
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link mx-2">contact</a>
-            </li>
-            <li class="nav-item">
-              <a href="https://templatesjungle.gumroad.com/l/jubilee-free-bootstrap-5-html-website-template-for-online-course"
-                class="nav-link mx-2 text-decoration-underline" target="_blank">GET PRO</a>
-            </li> --}}
+                        
                         <li class="nav-item">
                             <a href="/event" class="nav-link mx-2">Events</a>
                         </li>

@@ -119,13 +119,13 @@
                     <h5 class=" fw-bold mb-4">Contact Us</h5>
                     <ul class="menu-list list-unstyled">
                         <li class="menu-item mb-2">
-                            <a href="#" class="footer-link">contact@yourcompany</a>
+                            <a href="#" class="footer-link">{{ setting('contact.email') }}</a>
                         </li>
                         <li class="menu-item mb-2">
-                            <a href="#" class="footer-link">+110 4587 2445</a>
+                            <a href="#" class="footer-link">{{ setting('contact.phone_number') }}</a>
                         </li>
                         <li class="menu-item mb-2">
-                            <a href="#" class="footer-link">New York, USA</a>
+                            <a href="#" class="footer-link">{{ setting('address.name') }} {{ setting('address.city') }} {{ setting('address.state') }} {{ setting('address.zip_code') }} </a>
                         </li>
                     </ul>
                 </div>

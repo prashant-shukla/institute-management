@@ -22,9 +22,9 @@
             <div class="col">
                 <h2 class="text-uppercase text-dark fw-bold">About Us</h2>
                 <p class="fs-4 text-dark mb-5">Our History</p>
-                <p>CADADDA is a registered company and the only Autodesk Authorized Training Center in Jodhpur. CADADDA
-                    is one of the experienced centers in Jodhpur, providing training on software related to CAD/CAM in
-                    the fields of mechanical, civil, electrical, and architecture.</p>
+                <p>Founded with a commitment to empowering learners, our journey in education began with a small team passionate about making knowledge accessible. Over the years, 
+                    we've grown into a vibrant community, providing innovative resources and personalized support to help students succeed in an ever-evolving world of education.
+                </p>
             </div>
         </div>
     </div>
@@ -63,22 +63,25 @@
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <h2 class="text-uppercase text-dark fw-bold">Our History</h2>
                 <p class="fs-4 text-dark mb-4">Our Way of Success</p>
-                <p class="text-muted">CADADDA is a registered company and the only Autodesk Authorized Training Center
-                    in Jodhpur. CADADDA is one of the most experienced centers in Jodhpur, providing training on
-                    software related to CAD/CAM in the fields of mechanical, civil, electrical, and architecture.</p>
+                <p class="text-muted">
+                    Founded with a commitment to empowering learners, our journey in education began with a small team passionate about making knowledge accessible. Over the years,
+                     we've grown into a vibrant community, providing innovative resources and personalized support to help students succeed in an ever-evolving world of education.
+                </p>
                 
                 <!-- Timeline -->
                 <div class="timeline">
-                    <div class="timeline-item mb-4">
-                        <div class="timeline-date">
-                            <span class="date fw-bold text-primary">2001</span>
-                        </div>
-                        <h4 class="text-dark fw-semibold">Company Formed</h4>
-                        <p class="text-muted">CADADDA is a registered company and the only Autodesk Authorized Training
-                            Center in Jodhpur. CADADDA is one of the most experienced centers in Jodhpur, providing
-                            training on software related to CAD/CAM in the fields of mechanical, civil, electrical, and
-                            architecture.</p>
+                    <div class="timeline">
+                        @foreach ($this->getTableRecords() as $item)
+                            <div class="timeline-item mb-4">
+                                <div class="timeline-date">
+                                    <span class="date fw-bold text-primary">{{ $item->date }}</span>
+                                </div>
+                                <h4 class="text-dark fw-semibold">{{ $item->title }}</h4>
+                                <p class="text-muted">{{ $item->description }}</p>
+                            </div>
+                        @endforeach
                     </div>
+                    
                     
                     <div class="timeline-item mb-4">
                         <div class="timeline-date">
