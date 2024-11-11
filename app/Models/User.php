@@ -10,6 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    const ADMIN_ROLE = 'admin';
     use HasFactory, Notifiable;
     use HasRoles;
     /**

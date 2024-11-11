@@ -71,7 +71,7 @@
                 <!-- Timeline -->
                 <div class="timeline">
                     <div class="timeline">
-                        @foreach ($this->getTableRecords() as $item)
+                        @foreach ($history as $item)
                             <div class="timeline-item mb-4">
                                 <div class="timeline-date">
                                     <span class="date fw-bold text-primary">{{ $item->date }}</span>
@@ -80,29 +80,6 @@
                                 <p class="text-muted">{{ $item->description }}</p>
                             </div>
                         @endforeach
-                    </div>
-                    
-                    
-                    <div class="timeline-item mb-4">
-                        <div class="timeline-date">
-                            <span class="date fw-bold text-primary">2005</span>
-                        </div>
-                        <h4 class="text-dark fw-semibold">Suspendisse tincidunt nibh.</h4>
-                        <p class="text-muted">CADADDA is a registered company and the only Autodesk Authorized Training
-                            Center in Jodhpur. CADADDA is one of the most experienced centers in Jodhpur, providing
-                            training on software related to CAD/CAM in the fields of mechanical, civil, electrical, and
-                            architecture.</p>
-                    </div>
-                    
-                    <div class="timeline-item mb-4">
-                        <div class="timeline-date">
-                            <span class="date fw-bold text-primary">2017</span>
-                        </div>
-                        <h4 class="text-dark fw-semibold">Awards and 300 Employees</h4>
-                        <p class="text-muted">CADADDA is a registered company and the only Autodesk Authorized Training
-                            Center in Jodhpur. CADADDA is one of the most experienced centers in Jodhpur, providing
-                            training on software related to CAD/CAM in the fields of mechanical, civil, electrical, and
-                            architecture.</p>
                     </div>
                     
                     <!-- Timeline vertical line -->

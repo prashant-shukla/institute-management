@@ -12,6 +12,7 @@ use App\Models\CourseTool;
 use App\Models\CourseMentor;
 use App\Models\Banner;
 use App\Models\Events;
+use App\Models\History;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
@@ -120,7 +121,9 @@ class HomeController extends Controller
       
       $banners = Banner::where('banner_page', 'about us')->get();
       $mentors = Mentor::all();
-     return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors,]);
+      $history = History::all();
+
+     return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors,'history' =>$history]);
   
  }
  public function event()
