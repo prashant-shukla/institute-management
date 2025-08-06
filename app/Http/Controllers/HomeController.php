@@ -13,9 +13,12 @@ use App\Models\CourseMentor;
 use App\Models\Banner;
 use App\Models\Events;
 use App\Models\History;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
+use Datlechin\FilamentMenuBuilder\Models\Menu as DatlechinMenu;
+
 
 class HomeController extends Controller
 {
@@ -37,20 +40,20 @@ class HomeController extends Controller
    
     public function Home()
     {
-       
+        $menu = DatlechinMenu::location('primary');
+        dd($menu);
+
         $reviews = Reviews::all();
         $mentors = Mentor::all();
         $courses = Course::all();
         $coursecategories = CourseCategory::all();
         $banners = Banner::where('banner_page', 'home')->get();
-// dd($banner[0]->image_url);
         return view('home', [
             'reviews' => $reviews,
             'mentors' => $mentors,
             'coursecategories'=>$coursecategories,
             'courses' => $courses,
             'banners'=>$banners,
-            
         ]); 
     }
     public function category()
@@ -60,8 +63,6 @@ class HomeController extends Controller
         $mentors = Mentor::all();
         $reviews = Reviews::all();
         $banners = Banner::where('banner_page', 'categories')->get();
-        // dd($banners[0]->image_url);
-        //  dd($courses); // For debugging, remove this line in production
         return view('category', ['courses' => $courses,'coursecategories'=>$coursecategories,'mentors' => $mentors,'reviews' => $reviews,   'banners'=>$banners,]);
     }
     // In your controller

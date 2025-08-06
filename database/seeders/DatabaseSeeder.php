@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 
@@ -14,12 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesTableSeeder::class,
-            UsersTableSeeder::class,
-        ]);
-
-        // Call the custom command to create the super admin
-        Artisan::call('shield:super-admin', [
-            '--user' => 'superadmin@unnatischoolofdesign.com'
+            PermissionsTableSeeder::class,
         ]);
     }
 }

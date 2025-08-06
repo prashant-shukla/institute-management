@@ -8,9 +8,13 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Shipu\WebInstaller\Concerns\InstallationContract;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Str;
 
 
 class InstallationFinish implements InstallationContract
@@ -27,10 +31,21 @@ class InstallationFinish implements InstallationContract
         Artisan::call('db:seed', [
           '--force' => true,
         ]);
+      } else {
+          Artisan::call('db:seed', [
+            '--class' => 'RolesTableSeeder',
+            '--force' => true,
+        ]);
+        
+        Artisan::call('db:seed', [
+            '--class' => 'PermissionsTableSeeder',
+            '--force' => true,
+        ]);
       }
 
-      $role = Role::create(['name' => 'admin', 'guard_name' => 'web']);
+    
 
+      $superAdminRole = Role::where('name', 'super-admin')->first();
       $user = User::create([
         'firstname'       => array_get($data, 'applications.admin.name'),
         'lastname'       => array_get($data, 'applications.admin.name'),
@@ -41,11 +56,12 @@ class InstallationFinish implements InstallationContract
         'created_at' => now(),
         'updated_at' => now(),
       ]);
+      $user->assignRole($superAdminRole);
 
-      $user->assignRole($role);
       file_put_contents(storage_path('installed'), 'installed');
       return true;
     } catch (\Exception $exception) {
+      //dd($exception->getMessage());
       return false;
     }
   }

@@ -23,6 +23,15 @@ use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
 use TomatoPHP\FilamentMenus\FilamentMenuLoader;
+use Datlechin\FilamentMenuBuilder\FilamentMenuBuilderPlugin;
+use Datlechin\FilamentMenuBuilder\MenuPanel\StaticMenuPanel;
+use Datlechin\FilamentMenuBuilder\MenuPanel\ModelMenuPanel;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use App\Models\Menu;
+use App\Models\MenuItem;
+use App\Models\MenuLocation;
+use App\Filament\Plugins\Resources\MenuResource;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -67,9 +76,50 @@ class AdminPanelProvider extends PanelProvider
                 ]),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentFabricatorPlugin::make(),
+                FilamentMenuBuilderPlugin::make()
+                ->addLocation('header', 'Header')
+                ->addLocation('footer', 'Footer'),
+                FilamentMenuBuilderPlugin::make()
+                ->addLocations([
+                    'header' => 'Header',
+                    'footer' => 'Footer',
+                ]),
+                FilamentMenuBuilderPlugin::make()
+                ->showCustomLinkPanel(false),
+                FilamentMenuBuilderPlugin::make()
+                ->showCustomTextPanel(),
+                FilamentMenuBuilderPlugin::make()
+            ->addMenuPanels([
+                StaticMenuPanel::make()
+                ->description('Lorem ipsum...')
+                    ->icon('heroicon-m-link')
+                    ->collapsed(true)
+                    ->collapsible(true)
+                    ->paginate(perPage: 5, condition: true)
+            ]),
+            
+            FilamentMenuBuilderPlugin::make()
+            ->addMenuPanels([
+                ModelMenuPanel::make()
+                    ->model(\App\Models\MenuCategory::class),
+            ]),
+            FilamentMenuBuilderPlugin::make()
+            ->addMenuFields([
+                Toggle::make('is_logged_in'),
+            ])
+            ->addMenuItemFields([
+                TextInput::make('classes'),
+            ]),
+            FilamentMenuBuilderPlugin::make()
+            ->usingResource(MenuResource::class),
+            FilamentMenuBuilderPlugin::make()
+            ->usingMenuModel(Menu::class)
+            ->usingMenuItemModel(MenuItem::class)
+            ->usingMenuLocationModel(MenuLocation::class),
                 \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar']),
                 \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
             ])
+           
            ;
             
     }
