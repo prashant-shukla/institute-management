@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\HasName;
 
-class User extends Authenticatable
+
+
+class User extends Authenticatable implements HasName
 {
     const ADMIN_ROLE = 'admin';
     use HasFactory, Notifiable;
@@ -25,6 +28,7 @@ class User extends Authenticatable
         'lastname',
         'password',
         'status',
+        'name',
     ];
 
     /**
@@ -41,11 +45,16 @@ class User extends Authenticatable
     {
         return $this->hasRole(config('filament-shield.super_admin.name'));
     }
-   
-    public function getFilamentName(): string
+
+
+  public function getFilamentName(): string
     {
-        return $this->getAttributeValue('username');
+        // ✅ Return a string – do NOT return null
+        $fullName = trim("{$this->firstname} {$this->lastname}");
+
+        return $fullName !== '' ? $fullName : ($this->email ?? 'Guest');
     }
+
     public function getFullNameAttribute()
     {
         return $this->firstname . ' ' . $this->lastname;
@@ -62,4 +71,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+  
 }

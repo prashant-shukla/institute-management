@@ -9,4 +9,8 @@ class Menu extends Model
 {
     use HasFactory;
     protected $fillable = ['title', 'key', 'location', 'activated']; 
+    public function locations()
+{
+    return $this->hasMany(MenuLocation::class, 'menu_id');
+}
 }
