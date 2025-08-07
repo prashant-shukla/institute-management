@@ -31,11 +31,13 @@ use Filament\Forms\Components\Toggle;
 use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\MenuLocation;
-use App\Filament\Plugins\Resources\MenuResource;
+use App\Filament\Resources\MenuResource;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 
 
 class AdminPanelProvider extends PanelProvider
 {
+
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -47,6 +49,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ->resources([
+                \App\Filament\Resources\MenuResource::class,
+            ])
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
@@ -74,53 +79,51 @@ class AdminPanelProvider extends PanelProvider
                 FilamentSettingsPlugin::make()->pages([
                     Settings::class,
                 ]),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentFabricatorPlugin::make(),
                 FilamentMenuBuilderPlugin::make()
-                ->addLocation('header', 'Header')
-                ->addLocation('footer', 'Footer'),
+                    ->addLocation('header', 'Header')
+                    ->addLocation('footer', 'Footer'),
                 FilamentMenuBuilderPlugin::make()
-                ->addLocations([
-                    'header' => 'Header',
-                    'footer' => 'Footer',
-                ]),
+                    ->addLocations([
+                        'header' => 'Header',
+                        'footer' => 'Footer',
+                    ]),
                 FilamentMenuBuilderPlugin::make()
-                ->showCustomLinkPanel(false),
+                    ->showCustomLinkPanel(false),
                 FilamentMenuBuilderPlugin::make()
-                ->showCustomTextPanel(),
+                    ->showCustomTextPanel(),
                 FilamentMenuBuilderPlugin::make()
-            ->addMenuPanels([
-                StaticMenuPanel::make()
-                ->description('Lorem ipsum...')
-                    ->icon('heroicon-m-link')
-                    ->collapsed(true)
-                    ->collapsible(true)
-                    ->paginate(perPage: 5, condition: true)
-            ]),
-            
-            FilamentMenuBuilderPlugin::make()
-            ->addMenuPanels([
-                ModelMenuPanel::make()
-                    ->model(\App\Models\MenuCategory::class),
-            ]),
-            FilamentMenuBuilderPlugin::make()
-            ->addMenuFields([
-                Toggle::make('is_logged_in'),
-            ])
-            ->addMenuItemFields([
-                TextInput::make('classes'),
-            ]),
-            FilamentMenuBuilderPlugin::make()
-            ->usingResource(MenuResource::class),
-            FilamentMenuBuilderPlugin::make()
-            ->usingMenuModel(Menu::class)
-            ->usingMenuItemModel(MenuItem::class)
-            ->usingMenuLocationModel(MenuLocation::class),
+                    ->addMenuPanels([
+                        StaticMenuPanel::make()
+                            ->description('Lorem ipsum...')
+                            ->icon('heroicon-m-link')
+                            ->collapsed(true)
+                            ->collapsible(true)
+                            ->paginate(perPage: 5, condition: true)
+                    ]),
+
+                FilamentMenuBuilderPlugin::make()
+                    ->addMenuPanels([
+                        ModelMenuPanel::make()
+                            ->model(\App\Models\MenuCategory::class),
+                    ]),
+                FilamentMenuBuilderPlugin::make()
+                    ->addMenuFields([
+                        Toggle::make('is_logged_in'),
+                    ])
+                    ->addMenuItemFields([
+                        TextInput::make('classes'),
+                    ]),
+                FilamentMenuBuilderPlugin::make()
+                    ->usingResource(MenuResource::class),
+                FilamentMenuBuilderPlugin::make()
+                    ->usingMenuModel(Menu::class)
+                    ->usingMenuItemModel(MenuItem::class)
+                    ->usingMenuLocationModel(MenuLocation::class),
                 \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar']),
                 \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
             ])
-           
-           ;
-            
+
+        ;
     }
 }
