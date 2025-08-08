@@ -43,29 +43,30 @@ class HomeController extends Controller
     public function Home()
     {
 
-        $menu = null;
+        // $menu = null;
 
-        if (Schema::hasTable('menu_locations')) {
-            $menu = Menu::whereHas('locations', function ($query) {
-                $query->where('location', 'primary');
-            })->first();
-        }
+        // if (Schema::hasTable('menu_locations')) {
+        //     $menu = Menu::whereHas('locations', function ($query) {
+        //         $query->where('location', 'primary');
+        //     })->first();
+        // }
 
-        $menu = DatlechinMenu::location('primary');
-        // dd($menu);
+        // $menu = DatlechinMenu::location('primary');
+        // // dd($menu);
 
-        $reviews = Reviews::all();
-        $mentors = Mentor::all();
-        $courses = Course::all();
-        $coursecategories = CourseCategory::all();
-        $banners = Banner::where('banner_page', 'home')->get();
-        return view('home', [
-            'reviews' => $reviews,
-            'mentors' => $mentors,
-            'coursecategories' => $coursecategories,
-            'courses' => $courses,
-            'banners' => $banners,
-        ]);
+        // $reviews = Reviews::all();
+        // $mentors = Mentor::all();
+        // $courses = Course::all();
+        // $coursecategories = CourseCategory::all();
+        // $banners = Banner::where('banner_page', 'home')->get();
+        // return view('home', [
+        //     'reviews' => $reviews,
+        //     'mentors' => $mentors,
+        //     'coursecategories' => $coursecategories,
+        //     'courses' => $courses,
+        //     'banners' => $banners,
+        // ]);
+         return view('home');
     }
     public function category()
     {
