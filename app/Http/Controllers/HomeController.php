@@ -132,11 +132,12 @@ class HomeController extends Controller
     public function about()
     {
 
-        $banners = Banner::where('banner_page', 'about us')->get();
-        $mentors = Mentor::all();
-        $history = History::all();
+        // $banners = Banner::where('banner_page', 'about us')->get();
+        // $mentors = Mentor::all();
+        // $history = History::all();
 
-        return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors, 'history' => $history]);
+        // return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors, 'history' => $history]);
+         return view('about');
     }
     public function event()
     {

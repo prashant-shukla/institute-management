@@ -161,7 +161,7 @@
                             <ul class="wsmenu-list nav-theme">
                                 <!-- DROPDOWN SUB MENU -->
                                 <li aria-haspopup="true">
-                                    <a href="#" class="h-link">About <span class="wsarrow"></span></a>
+                                    <a href="/about-us" class="h-link">About <span class="wsarrow"></span></a>
                                     <ul class="sub-menu">
                                         <li aria-haspopup="true"><a href="#lnk-1">Why Martex?</a></li>
                                         <li aria-haspopup="true"><a href="#lnk-2">Integrations</a></li>
@@ -182,7 +182,7 @@
                                                 <!-- MEGAMENU LINKS -->
                                                 <ul
                                                     class="lg:w-3/12 xl:w-3/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full link-list">
-                                                    <li class="fst-li"><a href="about.html">About Us</a></li>
+                                                    <li class="fst-li"><a href="/about-us">About Us</a></li>
                                                     <li><a href="team.html">Our Team</a></li>
                                                     <li><a href="careers.html">Careers <span
                                                                 class="sm-info">4</span></a></li>
@@ -2679,7 +2679,7 @@
                             <ul class="foo-links clearfix">
                                 <li class=" w-auto block align-top clear-none !m-0 !p-0">
                                     <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a
-                                            href="about.html">About Us</a></p>
+                                            href="/about-us">About Us</a></p>
                                 </li>
                                 <li class=" w-auto block align-top clear-none !m-0 !p-0">
                                     <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a
