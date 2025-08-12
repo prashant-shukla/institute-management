@@ -11,48 +11,48 @@
          <![endif]-->
          <!--[if (gte IE 9)|!(IE)]><!-->
          <html lang="en">
-            <head>
-               <meta charset="utf-8">
-               <meta http-equiv="X-UA-Compatible" content="IE=edge">
-               <meta name="author" content="elite-themes24">
-               <meta name="description" content="Martex - Tailwind CSS Software, SaaS & Startup Template">
-               <meta name="keywords"
-                  content="Responsive, HTML5, elite-themes24, Landing, Software, Mobile App, SaaS, Startup, Creative, Digital Product">
-               <meta name="viewport" content="width=device-width, initial-scale=1">
-               <!-- SITE TITLE -->
-               <title>Martex - Tailwind CSS Software, SaaS & Startup Template</title>
-               <!-- FAVICON AND TOUCH ICONS -->
-               <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-               <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-               <link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png">
-               <link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png">
-               <link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png">
-               <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-               <link rel="icon" href="images/apple-touch-icon.png" type="image/x-icon">
-               <!-- FONT ICONS -->
-               <link href="css/flaticon.css" rel="stylesheet">
-               <!-- PLUGINS STYLESHEET -->
-               <link href="css/menu.css" rel="stylesheet">
-               <link id="effect" href="css/dropdown-effects/fade-down.css" media="all" rel="stylesheet">
-               <link href="css/magnific-popup.css" rel="stylesheet">
-               <link href="css/owl.carousel.min.css" rel="stylesheet">
-               <link href="css/owl.theme.default.min.css" rel="stylesheet">
-               <link href="css/lunar.css" rel="stylesheet">
-               <!-- ON SCROLL ANIMATION -->
-               <link href="css/animate.css" rel="stylesheet">
-               <!-- TEMPLATE CSS -->
-               <link href="./style.css" rel="stylesheet">
-               <!-- Style Switcher CSS -->
-               <link href="css/colors/blue-theme.css" rel="stylesheet">
-               <link href="css/colors/crocus-theme.css" rel="alternate stylesheet" title="crocus-theme">
-               <link href="css/colors/green-theme.css" rel="alternate stylesheet" title="green-theme">
-               <link href="css/colors/magenta-theme.css" rel="alternate stylesheet" title="magenta-theme">
-               <link href="css/colors/pink-theme.css" rel="alternate stylesheet" title="pink-theme">
-               <link href="css/colors/purple-theme.css" rel="alternate stylesheet" title="purple-theme">
-               <link href="css/colors/skyblue-theme.css" rel="alternate stylesheet" title="skyblue-theme">
-               <link href="css/colors/red-theme.css" rel="alternate stylesheet" title="red-theme">
-               <link href="css/colors/violet-theme.css" rel="alternate stylesheet" title="violet-theme">
-            </head>
+        <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="elite-themes24">
+    <meta name="description" content="Martex - Tailwind CSS Software, SaaS & Startup Template">
+    <meta name="keywords"
+        content="Responsive, HTML5, elite-themes24, Landing, Software, Mobile App, SaaS, Startup, Creative, Digital Product">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SITE TITLE -->
+    <title>Martex - Tailwind CSS Software, SaaS & Startup Template</title>
+    <!-- FAVICON AND TOUCH ICONS -->
+      
+    <link rel="shortcut icon" href="front/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="front/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="front/assets/assests/images/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="front/assets/assests/images/icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="front/assets/assests/images/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" href="front/assets/assests/images/icons/apple-touch-icon.png">
+    <link rel="icon" href="front/assets/assests/images/icons/apple-touch-icon.png" type="image/x-icon">
+    <link href="front/css/flaticon.css" rel="stylesheet">
+    <!-- PLUGINS STYLESHEET -->
+    <link href="front/css/menu.css" rel="stylesheet">
+    <link id="effect" href="front/css/dropdown-effects/fade-down.css" media="all" rel="stylesheet">
+    <link href="front/css/magnific-popup.css" rel="stylesheet">
+    <link href="front/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="front/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="front/css/lunar.css" rel="stylesheet">
+    <!-- ON SCROLL ANIMATION -->
+    <link href="front/assets/assests/css/animate.css" rel="stylesheet">
+    <!-- TEMPLATE CSS -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Style Switcher CSS -->
+    <link href="front/css/colors/magenta-theme.css" rel="stylesheet">
+    <link href="front/css/colors/blue-theme.css" rel="alternate stylesheet" title="blue-theme">
+    <link href="front/css/colors/crocus-theme.css" rel="alternate stylesheet" title="crocus-theme">
+    <link href="front/css/colors/green-theme.css" rel="alternate stylesheet" title="green-theme">
+    <link href="front/css/colors/pink-theme.css" rel="alternate stylesheet" title="pink-theme">
+    <link href="front/css/colors/purple-theme.css" rel="alternate stylesheet" title="purple-theme">
+    <link href="front/css/colors/skyblue-theme.css" rel="alternate stylesheet" title="skyblue-theme">
+    <link href="front/css/colors/red-theme.css" rel="alternate stylesheet" title="red-theme">
+    <link href="front/css/colors/violet-theme.css" rel="alternate stylesheet" title="violet-theme">
+</head>
             <body>
                <!-- PRELOADER SPINNER
                   ============================================= -->
@@ -414,23 +414,23 @@
                <!-- END PAGE CONTENT -->	
                <!-- EXTERNAL SCRIPTS
                   ============================================= -->	
-               <script src="js/jquery-3.7.0.min.js"></script>
-               <script src="js/bootstrap.min.js"></script>	
-               <script src="js/modernizr.custom.js"></script>
-               <script src="js/jquery.easing.js"></script>
-               <script src="js/jquery.appear.js"></script>
-               <script src="js/menu.js"></script>
-               <script src="js/owl.carousel.min.js"></script>
-               <script src="js/pricing-toggle.js"></script>
-               <script src="js/jquery.magnific-popup.min.js"></script>
-               <script src="js/contact-form.js"></script>
-               <script src="js/jquery.validate.min.js"></script>
-               <script src="js/jquery.ajaxchimp.min.js"></script>	
-               <script src="js/popper.min.js"></script>
-               <script src="js/lunar.js"></script>
-               <script src="js/wow.js"></script>
-               <!-- Custom Script -->		
-               <script src="js/custom.js"></script>
+    <script src="front/assets/assests/js/jquery-3.7.0.min.js"></script>
+    <script src="front/assets/assests/js/bootstrap.min.js"></script>
+    <script src="front/assets/assests/js/modernizr.custom.js"></script>
+    <script src="front/assets/assests/js/jquery.easing.js"></script>
+    <script src="front/assets/assests/js/jquery.appear.js"></script>
+    <script src="front/js/menu.js"></script>
+    <script src="front/js/owl.carousel.min.js"></script>
+    <script src="front/js/pricing-toggle.js"></script>
+    <script src="front/js/jquery.magnific-popup.min.js"></script>
+    <script src="front/js/contact-form.js"></script>
+    <script src="front/js/jquery.validate.min.js"></script>
+    <script src="front/js/jquery.ajaxchimp.min.js"></script>
+    <script src="front/js/popper.min.js"></script>
+    <script src="front/js/lunar.js"></script>
+    <script src="front/assets/assests/js/wow.js"></script>
+    <!-- Custom Script -->
+    <script src="front/js/custom.js"></script>
                <script>
                   $(document).on({
                       "contextmenu": function (e) {

@@ -66,7 +66,7 @@ class HomeController extends Controller
         //     'courses' => $courses,
         //     'banners' => $banners,
         // ]);
-         return view('home');
+        return view('home');
     }
     public function category()
     {
@@ -125,9 +125,10 @@ class HomeController extends Controller
     public function contact()
     {
 
-        $banners = Banner::where('banner_page', 'contact us')->get();
+        // $banners = Banner::where('banner_page', 'contact us')->get();
 
-        return view('contact', ['banners' => $banners,]);
+        // return view('contact', ['banners' => $banners,]);
+        return view('contacts');
     }
     public function about()
     {
@@ -137,7 +138,7 @@ class HomeController extends Controller
         // $history = History::all();
 
         // return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors, 'history' => $history]);
-         return view('about');
+        return view('about');
     }
     public function event()
     {
