@@ -651,10 +651,8 @@
             <section id="lnk-2"
                 class="pt--100 pt-[100px] lg:max-xl:pt-[80px] md:max-lg:pt-[70px]  ws-wrapper content-section">
                 <div class="container">
-                    <div
-                        class="bc-1-wrapper bg--02 r-16 bg--fixed rounded-[16px] bg-no-repeat bg-[center_center] bg-cover bg-[url(.front/images/bg-02.jpg)] bg-scroll sm:max-md:w-auto xsm:max-sm:w-auto w-full">
-                        <div
-                            class="section-overlay p-[80px_70px] lg:max-xl:px-[50px] lg:max-xl:py-[65px] md:max-lg:px-[40px] md:max-lg:py-[60px] sm:max-md:!px-[50px] sm:max-md:py-[70px] xsm:max-sm:px-[22px] xsm:max-sm:py-[70px] w-full h-full">
+                    <div class="bc-1-wrapper bg--02 r-16 bg--fixed rounded-[16px] bg-no-repeat bg-[center_center] bg-cover bg-[url(front/images/bg-02.jpg)] bg-scroll sm:max-md:w-auto xsm:max-sm:w-auto w-full">
+                        <div class="section-overlay p-[80px_70px] lg:max-xl:px-[50px] lg:max-xl:py-[65px] md:max-lg:px-[40px] md:max-lg:py-[60px] sm:max-md:!px-[50px] sm:max-md:py-[70px] xsm:max-sm:px-[22px] xsm:max-sm:py-[70px] w-full h-full">
                             <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  items-center">
                                 <!-- TEXT BLOCK -->
                                 <div
@@ -1032,7 +1030,7 @@
             <!-- TEXT CONTENT
                      ============================================= -->
             <section
-                class="bg--02 py--100 py-[100px] lg:max-xl:py-[80px] md:max-lg:py-[70px] ct-03 content-section division bg-no-repeat bg-[center_center] bg-cover bg-[url(./images/bg-02.jpg)]">
+                class="bg--02 py--100 py-[100px] lg:max-xl:py-[80px] md:max-lg:py-[70px] ct-03 content-section division bg-no-repeat bg-[center_center] bg-cover bg-[url(front/images/bg-02.jpg)]">
                 <div class="container">
                     <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  items-center">
                         <!-- IMAGE BLOCK -->

@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ContactController;
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::get('/', [HomeController::class, 'Home']);
+      Route::get('/Home', [HomeController::class, 'Homes']);
+      Route::get('/Course', [HomeController::class, 'Courses']);
       Route::get('/categories', [HomeController::class, 'category'])->name('category');
       Route::get('/filter-courses', [HomeController::class, 'filterCourses'])->name('filter.courses');
       Route::get('/course/{slug}/{id}', [HomeController::class, 'Course'])->name('course');

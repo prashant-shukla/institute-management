@@ -68,6 +68,14 @@ class HomeController extends Controller
         // ]);
         return view('home');
     }
+    public function Homes()
+    {
+        return view('homes');
+    }
+    public function Courses()
+    {
+        return view('courses');
+    }
     public function category()
     {
         $courses = Course::all();
