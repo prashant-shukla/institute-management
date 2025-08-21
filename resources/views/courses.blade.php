@@ -251,7 +251,219 @@
         </nav>
     </header>
 
-    <div class="container mx-auto px-4 py-12">
+    <section id="top-banner-section" class="bg-gray-50 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Heading -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Give the <span class="text-blue-600">Best Start</span> <br class="hidden md:block"> to your Career
+            </h1>
+            <p class="text-lg text-gray-600 mb-10">Learn, practice, and get hired!</p>
+
+            <!-- Category Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <a href="#certification-courses" class="block group">
+                    <div class="bg-white rounded-2xl shadow hover:shadow-lg p-6 transition relative overflow-hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                            Certification Courses
+                        </h3>
+                        <p class="text-gray-600 mt-2">Learn in-demand skills and get certified</p>
+                        <p class="text-sm text-gray-500 mt-4">Duration: 4–8 weeks</p>
+                        <div class="mt-6 text-blue-600 font-medium flex items-center gap-2">
+                            Explore now <span class="transition group-hover:translate-x-1">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#placement-courses" class="block group">
+                    <div class="bg-white rounded-2xl shadow hover:shadow-lg p-6 transition relative overflow-hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                            Placement Guarantee Courses with AI
+                        </h3>
+                        <p class="text-gray-600 mt-2">Upskill and get a guaranteed placement</p>
+                        <p class="text-sm text-gray-500 mt-4">Duration: 2–7 months</p>
+                        <div class="mt-6 text-blue-600 font-medium flex items-center gap-2">
+                            Explore now <span class="transition group-hover:translate-x-1">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 3 (example extra) -->
+                <a href="#online-courses" class="block group">
+                    <div class="bg-white rounded-2xl shadow hover:shadow-lg p-6 transition relative overflow-hidden">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                            Online Live Courses
+                        </h3>
+                        <p class="text-gray-600 mt-2">Interactive live classes with experts</p>
+                        <p class="text-sm text-gray-500 mt-4">Duration: Flexible</p>
+                        <div class="mt-6 text-blue-600 font-medium flex items-center gap-2">
+                            Explore now <span class="transition group-hover:translate-x-1">→</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <style>
+        /* Marquee animation */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee {
+            display: flex;
+            width: 200%;
+            /* Double width for looping */
+            animation: scroll-left 30s linear infinite;
+        }
+    </style>
+
+
+    <section id="top-companies-section" class="py-10 bg-white shadow">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-6">Top companies hiring from us</h2>
+            <div class="overflow-hidden relative w-full">
+                <div class="marquee">
+                    <!-- First set -->
+                    <div class="flex space-x-10">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/amd.png"
+                            class="h-12" alt="AMD">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/birla.png"
+                            class="h-12" alt="Birla">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/bosch.png"
+                            class="h-12" alt="Bosch">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/deloitte.png"
+                            class="h-12" alt="Deloitte">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/disney.png"
+                            class="h-12" alt="Disney">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/ey.png"
+                            class="h-12" alt="EY">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/fedex.png"
+                            class="h-12" alt="FedEx">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/hcl.png"
+                            class="h-12" alt="HCL">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/paytm.png"
+                            class="h-12" alt="Paytm">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/zomato.png"
+                            class="h-12" alt="Zomato">
+                    </div>
+                    <!-- Duplicate set for smooth infinite scroll -->
+                    <div class="flex space-x-10 ml-10">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/amd.png"
+                            class="h-12" alt="AMD">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/birla.png"
+                            class="h-12" alt="Birla">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/bosch.png"
+                            class="h-12" alt="Bosch">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/deloitte.png"
+                            class="h-12" alt="Deloitte">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/disney.png"
+                            class="h-12" alt="Disney">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/ey.png"
+                            class="h-12" alt="EY">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/fedex.png"
+                            class="h-12" alt="FedEx">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/hcl.png"
+                            class="h-12" alt="HCL">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/paytm.png"
+                            class="h-12" alt="Paytm">
+                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/zomato.png"
+                            class="h-12" alt="Zomato">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<section id="second-fold-banner-section" class="max-w-7xl mx-auto px-4 py-12">
+    <!-- Title -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <h3 class="text-xl font-bold text-gray-800">
+            FEATURED COURSES
+        </h3>
+        <span class="text-sm text-gray-500 mt-2 sm:mt-0">
+            Duration: 6-12 Weeks
+        </span>
+    </div>
+
+    <!-- Heading + Offerings -->
+    <div class="mt-6">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-2">
+            <span class="w-2 h-8 bg-indigo-600 rounded"></span>
+            Learn & Upgrade Your Skills Online
+        </h2>
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 
+                    11.586 6.707 9.293a1 1 0 10-1.414 
+                    1.414l3 3a1 1 0 001.414 0l7-7a1 1 
+                    0 000-1.414z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-700">100% Online Learning</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 
+                    11.586 6.707 9.293a1 1 0 10-1.414 
+                    1.414l3 3a1 1 0 001.414 0l7-7a1 1 
+                    0 000-1.414z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-700">Hands-on Projects</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 
+                    11.586 6.707 9.293a1 1 0 10-1.414 
+                    1.414l3 3a1 1 0 001.414 0l7-7a1 1 
+                    0 000-1.414z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-700">Industry-Recognized Certificate</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner Image -->
+    <div class="mt-8">
+       <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&q=80&w=1600&fit=crop" 
+     alt="Students Learning Online" 
+     class="rounded-lg shadow-lg w-full object-cover" 
+     style="height:200px;">
+
+    </div>
+
+    <!-- Timer -->
+    {{-- <div class="mt-6 flex items-center gap-2 text-red-600 font-semibold text-lg">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" 
+                  d="M10 18a8 8 0 100-16 8 8 0 
+                  000 16zm1-8V6a1 1 0 10-2 0v5a1 1 
+                  0 00.293.707l3 3a1 1 0 101.414-1.414L11 
+                  10z" clip-rule="evenodd"/>
+        </svg>
+         <span>Enroll now – Offer ends in <span class="ml-1 font-bold">3d: 12h: 45m: 10s</span></span> 
+    </div> --}}
+</section>
+
+
+
+
+
+    {{-- <div class="container mx-auto px-4 py-12">
 
         <!-- ===== Category Tabs ===== -->
         <div class="flex justify-center space-x-4 mb-10">
@@ -318,9 +530,356 @@
             </div>
         </div>
 
+    </div> --}}
+    <div class="container mx-auto px-4 py-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- ===== Left Side Category Tabs ===== -->
+            <div class="space-y-4">
+                  <h2 class="text-lg font-bold text-gray-800">Categories</h2>
+                <button class="category-tab w-full text-left px-6 py-3 bg-blue-500 text-white rounded-lg active"
+                    data-target="offline">Offline Courses</button>
+                <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
+                    data-target="online">Online Courses</button>
+                <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
+                    data-target="workshops">Workshops</button>
+                <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
+                    data-target="certifications">Certifications</button>
+            </div>
+
+            <!-- ===== Right Side Courses Section ===== -->
+            <div class="md:col-span-3">
+
+                <!-- Offline Courses -->
+                <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white shadow rounded-xl overflow-hidden">
+                        <div class="h-40 bg-blue-500"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold">AutoCAD Mastery</h3>
+                            <p class="text-gray-600">6 Months Program</p>
+                            <p class="text-sm text-gray-500 mt-2">Learn 2D & 3D drafting with real-world projects.</p>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <p class="text-blue-600 font-semibold">₹25,000</p>
+                                <button
+                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white shadow rounded-xl overflow-hidden">
+                        <div class="h-40 bg-green-500"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold">Interior Design Basics</h3>
+                            <p class="text-gray-600">4 Months Program</p>
+                            <p class="text-sm text-gray-500 mt-2">Foundation course covering space planning & decor.
+                            </p>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <p class="text-blue-600 font-semibold">₹18,000</p>
+                                <button
+                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Online Courses -->
+                <div id="online"
+                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    <div class="bg-white shadow rounded-xl overflow-hidden">
+                        <div class="h-40 bg-purple-500"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold">CAD Fundamentals (Online)</h3>
+                            <p class="text-gray-600">3 Months Live Classes</p>
+                            <p class="text-sm text-gray-500 mt-2">Master CAD tools from home with expert guidance.</p>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <p class="text-blue-600 font-semibold">₹12,000</p>
+                                <button
+                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workshops -->
+                <div id="workshops"
+                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    <div class="bg-white shadow rounded-xl overflow-hidden">
+                        <div class="h-40 bg-yellow-500"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold">SketchUp Basics</h3>
+                            <p class="text-gray-600">2 Days Workshop</p>
+                            <p class="text-sm text-gray-500 mt-2">Quick start with 3D modeling techniques.</p>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <p class="text-blue-600 font-semibold">₹2,500</p>
+                                <button
+                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div id="certifications"
+                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    <div class="bg-white shadow rounded-xl overflow-hidden">
+                        <div class="h-40 bg-red-500"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold">BIM Professional Certification</h3>
+                            <p class="text-gray-600">6 Months Program</p>
+                            <p class="text-sm text-gray-500 mt-2">Get certified in Building Information Modeling (BIM).
+                            </p>
+
+                            <div class="flex items-center justify-between mt-3">
+                                <p class="text-blue-600 font-semibold">₹35,000</p>
+                                <button
+                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
     </div>
 
 
+
+
+    <section class="py-8 bg-gray-900 dark:bg-black relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-900/20 to-indigo-900/20"></div>
+            <div
+                class="absolute top-5 right-5 w-24 h-24 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10">
+            </div>
+            <div
+                class="absolute bottom-5 left-5 w-24 h-24 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10">
+            </div>
+        </div>
+
+        <div class="relative container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
+                    style="animation-delay: 0.3s;">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">
+                        <span class="counter" data-target="10" data-suffix="K+">10K+</span>
+                    </div>
+                    <div class="text-blue-200 text-xs">Students Trained</div>
+                </div>
+
+                <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
+                    style="animation-delay: 0.4s;">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">
+                        <span class="counter" data-target="200" data-suffix="+">200+</span>
+                    </div>
+                    <div class="text-blue-200 text-xs">Courses Available</div>
+                </div>
+
+                <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
+                    style="animation-delay: 0.5s;">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">
+                        <span class="counter" data-target="4.5" data-suffix="/5">4.5/5</span>
+                    </div>
+                    <div class="text-blue-200 text-xs">Average Rating</div>
+                </div>
+
+                <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
+                    style="animation-delay: 0.6s;">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">
+                        <span class="counter" data-target="1.3" data-suffix="M+">1.3M+</span>
+                    </div>
+                    <div class="text-blue-200 text-xs">Training Hours</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Company Feedback & Hiring Partners -->
+    <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <h2
+                class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-300">
+                Company Feedback & Our Hiring Partners
+            </h2>
+
+            <!-- Testimonials -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                    <div class="flex mb-4">
+                        <div class="text-yellow-400">★★★★★</div>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                        "CADADDA has provided us with highly skilled CAD professionals. Their students are well-trained
+                        and job-ready from day one."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                        <div>
+                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Rajesh
+                                Kumar</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">HR
+                                Manager, Tech Solutions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                    <div class="flex mb-4">
+                        <div class="text-yellow-400">★★★★★</div>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                        "The quality of training at CADADDA is exceptional. We've hired multiple graduates and they've
+                        all exceeded our expectations."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                        <div>
+                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Priya
+                                Sharma</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                Director, Design Studio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                    <div class="flex mb-4">
+                        <div class="text-yellow-400">★★★★★</div>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                        "We regularly recruit from CADADDA. Their students have strong technical skills and professional
+                        work ethics."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                        <div>
+                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Amit
+                                Patel</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">CEO,
+                                BuildTech</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hiring Partners Logos -->
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold mb-8 text-gray-800 dark:text-white transition-colors duration-300">
+                    Companies Hiring From Us</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    <!-- Placeholder logos -->
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
+                            1</span>
+                    </div>
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
+                            2</span>
+                    </div>
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
+                            3</span>
+                    </div>
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
+                            4</span>
+                    </div>
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
+                            5</span>
+                    </div>
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
+                            6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<section id="advantages-section" class="py-12 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    
+    <!-- Heading -->
+    <div class="text-center mb-10">
+      <img 
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+        alt="Advantage Icon" 
+        class="mx-auto h-12 w-12 mb-4"
+      >
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
+        Why Choose Us?
+      </h2>
+      <p class="text-gray-600 mt-2">
+        Learn, grow, and achieve your career goals with our trusted training programs
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Card 1 -->
+      <div class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
+        <img 
+          src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" 
+          alt="Expert Mentors" 
+          class="mx-auto h-16 w-16 mb-4"
+        >
+        <h3 class="text-lg font-semibold text-gray-800">Expert Mentors</h3>
+        <p class="text-gray-600 mt-2">Learn directly from industry experts with years of real-world experience.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
+        <img 
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135773.png" 
+          alt="Career Support" 
+          class="mx-auto h-16 w-16 mb-4"
+        >
+        <h3 class="text-lg font-semibold text-gray-800">Career Support</h3>
+        <p class="text-gray-600 mt-2">Get guidance, resume reviews, and interview preparation to land your dream job.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
+        <img 
+          src="https://cdn-icons-png.flaticon.com/512/992/992651.png" 
+          alt="Certified Courses" 
+          class="mx-auto h-16 w-16 mb-4"
+        >
+        <h3 class="text-lg font-semibold text-gray-800">Certified Courses</h3>
+        <p class="text-gray-600 mt-2">Earn globally recognized certificates to showcase your skills and expertise.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 
     <!-- Footer -->
@@ -462,6 +1021,27 @@
     </footer>
 
     <!-- Scripts -->
+    <script>
+        // Category Tabs Click Event
+        const tabs = document.querySelectorAll(".category-tab");
+        const sections = document.querySelectorAll(".course-section");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                // reset tabs
+                tabs.forEach(t => t.classList.remove("bg-blue-500", "text-white", "active"));
+                tabs.forEach(t => t.classList.add("bg-gray-200", "text-gray-700"));
+
+                // active tab
+                tab.classList.remove("bg-gray-200", "text-gray-700");
+                tab.classList.add("bg-blue-500", "text-white", "active");
+
+                // show related section
+                sections.forEach(sec => sec.classList.add("hidden"));
+                document.getElementById(tab.dataset.target).classList.remove("hidden");
+            });
+        });
+    </script>
     <script>
         // Dark mode functionality
         function toggleDarkMode() {
