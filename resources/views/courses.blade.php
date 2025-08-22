@@ -388,66 +388,65 @@
 
 
 
-<section id="second-fold-banner-section" class="max-w-7xl mx-auto px-4 py-12">
-    <!-- Title -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h3 class="text-xl font-bold text-gray-800">
-            FEATURED COURSES
-        </h3>
-        <span class="text-sm text-gray-500 mt-2 sm:mt-0">
-            Duration: 6-12 Weeks
-        </span>
-    </div>
+    <section id="second-fold-banner-section" class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Title -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <h3 class="text-xl font-bold text-gray-800">
+                FEATURED COURSES
+            </h3>
+            <span class="text-sm text-gray-500 mt-2 sm:mt-0">
+                Duration: 6-12 Weeks
+            </span>
+        </div>
 
-    <!-- Heading + Offerings -->
-    <div class="mt-6">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-2">
-            <span class="w-2 h-8 bg-indigo-600 rounded"></span>
-            Learn & Upgrade Your Skills Online
-        </h2>
+        <!-- Heading + Offerings -->
+        <div class="mt-6">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-2">
+                <span class="w-2 h-8 bg-indigo-600 rounded"></span>
+                Learn & Upgrade Your Skills Online
+            </h2>
 
-        <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 
-                    11.586 6.707 9.293a1 1 0 10-1.414 
-                    1.414l3 3a1 1 0 001.414 0l7-7a1 1 
-                    0 000-1.414z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700">100% Online Learning</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 
-                    11.586 6.707 9.293a1 1 0 10-1.414 
-                    1.414l3 3a1 1 0 001.414 0l7-7a1 1 
-                    0 000-1.414z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700">Hands-on Projects</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 
-                    11.586 6.707 9.293a1 1 0 10-1.414 
-                    1.414l3 3a1 1 0 001.414 0l7-7a1 1 
-                    0 000-1.414z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700">Industry-Recognized Certificate</span>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9
+                    11.586 6.707 9.293a1 1 0 10-1.414
+                    1.414l3 3a1 1 0 001.414 0l7-7a1 1
+                    0 000-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-gray-700">100% Online Learning</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9
+                    11.586 6.707 9.293a1 1 0 10-1.414
+                    1.414l3 3a1 1 0 001.414 0l7-7a1 1
+                    0 000-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-gray-700">Hands-on Projects</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9
+                    11.586 6.707 9.293a1 1 0 10-1.414
+                    1.414l3 3a1 1 0 001.414 0l7-7a1 1
+                    0 000-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-gray-700">Industry-Recognized Certificate</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Banner Image -->
-    <div class="mt-8">
-       <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&q=80&w=1600&fit=crop" 
-     alt="Students Learning Online" 
-     class="rounded-lg shadow-lg w-full object-cover" 
-     style="height:200px;">
+        <!-- Banner Image -->
+        <div class="mt-8">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&q=80&w=1600&fit=crop"
+                alt="Students Learning Online" class="rounded-lg shadow-lg w-full object-cover"
+                style="height:200px;">
 
-    </div>
+        </div>
 
-    <!-- Timer -->
-    {{-- <div class="mt-6 flex items-center gap-2 text-red-600 font-semibold text-lg">
+        <!-- Timer -->
+        {{-- <div class="mt-6 flex items-center gap-2 text-red-600 font-semibold text-lg">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" 
                   d="M10 18a8 8 0 100-16 8 8 0 
@@ -457,7 +456,7 @@
         </svg>
          <span>Enroll now – Offer ends in <span class="ml-1 font-bold">3d: 12h: 45m: 10s</span></span> 
     </div> --}}
-</section>
+    </section>
 
 
 
@@ -537,7 +536,7 @@
 
             <!-- ===== Left Side Category Tabs ===== -->
             <div class="space-y-4">
-                  <h2 class="text-lg font-bold text-gray-800">Categories</h2>
+                <h2 class="text-lg font-bold text-gray-800">Categories</h2>
                 <button class="category-tab w-full text-left px-6 py-3 bg-blue-500 text-white rounded-lg active"
                     data-target="offline">Offline Courses</button>
                 <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
@@ -712,6 +711,231 @@
 
 
 
+<section class="py-12 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Heading -->
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold">Get the CADADDA Advantage</h2>
+      <p class="text-gray-600 mt-2">The Edge Your Career Needs</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Left Top Card -->
+      <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
+        <img src="https://via.placeholder.com/300x200" alt="Industry-Relevant Skills" class="w-full h-30 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg">Industry-Relevant Skills</h3>
+          <p class="text-gray-600 mt-2">Master the tools and techniques top companies actually use.</p>
+        </div>
+      </div>
+
+      <!-- Left Bottom Card -->
+      <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
+        <div class="grid grid-cols-2 gap-1 p-2">
+          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+        </div>
+      </div>
+
+      <!-- Middle Card (Video) -->
+      <div class="bg-white rounded-lg md:grid-cols-4 shadow overflow-hidden md:row-span-2">
+        <video controls class="w-full h-80 object-cover">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="p-4">
+          <h3 class="font-semibold text-lg">Career Opportunities</h3>
+          <p class="text-gray-600 mt-2">Turn your skills into interviews, offers, and real impact.</p>
+        </div>
+      </div>
+
+      <!-- Right Top Card -->
+      <div class="bg-white md:grid-cols-5 rounded-lg shadow overflow-hidden">
+        <img src="https://via.placeholder.com/300x200" alt="Community at the Center" class="w-full h-40 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg">Community at the Center</h3>
+          <p class="text-gray-600 mt-2">Learn, grow, and stay inspired with a like-minded tribe.</p>
+        </div>
+      </div>
+
+      <!-- Right Bottom Card -->
+      <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5" >
+        <img src="https://via.placeholder.com/300x200" alt="Classroom Session" class="w-full h-40 object-cover">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <div class="max-w-7xl mx-auto px-6 py-10 relative">
+        <h2 class="text-center text-2xl font-bold mb-6">
+            CADADDA learners now shine at 200+ leading product companies
+        </h2>
+
+        <div class="flex justify-center gap-10 mb-6">
+            <div class="bg-white-100 px-4 py-2 rounded-lg shadow">
+                <p class="text-sm">Jobs On LinkedIn</p>
+                <h3 class="text-xl font-bold text-blue-600">52,000+</h3>
+            </div>
+            <div class="bg-white-100 px-4 py-2 rounded-lg shadow">
+                <p class="text-sm">Average Salary Hike</p>
+                <h3 class="text-xl font-bold text-blue-600">90%</h3>
+            </div>
+        </div>
+
+        <!-- Slider main container -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <!-- Example Slide -->
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <!-- Duplicate slides for loop -->
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+                <!-- Example Slide -->
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <!-- Duplicate slides for loop -->
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+
+                <!-- Duplicate slides for loop -->
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
+                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
+                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 8, // ✅ default 8 slides
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1
+                }, // mobile
+                640: {
+                    slidesPerView: 2
+                }, // tablet
+                1024: {
+                    slidesPerView: 4
+                }, // medium desktop
+                1440: {
+                    slidesPerView: 8
+                }, // ✅ large screen
+            },
+        });
+    </script>
+
+
+
+
+
+
 
     <!-- Company Feedback & Hiring Partners -->
     <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
@@ -781,106 +1005,60 @@
                 </div>
             </div>
 
-            <!-- Hiring Partners Logos -->
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold mb-8 text-gray-800 dark:text-white transition-colors duration-300">
-                    Companies Hiring From Us</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-                    <!-- Placeholder logos -->
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            1</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            2</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            3</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            4</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            5</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            6</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
+    <section id="advantages-section" class="py-12 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
 
-<section id="advantages-section" class="py-12 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-6">
-    
-    <!-- Heading -->
-    <div class="text-center mb-10">
-      <img 
-        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
-        alt="Advantage Icon" 
-        class="mx-auto h-12 w-12 mb-4"
-      >
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-        Why Choose Us?
-      </h2>
-      <p class="text-gray-600 mt-2">
-        Learn, grow, and achieve your career goals with our trusted training programs
-      </p>
-    </div>
+            <!-- Heading -->
+            <div class="text-center mb-10">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Advantage Icon"
+                    class="mx-auto h-12 w-12 mb-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
+                    Why Choose Us?
+                </h2>
+                <p class="text-gray-600 mt-2">
+                    Learn, grow, and achieve your career goals with our trusted training programs
+                </p>
+            </div>
 
-    <!-- Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      
-      <!-- Card 1 -->
-      <div class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
-        <img 
-          src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" 
-          alt="Expert Mentors" 
-          class="mx-auto h-16 w-16 mb-4"
-        >
-        <h3 class="text-lg font-semibold text-gray-800">Expert Mentors</h3>
-        <p class="text-gray-600 mt-2">Learn directly from industry experts with years of real-world experience.</p>
-      </div>
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-      <!-- Card 2 -->
-      <div class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
-        <img 
-          src="https://cdn-icons-png.flaticon.com/512/3135/3135773.png" 
-          alt="Career Support" 
-          class="mx-auto h-16 w-16 mb-4"
-        >
-        <h3 class="text-lg font-semibold text-gray-800">Career Support</h3>
-        <p class="text-gray-600 mt-2">Get guidance, resume reviews, and interview preparation to land your dream job.</p>
-      </div>
+                <!-- Card 1 -->
+                <div
+                    class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Expert Mentors"
+                        class="mx-auto h-16 w-16 mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Expert Mentors</h3>
+                    <p class="text-gray-600 mt-2">Learn directly from industry experts with years of real-world
+                        experience.</p>
+                </div>
 
-      <!-- Card 3 -->
-      <div class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
-        <img 
-          src="https://cdn-icons-png.flaticon.com/512/992/992651.png" 
-          alt="Certified Courses" 
-          class="mx-auto h-16 w-16 mb-4"
-        >
-        <h3 class="text-lg font-semibold text-gray-800">Certified Courses</h3>
-        <p class="text-gray-600 mt-2">Earn globally recognized certificates to showcase your skills and expertise.</p>
-      </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135773.png" alt="Career Support"
+                        class="mx-auto h-16 w-16 mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Career Support</h3>
+                    <p class="text-gray-600 mt-2">Get guidance, resume reviews, and interview preparation to land your
+                        dream job.</p>
+                </div>
 
-    </div>
-  </div>
-</section>
+                <!-- Card 3 -->
+                <div
+                    class="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-xl hover:scale-105 transition transform">
+                    <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="Certified Courses"
+                        class="mx-auto h-16 w-16 mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Certified Courses</h3>
+                    <p class="text-gray-600 mt-2">Earn globally recognized certificates to showcase your skills and
+                        expertise.</p>
+                </div>
 
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">
