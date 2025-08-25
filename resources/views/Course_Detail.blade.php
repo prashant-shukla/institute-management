@@ -575,6 +575,207 @@
 </script>
 
 
+<!-- AutoCAD FAQ Section -->
+<section id="faq" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <!-- Heading -->
+    <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">
+      ❓ AutoCAD Course FAQs
+    </h2>
+
+    <div class="space-y-4">
+      <!-- FAQ Item 1 -->
+      <div class="border rounded-xl bg-white shadow-sm">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group" onclick="toggleFAQ(this)">
+          <span class="font-semibold text-gray-900">What is AutoCAD and why should I learn it?</span>
+          <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-4 hidden">
+          <p class="text-gray-700">AutoCAD is a leading CAD software used for 2D drafting and 3D modeling. Learning it enhances your career in engineering, architecture, and design.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="border rounded-xl bg-white shadow-sm">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group" onclick="toggleFAQ(this)">
+          <span class="font-semibold text-gray-900">Do I need prior experience to take this course?</span>
+          <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-4 hidden">
+          <p class="text-gray-700">No prior experience is required. This course is designed for beginners and gradually builds up to advanced AutoCAD skills.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="border rounded-xl bg-white shadow-sm">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group" onclick="toggleFAQ(this)">
+          <span class="font-semibold text-gray-900">Will I work on real-world projects?</span>
+          <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-4 hidden">
+          <p class="text-gray-700">Yes! The course includes 2D drafting, 3D modeling, and architectural projects to give you hands-on experience.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="border rounded-xl bg-white shadow-sm">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group" onclick="toggleFAQ(this)">
+          <span class="font-semibold text-gray-900">Can I get a certificate after completion?</span>
+          <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-4 hidden">
+          <p class="text-gray-700">Yes, you will receive a certificate upon successfully completing all course modules and projects.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="border rounded-xl bg-white shadow-sm">
+        <button class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group" onclick="toggleFAQ(this)">
+          <span class="font-semibold text-gray-900">Is there placement assistance after this course?</span>
+          <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="px-6 pb-4 hidden">
+          <p class="text-gray-700">Yes, we provide placement guidance and support to help you land internships or job opportunities in design and engineering fields.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Include Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+
+<section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+  <div class="container mx-auto px-4">
+    <h2
+      class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-300">
+      ⭐ What Our Students Say
+    </h2>
+
+    <!-- Swiper Slider -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+        <!-- Slide 1 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+          <div class="flex mb-4">
+            <div class="text-yellow-400">★★★★★</div>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+            "AutoCAD training at CADADDA was amazing! The projects helped me understand real-world drafting and modeling."
+          </p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+            <div>
+              <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Siddharth Verma</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">Mechanical Engineering Student</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+          <div class="flex mb-4">
+            <div class="text-yellow-400">★★★★★</div>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+            "The instructors were very clear and supportive. I gained confidence in creating 3D models and floor plans."
+          </p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+            <div>
+              <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Ananya Singh</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">Architecture Student</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+          <div class="flex mb-4">
+            <div class="text-yellow-400">★★★★★</div>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+            "Thanks to CADADDA, I was able to complete my projects professionally. The skills I learned are now helping me in my job."
+          </p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+            <div>
+              <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Rohit Mehta</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">Civil Engineering Student</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination mt-6"></div>
+
+      <!-- Navigation -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Include Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+  });
+</script>
+
+
+<!-- FAQ Accordion JS -->
+<script>
+  function toggleFAQ(button) {
+    const content = button.nextElementSibling;
+    const icon = button.querySelector('svg');
+    content.classList.toggle('hidden');
+    icon.classList.toggle('rotate-180');
+  }
+</script>
+
+
+
   <!-- Call To Action -->
   <section class="py-20 bg-indigo-500 text-white text-center relative overflow-hidden">
     <div class="absolute inset-0 bg-[url('https://source.unsplash.com/1600x600/?code,developer')] bg-cover bg-center opacity-20"></div>
