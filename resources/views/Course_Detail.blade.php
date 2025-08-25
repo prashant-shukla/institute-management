@@ -575,6 +575,51 @@
 </script>
 
 
+
+<section class="py-16 bg-blue-50">
+  <div class="max-w-6xl mx-auto px-6 md:flex md:items-center md:justify-between gap-8">
+    
+    <!-- Course Info -->
+    <div class="md:flex-1">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Diploma in Interior Design</h2>
+      <p class="text-gray-600 mb-4">Learn industry-ready skills with projects & mentorship</p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2">
+        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">1 Year</span>
+        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Offline + Online support</span>
+        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">Certificate Included</span>
+      </div>
+    </div>
+
+    <!-- Pricing & Enroll -->
+    <div class="md:w-80 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-2xl font-bold text-gray-900">₹45,000</span>
+          <span class="text-gray-400 line-through ml-2">₹60,000</span>
+        </div>
+        <span class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">Limited seats</span>
+      </div>
+
+      <button class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
+        Enroll Now
+      </button>
+      
+      <button class="w-full border border-indigo-600 text-indigo-600 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
+        View Curriculum
+      </button>
+
+      <p class="text-xs text-gray-500 mt-2">
+        Secure checkout via UPI / Cards. Instant confirmation.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
 <!-- AutoCAD FAQ Section -->
 <section id="faq" class="py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
