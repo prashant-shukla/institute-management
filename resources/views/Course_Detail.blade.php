@@ -593,24 +593,24 @@
     </div>
 
     <!-- Pricing & Enroll -->
-    <div class="md:w-80 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
+    <div class="md:w-100 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
       <div class="flex items-center justify-between">
         <div>
           <span class="text-2xl font-bold text-gray-900">₹45,000</span>
           <span class="text-gray-400 line-through ml-2">₹60,000</span>
         </div>
-        <span class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">Limited seats</span>
+        <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
       </div>
 
-      <button class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
+      <button class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
         Enroll Now
       </button>
       
-      <button class="w-full border border-indigo-600 text-indigo-600 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
+      <button class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
         View Curriculum
       </button>
 
-      <p class="text-xs text-gray-500 mt-2">
+      <p class="text-xs text-gray-400 mt-2">
         Secure checkout via UPI / Cards. Instant confirmation.
       </p>
     </div>
