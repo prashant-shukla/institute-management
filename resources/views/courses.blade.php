@@ -388,7 +388,7 @@
 
 
 
-    <section id="second-fold-banner-section" class="max-w-7xl mx-auto px-4 py-12">
+    <section id="second-fold-banner-section" class="container mx-auto px-4 py-12">
         <!-- Title -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <h3 class="text-xl font-bold text-gray-800">
@@ -439,7 +439,7 @@
 
         <!-- Banner Image -->
         <div class="mt-8">
-            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&q=80&w=1600&fit=crop"
+            <img src="{{asset('images/1080x200.svg')}}"
                 alt="Students Learning Online" class="rounded-lg shadow-lg w-full object-cover"
                 style="height:200px;">
 
@@ -743,7 +743,7 @@
 
       <!-- Middle Card (Video) -->
       <div class="bg-white rounded-lg md:grid-cols-4 shadow overflow-hidden md:row-span-2">
-        <video controls class="w-full h-80 object-cover">
+        <video  autoplay muted loop playsinline  class="w-full h-80 object-cover">
           <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -755,11 +755,10 @@
 
       <!-- Right Top Card -->
       <div class="bg-white md:grid-cols-5 rounded-lg shadow overflow-hidden">
-        <img src="https://via.placeholder.com/300x200" alt="Community at the Center" class="w-full h-40 object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold text-lg">Community at the Center</h3>
-          <p class="text-gray-600 mt-2">Learn, grow, and stay inspired with a like-minded tribe.</p>
-        </div>
+       <video  autoplay muted loop playsinline  class="w-full h-80 object-cover">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
 
       <!-- Right Bottom Card -->
