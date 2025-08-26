@@ -80,6 +80,10 @@ class HomeController extends Controller
     {
         return view('Course_Detail');
     }
+          public function contacts()
+    {
+        return view('contacts');
+    }
     public function category()
     {
         $courses = Course::all();

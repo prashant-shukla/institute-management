@@ -1,488 +1,645 @@
-<!doctype html>
-<!-- Martex - Tailwind CSS Software, SaaS & Startup Template design by elite-themes24 () -->
-<!--[if lt IE 7 ]>
-<html class="ie ie6" lang="en">
-   <![endif]-->
-   <!--[if IE 7 ]>
-   <html class="ie ie7" lang="en">
-      <![endif]-->
-      <!--[if IE 8 ]>
-      <html class="ie ie8" lang="en">
-         <![endif]-->
-         <!--[if (gte IE 9)|!(IE)]><!-->
-         <html lang="en">
-        <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="elite-themes24">
-    <meta name="description" content="Martex - Tailwind CSS Software, SaaS & Startup Template">
-    <meta name="keywords"
-        content="Responsive, HTML5, elite-themes24, Landing, Software, Mobile App, SaaS, Startup, Creative, Digital Product">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- SITE TITLE -->
-    <title>Martex - Tailwind CSS Software, SaaS & Startup Template</title>
-    <!-- FAVICON AND TOUCH ICONS -->
-      
-    <link rel="shortcut icon" href="front/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="front/images/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="152x152" href="front/assets/assests/images/icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="front/assets/assests/images/icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="front/assets/assests/images/icons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" href="front/assets/assests/images/icons/apple-touch-icon.png">
-    <link rel="icon" href="front/assets/assests/images/icons/apple-touch-icon.png" type="image/x-icon">
-    <link href="front/css/flaticon.css" rel="stylesheet">
-    <!-- PLUGINS STYLESHEET -->
-    <link href="front/css/menu.css" rel="stylesheet">
-    <link id="effect" href="front/css/dropdown-effects/fade-down.css" media="all" rel="stylesheet">
-    <link href="front/css/magnific-popup.css" rel="stylesheet">
-    <link href="front/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="front/css/owl.theme.default.min.css" rel="stylesheet">
-    <link href="front/css/lunar.css" rel="stylesheet">
-    <!-- ON SCROLL ANIMATION -->
-    <link href="front/assets/assests/css/animate.css" rel="stylesheet">
-    <!-- TEMPLATE CSS -->
-    <link href="style.css" rel="stylesheet">
-    <!-- Style Switcher CSS -->
-    <link href="front/css/colors/magenta-theme.css" rel="stylesheet">
-    <link href="front/css/colors/blue-theme.css" rel="alternate stylesheet" title="blue-theme">
-    <link href="front/css/colors/crocus-theme.css" rel="alternate stylesheet" title="crocus-theme">
-    <link href="front/css/colors/green-theme.css" rel="alternate stylesheet" title="green-theme">
-    <link href="front/css/colors/pink-theme.css" rel="alternate stylesheet" title="pink-theme">
-    <link href="front/css/colors/purple-theme.css" rel="alternate stylesheet" title="purple-theme">
-    <link href="front/css/colors/skyblue-theme.css" rel="alternate stylesheet" title="skyblue-theme">
-    <link href="front/css/colors/red-theme.css" rel="alternate stylesheet" title="red-theme">
-    <link href="front/css/colors/violet-theme.css" rel="alternate stylesheet" title="violet-theme">
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADADDA - Autodesk Authorized CAD/CAM Training Institute</title>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'slide-right': 'slideRight 0.6s ease-out',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        slideIn: {
+                            '0%': {
+                                transform: 'translateX(-100%)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(50px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideRight: {
+                            '0%': {
+                                transform: 'translateX(50px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Slide animations */
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .slide-in-up {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        /* Initial states */
+        .slide-in-left,
+        .slide-in-right,
+        .slide-in-up {
+            opacity: 0;
+        }
+
+        /* Keyframes */
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Counter animation styles */
+        .counter {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .counter.animate {
+            transform: scale(1.1);
+            color: #fbbf24;
+        }
+
+        /* Ensure animations work on all browsers */
+        .slide-in-left,
+        .slide-in-right,
+        .slide-in-up {
+            will-change: transform, opacity;
+        }
+    </style>
 </head>
-            <body>
-               <!-- PRELOADER SPINNER
-                  ============================================= -->
-              <div id="loading" class="loading--theme  h-full w-full fixed z-[99999999] mt--0 top-0 bg-[#f5f5f9]">
-                <div id="loading-center" class="absolute !h-[100px] !w-[100px] mt-[-50px] ml-[-50px] animate-[loading-center-absolute_1s_infinite] left-2/4 top-2/4 lg:max-xl:!h-[90px] lg:max-xl:!w-[90px] lg:max-xl:!mt-[-45px] lg:max-xl:ml-[-45px] md:max-lg:!h-[90px] md:max-lg:!w-[90px] md:max-lg:!mt-[-45px] md:max-lg:ml-[-45px]"><span class="loader !w-[100px] !h-[100px] inline-block relative box-border animate-[rotation_1s_linear_infinite] rounded-[50%] border-2 border-solid border-[transparent_#888] after:content-[''] after:box-border after:absolute after:-translate-x-2/4 after:-translate-y-2/4 after:rounded-[50%] after:border-[50px] after:border-solid after:border-[transparent_rgba(30,30,30,0.15)] after:left-2/4 after:!top-2/4 lg:max-xl:!w-[90px] lg:max-xl:!h-[90px] lg:max-xl:after:border-[45px] lg:max-xl:after:border-solid md:max-lg:!w-[90px] md:max-lg:!h-[90px] md:max-lg:after:border-[45px] md:max-lg:after:border-solid sm:max-md:!w-[80px] sm:max-md:!h-[80px] sm:max-md:after:border-[40px] sm:max-md:after:border-solid"></span></div>
-              </div>
-               <!-- STYLE SWITCHER
-                  ============================================= -->
-               <div id="stlChanger" class="fixed z-[9999] !text-[15px] overflow-hidden right-[-230px] cursor-pointer transition-all duration-[400ms] ease-[ease-in-out] rounded-none top-[100px] xsm:max-sm:hidden">
-                  <div class="blockChanger bgChanger min-w-[280px] min-h-[280px] !w-[230px]">
-                     <a href="#" class="chBut icon-xs !w-[50px] !h-[50px] !absolute z-[1000000] !text-center transition-all duration-300 ease-[ease-in-out] shadow-[0_0_2px_rgba(50,50,50,0.4)] pl-[2px] pr-0 py-0 rounded-[4px_0px_0px_4px] ![border-left:none] [border:1px_solid_#ef2853] left-0 top-[30px] bg-[#ef2853]"><span class="flaticon-control-panel before:content-['\f1cf'] before:!text-white before:!text-[2.15rem]"></span></a>
-                     <div class="chBody white-color !w-[230px] relative border !h-[425px] overflow-scroll overflow-x-hidden ml-[50px] rounded-[4px_0px_0px_4px] border-solid border-[#2b2e37] bg-[#2b2e37] [direction:rtl]">
-                        <div class="stBlock !text-center" style="margin: 30px 20px 20px 26px;">
-                           <div class="stBgs">
-                              <p class="switch !text-[18px] font-semibold tracking-[0] !mb-[20px] font-Jakarta w-full !text-white rounded px-[1.4rem] py-[0.4rem] border-2 border-solid border-white !leading-[1.6666]"></p>
-                              <p class="color--white !text-[1.125rem] font-semibold tracking-[0] !mb-[20px] font-Jakarta">Color Scheme</p>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('pink-theme', 60)"><img src="images/color-scheme/pink.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('purple-theme', 60)"><img src="images/color-scheme/purple.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('violet-theme', 60)"><img src="images/color-scheme/violet.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('skyblue-theme', 60)"><img src="images/color-scheme/skyblue.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('magenta-theme', 60)"><img src="images/color-scheme/magenta.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('crocus-theme', 60)"><img src="images/color-scheme/crocus.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('red-theme', 60)"><img src="images/color-scheme/red.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                              <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]" href="javascript:chooseStyle('green-theme', 60)"><img src="images/color-scheme/green.jpg"
-                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
-                           </div>
+
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header / Navbar -->
+    <header
+        class="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/50 sticky top-0 z-50 transition-colors duration-300">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">C</span>
+                    </div>
+                    <span
+                        class="text-2xl font-bold text-gray-800 dark:text-white transition-colors duration-300">CADADDA</span>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-gray-700 dark:text-gray-300 transition-colors duration-300"
+                    onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
+                    <a href="#courses"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Courses</a>
+                    <a href="#event"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
+                    <a href="#gallery"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
+                    <a href="#jobs"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
+                    <a href="#contact"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
+                        Us</a>
+                </div>
+
+                <!-- Dark Mode Toggle & Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle"
+                        class="p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                        onclick="toggleDarkMode()">
+                        <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <button
+                        class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
+                        Sign in
+                    </button>
+                    <button
+                        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                        Join Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden mt-4 md:hidden">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
+                    <a href="#courses"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Courses</a>
+                    <a href="#event"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
+                    <a href="#gallery"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
+                    <a href="#jobs"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
+                    <a href="#contact"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
+                        Us</a>
+                    <div class="flex space-x-2 pt-3">
+                        <button
+                            class="flex-1 px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
+                            Sign in
+                        </button>
+                        <button
+                            class="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                            Join Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-12 text-center">
+        <h1 class="text-4xl font-bold">Contact Us</h1>
+        <p class="mt-2 text-lg">Feel free to ask for details, don’t save any questions!</p>
+    </header>
+
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+
+            <!-- Contact Info Boxes -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
+
+                <!-- Email -->
+                <div
+                    class="rounded-xl transition-all duration-300 bg-white border border-gray-200 hover:shadow-lg hover:border-indigo-300 hover:-translate-y-1 p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-indigo-50 text-indigo-600">
+                            <!-- Mail Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24">
+                                <rect width="20" height="16" x="2" y="4" rx="2" />
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                            </svg>
                         </div>
-                        <div class="stBlock !text-center" style="margin: 0px 27px 25px 31px;">
-                           <a class="btn rounded-[4px] btn--theme hover--theme w-full leading-none mt-[15px] !px-[1.2rem] !py-[0.65rem]" href="javascript:chooseStyle('none', 60)">Reset
-                           Color</a>
+                        <div class="flex-1">
+                            <p class="text-xs text-gray-500 font-medium">Email Us</p>
+                            <p class="text-sm font-bold text-gray-900">info@cadadda.com</p>
+                            <a href="mailto:info@cadadda.com"
+                                class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                                Send Email
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14" />
+                                    <path d="m12 5 7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- END SWITCHER -->
-               <!-- PAGE CONTENT
-                  ============================================= -->	
-               <div id="page" class="page font--jakarta">
-				<!-- HEADER
-				   ============================================= -->
-				<header id="header" class="tra-menu navbar-dark inner-page-header white-scroll w-full block !pt-0">
-				   <div class="header-wrapper fixed z-[1030] top-0 inset-x-0">
-					  <!-- MOBILE HEADER -->
-					  <div class="wsmobileheader clearfix">
-						 <span class="smllogo md:max-lg:!block md:max-lg:!mt-[22px] md:max-lg:!pl-[22px] sm:max-md:!block sm:max-md:!mt-[23px] sm:max-md:!pl-[18px] xsm:max-sm:!block xsm:max-sm:!mt-[23px] xsm:max-sm:!pl-[16px]"><img class="md:w-auto  md:max-lg:!max-w-[inherit] md:max-lg:!max-h-[34px] sm:max-md:!w-auto sm:max-md:!max-w-[inherit] sm:max-md:!max-h-[34px] xsm:max-sm:!w-auto xsm:max-sm:!max-w-[inherit] xsm:max-sm:!max-h-[34px]" src="images/logo-blue.png" alt="mobile-logo"></span>
-						 <a id="wsnavtoggle" class="wsanimated-arrow"><span></span></a>
-					  </div>
-					  <!-- NAVIGATION MENU -->
-					  <div class="wsmainfull menu clearfix !text-[#b1b7cd] p-[20px_0] w-full h-auto z-[1031] [transition:all_450ms_ease-in-out]">
-						 <div class="wsmainwp clearfix">
-							<!-- HEADER BLACK LOGO -->
-							<div class="desktoplogo">
-							   <a href="demo-1.html" class="logo-black">
-							   <img class="light-theme-img w-auto max-w-[inherit] !max-h-[38px] lg:max-xl:!max-h-[34px] inline-block" src="images/logo-blue.png" alt="logo">
-							   <img class="dark-theme-img w-auto max-w-[inherit] !max-h-[38px] lg:max-xl:!max-h-[34px]" src="images/logo-blue-white.png" alt="logo">
-							   </a>
-							</div>
-							<!-- HEADER WHITE LOGO -->
-							<div class="desktoplogo">
-							   <a href="demo-1.html" class="logo-white">
-								  <img class=" w-auto max-w-[inherit] !max-h-[38px] lg:max-xl:!max-h-[34px] inline-block" src="images/logo-blue-white.png" alt="logo"></a>
-							</div>
-							<!-- MAIN MENU -->
-							<nav class="wsmenu clearfix">
-							   <ul class="wsmenu-list nav-theme">
-								  <!-- DROPDOWN SUB MENU -->
-								  <li aria-haspopup="true">
-									 <a href="#" class="h-link">Company <span
-										class="wsarrow"></span></a>
-									 <ul class="sub-menu">
-										<li aria-haspopup="true"><a href="about.html">About Us</a></li>
-										<li aria-haspopup="true"><a href="careers.html">Careers <span
-										   class="sm-info">4</span></a></li>
-										<li aria-haspopup="true"><a href="reviews.html">Customers</a></li>
-										<li aria-haspopup="true"><a href="blog-listing.html">Our Blog</a></li>
-										<li aria-haspopup="true"><a href="contacts.html">Contact Us</a></li>
-									 </ul>
-								  </li>
-								  <!-- SIMPLE NAVIGATION LINK -->
-								  <li class="nl-simple" aria-haspopup="true"><a href="projects.html" class="h-link">Case
-									 Studies</a>
-								  </li>
-								  <!-- SIMPLE NAVIGATION LINK -->
-								  <li class="nl-simple" aria-haspopup="true"><a href="pricing-1.html"
-									 class="h-link">Pricing</a></li>
-								  <!-- SIMPLE NAVIGATION LINK -->
-								  <li class="nl-simple" aria-haspopup="true"><a href="faqs.html" class="h-link">FAQs</a>
-								  </li>
-								  <!-- SIGN IN LINK -->
-								  <li class="nl-simple reg-fst-link mobile-last-link" aria-haspopup="true">
-									 <a href="login-2.html" class="h-link">Sign In</a>
-								  </li>
-								  <!-- SIGN UP BUTTON -->
-								  <li class="nl-simple" aria-haspopup="true">
-									 <a href="signup-2.html" class="btn  !rounded-[4px]  btn--theme hover--theme last-link">Get
-									 Started</a>
-								  </li>
-							   </ul>
-							</nav>
-							<!-- END MAIN MENU -->
-						 </div>
-					  </div>
-					  <!-- END NAVIGATION MENU -->
-				   </div>
-				   <!-- End header-wrapper -->
-				</header>
-				<!-- END HEADER -->
-                  <!-- CONTACTS-1
-                     ============================================= -->
-                  <section id="contacts-1" class="pb--50 xl:!pb-[50px] lg:max-xl:!pb-[40px] md:max-lg:!pb-[30px]  inner-page-hero contacts-section division pt-[180px] lg:max-xl:pt-[160px] md:max-lg:!mt-[80px] md:max-lg:pt-[70px]">
-                     <div class="container">
-                        <!-- SECTION TITLE -->	
-                        <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  justify-center">
-                           <div class="md:w-10/12 lg:max-xl:w-9/12 xl:w-9/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full ">
-                              <div class="section-title !text-center mb--80 xl:!mb-[80px] lg:max-xl:!mb-[60px] md:max-lg:!mb-[50px]">
-                                 <!-- Title -->	
-                                 <h2 class="s-52 w--700 xl:!text-[3.25rem] lg:max-xl:!text-[3rem] md:max-lg:!text-[2.79411rem] sm:max-md:!text-[2.375rem] xsm:max-sm:!text-[2.0625rem] !font-bold !tracking-[-0.5px] !mb-0 xsm:max-sm:px-[1%] xsm:max-sm:py-0 font-Jakarta leading-[1.25] sm:max-md:!leading-[1.35] xsm:max-sm:!leading-[1.35]">Questions? Let's Talk</h2>
-                                 <!-- Text -->	
-                                 <p class="p-lg !text-[1.125rem] xl:!mt-[18px] !mb-0 px-[3%] py-0 lg:max-xl:!mt-[15px] md:max-lg:!mt-3 lg:max-xl:!p-0 md:max-lg:!p-0 sm:max-md:!mt-[14px] sm:max-md:!p-0 xsm:max-sm:!p-0 !leading-[1.6666]">Want to learn more about Martex, get a quote, or speak with an expert? 
-                                    Let us know what you are looking for and we’ll get back to you right away
-                                 </p>
-                              </div>
-                           </div>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div
+                    class="rounded-xl transition-all duration-300 bg-white border border-gray-200 hover:shadow-lg hover:border-indigo-300 hover:-translate-y-1 p-6">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-xl flex items-center justify-center bg-indigo-50 text-indigo-600">
+                            <!-- Phone Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
                         </div>
-                        <!-- CONTACT FORM -->
-                        <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  justify-center">
-                           <div class="md:w-11/12 lg:max-xl:w-10/12 xl:w-8/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full ">
-                              <div class="form-holder">
-                                 <form name="contactform" class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  contact-form">
-                                    <!-- Form Select -->
-                                    <div class="md:w-full w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full  input-subject">
-                                       <p class="p-lg text-[#353f4f] !text-[1.125rem] !leading-none font-medium !mb-[10px] pl-[8px]">This question is about: </p>
-                                       <span class="block !text-[0.95rem] leading-none !font-light xl:!mb-[20px] pl-[8px] lg:max-xl:!mb-[15px] md:max-lg:!mb-[15px] sm:max-md:!mb-[15px] xsm:max-sm:!leading-[1.4] xsm:max-sm:!mb-[15px]">Choose a topic, so we know who to send your request to: </span>
-                                       <select class="form-select subject inline-block w-full !text-[#998da0] shadow-none rounded-[6px] xl:!h-[62px] bg-[#f5f6f8] border !text-[1rem] !font-normal mb--30 mb-[30px] p-[0_15px] bg-[right_0.75rem_center] border-solid border-transparent lg:max-xl:!h-[54px] md:max-lg:!h-[52px] sm:max-md:!h-[54px] xsm:max-sm:!h-[54px] focus:shadow-none focus:bg-[#fcfdfd] focus:border-[#1680fb] focus:[outline:0px_none]" aria-label="Default select example">
-                                          <option selected>This question is about...</option>
-                                          <option>Registering/Authorising</option>
-                                          <option>Using Application</option>
-                                          <option>Troubleshooting</option>
-                                          <option>Backup/Restore</option>
-                                          <option>Other</option>
-                                       </select>
-                                    </div>
-                                    <!-- Contact Form Input -->
-                                    <div class="w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                       <p class="p-lg text-[#353f4f] !text-[1.125rem] !leading-none font-medium !mb-[10px] pl-[8px]">Your Name: </p>
-                                       <span class="block !text-[0.95rem] leading-none !font-light xl:!mb-[20px] pl-[8px] lg:max-xl:!mb-[15px] md:max-lg:!mb-[15px] sm:max-md:!mb-[15px] xsm:max-sm:!leading-[1.4] xsm:max-sm:!mb-[15px]">Please enter your real name: </span>
-                                       <input type="text" name="name" class="form-control block w-full name xl:!h-[62px] bg-[#f5f6f8] border shadow-[0_0_0_0] !text-[#3a4a56] !text-[1rem] !font-normal mb--30 mb-[30px] p-[0_15px] rounded-[6px] border-solid border-transparent lg:max-xl:!h-[54px] md:max-lg:!h-[52px] sm:max-md:!h-[54px] xsm:max-sm:!h-[54px] focus:shadow-none focus:bg-[#fcfdfd] focus:border-[#1680fb] focus:[outline:0px_none]" placeholder="Your Name*"> 
-                                    </div>
-                                    <div  class="w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                       <p class="p-lg text-[#353f4f] !text-[1.125rem] !leading-none font-medium !mb-[10px] pl-[8px]">Your Email Address: </p>
-                                       <span class="block !text-[0.95rem] leading-none !font-light xl:!mb-[20px] pl-[8px] lg:max-xl:!mb-[15px] md:max-lg:!mb-[15px] sm:max-md:!mb-[15px] xsm:max-sm:!leading-[1.4] xsm:max-sm:!mb-[15px]">Please carefully check your email address for accuracy</span>
-                                       <input type="text" name="email" class="form-control block w-full email xl:!h-[62px] bg-[#f5f6f8] border shadow-[0_0_0_0] !text-[#3a4a56] !text-[1rem] !font-normal mb--30 mb-[30px] p-[0_15px] rounded-[6px] border-solid border-transparent lg:max-xl:!h-[54px] md:max-lg:!h-[52px] sm:max-md:!h-[54px] xsm:max-sm:!h-[54px] focus:shadow-none focus:bg-[#fcfdfd] focus:border-[#1680fb] focus:[outline:0px_none]" placeholder="Email Address*"> 
-                                    </div>
-                                    <div class="w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                       <p class="p-lg text-[#353f4f] !text-[1.125rem] !leading-none font-medium !mb-[10px] pl-[8px]">Explain your question in details: </p>
-                                       <span class="block !text-[0.95rem] leading-none !font-light xl:!mb-[20px] pl-[8px] lg:max-xl:!mb-[15px] md:max-lg:!mb-[15px] sm:max-md:!mb-[15px] xsm:max-sm:!leading-[1.4] xsm:max-sm:!mb-[15px]">Your OS version, Martex version & build, steps you did. Be VERY precise!</span>
-                                       <textarea class="form-control block w-full message xl:!h-[62px] bg-[#f5f6f8] border shadow-[0_0_0_0] !text-[#3a4a56] !text-[1rem] !font-normal mb--30 mb-[30px] p-[0_15px] rounded-[6px] border-solid border-transparent lg:max-xl:!h-[54px] md:max-lg:!h-[52px] sm:max-md:!h-[54px] xsm:max-sm:!h-[54px] focus:shadow-none focus:bg-[#fcfdfd] focus:border-[#1680fb] focus:[outline:0px_none]" name="message" rows="6" placeholder="I have a problem with..."></textarea>
-                                    </div>
-                                    <!-- Contact Form Button -->
-                                    <div class="w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full mt-[15px] form-btn">	
-                                       <button type="submit" class="btn btn--theme hover--theme submit">Submit Request</button>	
-                                    </div>
-                                    <div class="contact-form-notice w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                       <p class="p-sm !text-[0.835rem] !font-light leading-[1.5555] mt--40 xl:!mt-[40px] pl-0 lg:max-xl:!text-sm lg:max-xl:!mt-[30px] md:max-lg:!text-sm md:max-lg:!mt-[30px] sm:max-md:!text-sm sm:max-md:!mt-[30px] xsm:max-sm:!text-sm xsm:max-sm:!mt-[30px] text-[#353f4f] !mb-[10px]">We are committed to your privacy. Martex uses the information you 
-                                          provide us to contact you about our relevant content, products, and services. 
-                                          You may unsubscribe from these communications at any time. For more information, 
-                                          check out our <a href="privacy.html" class="text-[#353f4f] font-medium !underline">Privacy Policy</a>.
-                                       </p>
-                                    </div>
-                                    <!-- Contact Form Message -->
-                                    <div class="contact-form-msg w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full block mt-[20px] pl-0">
-                                       <span class="loading !text-[#00b2e4] !text-[1.0625rem] leading-none font-medium pl-[15px]"></span>
-                                    </div>
-                                 </form>
-                              </div>
-                           </div>
+                        <div class="flex-1">
+                            <p class="text-xs text-gray-500 font-medium">Call Us</p>
+                            <p class="text-sm font-bold text-gray-900">+91 9261077888</p>
+                            <p class="text-sm text-gray-600">Mon-Fri 9:00 AM - 6:00 PM</p>
+                            <a href="tel:+919261077888"
+                                class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                                Call Now
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14" />
+                                    <path d="m12 5 7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
-                        <!-- END CONTACT FORM -->
-                     </div>
-                     <!-- End container -->	
-                  </section>
-                  <!-- END CONTACTS-1 -->
-                  <!-- DIVIDER LINE -->
-                  <hr class="divider w-full h-px bg-transparent bg-[linear-gradient(90deg,rgba(206,211,246,0)_0,#bbb_38%,#bbb_64%,rgba(206,211,246,0)_99%)] opacity-40 !m-0 ![border:none]">
-                  <!-- NEWSLETTER-1
-                     ============================================= -->
-                  <section id="newsletter-1" class="newsletter-section">
-                     <div class="newsletter-overlay py-[60px] lg:max-xl:py-[45px] md:max-lg:!text-center md:max-lg:pt-[40px] md:max-lg:!pb-[30px] md:max-lg:px-[18%] sm:max-md:pt-[50px] sm:max-md:!pb-[40px] xsm:max-sm:pt-[50px] xsm:max-sm:!pb-[40px]">
-                        <div class="container">
-                           <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  items-center row-cols-1 row-cols-lg-2">
-                              <!-- NEWSLETTER TEXT -->	
-                              <div class="xl:w-6/12 lg:max-xl:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                 <div class="newsletter-txt">
-                                    <h4 class="s-34 w--700 xl:!text-[2.125rem] lg:max-xl:!text-[2rem] md:max-lg:!text-[1.764705rem] !font-bold leading-[1.35] font-Jakarta sm:max-md:!leading-[1.4] xsm:max-sm:!leading-[1.4] xl:!mb-0 md:max-lg:!mb-[22px] md:max-lg:px-[10%] md:max-lg:py-0 sm:max-md:!text-[2.0625rem] sm:max-md:!mb-[30px] sm:max-md:px-[5%] sm:max-md:py-0 xsm:max-sm:!text-[1.75rem] xsm:max-sm:!mb-[25px] xsm:max-sm:!p-0">Stay up to date with our news, ideas and updates</h4>
-                                 </div>
-                              </div>
-                              <!-- NEWSLETTER FORM -->
-                              <div class="xl:w-6/12 lg:max-xl:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                 <form class="newsletter-form mt-[30px] pl-[15%] lg:max-xl:!mt-[25px] lg:max-xl:!pl-[8%] md:max-lg:!mt-0 md:max-lg:px-[10%] md:max-lg:py-0 sm:max-md:!px-[10%] sm:max-md:py-0 xsm:max-sm:!px-[5%] xsm:max-sm:py-0 block">
-                                    <div class="input-group relative flex flex-wrap items-stretch w-full">
-                                       <input type="email" autocomplete="off" class="form-control xl:!h-[54px] xl:!text-[0.975rem] lg:max-xl:!text-[0.975rem] md:max-lg:!text-[1.0625rem] bg-white border !text-[#353f4f] !font-normal shadow-none xl:!mr-3 p-[0_15px] rounded-[6px] border-solid border-[#ccc] focus:bg-white focus:shadow-none focus:border-[#1680fb] lg:max-xl:!h-[50px] md:max-lg:!h-[46px] md:max-lg:mr-[8px] placeholder:text-[#aaa] focus:[outline:0] sm:max-md:!h-[54px] sm:max-md:!text-[1.0625rem] xsm:max-sm:!h-[54px] xsm:max-sm:!text-[1.0625rem] relative flex-[1_1_auto] !w-[1%] min-w-0" placeholder="Your email address" required id="s-email">								
-                                       <span class="input-group-btn">
-                                       <button type="submit" class="btn btn--theme hover--theme xl:!h-[54px] xl:!text-[0.925rem] xl:!px-[1.3rem] xl:!py-[0.7rem] lg:max-xl:!h-[50px] lg:max-xl:!text-[0.925rem] lg:max-xl:!px-[1.3rem] lg:max-xl:!py-[0.7rem] md:max-lg:!h-[46px] md:max-lg:!text-[1.0625rem] md:max-lg:!px-[1.3rem] md:max-lg:!py-[0.7rem] sm:max-md:!h-[54px] sm:max-md:!text-[1.0625rem] xsm:max-sm:!h-[54px] xsm:max-sm:!text-[1.0625rem]">Subscribe Now</button>
-                                       </span>										
-                                    </div>
-                                    <!-- Newsletter Form Notification -->	
-                                    <label for="s-email" class="form-notification"></label>
-                                 </form>
-                              </div>
-                              <!-- END NEWSLETTER FORM -->
-                           </div>
-                           <!-- End row -->
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div
+                    class="rounded-xl transition-all duration-300 bg-white border border-gray-200 hover:shadow-lg hover:border-indigo-300 hover:-translate-y-1 p-6">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-xl flex items-center justify-center bg-indigo-50 text-indigo-600">
+                            <!-- Map Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
                         </div>
-                        <!-- End container -->	
-                     </div>
-                     <!-- End newsletter-overlay -->
-                  </section>
-                  <!-- END NEWSLETTER-1 -->
-                  <!-- DIVIDER LINE -->
-                  <hr class="divider w-full h-px bg-transparent bg-[linear-gradient(90deg,rgba(206,211,246,0)_0,#bbb_38%,#bbb_64%,rgba(206,211,246,0)_99%)] opacity-40 !m-0 ![border:none]">
-                  <!-- FOOTER-3
-                     ============================================= -->
-                  <footer id="footer-3" class=" pt--100 pt-[100px] lg:max-xl:pt-[80px] md:max-lg:pt-[70px] footer !pb-[50px] lg:max-xl:!pb-[35px] md:max-lg:!pb-[25px] sm:max-md:!pb-[30px] xsm:max-sm:!pb-[30px]">
-                     <div class="container">
-                        <!-- FOOTER CONTENT -->
-                        <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)] ">
-                           <!-- FOOTER LOGO -->
-                           <div class="xl:w-3/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full ">
-                              <div class="footer-info !mb-[40px] lg:max-xl:!mb-[50px]">
-                                 <img class="footer-logo w-auto max-w-[inherit] xl:!max-h-[40px] lg:max-xl:!max-h-[34px] md:max-lg:!max-h-[33px] sm:max-md:!max-h-[38px] xsm:max-sm:!max-h-[37px]" src="images/logo-blue.png" alt="footer-logo">
-                                 <img class="footer-logo-dark hidden w-auto max-w-[inherit] xl:!max-h-[40px] lg:max-xl:!max-h-[34px] md:max-lg:!max-h-[33px] sm:max-md:!max-h-[38px] xsm:max-sm:!max-h-[37px]" src="images/logo-blue-white.png" alt="footer-logo">
-                              </div>
-                           </div>
-                           <!-- FOOTER LINKS -->
-                           <div class="sm:w-4/12 md:max-lg:w-3/12 lg:max-xl:w-3/12 xl:w-2/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                              <div class="footer-links !mb-[40px] fl-1">
-                                 <!-- Title -->
-                                 <h6 class="s-17 !text-[1.0625rem] lg:max-xl:!text-[1.0625rem] leading-none !mb-[25px] lg:max-xl:!mb-[20px] md:max-lg:!text-[1.17647rem] md:max-lg:!mb-[16px] sm:max-md:!text-[1.21875rem] sm:max-md:!mb-[20px] xsm:max-sm:!text-[1.21875rem] xsm:max-sm:!mb-[20px] font-Jakarta">Company</h6>
-                                 <!-- Links -->
-                                 <ul class="foo-links clearfix">
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="about.html">About Us</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="careers.html">Careers</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="blog-listing.html">Our Blog</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="contacts.html">Contact Us</a></p>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                           <!-- END FOOTER LINKS -->	
-                           <!-- FOOTER LINKS -->
-                           <div class="sm:w-4/12 md:max-lg:w-3/12 lg:max-xl:w-3/12 xl:w-2/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                              <div class="footer-links !mb-[40px] fl-2">
-                                 <!-- Title -->
-                                 <h6 class="s-17 !text-[1.0625rem] lg:max-xl:!text-[1.0625rem] leading-none !mb-[25px] lg:max-xl:!mb-[20px] md:max-lg:!text-[1.17647rem] md:max-lg:!mb-[16px] sm:max-md:!text-[1.21875rem] sm:max-md:!mb-[20px] xsm:max-sm:!text-[1.21875rem] xsm:max-sm:!mb-[20px] font-Jakarta">Product</h6>
-                                 <!-- Links -->
-                                 <ul class="foo-links clearfix">
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="features.html">Integration</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="reviews.html">Customers</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="pricing-1.html">Pricing</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="help-center.html">Help Center</a></p>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                           <!-- END FOOTER LINKS -->	
-                           <!-- FOOTER LINKS -->
-                           <div class="sm:w-4/12 md:max-lg:w-3/12 lg:max-xl:w-3/12 xl:w-2/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                              <div class="footer-links !mb-[40px] fl-3 lg:max-xl:!pl-[28%]">
-                                 <!-- Title -->
-                                 <h6 class="s-17 !text-[1.0625rem] lg:max-xl:!text-[1.0625rem] leading-none !mb-[25px] lg:max-xl:!mb-[20px] md:max-lg:!text-[1.17647rem] md:max-lg:!mb-[16px] sm:max-md:!text-[1.21875rem] sm:max-md:!mb-[20px] xsm:max-sm:!text-[1.21875rem] xsm:max-sm:!mb-[20px] font-Jakarta">Legal</h6>
-                                 <!-- Links -->
-                                 <ul class="foo-links clearfix">
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="terms.html">Terms of Use</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="privacy.html">Privacy Policy</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="cookies.html">Cookie Policy</a></p>
-                                    </li>
-                                    <li class=" w-auto block align-top clear-none !m-0 !p-0">
-                                       <p class=" !font-normal !mb-[10px] md:max-lg:!mb-[8px]"><a href="#">Site Map</a></p>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                           <!-- END FOOTER LINKS -->	
-                           <!-- FOOTER LINKS -->
-                           <div class="sm:w-6/12 md:max-lg:w-3/12 lg:max-xl:w-3/12 xl:w-3/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full ">
-                              <div class="footer-links !mb-[40px] fl-4">
-                                 <!-- Title -->
-                                 <h6 class="s-17 !text-[1.0625rem] lg:max-xl:!text-[1.0625rem] leading-none !mb-[25px] lg:max-xl:!mb-[20px] md:max-lg:!text-[1.17647rem] md:max-lg:!mb-[16px] sm:max-md:!text-[1.21875rem] sm:max-md:!mb-[20px] xsm:max-sm:!text-[1.21875rem] xsm:max-sm:!mb-[20px] font-Jakarta">Connect With Us</h6>
-                                 <!-- Mail Link -->
-                                 <p class="footer-mail-link ico-25 !ml-0 !mb-[20px] lg:max-xl:!mb-[14px] md:max-lg:!mb-[10px]">
-                                    <a class="font-normal" href="mailto:yourdomain@mail.com">hello@yourdomain.com</a>
-                                 </p>
-                                 <!-- Social Links -->	
-                                 <ul class="footer-socials ico-25 !text-center clearfix inline-block !m-0">
-                                    <li class=" float-left w-auto inline-block align-top clear-none !m-0"><a class=" block mr-[16px] lg:max-xl:mr-[14px] md:max-lg:mr-[11px] hover:!text-[#353f4f]" href="#"><span class="flaticon-facebook"></span></a></li>
-                                    <li class=" float-left w-auto inline-block align-top clear-none !m-0"><a class=" block mr-[16px] lg:max-xl:mr-[14px] md:max-lg:mr-[11px] hover:!text-[#353f4f]" href="#"><span class="flaticon-twitter"></span></a></li>
-                                    <li class=" float-left w-auto inline-block align-top clear-none !m-0"><a class=" block mr-[16px] lg:max-xl:mr-[14px] md:max-lg:mr-[11px] hover:!text-[#353f4f]" href="#"><span class="flaticon-github"></span></a></li>
-                                    <li class=" float-left w-auto inline-block align-top clear-none !m-0"><a class=" block mr-[16px] lg:max-xl:mr-[14px] md:max-lg:mr-[11px] hover:!text-[#353f4f]" href="#"><span class="flaticon-dribbble"></span></a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                           <!-- END FOOTER LINKS -->	
+                        <div class="flex-1">
+                            <p class="text-xs text-gray-500 font-medium">Visit Us</p>
+                            <p class="text-sm text-gray-600"> PL No-8, Behind mahaveer complex, Opp. Bheru bagh jain Mandir, C road, Sardarpura, Jodhpur, Rajasthan, 342001</p>
+                            <a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin" target="_blank"
+                                class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                                Get Directions
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14" />
+                                    <path d="m12 5 7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
-                        <!-- END FOOTER CONTENT -->
-                        <hr class=" mt-[30px] !mb-[50px] lg:max-xl:!mt-[10px] lg:max-xl:lg:!mb-[35px] md:max-lg:!mt-[5px] md:max-lg:!mb-[25px] sm:max-md:!mt-[15px] sm:max-md:!mb-[30px] xsm:max-sm:!mt-[5px] xsm:max-sm:!mb-[30px]">
-                        <!-- FOOTER DIVIDER LINE -->
-                        <!-- BOTTOM FOOTER -->
-                        <div class="bottom-footer">
-                           <div class="flex flex-wrap mx-[calc(-0.5*_1.5rem)]  row-cols-1 row-cols-md-2 items-center">
-                              <!-- FOOTER COPYRIGHT -->
-                              <div class="xl:w-6/12 lg:max-xl:w-6/12 md:max-lg:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                 <div class="footer-copyright">
-                                    <p class="p-sm !mb-0">&copy; 2025 Martex. <span>All Rights Reserved</span></p>
-                                 </div>
-                              </div>
-                              <!-- FOOTER SECONDARY LINK -->
-                              <div class="xl:w-6/12 lg:max-xl:w-6/12 md:max-lg:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
-                                 <div class="bottom-secondary-link ico-15 text-right text-end">
-                                    <p class="p-sm !mb-0"><a href="https://themeforest.net/user/elite-themes24">Made with 
-                                       <span class="flaticon-heart color--pink-400 relative px-[2px] py-0 top-px sm:max-md:px-[2px] sm:max-md:py-0 sm:max-md:top-[1.5px] xsm:max-sm:px-[2px] xsm:max-sm:py-0 xsm:max-sm:top-[1.5px]"></span> by @elite-themes24</a>
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- End row -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Contact Form -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+
+                <!-- Form -->
+                <div class="bg-white rounded-xl shadow p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First
+                                    Name</label>
+                                <input type="text" id="firstName"
+                                    class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="John">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last
+                                    Name</label>
+                                <input type="text" id="lastName"
+                                    class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+                                    placeholder="Doe">
+                            </div>
                         </div>
-                        <!-- END BOTTOM FOOTER -->
-                     </div>
-                     <!-- End container -->	
-                  </footer>
-                  <!-- END FOOTER-3 -->
-               </div>
-               <!-- END PAGE CONTENT -->	
-               <!-- EXTERNAL SCRIPTS
-                  ============================================= -->	
-    <script src="front/assets/assests/js/jquery-3.7.0.min.js"></script>
-    <script src="front/assets/assests/js/bootstrap.min.js"></script>
-    <script src="front/assets/assests/js/modernizr.custom.js"></script>
-    <script src="front/assets/assests/js/jquery.easing.js"></script>
-    <script src="front/assets/assests/js/jquery.appear.js"></script>
-    <script src="front/js/menu.js"></script>
-    <script src="front/js/owl.carousel.min.js"></script>
-    <script src="front/js/pricing-toggle.js"></script>
-    <script src="front/js/jquery.magnific-popup.min.js"></script>
-    <script src="front/js/contact-form.js"></script>
-    <script src="front/js/jquery.validate.min.js"></script>
-    <script src="front/js/jquery.ajaxchimp.min.js"></script>
-    <script src="front/js/popper.min.js"></script>
-    <script src="front/js/lunar.js"></script>
-    <script src="front/assets/assests/js/wow.js"></script>
-    <!-- Custom Script -->
-    <script src="front/js/custom.js"></script>
-               <script>
-                  $(document).on({
-                      "contextmenu": function (e) {
-                          console.log("ctx menu button:", e.which); 
-                  
-                          // Stop the context menu
-                          e.preventDefault();
-                      },
-                      "mousedown": function(e) { 
-                          console.log("normal mouse down:", e.which); 
-                      },
-                      "mouseup": function(e) { 
-                          console.log("normal mouse up:", e.which); 
-                      }
-                  });
-               </script>
-               <script>
-                  $(function() {
-                    $(".switch").click(function() {
-                      $("body").toggleClass("theme--dark");
-                  	    if( $( "body" ).hasClass( "theme--dark" )) {
-                                	$( ".switch" ).text( "Light Mode" );
-                            	} else {
-                                	$( ".switch" ).text( "Dark Mode" );
-                            	}
-                      });
-                  });
-               </script>
-               <script>
-                  $(document).ready(function() {
-                            if( $( "body" ).hasClass( "theme--dark" )) {
-                                $( ".switch" ).text( "Light Mode" );
-                            } else {
-                                $( ".switch" ).text( "Dark Mode" );
-                            }
-                        });
-               </script>
-               <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information. -->															
-               <!--
-                  <script>
-                  	var _gaq = _gaq || [];
-                  	_gaq.push(['_setAccount', 'UA-XXXXX-X']);
-                  	_gaq.push(['_trackPageview']);
-                  
-                  	(function() {
-                  		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                  		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                  		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                  	})();
-                  </script>
-                  -->	
-               <script src="js/changer.js"></script>
-               <script defer src="js/styleswitch.js"></script>	
-            </body>
-         </html>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email"
+                                class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+                                placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" rows="4"
+                                class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+                                placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Office Info -->
+                <div class="space-y-8">
+                    <div class="bg-gray-100 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Office Hours</h3>
+                        <p class="flex justify-between text-gray-700"><span>Monday - Friday</span> <span>9:00 AM - 6:00
+                                PM</span></p>
+                        <p class="flex justify-between text-gray-700"><span>Saturday</span> <span>10:00 AM - 4:00
+                                PM</span></p>
+                        <p class="flex justify-between text-gray-500"><span>Sunday</span> <span>Closed</span></p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"> <i class="fab fa-linkedin"></i></a>
+                            <a href="#"
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"><i class="fa-brands fa-square-instagram"></i></a>
+                            <a href="#"
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"> <i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="rounded-xl overflow-hidden h-64 bg-gray-200 flex items-center justify-center">
+ <iframe class="w-full h-64 rounded-xl border-0"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin"
+            allowfullscreen="" loading="lazy"></iframe>                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">C</span>
+                        </div>
+                        <span class="text-2xl font-bold">CADADDA</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Autodesk Authorized CAD/CAM Training Institute providing industry-standard education since 2017.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Our Courses</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Admission
+                                Process</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Student
+                                Portal</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Courses -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Popular Courses</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">AutoCAD</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">3DS Max</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Revit
+                                Architecture</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">SolidWorks</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Interior
+                                Design</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start space-x-3">
+                            <svg class="w-5 h-5 text-blue-500 dark:text-blue-400 mt-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-gray-400">123 Training Center, Education Hub, City - 110001</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span class="text-gray-400">info@cadadda.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 dark:border-gray-700 pt-8 mt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy
+                            Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of
+                            Service</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Refund
+                            Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Dark mode functionality
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference or default to light mode
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+
+            if (savedTheme === 'dark') {
+                html.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                html.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', initializeTheme);
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+
+        <
+        /body>
+
+        <
+        /html>
