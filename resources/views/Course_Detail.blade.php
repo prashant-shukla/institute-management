@@ -252,10 +252,11 @@
     </header>
 
     <!-- Header Section -->
-    <header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-white-500 text-white py-20">
+    {{-- <header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-white-500 text-white py-20">
         <div
             class="absolute inset-0 bg-[url('https://source.unsplash.com/1600x600/?autocad,architecture,design')] bg-cover bg-center opacity-20">
         </div>
+        <div>
         <div class="relative max-w-6xl mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
                 AutoCAD Mastery
@@ -268,7 +269,79 @@
                 🚀 Enroll Now
             </button>
         </div>
-    </header>
+
+            <!-- Pricing & Enroll -->
+            <div class="md:w-100 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-2xl font-bold text-gray-900">₹45,000</span>
+                        <span class="text-gray-400 line-through ml-2">₹60,000</span>
+                    </div>
+                    <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
+                </div>
+
+                <button
+                    class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
+                    Enroll Now
+                </button>
+
+                <button onclick="openForm()"
+                    class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
+                    View Curriculum
+                </button>
+
+                <p class="text-xs text-gray-400 mt-2">
+                    Secure checkout via UPI / Cards. Instant confirmation.
+                </p>
+            </div>
+</div>
+    </header> --}}
+
+<header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-300 text-white py-20">
+  <!-- Background image overlay -->
+  <div class="absolute inset-0 bg-[url('https://source.unsplash.com/1600x600/?autocad,architecture,design')] bg-cover bg-center opacity-20"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-between md:gap-16 gap-10">
+    <!-- Left: Main heading -->
+    <div class="text-center md:text-left flex-1">
+      <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
+        AutoCAD Mastery
+      </h1>
+      <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-2xl">
+        Learn 2D drafting, 3D modeling, and architectural design with real-world projects.
+      </p>
+      <button class="mt-8 bg-white text-indigo-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-indigo-50 transition-transform">
+        🚀 Enroll Now
+      </button>
+    </div>
+
+    <!-- Right: Pricing & Enroll box -->
+    <div class="md:w-50 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 text-gray-900">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-2xl font-bold">₹45,000</span>
+          <span class="text-gray-400 line-through ml-2">₹60,000</span>
+        </div>
+        <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
+      </div>
+
+      <button class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
+        Enroll Now
+      </button>
+
+      <button onclick="openForm()" class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
+        View Curriculum
+      </button>
+
+      <p class="text-xs text-gray-500 mt-2">
+        Secure checkout via UPI / Cards. Instant confirmation.
+      </p>
+    </div>
+  </div>
+</header>
+
+
+
 
 
     {{-- <!-- Course Preview Cards -->
