@@ -84,6 +84,10 @@ class HomeController extends Controller
     {
         return view('contacts');
     }
+    public function Events()
+    {
+        return view('Event');
+    }
     public function category()
     {
         $courses = Course::all();

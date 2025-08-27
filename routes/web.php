@@ -10,6 +10,7 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::get('/Course', [HomeController::class, 'Courses']);
       Route::get('/Course_Detail', [HomeController::class, 'Course_Detail']);
       Route::get('/contacts', [HomeController::class, 'contacts']);
+      Route::get('/events', [HomeController::class, 'Events']);
       Route::get('/categories', [HomeController::class, 'category'])->name('category');
       Route::get('/filter-courses', [HomeController::class, 'filterCourses'])->name('filter.courses');
       Route::get('/course/{slug}/{id}', [HomeController::class, 'Course'])->name('course');
