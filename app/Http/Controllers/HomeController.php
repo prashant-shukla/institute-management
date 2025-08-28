@@ -88,6 +88,10 @@ class HomeController extends Controller
     {
         return view('Event');
     }
+        public function Gallery()
+    {
+        return view('Gallery');
+    }
     public function category()
     {
         $courses = Course::all();

@@ -7,7 +7,9 @@
     <title>CADADDA - Autodesk Authorized CAD/CAM Training Institute</title>
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script>
         tailwind.config = {
@@ -339,8 +341,10 @@
                         </div>
                         <div class="flex-1">
                             <p class="text-xs text-gray-500 font-medium">Visit Us</p>
-                            <p class="text-sm text-gray-600"> PL No-8, Behind mahaveer complex, Opp. Bheru bagh jain Mandir, C road, Sardarpura, Jodhpur, Rajasthan, 342001</p>
-                            <a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin" target="_blank"
+                            <p class="text-sm text-gray-600"> PL No-8, Behind mahaveer complex, Opp. Bheru bagh jain
+                                Mandir, C road, Sardarpura, Jodhpur, Rajasthan, 342001</p>
+                            <a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin"
+                                target="_blank"
                                 class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
                                 Get Directions
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
@@ -411,17 +415,21 @@
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
                         <div class="flex gap-4">
                             <a href="#"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"> <i class="fab fa-linkedin"></i></a>
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition">
+                                <i class="fab fa-linkedin"></i></a>
                             <a href="#"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"><i class="fa-brands fa-square-instagram"></i></a>
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"><i
+                                    class="fa-brands fa-square-instagram"></i></a>
                             <a href="#"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"> <i class="fab fa-youtube"></i></a>
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition">
+                                <i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                     <div class="rounded-xl overflow-hidden h-64 bg-gray-200 flex items-center justify-center">
- <iframe class="w-full h-64 rounded-xl border-0"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin"
-            allowfullscreen="" loading="lazy"></iframe>                    </div>
+                        <iframe class="w-full h-64 rounded-xl border-0"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin"
+                            allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
 
             </div>
@@ -636,10 +644,7 @@
                 header.classList.remove('shadow-lg');
             }
         });
+    </script>
+    </body>
 
-
-        <
-        /body>
-
-        <
-        /html>
+        </html>
