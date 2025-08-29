@@ -88,9 +88,13 @@ class HomeController extends Controller
     {
         return view('Event');
     }
-        public function Gallery()
+    public function Gallery()
     {
         return view('Gallery');
+    }
+    public function placement()
+    {
+        return view('placement');
     }
     public function category()
     {
