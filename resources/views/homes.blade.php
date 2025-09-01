@@ -159,12 +159,16 @@
                         </svg>
                     </button>
                     
-                    <button class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
-                        Sign in
-                    </button>
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
-                        Join Now
-                    </button>
+                    <a href="{{ route('login') }}" 
+                    class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
+                     Sign in
+                 </a>
+                 
+                 <a href="{{ route('register') }}" 
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                     Join Now
+                 </a>
+                 
                 </div>
             </div>
             

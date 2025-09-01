@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\ContactController;
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
@@ -21,4 +22,16 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::get('/event', [HomeController::class, 'event'])->name('event');
       Route::post('/register-event', [App\Http\Controllers\EventRegistrationController::class, 'store'])->name('event.register');
       Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.submit');
+
+
+   
+
+      Route::get('/register', [UserController::class, 'register'])->name('register');
+      Route::post('/register', [UserController::class, 'storeRegister'])->name('register.store');
+      
+      Route::get('/login', [UserController::class, 'login'])->name('login');
+      Route::post('/login', [UserController::class, 'storeLogin'])->name('login.store');
+      
+      Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+      
 });

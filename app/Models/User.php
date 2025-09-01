@@ -71,5 +71,8 @@ class User extends Authenticatable implements HasName
             'password' => 'hashed',
         ];
     }
+
+
+  
   
 }
