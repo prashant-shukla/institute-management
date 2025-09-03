@@ -3,16 +3,19 @@
 return [
     'shield_resource' => [
         'should_register_navigation' => true,
-        'show_resource_in_navigation' => true,
         'slug' => 'shield/roles',
-        'navigation_sort' => -10,
+        'navigation_sort' => -1,
         'navigation_badge' => true,
         'navigation_group' => true,
+        'sub_navigation_position' => null,
         'is_globally_searchable' => false,
         'show_model_path' => true,
         'is_scoped_to_tenant' => true,
         'cluster' => null,
     ],
+
+    'tenant_model' => 'App\Models\Team',
+
 
     'auth_provider_model' => [
         'fqcn' => 'App\\Models\\User',
@@ -24,11 +27,6 @@ return [
         'define_via_gate' => false,
         'intercept_gate' => 'before', // after
     ],
-    'register_role_policy' => [
-        'enabled' => true,
-    ],
-
-    'teams' => false,
 
     'panel_user' => [
         'enabled' => true,
@@ -91,6 +89,5 @@ return [
     'register_role_policy' => [
         'enabled' => true,
     ],
-  
 
 ];

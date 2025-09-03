@@ -1,31 +1,36 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-           // Ensure role exists
-    Role::firstOrCreate(['name' => 'super_admin']);
+        $team = Team::firstOrCreate(['name' => 'Default Team']);
 
-    // Assign role to first user (or any user)
-    $user = User::find(1); // or use email lookup
-    if ($user) {
-        $user->assignRole('super_admin');
-    }
+        Role::firstOrCreate(['name' => 'super_admin']);
+
+        $user = User::where('email', 'admin@example.com')->first();
+
+        if ($user && $team) {
+            // Set default team context for Spatie
+            app(PermissionRegistrar::class)->setPermissionsTeamId($team->id);
+
+            // Assign super_admin role in the context of team
+            if (! $user->hasRole('super_admin', $team->id)) {
+                $user->assignRole('super_admin', $team->id);
+            }
+        }
+
         $this->call([
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            AdminSeeder::class,
         ]);
     }
-    
 }
