@@ -36,8 +36,8 @@ class FeesRelationManager extends RelationManager
                     ->inline()
                     ->options([
                         'credit_card' => 'Credit Card',
-                        'bank_transfer' => 'Bank Transfer',
-                        'paypal' => 'PayPal',
+                        'cash' => 'Cash',
+                        'upi' => 'UPI',
                     ])
                     ->required(),
                     Forms\Components\Select::make('course_id')
@@ -74,8 +74,16 @@ class FeesRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+
+                   // ✅ Custom WhatsApp share action
+            Tables\Actions\Action::make('whatsapp')
+            ->label('Send Receipt')
+            ->icon('heroicon-o-chat-bubble-left-ellipsis')
+            ->url(fn ($record) => $this->generateWhatsAppUrl($record))
+            ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -83,4 +91,21 @@ class FeesRelationManager extends RelationManager
                 ]),
             ]);
     }
+
+        // ✅ Helper Method yahan add karen
+        protected function generateWhatsAppUrl($record): string
+        {
+            $phone = $record->Student->mobile_no ?? ''; // student table me phone field hona chahiye
+            $amount = number_format($record->fee_amount, 2);
+            $date = \Carbon\Carbon::parse($record->received_on)->format('d M Y');
+    
+            $message = "Hello {$record->Student->name},\n\n".
+                       "We have received your fee payment.\n".
+                       "💰 Amount: ₹{$amount}\n".
+                       "📅 Date: {$date}\n".
+                       "📖 Course: {$record->course->name}\n\n".
+                       "Thank you!";
+    
+            return "https://wa.me/{$phone}?text=" . urlencode($message);
+        }
 }

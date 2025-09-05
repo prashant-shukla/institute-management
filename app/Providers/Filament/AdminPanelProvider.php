@@ -32,6 +32,7 @@ use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\MenuLocation;
 use App\Filament\Resources\MenuResource;
+use App\Filament\Widgets\PaymentsOverview;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 
 
@@ -60,6 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+                PaymentsOverview::class
             ])
             ->middleware([
                 EncryptCookies::class,
