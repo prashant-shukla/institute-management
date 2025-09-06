@@ -9,6 +9,7 @@
         "bezhansalleh/filament-shield": "^3.3",
         "datlechin/filament-menu-builder": "^0.6.0",
         "filament/filament": "^3.2",
+        "flowframe/laravel-trend": "^0.4.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "outerweb/filament-settings": "^1.2",

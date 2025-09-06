@@ -33,6 +33,7 @@ use App\Models\MenuItem;
 use App\Models\MenuLocation;
 use App\Filament\Resources\MenuResource;
 use App\Filament\Widgets\PaymentsOverview;
+use App\Filament\Widgets\AdmissionsChart;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 
 
@@ -59,9 +60,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                PaymentsOverview::class,   // 👈 Top par dikhane ke liye sabse pehle likho
+                AdmissionsChart::class,
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
-                PaymentsOverview::class
+            
             ])
             ->middleware([
                 EncryptCookies::class,
