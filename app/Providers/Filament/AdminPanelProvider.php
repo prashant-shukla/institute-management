@@ -32,14 +32,11 @@ use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\MenuLocation;
 use App\Filament\Resources\MenuResource;
-use App\Filament\Widgets\PaymentsOverview;
-use App\Filament\Widgets\AdmissionsChart;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
-
+use App\Filament\Pages\Dashboard\Dashboard;
 
 class AdminPanelProvider extends PanelProvider
 {
-
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -56,16 +53,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                // Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->widgets([
-                PaymentsOverview::class,   // 👈 Top par dikhane ke liye sabse pehle likho
-                AdmissionsChart::class,
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-            
-            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

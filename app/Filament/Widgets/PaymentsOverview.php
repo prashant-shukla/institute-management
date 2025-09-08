@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\StudentFees;
 use App\Models\Student;
+use Faker\Core\Color;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Carbon;
@@ -39,16 +40,28 @@ class PaymentsOverview extends BaseWidget
         return [
             Stat::make('Monthly Fees Collected', '₹' . number_format($monthlyTotal))
                 ->description('Total in ' . $now->format('F'))
-                ->color('success'),
-    
+                ->color('success')
+                ->extraAttributes([
+                    'class' => 'bg-green-100 dark:bg-green-900 text-green-800 rounded-lg shadow-md',
+                ]),
+        
             Stat::make('Weekly Fees Collected', '₹' . number_format($weeklyTotal))
-                ->description('This Week (' . $now->copy()->startOfWeek()->format('d M') . ' - ' . $now->copy()->endOfWeek()->format('d M') . ')')
-                ->color('info'),
-    
+                ->description(
+                    'This Week (' . $now->copy()->startOfWeek()->format('d M') . ' - ' . $now->copy()->endOfWeek()->format('d M') . ')'
+                )
+                ->color('info')
+                ->extraAttributes([
+                    'class' => 'bg-blue-100 dark:bg-blue-900 text-blue-800 rounded-lg shadow-md',
+                ]),
+        
             Stat::make('Pending Fees', '₹' . number_format($pendingFee))
                 ->description('Total fees still pending')
-                ->color('danger'),
+                ->color('danger')
+                ->extraAttributes([
+                    'class' => 'bg-red-100 dark:bg-red-900 text-red-800 rounded-lg shadow-md',
+                ]),
         ];
+        
     }
     
     
