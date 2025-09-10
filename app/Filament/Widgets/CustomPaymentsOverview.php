@@ -8,28 +8,37 @@ class CustomPaymentsOverview extends Widget
 {
     protected static string $view = 'filament.widgets.custom-payments-overview';
 
-    protected int|string|array $columnSpan = 'full'; // 👈 ye add karo
+    // 👇 Always full width
+    protected int|string|array $columnSpan = 'full';
 
-    public $monthlyTotal;
+    public $todayTotal;
     public $weeklyTotal;
-    public $pendingFee;
+    public $monthlyTotal;
+    public $yearlyTotal;
+
 
     public function mount(): void
     {
         $now = now();
 
-        $this->monthlyTotal = \App\Models\StudentFees::whereMonth('created_at', $now->month)
-            ->whereYear('created_at', $now->year)
+        // ✅ Today
+        $this->todayTotal = \App\Models\StudentFees::whereDate('received_on', $now->toDateString())
             ->sum('fee_amount');
 
-        $this->weeklyTotal = \App\Models\StudentFees::whereBetween('created_at', [
-            $now->copy()->startOfWeek(),
-            $now->copy()->endOfWeek(),
-        ])->sum('fee_amount');
+        // // ✅ Weekly
+        // $this->weeklyTotal = \App\Models\StudentFees::whereBetween('created_at', [
+        //     $now->copy()->startOfWeek(),
+        //     $now->copy()->endOfWeek(),
+        // ])->sum('fee_amount');
 
-        $collectedFee = \App\Models\StudentFees::sum('fee_amount');
-        $totalFee     = \App\Models\Student::with('course')->get()->sum(fn ($s) => $s->course->fee ?? 0);
+        // ✅ Monthly
+        $this->monthlyTotal = \App\Models\StudentFees::whereMonth('received_on', $now->month)
+            ->whereYear('received_on', $now->year)
+            ->sum('fee_amount');
 
-        $this->pendingFee = $totalFee - $collectedFee;
+        // ✅ Yearly
+        $this->yearlyTotal = \App\Models\StudentFees::whereYear('received_on', $now->year)
+            ->sum('fee_amount');
+
     }
 }

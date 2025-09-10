@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\ContactController;
+use Illuminate\Support\Facades\Artisan;
+
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::get('/', [HomeController::class, 'Home']);
@@ -33,5 +35,22 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::post('/login', [UserController::class, 'storeLogin'])->name('login.store');
       
       Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-      
+
+      Route::get('/run-migrate', function () {
+            Artisan::call('migrate', [
+                '--force' => true, // required in production
+            ]);
+        
+            return 'Migrations have been run successfully!';
+        });
+   
+
+        Route::get('/seed', function () {
+            Artisan::call('db:seed', [
+                '--force' => true, // allow in production
+            ]);
+        
+            return 'Database seeding completed!';
+        });
+        
 });
