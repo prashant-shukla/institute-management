@@ -1,29 +1,49 @@
 <x-filament-widgets::widget>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <style>
+        .card-col {
+            width: 100%; /* default mobile */
+        }
+       
+        @media (min-width: 1024px) { /* Desktop (lg) */
+            .card-col {
+                width: 50%;
+            }
+        }
+    </style>
 
-             {{-- Today --}}
-             <div style="background-color:#2563eb; color:#ffffff; padding:28px; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-                <h3 style="font-size:22px; font-weight:bold;">Today collection</h3>
-                <p style="font-size:28px; margin-top:8px;">₹{{ number_format($todayTotal) }}</p>
+    <div class="flex flex-wrap -mx-3 gap-y-6">
+
+        {{-- Monthly Revenue --}}
+        <div class="px-3 card-col">
+            <div class="p-6 rounded-xl shadow text-black" style="background-color:#ffffff;">
+                <h3 class="text-lg font-bold">Monthly Revenue</h3>
+                <p class="text-2xl mt-2">₹ {{ number_format($monthlyTotal ?? 0, 2) }}</p>
             </div>
-    
-            {{-- Weekly --}}
-            {{-- <div style="background-color:#d43f8d; color:#ffffff; padding:28px; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-                <h3 style="font-size:22px; font-weight:bold;">Weekly Revenue</h3>
-                <p style="font-size:28px; margin-top:8px;">₹{{ number_format($weeklyTotal) }}</p>
-            </div> --}}
-    
-            {{-- Monthly --}}
-            <div style="background-color:#d43f8d; color:#ffffff; padding:28px; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-                <h3 style="font-size:22px; font-weight:bold;">Monthly Revenue</h3>
-                <p style="font-size:28px; margin-top:8px;">₹{{ number_format($monthlyTotal) }}</p>
+        </div>
+
+        {{-- Yearly Revenue --}}
+        <div class="px-3 card-col">
+            <div class="p-6 rounded-xl shadow text-black" style="background-color:#ffffff;">
+                <h3 class="text-lg font-bold">Yearly  Revenue</h3>
+                <p class="text-2xl mt-2">₹ {{ number_format($yearlyTotal ?? 0, 2) }}</p>
             </div>
-    
-            {{-- Yearly --}}
-            <div style="background-color:#09ad95; color:#ffffff; padding:28px; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-                <h3 style="font-size:22px; font-weight:bold;">Yearly Revenue</h3>
-                <p style="font-size:28px; margin-top:8px;">₹{{ number_format($yearlyTotal) }}</p>
+        </div>
+
+        {{-- Monthly Expense --}}
+        <div class="px-3 card-col">
+            <div class="p-6 rounded-xl shadow text-black" style="background-color:#ffffff;">
+                <h3 class="text-lg font-bold">Monthly Expense</h3>
+                <p class="text-2xl mt-2">₹ {{ number_format($monthlyExpense ?? 0, 2) }}</p>
             </div>
+        </div>
+
+        {{-- Yearly Expense --}}
+        <div class="px-3 card-col">
+            <div class="p-6 rounded-xl shadow text-black" style="background-color:#ffffff;">
+                <h3 class="text-lg font-bold">Yearly  Expense</h3>
+                <p class="text-2xl mt-2">₹ {{ number_format($yearlyExpense ?? 0, 2) }}</p>
+            </div>
+        </div>
 
     </div>
 </x-filament-widgets::widget>

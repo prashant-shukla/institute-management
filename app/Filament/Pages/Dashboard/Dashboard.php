@@ -5,6 +5,7 @@ use App\Filament\Widgets\AdmissionsChart;
 use App\Filament\Widgets\CourseOverview;
 use App\Filament\Widgets\CustomPaymentsOverview;
 use App\Filament\Widgets\CustomRegistrationsOverview;
+use App\Filament\Widgets\ExpensesOverview;
 use App\Filament\Widgets\Inquiry;
 use App\Filament\Widgets\PaymentsOverview;
 use Filament\Pages\Dashboard as BaseDashboard;
@@ -29,7 +30,7 @@ class Dashboard extends BaseDashboard
             CustomRegistrationsOverview::class,
             CustomPaymentsOverview::class,
             // PaymentsOverview::class,
-            AdmissionsChart::class,
+            ExpensesOverview::class,
             CourseOverview::class, 
             Inquiry::class,
         ];

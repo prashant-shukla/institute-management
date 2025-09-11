@@ -1,26 +1,25 @@
 <?php
 
 namespace App\Filament\Widgets;
+
 use Filament\Widgets\Widget;
 use App\Models\Student;
+use App\Models\StudentFees;
 
 class CustomRegistrationsOverview extends Widget
 {
-    // Yeh widget ka view file link karega
     protected static string $view = 'filament.widgets.custom-registrations-overview';
 
-    // Column span "full" rakha hai, matlab full width lega
     protected int|string|array $columnSpan = 'full';
 
-    // Public properties jisme values store hongi
     public $todayRegistrations;
     public $monthlyRegistrations;
     public $yearlyRegistrations;
+    public $todayTotal;
 
-    // Mount function jab widget load hota hai tab run hota hai
     public function mount(): void
     {
-        $now = now(); // Current date & time
+        $now = now();
 
         // ✅ Today registrations count
         $this->todayRegistrations = Student::whereDate('created_at', $now->toDateString())->count();
@@ -32,5 +31,9 @@ class CustomRegistrationsOverview extends Widget
 
         // ✅ Yearly registrations count
         $this->yearlyRegistrations = Student::whereYear('created_at', $now->year)->count();
+
+        // ✅ Today total fees received
+        $this->todayTotal = StudentFees::whereDate('received_on', $now->toDateString())
+            ->sum('fee_amount');
     }
 }

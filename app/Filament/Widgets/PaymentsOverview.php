@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 class PaymentsOverview extends BaseWidget
 { 
-    protected static ?int $navigationSort = -10;
+    
     protected function getStats(): array
     {
         $now = now();

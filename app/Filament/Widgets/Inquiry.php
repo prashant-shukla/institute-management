@@ -9,7 +9,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class Inquiry extends BaseWidget
 {
-    protected int | string | array $columnSpan = 'full'; // pura width le
+    // pura width le
 
     public function table(Table $table): Table
     {
@@ -28,13 +28,13 @@ class Inquiry extends BaseWidget
                     ->label('Email')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('message')
-                    ->label('Message')
-                    ->limit(50),
+                // Tables\Columns\TextColumn::make('message')
+                //     ->label('Message')
+                //     ->limit(50),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Date')
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->label('Date')
+                //     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc');
     }
