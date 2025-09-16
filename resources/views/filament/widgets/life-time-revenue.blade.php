@@ -3,11 +3,11 @@
         {{-- LifeTime Revenue Card --}}
         <div class="flex-1 p-6 bg-white rounded-xl shadow flex flex-col justify-between">
             <p class="text-gray-500 font-medium">Lifetime Revenue</p>
-            <p class="text-3xl font-bold text-blue-500">₹{{ number_format($lifeTimeRevenue, 2) }}</p>
+            <p class="text-3xl font-bold text-blue-500 custom-text-color-blue">₹{{ number_format($lifeTimeRevenue, 2) }}</p>
         </div>
 
         {{-- Quick Actions --}}
-        <div class="flex-1 flex flex-col gap-4">
+        <div class="flex-1 flex flex-col gap-4 custom-text-color-blue">
             <a href="#"
                class="flex items-center justify-between p-4 bg-blue-50 rounded-xl text-blue-500 font-medium shadow hover:bg-blue-100 transition">
                <span class="flex items-center gap-2">
@@ -46,5 +46,8 @@
                </svg>
             </a>
         </div>
+        <style>
+            .custom-text-color-blue{ color:#36b9cc}
+        </style>
     </div>
 </x-filament-widgets::widget>

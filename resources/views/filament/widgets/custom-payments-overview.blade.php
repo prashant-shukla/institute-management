@@ -64,20 +64,20 @@
         <style>
             .progress_bar_border_red{
                 border-width: 5px;
-                border-color: red;
+                border-color: #db2777;
             } 
             
             .progress_bar_border_pink{
                 border-width: 5px;
-                border-color: pink;
+                border-color: #059669;
             } 
             .progress_bar_border_blue{
                 border-width: 5px;
-                border-color: blue;
+                border-color: #6d28d9;
             } 
             .progress_bar_border_yellow{
                 border-width: 5px;
-                border-color: yellow;
+                border-color: blue;
             }
         </style>
     </x-filament::card>
