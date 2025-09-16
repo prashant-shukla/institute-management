@@ -6,7 +6,7 @@
         </style>
 
             {{-- Website Sessions --}}
-            <div class="w-1/4 p-2 custom_width_25">
+            <div class="w-1/4 py-2 custom_width_25">
                 <div class="p-6 bg-white rounded-xl shadow flex flex-col justify-between">
                     <p class="text-gray-500 font-medium">Website Sessions</p>
                     <p class="text-3xl font-bold text-blue-500">{{ $websiteSessions }}</p>
@@ -34,7 +34,7 @@
             </div>
 
             {{-- Revenue --}}
-            <div class="w-1/4 p-2 custom_width_25">
+            <div class="w-1/4 py-2 custom_width_25">
                 <div class="p-6 bg-white rounded-xl shadow flex flex-col justify-between">
                     <p class="text-gray-500 font-medium">Revenue</p>
                     <p class="text-3xl font-bold text-blue-500">{{ $revenue }}</p>
