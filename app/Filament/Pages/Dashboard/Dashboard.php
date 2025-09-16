@@ -2,6 +2,7 @@
 namespace App\Filament\Pages\Dashboard;
 
 use App\Filament\Widgets\AdmissionsChart;
+use App\Filament\Widgets\AnalyticsOverview;
 use App\Filament\Widgets\CourseOverview;
 use App\Filament\Widgets\CustomPaymentsOverview;
 use App\Filament\Widgets\CustomRegistrationsOverview;
@@ -33,6 +34,7 @@ class Dashboard extends BaseDashboard
             ExpensesOverview::class,
             CourseOverview::class, 
             Inquiry::class,
+            AnalyticsOverview::class
         ];
     }
 

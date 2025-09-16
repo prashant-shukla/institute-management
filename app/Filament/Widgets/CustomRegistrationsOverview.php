@@ -9,8 +9,7 @@ use App\Models\StudentFees;
 class CustomRegistrationsOverview extends Widget
 {
     protected static string $view = 'filament.widgets.custom-registrations-overview';
-
-    protected int|string|array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 12;
 
     public $todayRegistrations;
     public $monthlyRegistrations;

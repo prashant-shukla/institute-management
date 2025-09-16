@@ -9,11 +9,7 @@ use App\Models\Expense;
 class CustomPaymentsOverview extends Widget
 {
     protected static string $view = 'filament.widgets.custom-payments-overview';
-
-    // full width
-    // protected int|string|array $columnSpan = 'full';
-
-    // initialize default values to avoid "undefined" issues
+    protected int|string|array $columnSpan = 4;
    
     public $monthlyTotal = 0;
     public $yearlyTotal = 0;
