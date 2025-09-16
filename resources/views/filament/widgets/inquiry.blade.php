@@ -1,6 +1,6 @@
 <x-filament-widgets::widget>
     <x-filament::section>
-        <h2 class="text-lg font-bold mb-4">Rating Record</h2>
+        <h2 class="text-lg font-bold mb-4">Inquiry</h2>
 
         <table class="w-full text-sm border-collapse">
             <thead>

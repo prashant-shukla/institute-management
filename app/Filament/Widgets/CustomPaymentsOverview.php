@@ -8,8 +8,10 @@ use App\Models\Expense;
 
 class CustomPaymentsOverview extends Widget
 {
+    protected static ?string $heading = 'Total : Price|Stock|Revenue|Investment';
+
     protected static string $view = 'filament.widgets.custom-payments-overview';
-    protected int|string|array $columnSpan = 4;
+    protected int|string|array $columnSpan = 6;
    
     public $monthlyTotal = 0;
     public $yearlyTotal = 0;

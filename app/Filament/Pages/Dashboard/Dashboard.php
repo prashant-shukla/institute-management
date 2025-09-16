@@ -8,6 +8,7 @@ use App\Filament\Widgets\CustomPaymentsOverview;
 use App\Filament\Widgets\CustomRegistrationsOverview;
 use App\Filament\Widgets\ExpensesOverview;
 use App\Filament\Widgets\Inquiry;
+use App\Filament\Widgets\LifeTimeRevenue;
 use App\Filament\Widgets\PaymentsOverview;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Widgets\AccountWidget;
@@ -28,13 +29,14 @@ class Dashboard extends BaseDashboard
     {
         return [
             // AccountWidget::class,
-            CustomRegistrationsOverview::class,
-            CustomPaymentsOverview::class,
             // PaymentsOverview::class,
-            ExpensesOverview::class,
+            CustomRegistrationsOverview::class,
             CourseOverview::class, 
+            ExpensesOverview::class,
+            CustomPaymentsOverview::class,
             Inquiry::class,
-            AnalyticsOverview::class
+            AnalyticsOverview::class,
+            LifeTimeRevenue::class
         ];
     }
 

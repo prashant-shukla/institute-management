@@ -7,7 +7,7 @@ use Filament\Widgets\ChartWidget;
 class CourseOverview extends ChartWidget
 {
     protected static ?string $heading = 'Customer satisfaction';
-    protected int|string|array $columnSpan = 4;
+    protected int|string|array $columnSpan = 5;
     protected function getData(): array
     {
         // Dummy data: total = 98,000

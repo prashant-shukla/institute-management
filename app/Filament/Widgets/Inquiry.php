@@ -10,6 +10,7 @@ use Filament\Widgets\Widget;
 
 class Inquiry extends Widget
 {
+    protected static ?string $heading = 'Inquiry';
     protected int|string|array $columnSpan = 6;    
     protected static string $view = 'filament.widgets.inquiry';
 
