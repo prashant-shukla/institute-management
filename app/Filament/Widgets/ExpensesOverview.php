@@ -2,52 +2,122 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Expense;
 use Filament\Widgets\ChartWidget;
 
 class ExpensesOverview extends ChartWidget
 {
-    protected static ?string $heading = "Expenses Overview";
+    protected static ?string $heading = "Revenue Report";
     protected int|string|array $columnSpan = 7;
+    public ?string $filter = 'year';
+
+    // ❌ Remove this (it forces fixed height)
+    // protected static ?string $maxHeight = '300px';
+
     protected function getData(): array
     {
-        $months = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ];
+        switch ($this->filter) {
+            case 'week':
+                return $this->getWeeklyData();
+            case 'month':
+                return $this->getMonthlyData();
+            case 'year':
+            default:
+                return $this->getYearlyData();
+        }
+    }
 
-        // Fake test data simulating Revenue and Support Cost
-        $revenueData = [15, 18, 12, 14, 10, 14, 8, 18, 16, 12, 14, 9];
-        $supportCostData = [10, 14, 10, 15, 9, 13, 15, 19, 14, 10, 15, 9];
+    private function getWeeklyData(): array
+    {
+        $labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        $thisWeek = [12000, 15000, 18000, 20000, 17000, 25000, 22000];
+        $lastWeek = [10000, 14000, 16000, 18000, 15000, 21000, 19000];
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Revenue',
-                    'data' => $revenueData,
-                    'backgroundColor' => '#ec4899', // pink-500
-                    'barThickness' => 12,
+                    'label' => 'This Week',
+                    'data' => $thisWeek,
+                    'backgroundColor' => '#3b82f6',
+                    'borderWidth' => 0,
                 ],
                 [
-                    'label' => 'Support Cost',
-                    'data' => $supportCostData,
-                    'backgroundColor' => '#3b82f6', // blue-500
-                    'barThickness' => 12,
+                    'label' => 'Last Week',
+                    'data' => $lastWeek,
+                    'backgroundColor' => '#ef4444',
+                    'borderWidth' => 0,
+                ],
+            ],
+            'labels' => $labels,
+        ];
+    }
+
+    private function getMonthlyData(): array
+    {
+        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        $revenue2025 = [180000, 260000, 140000, 240000, 170000, 150000, 0, 0, 0, 0, 0, 0];
+        $revenue2024 = [150000, 250000, 160000, 170000, 40000, 330000, 210000, 225000, 75000, 90000, 165000, 260000];
+
+        return [
+            'datasets' => [
+                [
+                    'label' => '2025',
+                    'data' => $revenue2025,
+                    'backgroundColor' => '#3b82f6',
+                    'borderWidth' => 0,
+                ],
+                [
+                    'label' => '2024',
+                    'data' => $revenue2024,
+                    'backgroundColor' => '#ef4444',
+                    'borderWidth' => 0,
                 ],
             ],
             'labels' => $months,
         ];
     }
 
+    private function getYearlyData(): array
+    {
+        $years = ['2021', '2022', '2023', '2024', '2025'];
+        $totals = [120000, 150000, 180000, 220000, 250000];
+
+        return [
+            'datasets' => [
+                [
+                    'label' => 'Total Revenue',
+                    'data' => $totals,
+                    'backgroundColor' => '#10b981',
+                    'borderWidth' => 0,
+                ],
+            ],
+            'labels' => $years,
+        ];
+    }
 
     protected function getOptions(): array
     {
         return [
+            'responsive' => true,
+            'maintainAspectRatio' => false,
+            'layout' => [
+                'padding' => [
+                    'top' => 10,
+                    'bottom' => 10,
+                ],
+            ],
             'scales' => [
                 'y' => [
                     'beginAtZero' => true,
-                    'ticks' => ['stepSize' => 2],
-                    'grid' => ['color' => '#e5e7eb'], // gray-200 lines
+                    'min' => 0,          // ✅ Y-axis 0 से शुरू होगा
+                    'max' => 300000,     // ✅ Y-axis 3 लाख तक फिक्स
+                    'ticks' => [
+                        'stepSize' => 20000, // ✅ हर 50K पर tick
+                        'callback' => 'function(value) { return (value / 1000) + "K"; }',
+                        'color' => '#374151',
+                    ],
+                    'grid' => ['color' => '#e5e7eb'],
                 ],
                 'x' => [
                     'grid' => ['display' => false],
@@ -56,64 +126,37 @@ class ExpensesOverview extends ChartWidget
             'plugins' => [
                 'legend' => [
                     'display' => true,
+                    'position' => 'top',
                     'labels' => [
-                        'color' => '#374151', // text-gray-700
+                        'color' => '#374151',
                         'font' => ['size' => 12],
                     ],
                 ],
+                'datalabels' => [
+                    'anchor' => 'end',
+                    'align' => 'end',
+                    'color' => '#111827',
+                    'formatter' => 'function(value) { return (value / 1000) + "K"; }',
+                    'font' => ['weight' => 'bold'],
+                ],
             ],
         ];
     }
-
-
-    protected function __getData(): array
-    {
-        $year = 2025;
-
-        // ✅ Labels for 12 months
-        $months = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ];
-
-        // ✅ Monthly Data for 2025
-        $monthlyData = [];
-        $yearlyData = [];
-        foreach (range(1, 12) as $month) {
-            // $monthlyData[] = Expense::whereYear('created_at', $year)
-            //     ->whereMonth('created_at', $month)
-            //     ->sum('amount');
-            $monthlyData[] = rand(10,1000); //only for testing
-            $yearlyData[] = rand(10,1000); //only for testing
-        }
-
-        // ✅ Yearly Total for 2025
-        $yearlyTotal = Expense::whereYear('created_at', $year)->sum('amount');
-        $yearlyTotal = 1000;
-
-        return [
-            'datasets' => [
-                [
-                    'label' => "Monthly Expenses ($year)",
-                    'data' => $monthlyData,
-                    'backgroundColor' => '#2563eb',
-                ],
-                [
-                    'label' => "Yearly Total ($year)",
-                    'data' => array_fill(0, 12, $yearlyTotal), // flat line for yearly
-                    'data' => $yearlyData, // flat line for yearly
-                    'type' => 'line',
-                    'borderColor' => '#f97316',
-                    'borderWidth' => 2,
-                    'fill' => false,
-                ],
-            ],
-            'labels' => $months,
-        ];
-    }
+    
+    
+    
 
     protected function getType(): string
     {
-        return 'bar'; // main chart type
+        return 'bar';
+    }
+
+    protected function getFilters(): ?array
+    {
+        return [
+            'week' => 'Week',
+            'month' => 'Month',
+            'year' => 'Year',
+        ];
     }
 }

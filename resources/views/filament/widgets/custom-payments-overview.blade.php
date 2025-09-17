@@ -3,8 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Total Price -->
             <div class="p-4 bg-white rounded shadow">
-                <h3 class="text-sm text-gray-500">Total Price</h3>
-                <p class="text-3xl font-bold text-black">4,657</p>
+                <h3 class="text-sm text-gray-500">Monthly Revenue</h3>
+                <p class="text-3xl font-bold text-black">{{ number_format($this->monthlyTotal) }}</p>
 
                 <!-- Progress bar -->
                 <div class="mt-2 h-2 bg-gray-200 rounded-full">
@@ -18,8 +18,8 @@
 
             <!-- Total Stock -->
             <div class="p-4 bg-white rounded shadow">
-                <h3 class="text-sm text-gray-500">Total Stock</h3>
-                <p class="text-3xl font-bold text-black">2,592</p>
+                <h3 class="text-sm text-gray-500">Yearly Revenue</h3>
+                <p class="text-3xl font-bold text-black">{{ number_format($this->yearlyTotal) }}</p>
 
                 <!-- Progress bar -->
                 <div class="mt-2 h-2 bg-gray-200 rounded-full">
@@ -33,8 +33,8 @@
 
             <!-- Total Revenue -->
             <div class="p-4 bg-white rounded shadow">
-                <h3 class="text-sm text-gray-500">Total Revenue</h3>
-                <p class="text-3xl font-bold text-black">3,517</p>
+                <h3 class="text-sm text-gray-500">Monthly Expense</h3>
+                <p class="text-3xl font-bold text-black">{{ number_format($this->monthlyExpense) }}</p>
 
                 <!-- Progress bar -->
                 <div class="mt-2 h-2 bg-gray-200 rounded-full">
@@ -48,8 +48,8 @@
 
             <!-- Total Investment -->
             <div class="p-4 bg-white rounded shadow">
-                <h3 class="text-sm text-gray-500">Total Investment</h3>
-                <p class="text-3xl font-bold text-black">5,759</p>
+                <h3 class="text-sm text-gray-500">Yearly Expense</h3>
+                <p class="text-3xl font-bold text-black">{{ number_format($this->yearlyExpense) }}</p>
 
                 <!-- Progress bar -->
                 <div class="mt-2 h-2 bg-gray-200 rounded-full">
