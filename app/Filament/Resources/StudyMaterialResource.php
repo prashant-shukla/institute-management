@@ -31,9 +31,9 @@ class StudyMaterialResource extends Resource
     protected static ?string $model = StudyMaterial::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
-    protected static ?string $navigationGroup = 'Institute';
+    protected static ?string $navigationGroup = 'Courses';
     protected static ?string $navigationLabel = 'Study Materials';
-    protected static ?int $navigationSort = -110;
+    protected static ?int $navigationSort = 406;
 
     public static function form(Form $form): Form
     {

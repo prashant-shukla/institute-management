@@ -31,8 +31,8 @@ class StaffResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'Users';
-    protected static ?int $navigationSort = -40;
+    protected static ?string $navigationGroup = 'Institute';
+    protected static ?int $navigationSort = 602;
     public static function form(Form $form): Form
     {
         return $form

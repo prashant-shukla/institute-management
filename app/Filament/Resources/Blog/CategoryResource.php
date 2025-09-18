@@ -24,7 +24,7 @@ class CategoryResource extends Resource
     protected static ?string $navigationGroup = 'CMS';
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $navigationLabel = 'PostCategory';
-    protected static ?int $navigationSort = -120;
+    protected static ?int $navigationSort = 702;
     public static function form(Form $form): Form
     {
         return $form

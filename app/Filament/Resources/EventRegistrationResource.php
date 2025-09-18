@@ -17,9 +17,10 @@ use Filament\Tables\Columns\TextColumn;
 class EventRegistrationResource extends Resource
 {
     protected static ?string $model = EventRegistration::class;
-
+    protected static ?string $navigationGroup = 'CMS';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    
+    protected static ?int $navigationSort = 706;
     public static function form(Form $form): Form
     {
         return $form

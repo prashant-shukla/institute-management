@@ -25,7 +25,7 @@ class CertificateResource extends Resource
     protected static ?string $model = Certificate::class;
 
     protected static ?string $navigationGroup = 'Institute';
-    protected static ?int $navigationSort = -90;
+    protected static ?int $navigationSort = 607;
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     public static function form(Form $form): Form
     {

@@ -20,7 +20,7 @@ class FeedbackQuestionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
     protected static ?string $navigationGroup = 'Institute';
-    protected static ?int $navigationSort = -60;
+    protected static ?int $navigationSort = 604;
     public static function form(Form $form): Form
     {
         return $form

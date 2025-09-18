@@ -25,7 +25,7 @@ class NewsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     protected static ?string $navigationGroup = 'Institute';
-    protected static ?int $navigationSort = -80;
+    protected static ?int $navigationSort = 606;
     public static function form(Form $form): Form
     {
         return $form

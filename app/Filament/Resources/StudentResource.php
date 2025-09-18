@@ -30,9 +30,10 @@ class StudentResource extends Resource
     public static ?string $model = Student::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
-
-    protected static ?string $navigationGroup = 'Users';
-    protected static ?int $navigationSort = -40;
+    protected static ?string $navigationGroup = '';
+    protected static ?string $navigationLabel = 'Student';
+    protected static ?string $title = 'Student';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

@@ -71,55 +71,42 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
+
                 FilamentShieldPlugin::make(),
                 FilamentSettingsPlugin::make()->pages([
                     Settings::class,
                 ]),
                 FilamentFabricatorPlugin::make(),
+            
+                // ✅ Only ONE instance of FilamentMenuBuilderPlugin
                 FilamentMenuBuilderPlugin::make()
                     ->addLocation('header', 'Header')
-                    ->addLocation('footer', 'Footer'),
-                FilamentMenuBuilderPlugin::make()
-                    ->addLocations([
-                        'header' => 'Header',
-                        'footer' => 'Footer',
-                    ]),
-                FilamentMenuBuilderPlugin::make()
-                    ->showCustomLinkPanel(false),
-                FilamentMenuBuilderPlugin::make()
-                    ->showCustomTextPanel(),
-                FilamentMenuBuilderPlugin::make()
+                    ->addLocation('footer', 'Footer')
+                    ->showCustomLinkPanel(false)
+                    ->showCustomTextPanel()
                     ->addMenuPanels([
                         StaticMenuPanel::make()
                             ->description('Lorem ipsum...')
                             ->icon('heroicon-m-link')
                             ->collapsed(true)
                             ->collapsible(true)
-                            ->paginate(perPage: 5, condition: true)
-                    ]),
-
-                FilamentMenuBuilderPlugin::make()
-                    ->addMenuPanels([
+                            ->paginate(perPage: 5, condition: true),
                         ModelMenuPanel::make()
                             ->model(\App\Models\MenuCategory::class),
-                    ]),
-                FilamentMenuBuilderPlugin::make()
+                    ])
                     ->addMenuFields([
                         Toggle::make('is_logged_in'),
                     ])
                     ->addMenuItemFields([
                         TextInput::make('classes'),
-                    ]),
-                FilamentMenuBuilderPlugin::make()
-                    ->usingResource(MenuResource::class),
-                FilamentMenuBuilderPlugin::make()
+                    ])
+                    ->usingResource(MenuResource::class) // 👈 now only your custom resource is used
                     ->usingMenuModel(Menu::class)
                     ->usingMenuItemModel(MenuItem::class)
                     ->usingMenuLocationModel(MenuLocation::class),
+            
                 \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar']),
                 \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
-            ])
-
-        ;
+            ]);
     }
 }

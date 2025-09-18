@@ -22,7 +22,7 @@ class MentorResource extends Resource
     protected static ?string $model = Mentor::class;
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Courses';
-    protected static ?int $navigationSort = -170;
+    protected static ?int $navigationSort = 404;
     public static function form(Form $form): Form
     {
         return $form

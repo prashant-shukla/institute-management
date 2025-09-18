@@ -9,6 +9,9 @@ use Filament\Resources\Pages\ListRecords;
 class ListMenus extends ListRecords
 {
     protected static string $resource = MenuResource::class;
+    protected static ?int $navigationSort = 902;
+    protected static ?string $navigationGroup = 'Navigation';
+
 
     protected function getHeaderActions(): array
     {

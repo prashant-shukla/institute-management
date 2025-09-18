@@ -19,7 +19,7 @@ class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
     protected static ?string $navigationGroup = 'CMS';
-    protected static ?int $navigationSort = -150;
+    protected static ?int $navigationSort = 701;
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
     public static function form(Form $form): Form

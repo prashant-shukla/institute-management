@@ -14,7 +14,7 @@ class Settings extends BaseSettings
 {
     use HasPageShield;
     protected static ?string $navigationGroup = 'Settings';
-    protected static ?int $navigationSort = -0;
+    protected static ?int $navigationSort = 901;
     public function schema(): array|Closure
     {
         return [
