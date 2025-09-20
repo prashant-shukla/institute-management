@@ -38,112 +38,163 @@ class StudentResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Forms\Components\Group::make()
-                ->schema([
-                    Forms\Components\Section::make('User')
-               // Fieldset::make('User')
-                ->relationship('user')
-                        ->schema([
-                            TextInput::make('firstname')->required(),
-                            TextInput::make('lastname')->required(),
-                            TextInput::make('username')->required()->unique(ignoreRecord: true),
-                            TextInput::make('email')->required()->unique(ignoreRecord: true),
-                            TextInput::make('password')
-                            ->password()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn ($state) => filled($state)), 
-                        ])
-                        ->columns(2),
+            ->schema([
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('User')
+                            // Fieldset::make('User')
+                            ->relationship('user')
+                            ->schema([
+                                TextInput::make('firstname')->required(),
+                                TextInput::make('lastname'),
+                                TextInput::make('username')->required()->unique(ignoreRecord: true),
+                                TextInput::make('email')->required()->unique(ignoreRecord: true),
+                                TextInput::make('password')
+                                    ->password()
+                                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                                    ->dehydrated(fn($state) => filled($state)),
+                            ])
+                            ->columns(2),
 
-                    Forms\Components\Section::make('PERSONAL DETAILS')
-                        ->schema([
-                            FileUpload::make('photo')
-                            ->image()
-                            ->imageEditor(),
-                            TextInput::make('father_name')->required()->maxLength(255),
-                            DatePicker::make('date_of_birth')
-                                ->label('Date of Birth')
-                                ->required(),
-                            TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
-                            Textarea::make('correspondence_add')->required()->label('Correspondence Address')
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set, $get) {
-                                if ($get('same_Address')) {
-                                    $set('permanent_add', $state);
-                                }
-                            })
-                            ->autosize(),
-                            Checkbox::make('same_Address')
-                            ->label('Same Address')
-                                ->inline(false)
-                                ->reactive()
-                                ->afterStateUpdated(function ($state, callable $set, $get) {
-                                    if ($state) {
-                                        $set('permanent_add', $get('correspondence_add'));
-                                    }
-                                }),
-                            Textarea::make('permanent_add')
-                            ->required()
-                            ->label('Permanent Address')
-                            ->autosize(),
-                            TextInput::make('qualification')->required(),
-                            TextInput::make('college_workplace')->label('College/Workplace'),
-                            TextInput::make('residential_no')->label('Residential No'),
-                            TextInput::make('office_no')->label('Office No'),
-                            
-                        ])
-                        ->columns(2),
-                ])
-                ->columnSpan(['lg' => 2]),
+                        Forms\Components\Section::make('PERSONAL DETAILS')
+                            ->schema([
+                                FileUpload::make('photo')
+                                    ->image()
+                                    ->imageEditor(),
+                                TextInput::make('father_name')->required()->maxLength(255),
+                                DatePicker::make('date_of_birth')
+                                    ->label('Date of Birth')
+                                    ->required(),
+                                TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
+                                Textarea::make('correspondence_add')->required()->label('Correspondence Address')
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set, $get) {
+                                        if ($get('same_Address')) {
+                                            $set('permanent_add', $state);
+                                        }
+                                    })
+                                    ->autosize(),
+                                Checkbox::make('same_Address')
+                                    ->label('Same Address')
+                                    ->inline(false)
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set, $get) {
+                                        if ($state) {
+                                            $set('permanent_add', $get('correspondence_add'));
+                                        }
+                                    }),
+                                Textarea::make('permanent_add')
+                                    ->required()
+                                    ->label('Permanent Address')
+                                    ->autosize(),
+                                TextInput::make('qualification')->required(),
+                                TextInput::make('college_workplace')->label('College/Workplace'),
+                                TextInput::make('residential_no')->label('Residential No'),
+                                TextInput::make('office_no')->label('Office No'),
+                                Forms\Components\Toggle::make('is_online')
+                                    ->label('Is Online?')
+                                    ->default(false) // offline by default
+                                    ->inline(false)
+                                    ->hidden(),
 
-            Forms\Components\Group::make()
-                ->schema([
-                    Forms\Components\Section::make('REGISTRATION DETAILS')
-                        ->schema([
-                            DatePicker::make('reg_date')->label('Reg Date'),
-                            TextInput::make('reg_no')->label('Reg No')->maxLength(255),            
-                        ]),
 
-                    Forms\Components\Section::make('COURSE DETAILS')
-                        ->schema([
-                            Select::make('course_id')->required()->relationship('course', 'name'),
-                            TextInput::make('course_fee')
-                               ->label('Course Fee')
-                               ->required()
-                               ->numeric(),
-   
-                        ]),
-                ])
-                ->columnSpan(['lg' => 1]),
-        ])
-        ->columns(3);
-    
+                            ])
+                            ->columns(2),
+                    ])
+                    ->columnSpan(['lg' => 2]),
+
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('REGISTRATION DETAILS')
+                            ->schema([
+                                DatePicker::make('reg_date')->label('Reg Date'),
+                                TextInput::make('reg_no')->label('Reg No')->maxLength(255),
+                            ]),
+
+                        Forms\Components\Section::make('COURSE DETAILS')
+                            ->schema([
+                                Select::make('course_id')->required()->relationship('course', 'name'),
+                                TextInput::make('course_fee')
+                                    ->label('Course Fee')
+                                    ->required()
+                                    ->numeric(),
+
+                            ]),
+                    ])
+                    ->columnSpan(['lg' => 1]),
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            Tables\Columns\TextColumn::make('reg_no')->searchable()->sortable()->toggleable(),
-            Tables\Columns\TextColumn::make('user.full_name')->label('Full Name')->searchable()->sortable()->toggleable(),
-            Tables\Columns\TextColumn::make('course.name')->searchable()->sortable()->toggleable()->label('Course'),
-            Tables\Columns\TextColumn::make('reg_date')->searchable()->sortable()->toggleable(),
-        ])
-        ->filters([])
-        ->actions([
-            Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
-            Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
-            Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
-        ])
-        ->bulkActions([
-            BulkActionGroup::make([
-                DeleteBulkAction::make(),
-            ]),
-        ]);
+            ->columns([
+                Tables\Columns\TextColumn::make('reg_no')
+                ->label('Reg No')
+                ->action(
+                    Tables\Actions\Action::make('receipt')
+                    ->label('View Receipt')
+                    ->icon('heroicon-o-document-text')
+                    ->modalHeading('Student Details')
+                    ->modalContent(fn ($record) => view(
+                        'students.receipt',
+                        ['student' => Student::with('feeReceipts')->findOrFail($record->id)]
+                    ))
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel('Close'),
+                    ),
+            
+    
+                Tables\Columns\TextColumn::make('user.full_name')
+                    ->label('Full Name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+    
+                Tables\Columns\TextColumn::make('course.name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->label('Course'),
+    
+                Tables\Columns\TextColumn::make('reg_date')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+    
+                Tables\Columns\BadgeColumn::make('is_online')
+                    ->label('Status')
+                    ->sortable()
+                    ->colors([
+                        'success' => fn ($state): bool => $state === true,
+                        'danger' => fn ($state): bool => $state === false,
+                    ])
+                    ->formatStateUsing(fn ($state): string => $state ? 'Online' : 'Offline'),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('is_online')
+                    ->label('Status')
+                    ->options([
+                        1 => 'Online',
+                        0 => 'Offline',
+                    ]),
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
+                Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
+                Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
     }
+    
+    
 
-   
+
 
     public static function getPages(): array
     {

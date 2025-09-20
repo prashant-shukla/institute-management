@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Team;
 
-class TeamSeeder extends Seeder
+class TeamTableSeeder extends Seeder
 {
     public function run(): void
     {

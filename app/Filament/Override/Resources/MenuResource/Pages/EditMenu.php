@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\MenuResource\Pages;
+namespace App\Filament\Override\Resources\MenuResource\Pages;
 
-use App\Filament\Resources\MenuResource;
+use App\Filament\Override\Resources\MenuResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

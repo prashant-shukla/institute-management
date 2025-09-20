@@ -84,12 +84,19 @@ class FeesRelationManager extends RelationManager
             ->icon('heroicon-o-chat-bubble-left-ellipsis')
             ->url(fn ($record) => $this->generateWhatsAppUrl($record))
             ->openUrlInNewTab(),
+
+            Tables\Actions\Action::make('print')
+            ->label('Print Receipt')
+            ->icon('heroicon-o-printer')
+            ->url(fn ($record) => route('fees.print', $record->id)) // custom route
+            ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+            
     }
 
         // ✅ Helper Method yahan add karen
@@ -108,4 +115,6 @@ class FeesRelationManager extends RelationManager
     
             return "https://wa.me/{$phone}?text=" . urlencode($message);
         }
+
+        
 }

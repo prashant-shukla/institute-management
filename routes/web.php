@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\ContactController;
 use Illuminate\Support\Facades\Artisan;
-
+use App\Http\Controllers\FeeReceiptController;
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::get('/', [HomeController::class, 'Home']);
@@ -52,5 +52,9 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
         
             return 'Database seeding completed!';
         });
+        
+
+        Route::get('/fees/print/{id}', [FeeReceiptController::class, 'print'])->name('fees.print');
+
         
 });
