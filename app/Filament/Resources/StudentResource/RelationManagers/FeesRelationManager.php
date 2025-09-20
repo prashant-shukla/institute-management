@@ -20,32 +20,75 @@ class FeesRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
+            ->columns(2) // Divide form into 2 columns for better layout
             ->schema([
+                
+                // Fee Amount
                 Forms\Components\TextInput::make('fee_amount')
+                    ->label('Fee Amount')
                     ->numeric()
                     ->rules(['regex:/^\d{1,6}(\.\d{0,2})?$/'])
+                    ->minValue(0)
+                    ->step(0.01)
                     ->required(),
-                
-                Forms\Components\DatePicker::make('received_on'),
-                
-                Forms\Components\TextInput::make('remark')
+    
+                // GST Amount (optional)
+                Forms\Components\TextInput::make('gst_amount')
+                    ->label('GST Amount')
+                    ->numeric()
+                    ->minValue(0)
+                    ->step(0.01)
+                    ->nullable(),
+    
+          
+    
+                // Course
+                Forms\Components\Select::make('course_id')
+                    ->label('Course')
+                    ->relationship('course', 'name')
+                    ->searchable()
+                    ->required(),
+    
+                // Received On
+                Forms\Components\DatePicker::make('received_on')
+                    ->label('Received On')
+                    ->required(),
+    
+                // Remark
+                Forms\Components\Textarea::make('remark')
+                    ->label('Remark')
                     ->columnSpan('full')
                     ->required(),
                 
+                // Payment Mode
                 Forms\Components\ToggleButtons::make('payment_mode')
-                    ->inline()
-                    ->options([
-                        'credit_card' => 'Credit Card',
-                        'cash' => 'Cash',
-                        'upi' => 'UPI',
-                    ])
-                    ->required(),
-                    Forms\Components\Select::make('course_id')
-                    ->label('Course')
-                    ->relationship('course', 'name')
-                    ->required(),
+                ->label('Payment Mode')
+                ->inline()
+                ->options([
+                    'credit_card' => 'Credit Card',
+                    'cash' => 'Cash',
+                    'upi' => 'UPI',
+                ])
+                ->required(),
+    
+                // Coupon Code (optional)
+                Forms\Components\TextInput::make('coupon_code')
+                    ->label('Coupon Code')
+                    ->columnSpan('full')
+                    ->nullable()
+                    ->hidden(),
+    
+                // Discount Amount (optional)
+                Forms\Components\TextInput::make('discount_amount')
+                    ->label('Discount Amount')
+                    ->numeric()
+                    ->minValue(0)
+                    ->step(0.01)
+                    ->nullable()
+                    ->hidden(),
             ]);
     }
+    
 
     public function table(Table $table): Table
     {

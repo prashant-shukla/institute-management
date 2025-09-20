@@ -27,5 +27,33 @@ class StudentFees extends Model
     {
         return $this->belongsTo(Student::class, 'student_id');
     }
+ 
+
+
+    protected $fillable = [
+        'student_id',
+        'course_id',
+        'fee_amount',
+        'gst_amount',
+        'coupon_code',
+        'discount_amount',
+        'payment_mode',
+        'remark',
+        'received_on',
+        'receipt_no',
+    ];
+
+    protected static function booted()
+    {
+        static::creating(function ($fee) {
+            if (empty($fee->receipt_no)) {
+                $lastId = self::max('id') ?? 0;
+                $nextNumber = 1000 + $lastId + 1; // start from 1001
+                $fee->receipt_no = 'CA1002/' . $nextNumber;
+            }
+        });
+    }
+
+
   
 }
