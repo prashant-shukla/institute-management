@@ -111,15 +111,58 @@ class StudentResource extends Resource
                                 TextInput::make('reg_no')->label('Reg No')->maxLength(255),
                             ]),
 
-                        Forms\Components\Section::make('COURSE DETAILS')
+                            Forms\Components\Section::make('COURSE DETAILS')
                             ->schema([
-                                Select::make('course_id')->required()->relationship('course', 'name'),
+                                Select::make('course_id')
+                                    ->label('Course Name')
+                                    ->required()
+                                    ->relationship('course', 'name'),
+        
+                                Forms\Components\Toggle::make('calculate_gst')
+                                    ->label('Calculate GST?')
+                                    ->default(true)
+                                    ->reactive(),
+        
                                 TextInput::make('course_fee')
                                     ->label('Course Fee')
                                     ->required()
-                                    ->numeric(),
-
-                            ]),
+                                    ->numeric()
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set, $get) {
+                                        if ($get('calculate_gst')) {
+                                            $gst = $state * 0.18;
+                                            $total = $state + $gst;
+                                            $set('gst_amount', $gst);
+                                            $set('total_fee', $total);
+                                        } else {
+                                            $set('gst_amount', 0);
+                                            $set('total_fee', $state);
+                                        }
+                                    })
+                                    ->afterStateHydrated(function ($state, callable $set, $get) {
+                                        if ($get('calculate_gst')) {
+                                            $gst = $state * 0.18;
+                                            $total = $state + $gst;
+                                            $set('gst_amount', $gst);
+                                            $set('total_fee', $total);
+                                        } else {
+                                            $set('gst_amount', 0);
+                                            $set('total_fee', $state);
+                                        }
+                                    }),
+        
+                                    TextInput::make('gst_amount')
+                                    ->label('GST 18%')
+                                    ->numeric()
+                                    ->disabled() // user edit ना कर सके
+                                    ->dehydrated(fn ($state) => true), // Save to DB
+                                
+                                TextInput::make('total_fee')
+                                    ->label('Total Fee')
+                                    ->numeric()
+                                    ->disabled()
+                                    ->dehydrated(fn ($state) => true),
+                            ])
                     ])
                     ->columnSpan(['lg' => 1]),
             ])

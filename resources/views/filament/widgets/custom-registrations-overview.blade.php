@@ -10,7 +10,7 @@
                  style="background-color:#6d28d9;">
                 <div>
                     <p class="text-3xl font-bold">{{ number_format($todayRegistrations) }}</p>
-                    <p class="mt-1">Today Registrations</p>
+                    <p class="mt-1">Today Student Registrations</p>
                 </div>
                 <x-heroicon-o-paper-airplane class="w-10 h-10 opacity-70" />
             </div>
@@ -22,7 +22,7 @@
                  style="background-color:#db2777;">
                 <div>
                     <p class="text-3xl font-bold">{{ number_format($monthlyRegistrations) }}</p>
-                    <p class="mt-1">Monthly Registrations</p>
+                    <p class="mt-1">Monthly Student Registrations</p>
                 </div>
                 <x-heroicon-o-chart-bar class="w-10 h-10 opacity-70" />
             </div>
@@ -34,7 +34,7 @@
                  style="background-color:#059669;">
                 <div>
                     <p class="text-3xl font-bold">{{ number_format($yearlyRegistrations) }}</p>
-                    <p class="mt-1">Yearly Registrations</p>
+                    <p class="mt-1">Yearly Student Registrations</p>
                 </div>
                 <x-heroicon-o-currency-dollar class="w-10 h-10 opacity-70" />
             </div>

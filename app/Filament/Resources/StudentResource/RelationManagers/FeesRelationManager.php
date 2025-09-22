@@ -33,12 +33,16 @@ class FeesRelationManager extends RelationManager
                     ->required(),
     
                 // GST Amount (optional)
-                Forms\Components\TextInput::make('gst_amount')
-                    ->label('GST Amount')
-                    ->numeric()
-                    ->minValue(0)
-                    ->step(0.01)
-                    ->nullable(),
+                Forms\Components\Select::make('gst_amount')
+                ->label('GST %')
+                ->options([
+                    5  => '5%',
+                    18 => '18%',
+                ])
+              
+                ->native(false)
+                ->hidden(), // makes it look nicer in Filament
+            
     
           
     
