@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class RegistrationsChart extends ChartWidget
 {
     protected static ?string $heading = "Registrations Overview";
-    protected int|string|array $columnSpan = 7;
+    protected int|string|array $columnSpan = 6;
     public ?string $filter = 'year';
 
     protected function getData(): array

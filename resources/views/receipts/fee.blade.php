@@ -107,21 +107,15 @@
 <body onload="window.print()">
 
     @php
-  
-        // Course Fee, GST & Total Fee from student table
         $courseFee = $fee->student->course_fee ?? 0;
         $gstAmount = $fee->student->gst_amount ?? 0;
-        $totalFee = $fee->student->total_fee ;
+        $totalFee = $fee->student->total_fee;
 
-        // Received Amount from student_fees table
         $receivedAmount = $fee->fee_amount ?? 0;
-      
-        // Due calculation
         $dueAmount = $totalFee - $receivedAmount;
-    
-        // CGST & SGST
-        $cgst = $gstAmount / 2;
-        $sgst = $gstAmount / 2;
+
+        $cgst = $gstAmount > 0 ? $gstAmount / 2 : 0;
+        $sgst = $gstAmount > 0 ? $gstAmount / 2 : 0;
     @endphp
 
     <div class="container">
@@ -140,9 +134,15 @@
                 <p>Date: {{ \Carbon\Carbon::parse($fee->received_on)->format('d/m/Y') }}</p>
                 <p><b>Payment Summary:</b></p>
                 <p>Course Fee (Excl. GST): ₹{{ number_format($courseFee, 2) }}</p>
-                <p>CGST (9%): ₹{{ number_format($cgst, 2) }}</p>
-                <p>SGST (9%): ₹{{ number_format($sgst, 2) }}</p>
-                <p>Total GST (18%): ₹{{ number_format($gstAmount, 2) }}</p>
+
+                @if($gstAmount > 0)
+                    <p>CGST (9%): ₹{{ number_format($cgst, 2) }}</p>
+                    <p>SGST (9%): ₹{{ number_format($sgst, 2) }}</p>
+                    <p>Total GST (18%): ₹{{ number_format($gstAmount, 2) }}</p>
+                @else
+                    <p>GST: ₹0.00</p>
+                @endif
+
                 <p>Total Fee (Incl. GST): ₹{{ number_format($totalFee, 2) }}</p>
                 <p>Total Received: ₹{{ number_format($receivedAmount, 2) }}</p>
                 <p>Current Due: ₹{{ number_format($dueAmount, 2) }}</p>
@@ -166,9 +166,11 @@
                     <tr>
                         <th>Course</th>
                         <th>Course Fee (Excl. GST)</th>
-                        <th>CGST (9%)</th>
-                        <th>SGST (9%)</th>
-                        <th>Total GST (18%)</th>
+                        @if($gstAmount > 0)
+                            <th>CGST (9%)</th>
+                            <th>SGST (9%)</th>
+                        @endif
+                        <th>Total GST</th>
                         <th>Total Fee (Incl. GST)</th>
                     </tr>
                 </thead>
@@ -179,8 +181,12 @@
                             <small style="color:#777">{{ $fee->student->course->short_description ?? '' }}</small>
                         </td>
                         <td>₹{{ number_format($courseFee, 2) }}</td>
-                        <td>₹{{ number_format($cgst, 2) }}</td>
-                        <td>₹{{ number_format($sgst, 2) }}</td>
+
+                        @if($gstAmount > 0)
+                            <td>₹{{ number_format($cgst, 2) }}</td>
+                            <td>₹{{ number_format($sgst, 2) }}</td>
+                        @endif
+
                         <td>₹{{ number_format($gstAmount, 2) }}</td>
                         <td>₹{{ number_format($totalFee, 2) }}</td>
                     </tr>
@@ -190,9 +196,15 @@
 
         <div class="summary">
             <p>Course Fee (Excl. GST): ₹{{ number_format($courseFee, 2) }}</p>
-            <p>CGST (9%): ₹{{ number_format($cgst, 2) }}</p>
-            <p>SGST (9%): ₹{{ number_format($sgst, 2) }}</p>
-            <p>Total GST (18%): ₹{{ number_format($gstAmount, 2) }}</p>
+
+            @if($gstAmount > 0)
+                <p>CGST (9%): ₹{{ number_format($cgst, 2) }}</p>
+                <p>SGST (9%): ₹{{ number_format($sgst, 2) }}</p>
+                <p>Total GST (18%): ₹{{ number_format($gstAmount, 2) }}</p>
+            @else
+                <p>GST: ₹0.00</p>
+            @endif
+
             <p>Total Fee (Incl. GST): ₹{{ number_format($totalFee, 2) }}</p>
             <p>Total Received: <span class="total">₹{{ number_format($receivedAmount, 2) }}</span></p>
             <p>Current Due: <span class="total">₹{{ number_format($dueAmount, 2) }}</span></p>
