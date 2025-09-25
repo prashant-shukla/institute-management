@@ -14,6 +14,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class CourseCategoriesResource extends Resource
 {
@@ -25,62 +26,79 @@ class CourseCategoriesResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Section::make('')
+            ->schema([
+               Section::make('')
+    ->schema([
+        Forms\Components\Grid::make(2) // 2 columns per row
             ->schema([
                 Forms\Components\TextInput::make('name')
-                ->label('Name')
-                ->columnSpanFull(),
+                    ->label('Name')
+                    ->required()
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $set('slug', Str::slug($state));
+                    }),
+
                 Forms\Components\TextInput::make('slug')
-                ->dehydrated()
-                ->required()
-                ->label('Slug')
-                ->maxLength(255),
-               // Forms\Components\TagsInput::make('software'),
-                Forms\Components\MarkdownEditor::make('description'),
-                Forms\Components\TextInput::make('sub_title'),
-                Forms\Components\FileUpload::make('image'),
-                Forms\Components\TextInput::make('order'),
-                Forms\Components\Radio::make('show_on_website')
-                ->options([
-                    1 => 'show',
-                    0 => 'hide',
-                ])->inline(),
+                    ->label('Slug')
+                    ->required()
+                    ->maxLength(255)
+                   
+                    ->dehydrated(),
             ]),
-                
-            Section::make('SCO')
+
+        Forms\Components\Grid::make(2)
             ->schema([
-                Forms\Components\TextInput::make('site_title')
-                ->label('Site Title')
-                ->columnSpanFull(),
-                Forms\Components\Textarea::make('meta_keyword')
-                ->label('Meta Keywords')
-                ->autosize(),
-                Forms\Components\Textarea::make('meta_description')
-                ->label('Meta Description')
-                ->autosize(),
+                Forms\Components\TextInput::make('sub_title'),
+                Forms\Components\TextInput::make('order'),
             ]),
-        ]);
+
+        Forms\Components\FileUpload::make('image'),
+
+        Forms\Components\MarkdownEditor::make('description')
+            ->columnSpanFull(), // यह full width लेगा
+
+        Forms\Components\Radio::make('show_on_website')
+            ->options([
+                1 => 'show',
+                0 => 'hide',
+            ])
+            ->inline(),
+            ]),
+
+                Section::make('SCO')
+                    ->schema([
+                        Forms\Components\TextInput::make('site_title')
+                            ->label('Site Title')
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('meta_keyword')
+                            ->label('Meta Keywords')
+                            ->autosize(),
+                        Forms\Components\Textarea::make('meta_description')
+                            ->label('Meta Description')
+                            ->autosize(),
+                    ]),
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make(name:'name')
-                ->searchable()
-                ->sortable()
-                ->toggleable(),
+                Tables\Columns\TextColumn::make(name: 'name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                    Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
-                    Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
-                    Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
-                ])
-           
+                Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
+                Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
+                Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
+            ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

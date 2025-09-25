@@ -71,15 +71,8 @@ class CourseResource extends Resource
                 Forms\Components\MarkdownEditor::make('description')
                 ->label('Description')
                 ->columnSpan('full'),
-                TextInput::make('site_title')
-                ->label('Site Title')
-                ->nullable(),
-                Textarea::make('meta_keyword')
-                ->label('Meta Keywords')
-                ->nullable(),
-                Textarea::make('meta_description')
-                ->label('Meta Description')
-                ->nullable(),
+           
+                
                 Select::make('mode')
                 ->label('Mode')
                 ->options([

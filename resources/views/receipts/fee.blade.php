@@ -125,14 +125,24 @@
         <div class="header-right">
             <h3>Receipt No: {{ $fee->receipt_no ?? '' }}</h3>
             <p>Date: {{ \Carbon\Carbon::parse($fee->received_on)->format('d/m/Y') }}</p>
-            <p>GST No: 08DAZPK3683R1ZB</p>
+                @if($gstAmount > 0)
+                    <p>GST No: 08DAZPK3683R1ZB</p>
+                @endif
         </div>
     </div>
 
     <div class="section">
         <h4>Receipt To:</h4>
         <div class="details">
-            <p><b>{{ $fee->student->user->firstname ?? '' }} {{ $fee->student->user->lastname ?? '' }}</b></p>
+            <p>
+                <b>
+                    {{ $fee->student->user->firstname ?? '' }} {{ $fee->student->user->lastname ?? '' }}
+                    @if(isset($fee->student->is_online) && $fee->student->is_online == 0)
+                        (Offline)
+                    @endif
+                </b>
+            </p>
+            
             <p>Father Name: {{ $fee->student->father_name ?? '' }}</p>
             <p>Reg. No.: {{ $fee->student->reg_no ?? '' }}</p>
             <p>Address: {{ $fee->student->correspondence_add ?? '' }}</p>

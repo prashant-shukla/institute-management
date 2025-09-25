@@ -67,7 +67,7 @@ class UserResource extends Resource
                         'sm' => 1,
                         'lg' => 2
                     ]),
-                    Forms\Components\Group::make()
+                Forms\Components\Group::make()
                     ->schema([
                         Forms\Components\Section::make('Role')
                             ->schema([
@@ -78,16 +78,16 @@ class UserResource extends Resource
                                     ->saveRelationshipsUsing(function ($component, $state, $record) {
                                         if ($state) {
                                             app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId(1);
-                                    
+
                                             $role = \App\Models\Role::find($state);
-                                    
+
                                             if ($role) {
                                                 // ✅ Pass role object instead of only name
                                                 $record->syncRoles([$role]);
                                             }
                                         }
                                     })
-                                    
+
                                     ->native(false),
                             ])
                             ->compact(),
@@ -140,10 +140,17 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                // Tables\Columns\TextColumn::make('user.full_name')->label('Full Name')->searchable()->sortable()->toggleable(),
-                Tables\Columns\TextColumn::make('username')->label('Username')
-                    ->description(fn(Model $record) => $record->firstname . ' ' . $record->lastname)
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.full_name')
+                    ->label('Full Name')
+                    ->getStateUsing(fn($record) => $record->user?->firstname . ' ' . $record->user?->lastname)
+                    ->searchable(query: function ($query, string $search) {
+                        $query->whereHas('user', function ($q) use ($search) {
+                            $q->whereRaw("CONCAT(firstname, ' ', lastname) LIKE ?", ["%{$search}%"]);
+                        });
+                    }),
+
+
+
                 Tables\Columns\TextColumn::make('roles.name')->label('Role')
                     ->formatStateUsing(fn($state): string => Str::headline($state))
                     ->colors(['info'])

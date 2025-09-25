@@ -118,19 +118,32 @@ class StudentResource extends Resource
                                     ->required()
                                     ->relationship('course', 'name'),
         
-                                Forms\Components\Toggle::make('calculate_gst')
+                                    Forms\Components\Toggle::make('calculate_gst')
                                     ->label('Calculate GST?')
                                     ->default(true)
-                                    ->reactive(),
-        
-                                TextInput::make('course_fee')
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set, $get) {
+                                        $courseFee = $get('course_fee') ?? 0;
+                                
+                                        if ($state) {
+                                            $gst   = $courseFee * 0.18;
+                                            $total = $courseFee + $gst;
+                                            $set('gst_amount', $gst);
+                                            $set('total_fee', $total);
+                                        } else {
+                                            $set('gst_amount', 0);
+                                            $set('total_fee', $courseFee);
+                                        }
+                                    }),
+                                
+                                Forms\Components\TextInput::make('course_fee')
                                     ->label('Course Fee')
                                     ->required()
                                     ->numeric()
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, callable $set, $get) {
                                         if ($get('calculate_gst')) {
-                                            $gst = $state * 0.18;
+                                            $gst   = $state * 0.18;
                                             $total = $state + $gst;
                                             $set('gst_amount', $gst);
                                             $set('total_fee', $total);
@@ -141,7 +154,7 @@ class StudentResource extends Resource
                                     })
                                     ->afterStateHydrated(function ($state, callable $set, $get) {
                                         if ($get('calculate_gst')) {
-                                            $gst = $state * 0.18;
+                                            $gst   = $state * 0.18;
                                             $total = $state + $gst;
                                             $set('gst_amount', $gst);
                                             $set('total_fee', $total);
@@ -150,14 +163,14 @@ class StudentResource extends Resource
                                             $set('total_fee', $state);
                                         }
                                     }),
-        
-                                    TextInput::make('gst_amount')
+                                
+                                Forms\Components\TextInput::make('gst_amount')
                                     ->label('GST 18%')
                                     ->numeric()
-                                    ->disabled() // user edit ना कर सके
-                                    ->dehydrated(fn ($state) => true), // Save to DB
+                                    ->disabled()
+                                    ->dehydrated(fn ($state) => true),
                                 
-                                TextInput::make('total_fee')
+                                Forms\Components\TextInput::make('total_fee')
                                     ->label('Total Fee')
                                     ->numeric()
                                     ->disabled()
