@@ -445,91 +445,13 @@
 
         </div>
 
-        <!-- Timer -->
-        {{-- <div class="mt-6 flex items-center gap-2 text-red-600 font-semibold text-lg">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" 
-                  d="M10 18a8 8 0 100-16 8 8 0 
-                  000 16zm1-8V6a1 1 0 10-2 0v5a1 1 
-                  0 00.293.707l3 3a1 1 0 101.414-1.414L11 
-                  10z" clip-rule="evenodd"/>
-        </svg>
-         <span>Enroll now – Offer ends in <span class="ml-1 font-bold">3d: 12h: 45m: 10s</span></span> 
-    </div> --}}
     </section>
 
 
 
 
 
-    {{-- <div class="container mx-auto px-4 py-12">
 
-        <!-- ===== Category Tabs ===== -->
-        <div class="flex justify-center space-x-4 mb-10">
-            <button class="category-tab px-6 py-2 bg-blue-500 text-white rounded-lg active"
-                data-target="offline">Offline Courses</button>
-            <button class="category-tab px-6 py-2 bg-gray-200 text-gray-700 rounded-lg" data-target="online">Online
-                Courses</button>
-            <button class="category-tab px-6 py-2 bg-gray-200 text-gray-700 rounded-lg"
-                data-target="workshops">Workshops</button>
-            <button class="category-tab px-6 py-2 bg-gray-200 text-gray-700 rounded-lg"
-                data-target="certifications">Certifications</button>
-        </div>
-
-        <!-- ===== Courses Section ===== -->
-
-        <!-- Offline Courses -->
-        <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 bg-blue-500"></div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">AutoCAD Mastery</h3>
-                    <p class="text-gray-600">6 Months Program</p>
-                </div>
-            </div>
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 bg-green-500"></div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">Interior Design Basics</h3>
-                    <p class="text-gray-600">4 Months Program</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Online Courses -->
-        <div id="online" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 bg-purple-500"></div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">CAD Fundamentals (Online)</h3>
-                    <p class="text-gray-600">3 Months Live Classes</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Workshops -->
-        <div id="workshops" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 bg-yellow-500"></div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">SketchUp Basics</h3>
-                    <p class="text-gray-600">2 Days Workshop</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Certifications -->
-        <div id="certifications" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 bg-red-500"></div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">BIM Professional Certification</h3>
-                    <p class="text-gray-600">6 Months Program</p>
-                </div>
-            </div>
-        </div>
-
-    </div> --}}
     <div class="container mx-auto px-4 py-12">
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">

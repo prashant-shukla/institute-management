@@ -17,6 +17,7 @@ use App\Models\History;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Testimonial;
 
 use Illuminate\Http\Request;
 use Datlechin\FilamentMenuBuilder\Models\Menu as DatlechinMenu;
@@ -68,14 +69,32 @@ class HomeController extends Controller
         // ]);
         return view('home');
     }
-    public function Homes()
-    {
-        return view('homes');
-    }
-    public function Courses()
-    {
-        return view('courses');
-    }
+   public function Homes()
+{
+    $testimonials = Testimonial::where('status', 1)->latest()->get(); // sirf active testimonials
+    $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
+    $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
+
+    return view('homes', [
+        'courses' => $courses,
+        'latestCourses' => $latestCourses,
+        'testimonials' => $testimonials,
+    ]);
+}
+ public function Courses()
+{
+    // Get all courses, ordering online -> offline -> both
+    $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline','both')")->get();
+
+    // Filter courses for tabs
+    $offlineCourses = $courses->whereIn('mode', ['offline', 'both']);
+    $onlineCourses = $courses->whereIn('mode', ['online', 'both']);
+
+    $certifications = $courses->whereIn('mode', ['online', 'offline', 'both']); // show all in certifications
+
+    return view('courses', compact('offlineCourses', 'onlineCourses', 'certifications'));
+}
+
     public function Course_Detail()
     {
         return view('Course_Detail');
