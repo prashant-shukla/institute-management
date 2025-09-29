@@ -13,6 +13,8 @@ use App\Models\CourseTool;
 use App\Models\CourseMentor;
 use App\Models\Banner;
 use App\Models\Events;
+use App\Models\Client;
+use App\Models\ProudStudent;
 use App\Models\History;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -44,55 +46,37 @@ class HomeController extends Controller
     public function Home()
     {
 
-        // $menu = null;
-
-        // if (Schema::hasTable('menu_locations')) {
-        //     $menu = Menu::whereHas('locations', function ($query) {
-        //         $query->where('location', 'primary');
-        //     })->first();
-        // }
-
-        // $menu = DatlechinMenu::location('primary');
-        // // dd($menu);
-
-        // $reviews = Reviews::all();
-        // $mentors = Mentor::all();
-        // $courses = Course::all();
-        // $coursecategories = CourseCategory::all();
-        // $banners = Banner::where('banner_page', 'home')->get();
-        // return view('home', [
-        //     'reviews' => $reviews,
-        //     'mentors' => $mentors,
-        //     'coursecategories' => $coursecategories,
-        //     'courses' => $courses,
-        //     'banners' => $banners,
-        // ]);
+        
         return view('home');
     }
    public function Homes()
 {
-    $testimonials = Testimonial::where('status', 1)->latest()->get(); // sirf active testimonials
+    $testimonials = Testimonial::where('status', 1)->latest()->get(); 
     $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
     $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
-
+  $proudStudents = ProudStudent::latest()->take(3)->get();
+ 
+  $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
     return view('homes', [
         'courses' => $courses,
         'latestCourses' => $latestCourses,
         'testimonials' => $testimonials,
+        'proudStudents' => $proudStudents,
+        'clients' => $clients,
     ]);
 }
  public function Courses()
 {
-    // Get all courses, ordering online -> offline -> both
     $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline','both')")->get();
-
-    // Filter courses for tabs
-    $offlineCourses = $courses->whereIn('mode', ['offline', 'both']);
+    $clients = Client::latest()->get();
+    $proudStudents = ProudStudent::all();
+    $testimonials = Testimonial::where('status', 1)->latest()->get();
+    $offlineCourses = $courses->whereIn('mode', ['offline', 'both' ]);
     $onlineCourses = $courses->whereIn('mode', ['online', 'both']);
+    $certifications = $courses->whereIn('mode', ['online', 'offline', 'both']); 
+     
 
-    $certifications = $courses->whereIn('mode', ['online', 'offline', 'both']); // show all in certifications
-
-    return view('courses', compact('offlineCourses', 'onlineCourses', 'certifications'));
+    return view('courses', compact('offlineCourses', 'onlineCourses', 'certifications', 'clients','testimonials','proudStudents'));
 }
 
     public function Course_Detail()

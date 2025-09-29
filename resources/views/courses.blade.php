@@ -334,57 +334,22 @@
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold text-center mb-6">Top companies hiring from us</h2>
             <div class="overflow-hidden relative w-full">
-                <div class="marquee">
-                    <!-- First set -->
-                    <div class="flex space-x-10">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/amd.png"
-                            class="h-12" alt="AMD">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/birla.png"
-                            class="h-12" alt="Birla">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/bosch.png"
-                            class="h-12" alt="Bosch">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/deloitte.png"
-                            class="h-12" alt="Deloitte">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/disney.png"
-                            class="h-12" alt="Disney">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/ey.png"
-                            class="h-12" alt="EY">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/fedex.png"
-                            class="h-12" alt="FedEx">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/hcl.png"
-                            class="h-12" alt="HCL">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/paytm.png"
-                            class="h-12" alt="Paytm">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/zomato.png"
-                            class="h-12" alt="Zomato">
-                    </div>
-                    <!-- Duplicate set for smooth infinite scroll -->
-                    <div class="flex space-x-10 ml-10">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/amd.png"
-                            class="h-12" alt="AMD">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/birla.png"
-                            class="h-12" alt="Birla">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/bosch.png"
-                            class="h-12" alt="Bosch">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/deloitte.png"
-                            class="h-12" alt="Deloitte">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/disney.png"
-                            class="h-12" alt="Disney">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/ey.png"
-                            class="h-12" alt="EY">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/fedex.png"
-                            class="h-12" alt="FedEx">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/hcl.png"
-                            class="h-12" alt="HCL">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/paytm.png"
-                            class="h-12" alt="Paytm">
-                        <img src="https://training-comp-uploads.internshala.com/homepage/media/top_companies/desktop/zomato.png"
-                            class="h-12" alt="Zomato">
-                    </div>
+                <div class="marquee flex space-x-10">
+                    @foreach ($clients as $client)
+                        <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
+                            class="h-12 object-contain" />
+                    @endforeach
+
+                    {{-- Duplicate set for infinite scroll --}}
+                    @foreach ($clients as $client)
+                        <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
+                            class="h-12 object-contain" />
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
+
 
 
 
@@ -439,9 +404,8 @@
 
         <!-- Banner Image -->
         <div class="mt-8">
-            <img src="{{asset('images/1080x200.svg')}}"
-                alt="Students Learning Online" class="rounded-lg shadow-lg w-full object-cover"
-                style="height:200px;">
+            <img src="{{ asset('images/1080x200.svg') }}" alt="Students Learning Online"
+                class="rounded-lg shadow-lg w-full object-cover" style="height:200px;">
 
         </div>
 
@@ -453,7 +417,6 @@
 
 
     <div class="container mx-auto px-4 py-12">
-
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- ===== Left Side Category Tabs ===== -->
@@ -464,8 +427,6 @@
                 <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
                     data-target="online">Online Courses</button>
                 <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
-                    data-target="workshops">Workshops</button>
-                <button class="category-tab w-full text-left px-6 py-3 bg-gray-200 text-gray-700 rounded-lg"
                     data-target="certifications">Certifications</button>
             </div>
 
@@ -474,111 +435,85 @@
 
                 <!-- Offline Courses -->
                 <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white shadow rounded-xl overflow-hidden">
-                        <div class="h-40 bg-blue-500"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold">AutoCAD Mastery</h3>
-                            <p class="text-gray-600">6 Months Program</p>
-                            <p class="text-sm text-gray-500 mt-2">Learn 2D & 3D drafting with real-world projects.</p>
+                    @forelse($offlineCourses as $course)
+                        <div class="bg-white shadow rounded-xl overflow-hidden">
+                            <div class="h-40 bg-blue-500"></div>
+                            <div class="p-5">
+                                <h3 class="text-lg font-bold">{{ $course->name }}</h3>
+                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="text-blue-600 font-semibold">₹25,000</p>
-                                <button
-                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                    Join Now
-                                </button>
+                                <div class="flex items-center justify-between mt-3">
+                                    <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}
+                                    </p>
+                                    <button
+                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                        Join Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="bg-white shadow rounded-xl overflow-hidden">
-                        <div class="h-40 bg-green-500"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold">Interior Design Basics</h3>
-                            <p class="text-gray-600">4 Months Program</p>
-                            <p class="text-sm text-gray-500 mt-2">Foundation course covering space planning & decor.
-                            </p>
-
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="text-blue-600 font-semibold">₹18,000</p>
-                                <button
-                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                    Join Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-gray-500">No offline courses available.</p>
+                    @endforelse
                 </div>
 
                 <!-- Online Courses -->
                 <div id="online"
                     class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-                    <div class="bg-white shadow rounded-xl overflow-hidden">
-                        <div class="h-40 bg-purple-500"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold">CAD Fundamentals (Online)</h3>
-                            <p class="text-gray-600">3 Months Live Classes</p>
-                            <p class="text-sm text-gray-500 mt-2">Master CAD tools from home with expert guidance.</p>
+                    @forelse($onlineCourses as $course)
+                        <div class="bg-white shadow rounded-xl overflow-hidden">
+                            <div class="h-40 bg-purple-500"></div>
+                            <div class="p-5">
+                                <h3 class="text-lg font-bold">{{ $course->name }}</h3>
+                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="text-blue-600 font-semibold">₹12,000</p>
-                                <button
-                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                    Join Now
-                                </button>
+                                <div class="flex items-center justify-between mt-3">
+                                    <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}
+                                    </p>
+                                    <button
+                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                        Join Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Workshops -->
-                <div id="workshops"
-                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-                    <div class="bg-white shadow rounded-xl overflow-hidden">
-                        <div class="h-40 bg-yellow-500"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold">SketchUp Basics</h3>
-                            <p class="text-gray-600">2 Days Workshop</p>
-                            <p class="text-sm text-gray-500 mt-2">Quick start with 3D modeling techniques.</p>
-
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="text-blue-600 font-semibold">₹2,500</p>
-                                <button
-                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                    Join Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-gray-500">No online courses available.</p>
+                    @endforelse
                 </div>
 
                 <!-- Certifications -->
                 <div id="certifications"
                     class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-                    <div class="bg-white shadow rounded-xl overflow-hidden">
-                        <div class="h-40 bg-red-500"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold">BIM Professional Certification</h3>
-                            <p class="text-gray-600">6 Months Program</p>
-                            <p class="text-sm text-gray-500 mt-2">Get certified in Building Information Modeling (BIM).
-                            </p>
+                    @forelse($certifications as $course)
+                        <div class="bg-white shadow rounded-xl overflow-hidden">
+                            <div class="h-40 bg-red-500"></div>
+                            <div class="p-5">
+                                <h3 class="text-lg font-bold">{{ $course->name }}</h3>
+                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                            <div class="flex items-center justify-between mt-3">
-                                <p class="text-blue-600 font-semibold">₹35,000</p>
-                                <button
-                                    class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                    Join Now
-                                </button>
+                                <div class="flex items-center justify-between mt-3">
+                                    <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}
+                                    </p>
+                                    <button
+                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                        Join Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @empty
+                        <p class="text-gray-500">No certifications available.</p>
+                    @endforelse
                 </div>
 
             </div>
-
-
         </div>
     </div>
+
 
 
 
@@ -633,64 +568,66 @@
 
 
 
-<section class="py-12 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-6">
-    <!-- Heading -->
-    <div class="text-center mb-10">
-      <h2 class="text-3xl font-bold">Get the CADADDA Advantage</h2>
-      <p class="text-gray-600 mt-2">The Edge Your Career Needs</p>
-    </div>
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Heading -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold">Get the CADADDA Advantage</h2>
+                <p class="text-gray-600 mt-2">The Edge Your Career Needs</p>
+            </div>
 
-    <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <!-- Left Top Card -->
-      <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
-        <img src="https://via.placeholder.com/300x200" alt="Industry-Relevant Skills" class="w-full h-30 object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold text-lg">Industry-Relevant Skills</h3>
-          <p class="text-gray-600 mt-2">Master the tools and techniques top companies actually use.</p>
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Left Top Card -->
+                <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
+                    <img src="https://via.placeholder.com/300x200" alt="Industry-Relevant Skills"
+                        class="w-full h-30 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg">Industry-Relevant Skills</h3>
+                        <p class="text-gray-600 mt-2">Master the tools and techniques top companies actually use.</p>
+                    </div>
+                </div>
+
+                <!-- Left Bottom Card -->
+                <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
+                    <div class="grid grid-cols-2 gap-1 p-2">
+                        <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+                        <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+                        <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+                        <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
+                    </div>
+                </div>
+
+                <!-- Middle Card (Video) -->
+                <div class="bg-white rounded-lg md:grid-cols-4 shadow overflow-hidden md:row-span-2">
+                    <video autoplay muted loop playsinline class="w-full h-80 object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg">Career Opportunities</h3>
+                        <p class="text-gray-600 mt-2">Turn your skills into interviews, offers, and real impact.</p>
+                    </div>
+                </div>
+
+                <!-- Right Top Card -->
+                <div class="bg-white md:grid-cols-5 rounded-lg shadow overflow-hidden">
+                    <video autoplay muted loop playsinline class="w-full h-80 object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <!-- Right Bottom Card -->
+                <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
+                    <img src="https://via.placeholder.com/300x200" alt="Classroom Session"
+                        class="w-full h-40 object-cover">
+                </div>
+
+            </div>
         </div>
-      </div>
-
-      <!-- Left Bottom Card -->
-      <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5">
-        <div class="grid grid-cols-2 gap-1 p-2">
-          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
-          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
-          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
-          <img src="https://via.placeholder.com/140x100" class="w-full h-24 object-cover rounded">
-        </div>
-      </div>
-
-      <!-- Middle Card (Video) -->
-      <div class="bg-white rounded-lg md:grid-cols-4 shadow overflow-hidden md:row-span-2">
-        <video  autoplay muted loop playsinline  class="w-full h-80 object-cover">
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="p-4">
-          <h3 class="font-semibold text-lg">Career Opportunities</h3>
-          <p class="text-gray-600 mt-2">Turn your skills into interviews, offers, and real impact.</p>
-        </div>
-      </div>
-
-      <!-- Right Top Card -->
-      <div class="bg-white md:grid-cols-5 rounded-lg shadow overflow-hidden">
-       <video  autoplay muted loop playsinline  class="w-full h-80 object-cover">
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-      <!-- Right Bottom Card -->
-      <div class="bg-white rounded-lg shadow overflow-hidden md:grid-cols-5" >
-        <img src="https://via.placeholder.com/300x200" alt="Classroom Session" class="w-full h-40 object-cover">
-      </div>
-
-    </div>
-  </div>
-</section>
+    </section>
 
 
 
@@ -715,103 +652,32 @@
         </div>
 
         <!-- Slider main container -->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <!-- Example Slide -->
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        @foreach($proudStudents as $proudStudent)
+            <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                    <!-- Student Image -->
+                    <img src="{{ asset('storage/' . $proudStudent->image) }}"
+                         alt="{{ $proudStudent->name }}"
+                         class="mx-auto rounded-xl h-32 w-32 object-cover" />
 
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
+                    <!-- Student Name -->
+                    <h4 class="font-semibold h-15 mt-3">{{ $proudStudent->name }}</h4>
 
-                <!-- Duplicate slides for loop -->
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
-                <!-- Example Slide -->
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
+                    <!-- Fixed Text -->
+                    {{-- <p class="text-sm text-gray-500">CADADDA Jodhpur</p> --}}
 
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
-
-                <!-- Duplicate slides for loop -->
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
-
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
-
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
-                </div>
-
-                <!-- Duplicate slides for loop -->
-                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                        <img src="student1.jpg" class="mx-auto rounded-xl h-32 w-32 object-cover" />
-                        <h4 class="font-semibold mt-3">Varsha Rathi</h4>
-                        <p class="text-sm text-gray-500">CADADDA Jodhpur </p>
-                        <p class="text-xs text-gray-400 mt-1">Placed at XYZ</p>
-                    </div>
+                    <!-- Company Placed -->
+                    @if($proudStudent->company)
+                        <p class="text-xs text-gray-400 mt-1">Placed at {{ $proudStudent->company }}</p>
+                    @endif
                 </div>
             </div>
+        @endforeach
+    </div>
+</div>
 
-        </div>
     </div>
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -868,62 +734,43 @@
 
             <!-- Testimonials -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                    <div class="flex mb-4">
-                        <div class="text-yellow-400">★★★★★</div>
-                    </div>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                        "CADADDA has provided us with highly skilled CAD professionals. Their students are well-trained
-                        and job-ready from day one."
-                    </p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                        <div>
-                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Rajesh
-                                Kumar</div>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">HR
-                                Manager, Tech Solutions</div>
+                @foreach ($testimonials as $testimonial)
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                        <!-- ⭐ Star Rating -->
+                        <div class="flex mb-4">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span
+                                    class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
+                                    ★
+                                </span>
+                            @endfor
                         </div>
-                    </div>
-                </div>
 
-                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                    <div class="flex mb-4">
-                        <div class="text-yellow-400">★★★★★</div>
-                    </div>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                        "The quality of training at CADADDA is exceptional. We've hired multiple graduates and they've
-                        all exceeded our expectations."
-                    </p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                        <div>
-                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Priya
-                                Sharma</div>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                Director, Design Studio</div>
-                        </div>
-                    </div>
-                </div>
+                        <!-- Review -->
+                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                            "{{ $testimonial->review }}"
+                        </p>
 
-                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                    <div class="flex mb-4">
-                        <div class="text-yellow-400">★★★★★</div>
-                    </div>
-                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                        "We regularly recruit from CADADDA. Their students have strong technical skills and professional
-                        work ethics."
-                    </p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                        <div>
-                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">Amit
-                                Patel</div>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">CEO,
-                                BuildTech</div>
+                        <!-- User Info -->
+                        <div class="flex items-center">
+                            @if ($testimonial->image)
+                                <img src="{{ asset('storage/' . $testimonial->image) }}"
+                                    alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full mr-3 object-cover">
+                            @else
+                                <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                            @endif
+
+                            <div>
+                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
+                                    {{ $testimonial->name }}
+                                </div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                    "{{ $testimonial->short_description }}"
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
 
         </div>

@@ -796,7 +796,7 @@
                 </div>
 
                 <!-- Student Testimonials Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Student 1 -->
                     <div
                         class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
@@ -874,7 +874,56 @@
                             <span class="font-semibold">Package:</span> ₹8.2 LPA
                         </div>
                     </div>
+                </div> --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @foreach($proudStudents as $student)
+        <div
+            class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
+            
+            <!-- Top Section -->
+            <div class="flex items-center mb-6">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                    
+                    @if($student->image)
+                        <img src="{{ asset('storage/' . $student->image) }}" 
+                             alt="{{ $student->name }}" 
+                             class="w-full h-full object-cover rounded-full">
+                    @else
+                        <span class="text-white font-bold text-xl">
+                            {{ strtoupper(substr($student->name,0,1)) }}
+                        </span>
+                    @endif
                 </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $student->name }}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
+                    <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
+                </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="flex mb-4">
+                <div class="text-yellow-400">
+                    @for($i=1; $i<=5; $i++)
+                        ★
+                    @endfor
+                </div>
+            </div>
+
+            <!-- Review -->
+            <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
+                "{{ $student->message}}"
+            </p>
+
+            <!-- Package -->
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+                <span class="font-semibold">Package:</span> ₹{{ $student->package }}
+            </div>
+        </div>
+    @endforeach
+</div>
+
 
                 <!-- Success Stats -->
                 <div class="mt-16 text-center">
@@ -1154,39 +1203,20 @@
             <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold mb-8 text-gray-800 dark:text-white transition-colors duration-300">
                     Companies Hiring From Us</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-                    <!-- Placeholder logos -->
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            1</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            2</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            3</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            4</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            5</span>
-                    </div>
-                    <div
-                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
-                        <span class="text-gray-500 dark:text-gray-400 font-bold transition-colors duration-300">Company
-                            6</span>
-                    </div>
-                </div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+    @foreach($clients as $client)
+        <div
+            class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 p-2">
+        
+                <img src="{{ asset('storage/' . $client->logo) }}" 
+                     alt="{{ $client->name }}" 
+                     class="max-h-full max-w-full object-contain">
+       
+
+        </div>
+    @endforeach
+</div>
+
             </div>
         </div>
     </section>
