@@ -41,6 +41,7 @@ class Settings extends BaseSettings
                                 'kolkata' => 'Kolkata',
                                 'pune' => 'Pune',
                                 'jaipur' => 'Jaipur',
+                                'jodhpur' => 'Jodhpur',
                                 'lucknow' => 'Lucknow',
                                 'kanpur' => 'Kanpur',
                                 'nagpur' => 'Nagpur',

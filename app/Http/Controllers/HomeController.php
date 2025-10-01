@@ -16,10 +16,13 @@ use App\Models\Events;
 use App\Models\Client;
 use App\Models\ProudStudent;
 use App\Models\History;
+use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Testimonial;
+use Illuminate\Support\Arr;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Datlechin\FilamentMenuBuilder\Models\Menu as DatlechinMenu;
@@ -46,51 +49,81 @@ class HomeController extends Controller
     public function Home()
     {
 
-        
+
         return view('home');
     }
-   public function Homes()
-{
-    $testimonials = Testimonial::where('status', 1)->latest()->get(); 
-    $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
-    $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
-  $proudStudents = ProudStudent::latest()->take(3)->get();
- 
-  $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
-    return view('homes', [
-        'courses' => $courses,
-        'latestCourses' => $latestCourses,
-        'testimonials' => $testimonials,
-        'proudStudents' => $proudStudents,
-        'clients' => $clients,
-    ]);
-}
- public function Courses()
-{
-    $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline','both')")->get();
-    $clients = Client::latest()->get();
-    $proudStudents = ProudStudent::all();
-    $testimonials = Testimonial::where('status', 1)->latest()->get();
-    $offlineCourses = $courses->whereIn('mode', ['offline', 'both' ]);
-    $onlineCourses = $courses->whereIn('mode', ['online', 'both']);
-    $certifications = $courses->whereIn('mode', ['online', 'offline', 'both']); 
-     
-
-    return view('courses', compact('offlineCourses', 'onlineCourses', 'certifications', 'clients','testimonials','proudStudents'));
-}
-
-    public function Course_Detail()
+    public function Homes()
     {
-        return view('Course_Detail');
+        $testimonials = Testimonial::where('status', 1)->latest()->get();
+        $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
+        $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
+        $proudStudents = ProudStudent::latest()->take(3)->get();
+
+        $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
+        return view('homes', [
+            'courses' => $courses,
+            'latestCourses' => $latestCourses,
+            'testimonials' => $testimonials,
+            'proudStudents' => $proudStudents,
+            'clients' => $clients,
+        ]);
     }
+    public function Courses()
+    {
+        $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline','both')")->get();
+        $clients = Client::latest()->get();
+        $proudStudents = ProudStudent::all();
+        $testimonials = Testimonial::where('status', 1)->latest()->get();
+        $offlineCourses = $courses->whereIn('mode', ['offline', 'both']);
+        $onlineCourses = $courses->whereIn('mode', ['online', 'both']);
+        $certifications = $courses->whereIn('mode', ['online', 'offline', 'both']);
+
+
+        return view('courses', compact('offlineCourses', 'onlineCourses', 'certifications', 'clients', 'testimonials', 'proudStudents'));
+    }
+    public function Course_Detail($id)
+    {
+        $course_syllabuses = CourseSyllabuses::where('course_id', $id)->get();
+
+        return view('Course_Detail', compact('course_syllabuses'));
+    }
+
     public function contacts()
     {
-        return view('contacts');
+        // सभी settings को key => value के रूप में लाओ
+        $setting = Setting::all()->pluck('value', 'key')->toArray();
+
+        // dot keys को nested array में बदलना
+        $nested = [];
+        foreach ($setting as $k => $v) {
+            Arr::set($nested, $k, $v);
+        }
+        dd($setting);
+        // अब nested array को view में भेज दो
+        return view('contacts', compact('nested'))->with('setting', $nested);
     }
+
     public function Events()
-    {
-        return view('Event');
-    }
+{
+    $now = \Carbon\Carbon::now();
+
+    // Past Events → जिनका end_date already खत्म हो चुका
+    $pastEvents = Events::where('end_date', '<', $now)
+        ->orderBy('end_date', 'desc')
+        ->get();
+
+    // Present / Upcoming Events → जिनका start_date अभी या बाद में है
+    $presentEvents = Events::where('start_date', '>=', $now)
+        ->orderBy('start_date', 'asc')
+        ->get();
+
+    return view('Event', [
+        'pastEvents' => $pastEvents,
+        'presentEvents' => $presentEvents,
+    ]);
+}
+
+
     public function Gallery()
     {
         return view('Gallery');
@@ -156,10 +189,15 @@ class HomeController extends Controller
     public function contact()
     {
 
-        // $banners = Banner::where('banner_page', 'contact us')->get();
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
 
-        // return view('contact', ['banners' => $banners,]);
-        return view('contacts');
+        // dot keys को nested array में बदलना
+        $nested = [];
+        foreach ($settings as $k => $v) {
+            Arr::set($nested, $k, $v);
+        }
+        // अब nested array को view में भेज दो
+        return view('contacts', compact('nested'))->with('settings', $nested);
     }
     public function about()
     {
@@ -170,12 +208,5 @@ class HomeController extends Controller
 
         // return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors, 'history' => $history]);
         return view('about');
-    }
-    public function event()
-    {
-
-        $banners = Banner::where('banner_page', 'event')->get();
-        $events = Events::all();
-        return view('event', ['banners' => $banners, 'events' => $events,]);
     }
 }

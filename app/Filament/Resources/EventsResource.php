@@ -16,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class EventsResource extends Resource
 {
@@ -29,8 +30,25 @@ class EventsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->label('Name')->required()->maxLength(255),
-                Forms\Components\TextInput::make('slug')->dehydrated()->required()->maxLength(255),
+
+
+                Forms\Components\TextInput::make('name')
+                    ->label('Name')
+                    ->required()
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(
+                        fn($state, callable $set) =>
+                        $set('slug', Str::slug($state))
+                    ),
+
+                Forms\Components\TextInput::make('slug')
+                    ->label('Slug')
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(ignorable: fn($record) => $record)
+                    ->disabled(fn($record) => $record !== null),
+
                 Forms\Components\TextInput::make('organizer')->dehydrated()->required()->maxLength(255),
                 Forms\Components\DateTimePicker::make('start_date')->required(),
                 Forms\Components\DateTimePicker::make('end_date')->required(),

@@ -267,11 +267,11 @@
     <!-- Filter Buttons -->
     <div class="flex justify-center gap-4 mt-10">
         <button onclick="filterEvents('upcoming')"
-            class="filter-btn bg-indigo-500 text-white px-6 py-2 rounded-lg shadow hover:bg-indigo-500 transition">
+            class="filter-btn bg-indigo-500 text-white px-6 py-2 rounded-lg shadow hover:bg-indigo-600 transition">
             Upcoming Events
         </button>
         <button onclick="filterEvents('past')"
-            class="filter-btn bg-gray-200 text-gray-500 px-6 py-2 rounded-lg shadow hover:bg-gray-300 transition">
+            class="filter-btn bg-gray-200 text-gray-600 px-6 py-2 rounded-lg shadow hover:bg-gray-300 transition">
             Past Events
         </button>
     </div>
@@ -280,347 +280,86 @@
     <section class="py-16 max-w-6xl mx-auto px-6">
         <div id="eventsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- Event Card (Upcoming) -->
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+            {{-- Upcoming Events --}}
+            @foreach ($presentEvents as $event)
+                <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
+                    data-date="{{ $event->start_date }}">
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+                    {{-- Event Image --}}
+                    <img src="{{ $event->photo ? asset('storage/' . $event->photo) : 'https://source.unsplash.com/600x400/?event' }}"
+                        class="w-full h-40 object-cover" alt="{{ $event->name }}">
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+                    <div class="p-6 flex flex-col justify-between h-60">
+                        <div>
+                            <span class="text-sm text-gray-500 flex items-center justify-between">
+                                <span class="text-sm text-gray-500">
+                                    📅 {{ \Carbon\Carbon::parse($event->start_date)->format('d M Y') }}
+                                    | ⏰ {{ \Carbon\Carbon::parse($event->start_date)->format('h:i A') }}
+                                    @if ($event->location)
+                                        |
+                                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($event->location) }}"
+                                            target="_blank" class="text-black hover:text-blue-600"
+                                            title="View Location on Map">
+                                            📍 Location
+                                        </a>
+                                    @endif
+                                </span>
+                            </span>
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mt-2">{{ $event->name }}</h3>
+                                <p class="text-gray-500 mt-2 text-sm">{{ $event->description }}</p>
+                        </div>
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
+                        <button onclick="openPopup('{{ $event->slug }}')"
+                            class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
+                            Register Now
+                        </button>
                     </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
                 </div>
-            </div>
+            @endforeach
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+            {{-- Past Events --}}
+            @foreach ($pastEvents as $event)
+                <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
+                    data-date="{{ $event->end_date }}">
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+                    {{-- Event Image --}}
+                    <img src="{{ $event->photo ? asset('storage/' . $event->photo) : 'https://source.unsplash.com/600x400/?event' }}"
+                        class="w-full h-40 object-cover" alt="{{ $event->name }}">
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+                    <div class="p-6 flex flex-col justify-between h-60">
+                        <div>
+                            <span class="text-sm text-gray-500 flex items-center justify-between">
+                                <span class="text-sm text-gray-500">
+                                    📅 {{ \Carbon\Carbon::parse($event->start_date)->format('d M Y') }}
+                                    | ⏰ {{ \Carbon\Carbon::parse($event->start_date)->format('h:i A') }}
+                                    @if ($event->location)
+                                        |
+                                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($event->location) }}"
+                                            target="_blank" class="text-black hover:text-blue-600"
+                                            title="View Location on Map">
+                                            📍 Location
+                                        </a>
+                                    @endif
+                                </span>
+                            </span>
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mt-2">{{ $event->name }}</h3>
+                            <p class="text-gray-500 mt-2 text-sm">{{ $event->description }}</p>
+                        </div>
 
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-15">
-                <img src="https://source.unsplash.com/600x400/?design,architecture" class="w-full h-40 object-cover"
-                    alt="Event 1">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 15 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AutoCAD Mastery Workshop</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Learn 2D drafting, 3D modeling, and architectural design
-                            with real-world projects.</p>
+                        <button disabled
+                            class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
+                            Closed
+                        </button>
                     </div>
-                    <button onclick="openPopup('AutoCAD Mastery Workshop')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
                 </div>
-            </div>
-
-            <!-- Event Card (Upcoming) -->
-            <div class="event-card upcoming bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2025-09-20">
-                <img src="https://source.unsplash.com/600x400/?technology,ai" class="w-full h-40 object-cover"
-                    alt="Event 2">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 20 Sept 2025 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">AI & Machine Learning Conference</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Explore the future of AI and learn how to apply ML in
-                            real-world projects.</p>
-                    </div>
-                    <button onclick="openPopup('AI & Machine Learning Conference')"
-                        class="mt-4 bg-indigo-500 text-white w-full py-2 rounded-lg font-medium hover:bg-indigo-600 transition">
-                        Register Now
-                    </button>
-                </div>
-            </div>
-
-            <!-- Event Card (Past) -->
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-            <div class="event-card past bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-                data-date="2024-08-10">
-                <img src="https://source.unsplash.com/600x400/?business,startup" class="w-full h-40 object-cover"
-                    alt="Event 3">
-                <div class="p-6 flex flex-col justify-between h-60">
-                    <div>
-                        <span class="text-sm text-gray-500">📅 10 Aug 2024 | ⏰ 09:30 AM</span>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-2">Startup & Innovation Summit</h3>
-                        <p class="text-gray-500 mt-2 text-sm">Network with entrepreneurs and investors while
-                            discovering the latest in startup culture.</p>
-                    </div>
-                    <button disabled
-                        class="mt-4 bg-gray-400 text-white w-full py-2 rounded-lg font-medium cursor-not-allowed">
-                        Closed
-                    </button>
-                </div>
-            </div>
-
+            @endforeach
 
         </div>
     </section>
+
+
 
     <!-- Popup Modal -->
     <div id="popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

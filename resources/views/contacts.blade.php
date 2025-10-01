@@ -281,8 +281,11 @@
                         </div>
                         <div class="flex-1">
                             <p class="text-xs text-gray-500 font-medium">Email Us</p>
-                            <p class="text-sm font-bold text-gray-900">info@cadadda.com</p>
-                            <a href="mailto:info@cadadda.com"
+                            <p class="text-sm font-bold text-gray-900">
+                                 {{ data_get($settings, 'contact.email', 'Institute Email') }},
+                            </p>
+
+                            <a href="mailto: {{ data_get($settings, 'contact.email', '') }}"
                                 class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
                                 Send Email
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
@@ -310,9 +313,11 @@
                         </div>
                         <div class="flex-1">
                             <p class="text-xs text-gray-500 font-medium">Call Us</p>
-                            <p class="text-sm font-bold text-gray-900">+91 9261077888</p>
+                            <p class="text-sm font-bold text-gray-900">
+                             {{ data_get($settings, 'contact.phone_number', 'Institute Phone Number') }}
+                            </p>
                             <p class="text-sm text-gray-600">Mon-Fri 9:00 AM - 6:00 PM</p>
-                            <a href="tel:+919261077888"
+                            <a href="tel:{{ $settings['contact.phone_number'] ?? '' }}"
                                 class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
                                 Call Now
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
@@ -341,10 +346,14 @@
                         </div>
                         <div class="flex-1">
                             <p class="text-xs text-gray-500 font-medium">Visit Us</p>
-                            <p class="text-sm text-gray-600"> PL No-8, Behind mahaveer complex, Opp. Bheru bagh jain
-                                Mandir, C road, Sardarpura, Jodhpur, Rajasthan, 342001</p>
-                            <a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin"
-                                target="_blank"
+                            <p class="text-sm text-gray-600">
+                            <p class="text-sm text-gray-600">
+                                {{ data_get($settings, 'address.name', 'Institute Name') }},
+                                {{ data_get($settings, 'address.city', 'City') }},
+                                {{ data_get($settings, 'address.state', 'State') }} -
+                                {{ data_get($settings, 'address.zip_code', '') }}
+                            </p>
+                            <a href="{{ $settings['contact.map_link'] ?? '#' }}" target="_blank"
                                 class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
                                 Get Directions
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
@@ -358,6 +367,7 @@
                 </div>
 
             </div>
+
 
             <!-- Contact Form -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
@@ -645,6 +655,6 @@
             }
         });
     </script>
-    </body>
+</body>
 
-        </html>
+</html>
