@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,24 +20,50 @@
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
                         },
                         slideIn: {
-                            '0%': { transform: 'translateX(-100%)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                            '0%': {
+                                transform: 'translateX(-100%)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
                         },
                         slideUp: {
-                            '0%': { transform: 'translateY(50px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                            '0%': {
+                                transform: 'translateY(50px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
                         },
                         slideRight: {
-                            '0%': { transform: 'translateX(50px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                            '0%': {
+                                transform: 'translateX(50px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
                         },
                         fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
                         }
                     }
                 }
@@ -48,67 +75,70 @@
         .slide-in-left {
             animation: slideInLeft 0.8s ease-out forwards;
         }
-        
+
         .slide-in-right {
             animation: slideInRight 0.8s ease-out forwards;
         }
-        
+
         .slide-in-up {
             animation: slideInUp 0.8s ease-out forwards;
         }
-        
+
         /* Initial states */
         .slide-in-left,
         .slide-in-right,
         .slide-in-up {
             opacity: 0;
         }
-        
+
         /* Keyframes */
         @keyframes slideInLeft {
             0% {
                 transform: translateX(-100px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateX(0);
                 opacity: 1;
             }
         }
-        
+
         @keyframes slideInRight {
             0% {
                 transform: translateX(100px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateX(0);
                 opacity: 1;
             }
         }
-        
+
         @keyframes slideInUp {
             0% {
                 transform: translateY(50px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
-        
+
         /* Counter animation styles */
         .counter {
             display: inline-block;
             transition: all 0.3s ease;
         }
-        
+
         .counter.animate {
             transform: scale(1.1);
             color: #fbbf24;
         }
-        
+
         /* Ensure animations work on all browsers */
         .slide-in-left,
         .slide-in-right,
@@ -117,26 +147,32 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <!-- Header / Navbar -->
-    <header class="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/50 sticky top-0 z-50 transition-colors duration-300">
+    <header
+        class="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/50 sticky top-0 z-50 transition-colors duration-300">
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
                 <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-lg">C</span>
                     </div>
-                    <span class="text-2xl font-bold text-gray-800 dark:text-white transition-colors duration-300">CADADDA</span>
+                    <span
+                        class="text-2xl font-bold text-gray-800 dark:text-white transition-colors duration-300">CADADDA</span>
                 </div>
-                
+
                 <!-- Mobile Menu Toggle -->
-                <button class="md:hidden text-gray-700 dark:text-gray-300 transition-colors duration-300" onclick="toggleMobileMenu()">
+                <button class="md:hidden text-gray-700 dark:text-gray-300 transition-colors duration-300"
+                    onclick="toggleMobileMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                
+
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ url('/') }}"
@@ -158,42 +194,60 @@
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
                         Us</a>
                 </div>
-                
+
                 <!-- Dark Mode Toggle & Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
                     <!-- Dark Mode Toggle -->
-                    <button id="darkModeToggle" class="p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700" onclick="toggleDarkMode()">
-                        <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    <button id="darkModeToggle"
+                        class="p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                        onclick="toggleDarkMode()">
+                        <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
                         </svg>
                         <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
                         </svg>
                     </button>
-                    
-                    <button class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
+
+                    <button
+                        class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
                         Sign in
                     </button>
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                    <button
+                        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
                         Join Now
                     </button>
                 </div>
             </div>
-            
+
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden mt-4 md:hidden">
                 <div class="flex flex-col space-y-3">
-                    <a href="#home" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
-                    <a href="#courses" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Courses</a>
-                    <a href="#event" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
-                    <a href="#gallery" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
-                    <a href="#jobs" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
-                    <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact Us</a>
+                    <a href="#home"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
+                    <a href="#courses"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Courses</a>
+                    <a href="#event"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
+                    <a href="#gallery"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
+                    <a href="#jobs"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
+                    <a href="#contact"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
+                        Us</a>
                     <div class="flex space-x-2 pt-3">
-                        <button class="flex-1 px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
+                        <button
+                            class="flex-1 px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
                             Sign in
                         </button>
-                        <button class="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                        <button
+                            class="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
                             Join Now
                         </button>
                     </div>
@@ -202,81 +256,119 @@
         </nav>
     </header>
 
-  <!-- Hero -->
-  <header class="relative bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-12">
-    <div class="max-w-5xl mx-auto text-center px-6">
-      <h1 class="text-4xl md:text-5xl font-extrabold">Event Gallery</h1>
-      <p class="mt-3 text-lg text-indigo-100">
-        Select an Event or Year to filter gallery images
-      </p>
-    </div>
-  </header>
+    <!-- Hero -->
+    <header class="relative bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-12">
+        <div class="max-w-5xl mx-auto text-center px-6">
+            <h1 class="text-4xl md:text-5xl font-extrabold">Event Gallery</h1>
+            <p class="mt-3 text-lg text-indigo-100">
+                Select an Event or Year to filter gallery images
+            </p>
+        </div>
+    </header>
 
 <!-- Filters -->
 <section class="py-6 bg-white shadow-sm border-b">
-  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8 justify-center">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8 justify-center">
 
-    <!-- Event Filter -->
-    <div class="w-60">
-      <label for="eventFilter" class="block text-base font-semibold text-gray-700">Select Event</label>
-      <select id="eventFilter" 
-        class="mt-2 block w-full rounded-xl border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-base px-4 py-3">
-        <option value="all">All Events</option>
-        <option value="autocad">AutoCAD Workshop</option>
-        <option value="ai">AI Conference</option>
-        <option value="startup">Startup Summit</option>
-        <option value="cultural">Cultural Festival</option>
-      </select>
+        <!-- Category Filter -->
+        <div class="w-48">
+            <label for="categoryFilter" class="block text-base font-semibold text-gray-700">Select Category</label>
+            <select id="categoryFilter"
+                class="mt-2 block w-full rounded-xl border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-base px-4 py-3">
+                <option value="all">All Categories</option>
+                <option value="event">Event</option>
+                <option value="proud">Proud Moment</option>
+                <option value="institute">Institute</option>
+            </select>
+        </div>
+
     </div>
-
-    <!-- Year Filter -->
-    <div class="w-48">
-      <label for="yearFilter" class="block text-base font-semibold text-gray-700">Select Year</label>
-      <select id="yearFilter" 
-        class="mt-2 block w-full rounded-xl border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-base px-4 py-3">
-        <option value="all">All Years</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
-      </select>
-    </div>
-
-  </div>
 </section>
 
-
-  <!-- Gallery Grid -->
-  <section class="py-12 max-w-7xl mx-auto px-6">
+<!-- Gallery Grid -->
+<section class="py-12 max-w-7xl mx-auto px-6">
     <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-      <!-- Example Items -->
-      <div class="gallery-item" data-event="autocad" data-year="2025">
-        <img src="https://source.unsplash.com/600x400/?autocad,workshop" class="rounded-xl w-full h-48 object-cover shadow-md" alt="">
-        <p class="mt-2 text-center text-sm font-medium">AutoCAD Workshop (2025)</p>
-      </div>
-
-      <div class="gallery-item" data-event="ai" data-year="2024">
-        <img src="https://source.unsplash.com/600x400/?ai,conference" class="rounded-xl w-full h-48 object-cover shadow-md" alt="">
-        <p class="mt-2 text-center text-sm font-medium">AI Conference (2024)</p>
-      </div>
-
-      <div class="gallery-item" data-event="startup" data-year="2023">
-        <img src="https://source.unsplash.com/600x400/?startup,seminar" class="rounded-xl w-full h-48 object-cover shadow-md" alt="">
-        <p class="mt-2 text-center text-sm font-medium">Startup Summit (2023)</p>
-      </div>
-
-      <div class="gallery-item" data-event="cultural" data-year="2025">
-        <img src="https://source.unsplash.com/600x400/?festival,cultural" class="rounded-xl w-full h-48 object-cover shadow-md" alt="">
-        <p class="mt-2 text-center text-sm font-medium">Cultural Festival (2025)</p>
-      </div>
-
-      <div class="gallery-item" data-event="ai" data-year="2025">
-        <img src="https://source.unsplash.com/600x400/?artificial,intelligence" class="rounded-xl w-full h-48 object-cover shadow-md" alt="">
-        <p class="mt-2 text-center text-sm font-medium">AI Conference (2025)</p>
-      </div>
-
+        @foreach ($galleries as $gallery)
+            <div class="gallery-card cursor-pointer" 
+                 data-images='@json($gallery->images)' 
+                 data-title="{{ $gallery->title }}" 
+                 data-category="{{ $gallery->category }}">
+                <img src="{{ asset('storage/' . $gallery->images[0]) }}"
+                     class="rounded-xl w-full h-48 object-cover shadow-md" alt="{{ $gallery->title }}">
+                <p class="mt-2 text-center text-sm font-medium">
+                    {{ $gallery->title }} ({{ ucfirst($gallery->category) }})
+                </p>
+            </div>
+        @endforeach
     </div>
-  </section>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center hidden z-50">
+    <button id="closeLightbox" class="absolute top-4 right-4 text-gray-800 text-3xl font-bold">&times;</button>
+    <div class="max-w-2xl w-full max-h-[70vh] overflow-hidden relative rounded-xl shadow-lg">
+        <img id="lightboxImage" src="" class="w-full h-auto object-contain rounded-t-xl" alt="">
+        <p id="lightboxTitle" class="text-gray-800 text-center mt-2 mb-4 font-medium"></p>
+        <button id="prevImage" class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-800 text-3xl font-bold">&lt;</button>
+        <button id="nextImage" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-800 text-3xl font-bold">&gt;</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const closeLightbox = document.getElementById('closeLightbox');
+        const prevBtn = document.getElementById('prevImage');
+        const nextBtn = document.getElementById('nextImage');
+
+        let currentImages = [];
+        let currentIndex = 0;
+
+        // Lightbox functionality
+        galleryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                currentImages = JSON.parse(card.dataset.images);
+                currentIndex = 0;
+                lightboxImage.src = `/storage/${currentImages[currentIndex]}`;
+                lightboxTitle.textContent = card.dataset.title;
+                lightbox.classList.remove('hidden');
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => lightbox.classList.add('hidden'));
+        prevBtn.addEventListener('click', () => {
+            if (!currentImages.length) return;
+            currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            lightboxImage.src = `/storage/${currentImages[currentIndex]}`;
+        });
+        nextBtn.addEventListener('click', () => {
+            if (!currentImages.length) return;
+            currentIndex = (currentIndex + 1) % currentImages.length;
+            lightboxImage.src = `/storage/${currentImages[currentIndex]}`;
+        });
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.add('hidden');
+        });
+
+        // Category filter
+        const categoryFilter = document.getElementById('categoryFilter');
+        categoryFilter.addEventListener('change', function() {
+            const selectedCategory = this.value.toLowerCase();
+            galleryCards.forEach(card => {
+                const cardCategory = card.dataset.category.toLowerCase();
+                if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
+
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">
@@ -487,33 +579,34 @@
             }
         });
     </script>
- 
 
-  <!-- Filter Script -->
-  <script>
-    const eventFilter = document.getElementById('eventFilter');
-    const yearFilter = document.getElementById('yearFilter');
-    const items = document.querySelectorAll('.gallery-item');
 
-    function filterGallery() {
-      const eventValue = eventFilter.value;
-      const yearValue = yearFilter.value;
+    <!-- Filter Script -->
+    <script>
+        const eventFilter = document.getElementById('eventFilter');
+        const yearFilter = document.getElementById('yearFilter');
+        const items = document.querySelectorAll('.gallery-item');
 
-      items.forEach(item => {
-        const matchesEvent = (eventValue === 'all' || item.dataset.event === eventValue);
-        const matchesYear = (yearValue === 'all' || item.dataset.year === yearValue);
+        function filterGallery() {
+            const eventValue = eventFilter.value;
+            const yearValue = yearFilter.value;
 
-        if (matchesEvent && matchesYear) {
-          item.style.display = "block";
-        } else {
-          item.style.display = "none";
+            items.forEach(item => {
+                const matchesEvent = (eventValue === 'all' || item.dataset.event === eventValue);
+                const matchesYear = (yearValue === 'all' || item.dataset.year === yearValue);
+
+                if (matchesEvent && matchesYear) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
         }
-      });
-    }
 
-    eventFilter.addEventListener('change', filterGallery);
-    yearFilter.addEventListener('change', filterGallery);
-  </script>
+        eventFilter.addEventListener('change', filterGallery);
+        yearFilter.addEventListener('change', filterGallery);
+    </script>
 
 </body>
+
 </html>

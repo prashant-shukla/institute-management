@@ -257,17 +257,21 @@
     </header>
 
     <!-- Header Section -->
-    {{-- <header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-white-500 text-white py-20">
-        <div
-            class="absolute inset-0 bg-[url('https://source.unsplash.com/1600x600/?autocad,architecture,design')] bg-cover bg-center opacity-20">
-        </div>
-        <div>
-        <div class="relative max-w-6xl mx-auto px-6 text-center">
+<header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-300 text-white py-20">
+    <!-- Background image overlay -->
+    <div
+        class="absolute inset-0 bg-[url('{{ $course->banner_image ?? 'https://source.unsplash.com/1600x600/?autocad,architecture,design' }}')] bg-cover bg-center opacity-20">
+    </div>
+
+    <div
+        class="relative max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-between md:gap-16 gap-10">
+        <!-- Left: Main heading -->
+        <div class="text-center md:text-left flex-1">
             <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
-                AutoCAD Mastery
+                {{ $course->name }}
             </h1>
-            <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-2xl mx-auto">
-                Learn 2D drafting, 3D modeling, and architectural design with real-world projects.
+            <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-2xl">
+                {{ $course->sub_title }}
             </p>
             <button
                 class="mt-8 bg-white text-indigo-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-indigo-50 transition-transform">
@@ -275,120 +279,65 @@
             </button>
         </div>
 
-            <!-- Pricing & Enroll -->
-            <div class="md:w-100 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-2xl font-bold text-gray-900">₹45,000</span>
-                        <span class="text-gray-400 line-through ml-2">₹60,000</span>
-                    </div>
-                    <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
+        <!-- Right: Pricing & Enroll box -->
+        <div class="md:w-50 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 text-gray-900">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-2xl font-bold">₹{{ number_format($course->offer_fee, 2) }}</span>
+                    <span class="text-gray-400 line-through ml-2">₹{{ number_format($course->fee, 2) }}</span>
                 </div>
-
-                <button
-                    class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
-                    Enroll Now
-                </button>
-
-                <button onclick="openForm()"
-                    class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
-                    View Curriculum
-                </button>
-
-                <p class="text-xs text-gray-400 mt-2">
-                    Secure checkout via UPI / Cards. Instant confirmation.
-                </p>
+                <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
             </div>
-</div>
-    </header> --}}
 
-    <header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-300 text-white py-20">
-        <!-- Background image overlay -->
-        <div
-            class="absolute inset-0 bg-[url('https://source.unsplash.com/1600x600/?autocad,architecture,design')] bg-cover bg-center opacity-20">
+            <a href="#"
+                class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition text-center">
+                Enroll Now
+            </a>
+
+            <button onclick="openForm()"
+                class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
+                View Curriculum
+            </button>
+
+            <p class="text-xs text-gray-500 mt-2">
+                Secure checkout via UPI / Cards. Instant confirmation.
+            </p>
         </div>
+    </div>
 
-        <div
-            class="relative max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-between md:gap-16 gap-10">
-            <!-- Left: Main heading -->
-            <div class="text-center md:text-left flex-1">
-                <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
-                    AutoCAD Mastery
-                </h1>
-                <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-2xl">
-                    Learn 2D drafting, 3D modeling, and architectural design with real-world projects.
-                </p>
-                <button
-                    class="mt-8 bg-white text-indigo-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-indigo-50 transition-transform">
-                    🚀 Enroll Now
+    <!-- Modal Form -->
+    <div id="curriculumForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
+            <h3 class="text-lg font-bold mb-4 text-indigo-600">Get Curriculum</h3>
+            <form id="downloadForm">
+                <input type="text" name="name" placeholder="Your Name" class="w-full border p-2 rounded mb-3"
+                    required>
+                <input type="email" name="email" placeholder="Your Email" class="w-full border p-2 rounded mb-3" required>
+                <button type="submit" class="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
+                    Submit & Download
                 </button>
-            </div>
-
-            <!-- Right: Pricing & Enroll box -->
-            <div class="md:w-50 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 text-gray-900">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-2xl font-bold">₹45,000</span>
-                        <span class="text-gray-400 line-through ml-2">₹60,000</span>
-                    </div>
-                    <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
-                </div>
-
-                <button
-                    class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
-                    Enroll Now
-                </button>
-
-                <button onclick="openForm()"
-                    class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
-                    View Curriculum
-                </button>
-
-                <p class="text-xs text-gray-500 mt-2">
-                    Secure checkout via UPI / Cards. Instant confirmation.
-                </p>
-            </div>
+            </form>
+            <button onclick="closeForm()" class="mt-3 text-gray-500 hover:text-red-500">Close</button>
         </div>
-        <!-- Modal Form -->
-        <div id="curriculumForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
-                <h3 class="text-lg font-bold mb-4 text-indigo-600">Get Curriculum</h3>
-                <form id="downloadForm">
-                    <input type="text" name="name" placeholder="Your Name" class="w-full border p-2 rounded mb-3"
-                        required>
-                    <input type="email" name="email" placeholder="Your Email"
-                        class="w-full border p-2 rounded mb-3" required>
-                    <button type="submit"
-                        class="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
-                        Submit & Download
-                    </button>
-                </form>
-                <button onclick="closeForm()" class="mt-3 text-gray-500 hover:text-red-500">Close</button>
-            </div>
-        </div>
+    </div>
 
-        <script>
-            function openForm() {
-                document.getElementById("curriculumForm").classList.remove("hidden");
-            }
+    <script>
+        function openForm() {
+            document.getElementById("curriculumForm").classList.remove("hidden");
+        }
 
-            function closeForm() {
-                document.getElementById("curriculumForm").classList.add("hidden");
-            }
+        function closeForm() {
+            document.getElementById("curriculumForm").classList.add("hidden");
+        }
 
-            // Example: on form submit → download PDF (or trigger email via backend)
-            document.getElementById("downloadForm").addEventListener("submit", function(e) {
-                e.preventDefault();
+        document.getElementById("downloadForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            window.location.href = "/storage/curriculum.pdf"; // replace with backend logic if needed
+            closeForm();
+        });
+    </script>
+</header>
 
-                // Backend ko AJAX call karo yaha (Laravel/CodeIgniter)
-                // Example: after success → curriculum.pdf download
-                window.location.href = "/storage/curriculum.pdf";
-
-                closeForm();
-            });
-        </script>
-
-    </header>
 
 
 
@@ -785,72 +734,44 @@
                 ⭐ What Our Students Say
             </h2>
 
+
+
             <!-- Swiper Slider -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
 
-                    <!-- Slide 1 -->
-                    <div
-                        class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                        <div class="flex mb-4">
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                            "AutoCAD training at CADADDA was amazing! The projects helped me understand real-world
-                            drafting and modeling."
-                        </p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                            <div>
-                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                                    Siddharth Verma</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                    Mechanical Engineering Student</div>
+                    @forelse($reviews as $review)
+                        <div
+                            class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300 min-h-[230px]">
+                            <div class="flex mb-4">
+                                <div class="text-yellow-400">★★★★★</div> {{-- Always show 5 stars --}}
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                                "{{ $review->review }}"
+                            </p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3 overflow-hidden">
+                                    <img src="{{ asset('images/default-avatar.jpg') }}" alt="Reviewer"
+                                        class="w-12 h-12 object-cover rounded-full">
+                                </div>
+                                <div>
+                                    <div
+                                        class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
+                                        Student #{{ $review->student_id }}
+                                    </div>
+                                    <div
+                                        class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                        Verified Student
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div
-                        class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                        <div class="flex mb-4">
-                            <div class="text-yellow-400">★★★★★</div>
+                    @empty
+                        <div
+                            class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md text-center min-h-[230px]">
+                            <p class="text-gray-500 dark:text-gray-300">No reviews available yet.</p>
                         </div>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                            "The instructors were very clear and supportive. I gained confidence in creating 3D models
-                            and floor plans."
-                        </p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                            <div>
-                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                                    Ananya Singh</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                    Architecture Student</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div
-                        class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                        <div class="flex mb-4">
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                            "Thanks to CADADDA, I was able to complete my projects professionally. The skills I learned
-                            are now helping me in my job."
-                        </p>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                            <div>
-                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                                    Rohit Mehta</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                    Civil Engineering Student</div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
 
                 </div>
 
@@ -861,7 +782,11 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
+
+
         </div>
+    </section>
+    </div>
     </section>
 
     <!-- Include Swiper JS -->
@@ -898,20 +823,19 @@
 
 
     <!-- AutoCAD FAQ Section -->
-    <section id="faq" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <!-- Heading -->
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">
-                ❓ AutoCAD Course FAQs
-            </h2>
+<section id="faq" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">
+            ❓ {{ $course->name }} FAQs
+        </h2>
 
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
+        <div class="space-y-4">
+            @forelse($faqs as $faq)
                 <div class="border rounded-xl bg-white shadow-sm">
                     <button
                         class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
                         onclick="toggleFAQ(this)">
-                        <span class="font-semibold text-gray-900">What is AutoCAD and why should I learn it?</span>
+                        <span class="font-semibold text-gray-900">{{ $faq['question'] }}</span>
                         <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -919,98 +843,45 @@
                         </svg>
                     </button>
                     <div class="px-6 pb-4 hidden">
-                        <p class="text-gray-700">AutoCAD is a leading CAD software used for 2D drafting and 3D
-                            modeling. Learning it enhances your career in engineering, architecture, and design.</p>
+                        <p class="text-gray-700">{{ $faq['answer'] }}</p>
                     </div>
                 </div>
-
-                <!-- FAQ Item 2 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleFAQ(this)">
-                        <span class="font-semibold text-gray-900">Do I need prior experience to take this
-                            course?</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <p class="text-gray-700">No prior experience is required. This course is designed for beginners
-                            and gradually builds up to advanced AutoCAD skills.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleFAQ(this)">
-                        <span class="font-semibold text-gray-900">Will I work on real-world projects?</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <p class="text-gray-700">Yes! The course includes 2D drafting, 3D modeling, and architectural
-                            projects to give you hands-on experience.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 4 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleFAQ(this)">
-                        <span class="font-semibold text-gray-900">Can I get a certificate after completion?</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <p class="text-gray-700">Yes, you will receive a certificate upon successfully completing all
-                            course modules and projects.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 5 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleFAQ(this)">
-                        <span class="font-semibold text-gray-900">Is there placement assistance after this
-                            course?</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <p class="text-gray-700">Yes, we provide placement guidance and support to help you land
-                            internships or job opportunities in design and engineering fields.</p>
-                    </div>
-                </div>
-            </div>
+            @empty
+                <p class="text-center text-gray-500">No FAQs available for this course yet.</p>
+            @endforelse
         </div>
-    </section>
+    </div>
+</section>
+
 
 
     <!-- FAQ Accordion JS -->
-    <script>
-        function toggleFAQ(button) {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('svg');
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
+<script>
+    function toggleFAQ(button) {
+        const allContents = document.querySelectorAll('#faq .border > div'); // सब FAQ content
+        const allIcons = document.querySelectorAll('#faq .border button svg'); // सब arrow icons
+
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('svg');
+
+        // अगर current already open है तो उसे close करो और return
+        if (!content.classList.contains('hidden')) {
+            content.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+            return;
         }
-    </script>
+
+        // Pehle sabको close करो
+        allContents.forEach(c => c.classList.add('hidden'));
+        allIcons.forEach(i => i.classList.remove('rotate-180'));
+
+        // Ab current को open करो
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+    }
+</script>
+
+
 
 
 

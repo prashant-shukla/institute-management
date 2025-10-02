@@ -441,6 +441,7 @@
                 <!-- Offline Courses -->
                 <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse($offlineCourses as $course)
+                     <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
                         <div class="bg-white shadow rounded-xl overflow-hidden">
                             <div class="h-40 bg-blue-500"></div>
                             <div class="p-5">
@@ -458,6 +459,7 @@
                                 </div>
                             </div>
                         </div>
+                     </a>
                     @empty
                         <p class="text-gray-500">No offline courses available.</p>
                     @endforelse
@@ -467,6 +469,7 @@
                 <div id="online"
                     class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
                     @forelse($onlineCourses as $course)
+                     <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
                         <div class="bg-white shadow rounded-xl overflow-hidden">
                             <div class="h-40 bg-purple-500"></div>
                             <div class="p-5">
@@ -484,6 +487,7 @@
                                 </div>
                             </div>
                         </div>
+                     </a>
                     @empty
                         <p class="text-gray-500">No online courses available.</p>
                     @endforelse
@@ -493,6 +497,7 @@
                 <div id="certifications"
                     class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
                     @forelse($certifications as $course)
+                     <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
                         <div class="bg-white shadow rounded-xl overflow-hidden">
                             <div class="h-40 bg-red-500"></div>
                             <div class="p-5">
@@ -510,6 +515,7 @@
                                 </div>
                             </div>
                         </div>
+                     </a>
                     @empty
                         <p class="text-gray-500">No certifications available.</p>
                     @endforelse

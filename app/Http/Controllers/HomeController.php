@@ -14,6 +14,7 @@ use App\Models\CourseMentor;
 use App\Models\Banner;
 use App\Models\Events;
 use App\Models\Client;
+use App\Models\Gallery;
 use App\Models\ProudStudent;
 use App\Models\History;
 use App\Models\Setting;
@@ -46,12 +47,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function Home()
-    {
 
-
-        return view('home');
-    }
     public function Homes()
     {
         $testimonials = Testimonial::where('status', 1)->latest()->get();
@@ -120,11 +116,11 @@ class HomeController extends Controller
     ]);
 }
 
-
-    public function Gallery()
-    {
-        return view('Gallery');
-    }
+public function Gallery()
+{
+    $galleries = Gallery::all(); // DB se sab galleries fetch
+    return view('Gallery', compact('galleries')); // variable view me pass karo
+}
     public function placement()
     {
         return view('placement');
@@ -157,32 +153,35 @@ class HomeController extends Controller
         return view('ajax', ['courses' => $courses, 'coursecategories' => $coursecategories, 'mentors' => $mentors, 'reviews' => $reviews])->render();
     }
 
-    public function Course($slug, $id)
-    {
-        $slug = $slug;
-        // Retrieve the specific course by its ID
-        //   dd($id);
-        $course = Course::where('id', $id)->firstOrFail();
+public function Course($slug, $id)
+{
+    // Specific course by ID
+    $course = Course::findOrFail($id);
 
-        $banners = Banner::where('banner_page', 'course')->get();
-
-        // Fetch related data specific to this course
-        $coursementors = CourseMentor::where('course_id', $id)->get();
-        $reviews = Reviews::where('course_id', $id)->get();
-        $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
-        $coursetool = CourseTool::where('course_id', $id)->get();
-        //    dd($banners[0]->image_url[0]);
-
-        // Pass the specific data to the view
-        return view('course', [
-            'course' => $course,  // Pass single course object
-            'coursementors' => $coursementors,
-            'reviews' => $reviews,
-            'coursesyllabuses' => $coursesyllabuses,
-            'coursetool' => $coursetool,
-            'banners' => $banners,
-        ]);
+    $banners = Banner::where('banner_page', 'course')->get();
+    $coursementors = CourseMentor::where('course_id', $id)->get();
+    $reviews = Reviews::where('course_id', $id)->get();
+    $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
+    $coursetool = CourseTool::where('course_id', $id)->get();
+      $faqs = [];
+    if (!empty($course->faqs)) {
+        $faqs = is_array($course->faqs) ? $course->faqs : json_decode($course->faqs, true);
+        if (!is_array($faqs)) {
+            $faqs = []; // fallback if json_decode failed
+        }
     }
+
+    return view('Course_Detail', [
+        'course' => $course,
+        'coursementors' => $coursementors,
+        'reviews' => $reviews,
+        'coursesyllabuses' => $coursesyllabuses,
+        'coursetool' => $coursetool,
+        'banners' => $banners,
+        'faqs' => $faqs,
+    ]);
+}
+
     public function contact()
     {
 
