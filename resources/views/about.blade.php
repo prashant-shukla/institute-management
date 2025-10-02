@@ -1,15 +1,5 @@
 <!doctype html>
-<!-- Martex - Tailwind CSS Software, SaaS & Startup Template design by elite-themes24 () -->
-<!--[if lt IE 7 ]>
-<html class="ie ie6" lang="en">
-   <![endif]-->
-<!--[if IE 7 ]>
-   <html class="ie ie7" lang="en">
-      <![endif]-->
-<!--[if IE 8 ]>
-      <html class="ie ie8" lang="en">
-         <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
+
 <html lang="en">
 
 
@@ -24,7 +14,7 @@
     <!-- SITE TITLE -->
     <title>Martex - Tailwind CSS Software, SaaS & Startup Template</title>
     <!-- FAVICON AND TOUCH ICONS -->
-      
+
     <link rel="shortcut icon" href="front/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="front/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="152x152" href="front/assets/assests/images/icons/apple-touch-icon-152x152.png">
@@ -84,8 +74,9 @@
                         <p class="color--white !text-[1.125rem] font-semibold tracking-[0] !mb-[20px] font-Jakarta">
                             Color Scheme</p>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('pink-theme', 60)"><img src="front/images/color-scheme/pink.jpg"
-                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                            href="javascript:chooseStyle('pink-theme', 60)"><img
+                                src="front/images/color-scheme/pink.jpg" class=" !w-[50px] !h-[50px] rounded-[8px]"
+                                alt=""></a>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
                             href="javascript:chooseStyle('purple-theme', 60)"><img
                                 src="front/images/color-scheme/purple.jpg" class=" !w-[50px] !h-[50px] rounded-[8px]"
@@ -107,11 +98,13 @@
                                 src="front/images/color-scheme/crocus.jpg" class=" !w-[50px] !h-[50px] rounded-[8px]"
                                 alt=""></a>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('red-theme', 60)"><img src="front/images/color-scheme/red.jpg"
-                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                            href="javascript:chooseStyle('red-theme', 60)"><img
+                                src="front/images/color-scheme/red.jpg" class=" !w-[50px] !h-[50px] rounded-[8px]"
+                                alt=""></a>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('green-theme', 60)"><img src="front/images/color-scheme/green.jpg"
-                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                            href="javascript:chooseStyle('green-theme', 60)"><img
+                                src="front/images/color-scheme/green.jpg" class=" !w-[50px] !h-[50px] rounded-[8px]"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="stBlock !text-center" style="margin: 0px 27px 25px 31px;">
@@ -499,7 +492,8 @@
                                     class="video-btn video-btn-xl !w-[6.25rem] !h-[6.25rem] mt-[-3.125rem] ml-[-3.125rem] md:max-lg:w-28 md:max-lg:!h-28 md:max-lg:!mt-[-3.5rem] md:max-lg:ml-[-3.5rem] !absolute inline-block !text-center !text-white rounded-[100%] left-2/4 top-2/4 before:content-[''] before:absolute before:left-[-5px] before:right-[-5px] before:top-[-5px] before:bottom-[-5px] before:opacity-0 before:transition-all before:duration-[400ms] before:ease-[ease-in-out] before:rounded-[50%] before:bg-[rgba(255,255,255,0.2)] group hover:before:opacity-75  hover:before:left-[-1.5rem]  hover:before:right-[-1.5rem]  hover:before:top-[-1.5rem]  hover:before:bottom-[-1.5rem] bg--theme">
                                     <div
                                         class="video-block-wrapper transition-all duration-[400ms] ease-[ease-in-out] group-hover:scale-95">
-                                        <span class="flaticon-play-button"></span></div>
+                                        <span class="flaticon-play-button"></span>
+                                    </div>
                                 </div>
                             </a>
                             <!-- Preview Image -->
@@ -782,64 +776,64 @@
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-1.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-1.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-1-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-2.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-2.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-3-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-4.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-4.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-4-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-5.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-5.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-5-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-6.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-6.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-6-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-7.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-7.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-7-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-8.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-8.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-8-white.png" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo p-[0_20px] lg:max-xl:px-3 lg:max-xl:py-0 md:max-lg:px-[10px] md:max-lg:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="front/images/brand-9.png"
-                                        alt="brand-logo"></a>
+                                <a href="#"><img class="img-fluid light-theme-img"
+                                        src="front/images/brand-9.png" alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
                                         src="front/images/brand-9-white.png" alt="brand-logo"></a>
                             </div>
@@ -1098,7 +1092,8 @@
                                         Grow with Us!</h6>
                                     <p
                                         class="color--grey leading-none !font-normal tracking-[0] !mb-0 font-Jakarta xsm:max-sm:!text-[1.175rem]">
-                                        <a href="mailto:youremail@mail.com">hireme@domain.com</a></p>
+                                        <a href="mailto:youremail@mail.com">hireme@domain.com</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

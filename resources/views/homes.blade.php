@@ -175,20 +175,26 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home"
+                    <a href="{{ url('/') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Home</a>
-                    <a href="#courses"
+
+                    <a href="{{ url('/Course') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Courses</a>
-                    <a href="#event"
+
+                    <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
-                    <a href="#gallery"
+
+                    <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
-                    <a href="#jobs"
+
+                    <a href="{{ url('/placement') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
-                    <a href="#contact"
+
+                    <a href="{{ url('/contact') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
                         Us</a>
                 </div>
+
 
                 <!-- Dark Mode Toggle & Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
@@ -876,53 +882,54 @@
                     </div>
                 </div> --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    @foreach($proudStudents as $student)
-        <div
-            class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
-            
-            <!-- Top Section -->
-            <div class="flex items-center mb-6">
-                <div
-                    class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 overflow-hidden">
-                    
-                    @if($student->image)
-                        <img src="{{ asset('storage/' . $student->image) }}" 
-                             alt="{{ $student->name }}" 
-                             class="w-full h-full object-cover rounded-full">
-                    @else
-                        <span class="text-white font-bold text-xl">
-                            {{ strtoupper(substr($student->name,0,1)) }}
-                        </span>
-                    @endif
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $student->name }}</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
-                    <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
-                </div>
-            </div>
+                    @foreach ($proudStudents as $student)
+                        <div
+                            class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
 
-            <!-- Rating -->
-            <div class="flex mb-4">
-                <div class="text-yellow-400">
-                    @for($i=1; $i<=5; $i++)
-                        ★
-                    @endfor
+                            <!-- Top Section -->
+                            <div class="flex items-center mb-6">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+
+                                    @if ($student->image)
+                                        <img src="{{ asset('storage/' . $student->image) }}"
+                                            alt="{{ $student->name }}"
+                                            class="w-full h-full object-cover rounded-full">
+                                    @else
+                                        <span class="text-white font-bold text-xl">
+                                            {{ strtoupper(substr($student->name, 0, 1)) }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $student->name }}
+                                    </h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
+                                    <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="flex mb-4">
+                                <div class="text-yellow-400">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        ★
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <!-- Review -->
+                            <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
+                                "{{ $student->message }}"
+                            </p>
+
+                            <!-- Package -->
+                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                                <span class="font-semibold">Package:</span> ₹{{ $student->package }}
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
-
-            <!-- Review -->
-            <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
-                "{{ $student->message}}"
-            </p>
-
-            <!-- Package -->
-            <div class="text-sm text-gray-500 dark:text-gray-400">
-                <span class="font-semibold">Package:</span> ₹{{ $student->package }}
-            </div>
-        </div>
-    @endforeach
-</div>
 
 
                 <!-- Success Stats -->
@@ -967,69 +974,114 @@
                 <p class="text-center text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-300">Offline
                     courses at our center</p>
 
-@php
-    $latestCourses = \App\Models\Course::orderBy('created_at', 'desc')->take(4)->get();
+                @php
+                    $latestCourses = \App\Models\Course::orderBy('created_at', 'desc')->take(4)->get();
 
-    $bgColors = [
-        'online' => ['bg-gradient-to-br from-blue-400 to-blue-600', 'bg-gradient-to-br from-green-400 to-green-600', 'bg-gradient-to-br from-purple-400 to-purple-600'],
-        'offline' => ['bg-gradient-to-br from-orange-400 to-red-600', 'bg-gradient-to-br from-pink-400 to-rose-600', 'bg-gradient-to-br from-yellow-400 to-orange-500'],
-    ];
+                    $bgColors = [
+                        'online' => [
+                            'bg-gradient-to-br from-blue-400 to-blue-600',
+                            'bg-gradient-to-br from-green-400 to-green-600',
+                            'bg-gradient-to-br from-purple-400 to-purple-600',
+                        ],
+                        'offline' => [
+                            'bg-gradient-to-br from-orange-400 to-red-600',
+                            'bg-gradient-to-br from-pink-400 to-rose-600',
+                            'bg-gradient-to-br from-yellow-400 to-orange-500',
+                        ],
+                        'both' => [
+                            // 👈 new safe key
+                            'bg-gradient-to-br from-teal-400 to-teal-600',
+                            'bg-gradient-to-br from-indigo-400 to-indigo-600',
+                            'bg-gradient-to-br from-cyan-400 to-cyan-600',
+                        ],
+                    ];
 
-    $btnColors = [
-        'online' => ['bg-blue-500 hover:bg-blue-600', 'bg-green-500 hover:bg-green-600', 'bg-purple-500 hover:bg-purple-600'],
-        'offline' => ['bg-orange-500 hover:bg-orange-600', 'bg-pink-500 hover:bg-rose-600', 'bg-yellow-500 hover:bg-orange-500'],
-    ];
-@endphp
+                    $btnColors = [
+                        'online' => [
+                            'bg-blue-500 hover:bg-blue-600',
+                            'bg-green-500 hover:bg-green-600',
+                            'bg-purple-500 hover:bg-purple-600',
+                        ],
+                        'offline' => [
+                            'bg-orange-500 hover:bg-orange-600',
+                            'bg-pink-500 hover:bg-rose-600',
+                            'bg-yellow-500 hover:bg-orange-500',
+                        ],
+                        'both' => [
+                            // 👈 new safe key
+                            'bg-teal-500 hover:bg-teal-600',
+                            'bg-indigo-500 hover:bg-indigo-600',
+                            'bg-cyan-500 hover:bg-cyan-600',
+                        ],
+                    ];
+                @endphp
 
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    @foreach($latestCourses as $index => $course)
-        @php
-            $mode = $course->mode ?? 'online';
-            $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
-            $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
-        @endphp
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    @foreach ($latestCourses as $index => $course)
+                        @php
+                            // Agar mode invalid hai to default 'online' use karein
+                            $mode = $course->mode ?? 'online';
+                            $mode = array_key_exists($mode, $bgColors) ? $mode : 'online';
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-            <div class="h-48 relative overflow-hidden {{ $bgClass }}">
-                @if($course->image)
-                    <img src="{{ asset('uploads/courses/' . $course->image) }}" class="w-full h-full object-cover">
-                @else
-                    <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold">
-                        {{ strtoupper(substr($course->name, 0, 1)) }}
-                    </div>
-                @endif
-
-                <div class="absolute inset-0 bg-black opacity-20"></div>
-
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
-                    <p class="text-sm opacity-90">{{ $course->course_duration ?? 'N/A' }} Program</p>
-                    @if($mode === 'offline')
-                        <span class="text-xs bg-red-600 px-2 py-1 rounded">Offline</span>
-                    @endif
+                            $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
+                            $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
+                        @endphp
+                    @endforeach
                 </div>
-            </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    @foreach ($latestCourses as $index => $course)
+                        @php
+                            $mode = $course->mode ?? 'online';
+                            $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
+                            $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
+                        @endphp
 
-            <div class="p-4">
-<div class="flex justify-between items-center mb-3">
-    {{-- Offer Fee on left --}}
-    <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
-        ₹{{ number_format($course->offer_fee, 2) }}
-    </span>
+                        <div
+                            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                            <div class="h-48 relative overflow-hidden {{ $bgClass }}">
+                                @if ($course->image)
+                                    <img src="{{ asset('uploads/courses/' . $course->image) }}"
+                                        class="w-full h-full object-cover">
+                                @else
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold">
+                                        {{ strtoupper(substr($course->name, 0, 1)) }}
+                                    </div>
+                                @endif
 
-    {{-- Original Fee on right --}}
-    <span class="text-sm line-through text-gray-500">
-        ₹{{ number_format($course->fee, 2) }}
-    </span>
-</div>
+                                <div class="absolute inset-0 bg-black opacity-20"></div>
 
-                <button class="w-full py-2 {{ $btnClass }} text-white rounded-lg transition-colors">
-                    Enroll Now
-                </button>
-            </div>
-        </div>
-    @endforeach
-</div>
+                                <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                                    <p class="text-sm opacity-90">{{ $course->course_duration ?? 'N/A' }}
+                                        Program</p>
+                                    @if ($mode === 'offline')
+                                        <span class="text-xs bg-red-600 px-2 py-1 rounded">Offline</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    {{-- Offer Fee on left --}}
+                                    <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
+                                        ₹{{ number_format($course->offer_fee, 2) }}
+                                    </span>
+
+                                    {{-- Original Fee on right --}}
+                                    <span class="text-sm line-through text-gray-500">
+                                        ₹{{ number_format($course->fee, 2) }}
+                                    </span>
+                                </div>
+
+                                <button
+                                    class="w-full py-2 {{ $btnClass }} text-white rounded-lg transition-colors">
+                                    Enroll Now
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
 
 
 
@@ -1039,6 +1091,7 @@
                         View More Offline Courses →
                     </button>
                 </div>
+
             </div>
 
             <!-- Online Courses -->
@@ -1047,48 +1100,54 @@
                     class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white transition-colors duration-300">
                     Online Courses
                 </h2>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-300">Online live
+                <p class="text-center text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-300">Online
+                    live
                     courses via Zoom platform</p>
 
-@php
-    $onlineCourses = \App\Models\Course::where('mode', 'online')
+                @php
+                    $onlineCourses = \App\Models\Course::where('mode', 'online')
                         ->orderBy('created_at', 'desc')
                         ->take(4)
                         ->get();
-@endphp
+                @endphp
 
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    @foreach ($onlineCourses as $course)
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-            {{-- Header --}}
-            <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 relative overflow-hidden">
-                <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                    LIVE
-                </div>
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
-                    <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
-                </div>
-            </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    @foreach ($onlineCourses as $course)
+                        <div
+                            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                            {{-- Header --}}
+                            <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 relative overflow-hidden">
+                                <div
+                                    class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                    LIVE
+                                </div>
+                                <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                                    <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
+                                </div>
+                            </div>
 
-            {{-- Body --}}
-            <div class="p-4">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
-                        {{ $course->level ?? '' }}
-                    </span>
-                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400 transition-colors">
-                        ₹{{ number_format($course->offer_fee, 2) }} 
-                        <span class="line-through text-gray-500 ml-2">₹{{ number_format($course->fee, 2) }}</span>
-                    </span>
+                            {{-- Body --}}
+                            <div class="p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span
+                                        class="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                                        {{ $course->level ?? '' }}
+                                    </span>
+                                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400 transition-colors">
+                                        ₹{{ number_format($course->offer_fee, 2) }}
+                                        <span
+                                            class="line-through text-gray-500 ml-2">₹{{ number_format($course->fee, 2) }}</span>
+                                    </span>
+                                </div>
+                                <button
+                                    class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                    Join Online
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <button class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                    Join Online
-                </button>
-            </div>
-        </div>
-    @endforeach
-</div>
 
 
                 <div class="text-center mt-8">
@@ -1158,64 +1217,63 @@
             </h2>
 
             <!-- Testimonials -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-    @foreach($testimonials as $testimonial)
-        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-            <!-- ⭐ Star Rating -->
-            <div class="flex mb-4">
-                @for ($i = 1; $i <= 5; $i++)
-                    <span class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
-                        ★
-                    </span>
-                @endfor
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                @foreach ($testimonials as $testimonial)
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                        <!-- ⭐ Star Rating -->
+                        <div class="flex mb-4">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span
+                                    class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
+                                    ★
+                                </span>
+                            @endfor
+                        </div>
 
-            <!-- Review -->
-            <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                "{{ $testimonial->review }}"
-            </p>
+                        <!-- Review -->
+                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                            "{{ $testimonial->review }}"
+                        </p>
 
-            <!-- User Info -->
-            <div class="flex items-center">
-                @if ($testimonial->image)
-                    <img src="{{ asset('storage/' . $testimonial->image) }}"
-                        alt="{{ $testimonial->name }}"
-                        class="w-12 h-12 rounded-full mr-3 object-cover">
-                @else
-                    <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                @endif
+                        <!-- User Info -->
+                        <div class="flex items-center">
+                            @if ($testimonial->image)
+                                <img src="{{ asset('storage/' . $testimonial->image) }}"
+                                    alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full mr-3 object-cover">
+                            @else
+                                <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                            @endif
 
-                <div>
-                    <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                        {{ $testimonial->name }}
+                            <div>
+                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
+                                    {{ $testimonial->name }}
+                                </div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                    "{{ $testimonial->short_description }}"
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                        "{{ $testimonial->short_description }}"
-                    </div>
-                </div>
+                @endforeach
             </div>
-        </div>
-    @endforeach
-</div>
 
 
             <!-- Hiring Partners Logos -->
             <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold mb-8 text-gray-800 dark:text-white transition-colors duration-300">
                     Companies Hiring From Us</h3>
-<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-    @foreach($clients as $client)
-        <div
-            class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 p-2">
-        
-                <img src="{{ asset('storage/' . $client->logo) }}" 
-                     alt="{{ $client->name }}" 
-                     class="max-h-full max-w-full object-contain">
-       
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    @foreach ($clients as $client)
+                        <div
+                            class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 p-2">
 
-        </div>
-    @endforeach
-</div>
+                            <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
+                                class="max-h-full max-w-full object-contain">
+
+
+                        </div>
+                    @endforeach
+                </div>
 
             </div>
         </div>
@@ -1867,7 +1925,6 @@
                     const currentValue = stepValue * currentStep;
 
                     if (currentStep <= steps) {
-                        // Format the number based on target type
                         if (target >= 1000) {
                             counter.innerText = (currentValue / 1000).toFixed(1) + (suffix || '');
                         } else if (target % 1 !== 0) {
@@ -1917,6 +1974,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>

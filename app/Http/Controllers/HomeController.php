@@ -106,13 +106,10 @@ class HomeController extends Controller
     public function Events()
 {
     $now = \Carbon\Carbon::now();
-
-    // Past Events → जिनका end_date already खत्म हो चुका
     $pastEvents = Events::where('end_date', '<', $now)
         ->orderBy('end_date', 'desc')
         ->get();
 
-    // Present / Upcoming Events → जिनका start_date अभी या बाद में है
     $presentEvents = Events::where('start_date', '>=', $now)
         ->orderBy('start_date', 'asc')
         ->get();
