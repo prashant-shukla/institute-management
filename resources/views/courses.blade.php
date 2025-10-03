@@ -436,92 +436,109 @@
             </div>
 
             <!-- ===== Right Side Courses Section ===== -->
-            <div class="md:col-span-3">
+<div class="md:col-span-3 space-y-10">
 
-                <!-- Offline Courses -->
-                <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @forelse($offlineCourses as $course)
-                     <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                        <div class="bg-white shadow rounded-xl overflow-hidden">
-                            <div class="h-40 bg-blue-500"></div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-bold">{{ $course->name }}</h3>
-                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
-
-                                <div class="flex items-center justify-between mt-3">
-                                    <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}
-                                    </p>
-                                    <button
-                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                        Join Now
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                     </a>
-                    @empty
-                        <p class="text-gray-500">No offline courses available.</p>
-                    @endforelse
+    <!-- Offline Courses -->
+    <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @forelse($offlineCourses as $course)
+        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+            <div class="bg-white shadow rounded-xl overflow-hidden">
+                <div class="h-40 w-full">
+                    @if($course->image)
+                        <img src="{{ asset('storage/' . $course->image) }}"
+                             alt="{{ $course->name }}"
+                             class="w-full h-full object-cover">
+                    @else
+                        <div class="h-full w-full bg-blue-500"></div>
+                    @endif
                 </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-bold">{{ $course->name }}</h3>
+                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                <!-- Online Courses -->
-                <div id="online"
-                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-                    @forelse($onlineCourses as $course)
-                     <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                        <div class="bg-white shadow rounded-xl overflow-hidden">
-                            <div class="h-40 bg-purple-500"></div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-bold">{{ $course->name }}</h3>
-                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
-
-                                <div class="flex items-center justify-between mt-3">
-                                    <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}
-                                    </p>
-                                    <button
-                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                        Join Now
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                     </a>
-                    @empty
-                        <p class="text-gray-500">No online courses available.</p>
-                    @endforelse
+                    <div class="flex items-center justify-between mt-3">
+                        <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}</p>
+                        <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Join Now
+                        </button>
+                    </div>
                 </div>
-
-                <!-- Certifications -->
-                <div id="certifications"
-                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-                    @forelse($certifications as $course)
-                     <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                        <div class="bg-white shadow rounded-xl overflow-hidden">
-                            <div class="h-40 bg-red-500"></div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-bold">{{ $course->name }}</h3>
-                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
-
-                                <div class="flex items-center justify-between mt-3">
-                                    <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}
-                                    </p>
-                                    <button
-                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                        Join Now
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                     </a>
-                    @empty
-                        <p class="text-gray-500">No certifications available.</p>
-                    @endforelse
-                </div>
-
             </div>
+        </a>
+        @empty
+            <p class="text-gray-500">No offline courses available.</p>
+        @endforelse
+    </div>
+
+    <!-- Online Courses -->
+    <div id="online" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+        @forelse($onlineCourses as $course)
+        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+            <div class="bg-white shadow rounded-xl overflow-hidden">
+                <div class="h-40 w-full">
+                    @if($course->image)
+                        <img src="{{ asset('storage/' . $course->image) }}"
+                             alt="{{ $course->name }}"
+                             class="w-full h-full object-cover">
+                    @else
+                        <div class="h-full w-full bg-purple-500"></div>
+                    @endif
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-bold">{{ $course->name }}</h3>
+                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+
+                    <div class="flex items-center justify-between mt-3">
+                        <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}</p>
+                        <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Join Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </a>
+        @empty
+            <p class="text-gray-500">No online courses available.</p>
+        @endforelse
+    </div>
+
+    <!-- Certifications -->
+    <div id="certifications" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+        @forelse($certifications as $course)
+        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+            <div class="bg-white shadow rounded-xl overflow-hidden">
+                <div class="h-40 w-full">
+                    @if($course->image)
+                        <img src="{{ asset('storage/' . $course->image) }}"
+                             alt="{{ $course->name }}"
+                             class="w-full h-full object-cover">
+                    @else
+                        <div class="h-full w-full bg-red-500"></div>
+                    @endif
+                </div>
+                <div class="p-5">
+                    <h3 class="text-lg font-bold">{{ $course->name }}</h3>
+                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+
+                    <div class="flex items-center justify-between mt-3">
+                        <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}</p>
+                        <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Join Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </a>
+        @empty
+            <p class="text-gray-500">No certifications available.</p>
+        @endforelse
+    </div>
+
+</div>
+
         </div>
     </div>
 

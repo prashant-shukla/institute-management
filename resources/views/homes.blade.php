@@ -1040,8 +1040,9 @@
                             class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
                             <div class="h-48 relative overflow-hidden {{ $bgClass }}">
                                 @if ($course->image)
-                                    <img src="{{ asset('uploads/courses/' . $course->image) }}"
-                                        class="w-full h-full object-cover">
+                                    
+                                        <img src="{{ asset('storage/' . $course->image) }}"
+                                        alt="{{ $course->name }}" class="w-full h-full object-cover">
                                 @else
                                     <div
                                         class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold">
