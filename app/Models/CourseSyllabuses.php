@@ -12,6 +12,7 @@ class CourseSyllabuses extends Model
     protected $casts = [
         'extra_info' => 'array',
     ];
+    
     public function course()
     {
         return $this->belongsTo(Course::class);

@@ -100,27 +100,27 @@ class HomeController extends Controller
     }
 
     public function Events()
-{
-    $now = \Carbon\Carbon::now();
-    $pastEvents = Events::where('end_date', '<', $now)
-        ->orderBy('end_date', 'desc')
-        ->get();
+    {
+        $now = \Carbon\Carbon::now();
+        $pastEvents = Events::where('end_date', '<', $now)
+            ->orderBy('end_date', 'desc')
+            ->get();
 
-    $presentEvents = Events::where('start_date', '>=', $now)
-        ->orderBy('start_date', 'asc')
-        ->get();
+        $presentEvents = Events::where('start_date', '>=', $now)
+            ->orderBy('start_date', 'asc')
+            ->get();
 
-    return view('Event', [
-        'pastEvents' => $pastEvents,
-        'presentEvents' => $presentEvents,
-    ]);
-}
+        return view('Event', [
+            'pastEvents' => $pastEvents,
+            'presentEvents' => $presentEvents,
+        ]);
+    }
 
-public function Gallery()
-{
-    $galleries = Gallery::all(); // DB se sab galleries fetch
-    return view('Gallery', compact('galleries')); // variable view me pass karo
-}
+    public function Gallery()
+    {
+        $galleries = Gallery::all(); // DB se sab galleries fetch
+        return view('Gallery', compact('galleries')); // variable view me pass karo
+    }
     public function placement()
     {
         return view('placement');
@@ -153,34 +153,73 @@ public function Gallery()
         return view('ajax', ['courses' => $courses, 'coursecategories' => $coursecategories, 'mentors' => $mentors, 'reviews' => $reviews])->render();
     }
 
-public function Course($slug, $id)
-{
-    // Specific course by ID
-    $course = Course::findOrFail($id);
+    public function Course($slug, $id)
+    {
+        // Specific course by ID
+        $course = Course::findOrFail($id);
 
-    $banners = Banner::where('banner_page', 'course')->get();
-    $coursementors = CourseMentor::where('course_id', $id)->get();
-    $reviews = Reviews::where('course_id', $id)->get();
-    $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
-    $coursetool = CourseTool::where('course_id', $id)->get();
-      $faqs = [];
-    if (!empty($course->faqs)) {
-        $faqs = is_array($course->faqs) ? $course->faqs : json_decode($course->faqs, true);
-        if (!is_array($faqs)) {
-            $faqs = []; // fallback if json_decode failed
+        $banners = Banner::where('banner_page', 'course')->get();
+        $coursementors = CourseMentor::where('course_id', $id)->get();
+        $reviews = Reviews::where('course_id', $id)->get();
+        $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
+
+    $totals = [];
+
+    foreach ($coursesyllabuses as $syllabus) {
+        $extraInfo = $syllabus->extra_info;
+
+        // अगर DB में stringified JSON है तो decode करो, वरना जैसा array आए वैसे काम करो
+        if (is_string($extraInfo)) {
+            $decoded = json_decode($extraInfo, true);
+            $extraInfo = $decoded ?? [];
+        }
+
+        if (!is_array($extraInfo)) {
+            continue;
+        }
+
+        foreach ($extraInfo as $item) {
+            // item कभी object आ सकता है, कभी array
+            if (is_object($item)) {
+                $item = (array) $item;
+            }
+            if (!isset($item['name'], $item['value'])) {
+                continue;
+            }
+            $name = $item['name'];
+            $value = (int) $item['value'];
+
+            if (!isset($totals[$name])) {
+                $totals[$name] = 0;
+            }
+            $totals[$name] += $value;
         }
     }
 
-    return view('Course_Detail', [
-        'course' => $course,
-        'coursementors' => $coursementors,
-        'reviews' => $reviews,
-        'coursesyllabuses' => $coursesyllabuses,
-        'coursetool' => $coursetool,
-        'banners' => $banners,
-        'faqs' => $faqs,
-    ]);
-}
+    // OPTIONAL: commonly used keys के लिए default बनाए रखें ताकि blade में हर key मौजूद रहे
+    $defaults = ['Video' => 0, 'Assignments' => 0, 'Projects' => 0, 'Tools' => 0];
+    $totals = array_merge($defaults, $totals);
+
+        $coursetool = CourseTool::where('course_id', $id)->get();
+        $faqs = [];
+        if (!empty($course->faqs)) {
+            $faqs = is_array($course->faqs) ? $course->faqs : json_decode($course->faqs, true);
+            if (!is_array($faqs)) {
+                $faqs = []; // fallback if json_decode failed
+            }
+        }
+
+        return view('Course_Detail', [
+            'course' => $course,
+            'coursementors' => $coursementors,
+            'reviews' => $reviews,
+            'coursesyllabuses' => $coursesyllabuses,
+            'coursetool' => $coursetool,
+            'banners' => $banners,
+            'faqs' => $faqs,
+            'totals'=> $totals,
+        ]);
+    }
 
     public function contact()
     {

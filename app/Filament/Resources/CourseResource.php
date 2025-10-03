@@ -68,7 +68,7 @@ class CourseResource extends Resource
                 Forms\Components\FileUpload::make('image')
                 ->label('Image')
                 ->columnSpan('full'),
-                Forms\Components\MarkdownEditor::make('description')
+                Forms\Components\RichEditor::make('description')
                 ->label('Description')
                 ->columnSpan('full'),
            

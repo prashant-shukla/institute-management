@@ -519,15 +519,15 @@
 
 
     <!-- About Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold">✨ About This Course</h2>
-            <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-                Master AutoCAD for engineering, architecture, and design. Learn 2D drafting, 3D modeling, floor plans,
-                and technical drawings. Complete real-world projects to enhance your skills and advance your career.
-            </p>
+<section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center">✨ About This Course</h2>
+        <div class="mt-6 text-lg text-gray-600 leading-relaxed prose mx-auto">
+            {!! $course->description !!}
         </div>
-    </section>
+    </div>
+</section>
+
 
 
     <!-- Curriculum -->
@@ -540,122 +540,59 @@
             </h2>
 
             <!-- Brief Info -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-10">
-                <div class="flex flex-col items-center">
-                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/videos.png?v=5"
-                        alt="100 video tutorials" class="w-16 h-16 mb-2">
-                    <p class="text-gray-700 font-semibold">100 Video Tutorials</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/assignments.png?v=5"
-                        alt="10 assignments" class="w-16 h-16 mb-2">
-                    <p class="text-gray-700 font-semibold">10 Assignments</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/projects.png?v=5"
-                        alt="5 Projects" class="w-16 h-16 mb-2">
-                    <p class="text-gray-700 font-semibold">5 Projects</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/tools.png?v=5"
-                        alt="AutoCAD Tools Covered" class="w-16 h-16 mb-2">
-                    <p class="text-gray-700 font-semibold">15 AutoCAD Tools</p>
-                </div>
-            </div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-10">
+    <div class="flex flex-col items-center">
+        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/videos.png?v=5"
+            alt="{{ $totals['Video'] }} Video Tutorials" class="w-16 h-16 mb-2">
+        <p class="text-gray-700 font-semibold">{{ $totals['Video'] }} Video Tutorials</p>
+    </div>
+    <div class="flex flex-col items-center">
+        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/assignments.png?v=5"
+            alt="{{ $totals['Assignments'] }} Assignments" class="w-16 h-16 mb-2">
+        <p class="text-gray-700 font-semibold">{{ $totals['Assignments'] }} Assignments</p>
+    </div>
+    <div class="flex flex-col items-center">
+        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/projects.png?v=5"
+            alt="{{ $totals['Projects'] }} Projects" class="w-16 h-16 mb-2">
+        <p class="text-gray-700 font-semibold">{{ $totals['Projects'] }} Projects</p>
+    </div>
+    <div class="flex flex-col items-center">
+        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/tools.png?v=5"
+            alt="{{ $totals['Tools'] }} Tools Covered" class="w-16 h-16 mb-2">
+        <p class="text-gray-700 font-semibold">{{ $totals['Tools'] }} Tools</p>
+    </div>
+</div>
+
 
             <p class="text-center text-gray-600 mb-10">
                 After completing the training, you can also download videos for future reference
             </p>
 
             <!-- Accordion Modules -->
-            <div class="space-y-4">
-
-                <!-- Module 1 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleAccordion(this)">
-                        <span class="font-semibold text-gray-900">Getting Started with AutoCAD</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Overview of AutoCAD Interface</li>
-                            <li>Basic Drawing Commands</li>
-                        </ul>
-                    </div>
+<div class="space-y-4">
+    @foreach ($coursesyllabuses as $index => $syllabus)
+        <div class="border rounded-xl bg-white shadow-sm">
+            <button
+                class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
+                onclick="toggleAccordion(this)">
+                <span class="font-semibold text-gray-900">
+                    {{ $syllabus->title ?? 'Module ' . ($index + 1) }}
+                </span>
+                <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div class="px-6 pb-4 hidden">
+                <div class="text-gray-700 space-y-2">
+                    {!! str_replace('<ul>', '<ul class="list-disc list-inside">', $syllabus->description) !!}
                 </div>
-
-                <!-- Module 2 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleAccordion(this)">
-                        <span class="font-semibold text-gray-900">Intermediate AutoCAD Concepts</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Layer Management</li>
-                            <li>Advanced Drawing Commands</li>
-                            <li>Editing & Modifying Objects</li>
-                            <li>Dimensioning and Annotations</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Module 3 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleAccordion(this)">
-                        <span class="font-semibold text-gray-900">3D Modeling & Visualization</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>3D Drawing & Modeling</li>
-                            <li>Rendering & Visualization</li>
-                            <li>Working with Materials & Lights</li>
-                            <li>Creating Animations</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Module 4 -->
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleAccordion(this)">
-                        <span class="font-semibold text-gray-900">Projects & Real-World Applications</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Mechanical Drafting Project</li>
-                            <li>Architectural Floor Plan Project</li>
-                            <li>3D Modeling Mini-Project</li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
+        </div>
+    @endforeach
+</div>
+
+
 
         </div>
     </section>
@@ -673,55 +610,6 @@
 
 
 
-    {{-- <section class="py-16 bg-blue-50">
-        <div class="max-w-6xl mx-auto px-6 md:flex md:items-center md:justify-between gap-8">
-
-            <!-- Course Info -->
-            <div class="md:flex-1">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Diploma in AutoCAD Mastery</h2>
-                <p class="text-gray-600 mb-4">Learn industry-ready skills with projects & mentorship</p>
-
-                <!-- Tags -->
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">1
-                        Year</span>
-                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Offline +
-                        Online support</span>
-                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">Certificate
-                        Included</span>
-                </div>
-            </div>
-
-            <!-- Pricing & Enroll -->
-            <div class="md:w-100 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <span class="text-2xl font-bold text-gray-900">₹45,000</span>
-                        <span class="text-gray-400 line-through ml-2">₹60,000</span>
-                    </div>
-                    <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
-                </div>
-
-                <button
-                    class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">
-                    Enroll Now
-                </button>
-
-                <button onclick="openForm()"
-                    class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
-                    View Curriculum
-                </button>
-
-                <p class="text-xs text-gray-400 mt-2">
-                    Secure checkout via UPI / Cards. Instant confirmation.
-                </p>
-            </div>
-
-        </div>
-
-
-      
-    </section> --}}
 
 
     <!-- Include Swiper CSS -->
