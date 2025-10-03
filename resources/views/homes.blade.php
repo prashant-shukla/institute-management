@@ -496,7 +496,7 @@
                             <div
                                 class="relative h-48 overflow-hidden flex items-center justify-center {{ !$course->image ? $bgClass : '' }}">
                                 @if ($course->image)
-                                    <img src="{{ asset('uploads/courses/' . $course->image) }}"
+                                    <img src="{{ asset('storage/' . $course->image) }}"
                                         alt="{{ $course->name }}" class="w-full h-full object-cover">
                                 @endif
 

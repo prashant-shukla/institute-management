@@ -37,113 +37,116 @@ class CourseResource extends Resource
 
     protected static ?string $navigationGroup = 'Courses';
     protected static ?int $navigationSort = 402;
-    
+
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Section::make('')
             ->schema([
-                Forms\Components\TextInput::make('name')
-                ->label('Name')
-                ->required(),
-                Forms\Components\TextInput::make('slug')
-                ->label('Slug')
-                ->dehydrated()
-                ->required()
-                ->maxLength(255),
-                Forms\Components\TextInput::make('course_duration')
-                ->label('Course Duration'),
-                Forms\Components\Select::make('course_categories_id')
-                ->options(CourseCategory::all()->pluck('name', 'id'))
-                ->searchable()
-                ->label('Course Category'),
-            
-                Forms\Components\TextInput::make('sub_title')
-                ->label('Sub Title'),
-                Forms\Components\TextInput::make('status')
-                ->label('Status')
-                ->default('active'),
-               
-                Forms\Components\FileUpload::make('image')
-                ->label('Image')
-                ->columnSpan('full'),
-                Forms\Components\RichEditor::make('description')
-                ->label('Description')
-                ->columnSpan('full'),
-           
-                
-                Select::make('mode')
-                ->label('Mode')
-                ->options([
-                    'online' => 'Online',
-                    'offline' => 'Offline',
-                    'both' => 'Both',
-                ])
-                ->nullable(),
-                TextInput::make('sessions')
-                ->label('Sessions')
-                ->default(0)
-                ->numeric(),
-                TextInput::make('projects')
-                ->label('Projects')
-                ->numeric(),
-                TextInput::make('fee')
-                ->label('Fee')
-                ->numeric(),
-                TextInput::make('offer_fee')
-                ->label('Offer Fee')
-                ->numeric(),
-
-                Repeater::make('faqs')
+                Section::make('')
                     ->schema([
-                        TextInput::make('question')
+                        Forms\Components\TextInput::make('name')
+                            ->label('Name')
+                            ->required(),
+                        Forms\Components\TextInput::make('slug')
+                            ->label('Slug')
+                            ->dehydrated()
                             ->required()
-                            ->live(onBlur: true),
-                        TextInput::make('answer')
-                            ->required()
-                            ->live(onBlur: true),
-                    ])
-                    ->columnSpan('full')
-                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('course_duration')
+                            ->label('Course Duration'),
+                        Forms\Components\Select::make('course_categories_id')
+                            ->options(CourseCategory::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->label('Course Category'),
 
-                    Forms\Components\Toggle::make('popular_course')
-                    ->label('Is Popular Course')
-                    ->required(),
-            ])->columns(2),
-                
-            Section::make('SCO')
-            ->schema([
-                Forms\Components\TextInput::make('site_title')
-                ->label('Site Title')
-                ->columnSpanFull(),
-                Forms\Components\Textarea::make('meta_keyword')
-                ->label('Meta Keywords')
-                ->autosize(),
-                Forms\Components\Textarea::make('meta_description')
-                ->label('Meta Description')
-                ->autosize(),
-               
-            ])->columns(1),
+                        Forms\Components\TextInput::make('sub_title')
+                            ->label('Sub Title'),
+                        Forms\Components\TextInput::make('status')
+                            ->label('Status')
+                            ->default('active'),
+
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Image')
+                            ->directory('courses')   // uploaded files will go to storage/app/public/courses
+                            ->disk('public')         // make sure you are using 'public' disk
+                            ->columnSpan('full'),
+
+                        Forms\Components\RichEditor::make('description')
+                            ->label('Description')
+                            ->columnSpan('full'),
+
+
+                        Select::make('mode')
+                            ->label('Mode')
+                            ->options([
+                                'online' => 'Online',
+                                'offline' => 'Offline',
+                                'both' => 'Both',
+                            ])
+                            ->nullable(),
+                        TextInput::make('sessions')
+                            ->label('Sessions')
+                            ->default(0)
+                            ->numeric(),
+                        TextInput::make('projects')
+                            ->label('Projects')
+                            ->numeric(),
+                        TextInput::make('fee')
+                            ->label('Fee')
+                            ->numeric(),
+                        TextInput::make('offer_fee')
+                            ->label('Offer Fee')
+                            ->numeric(),
+
+                        Repeater::make('faqs')
+                            ->schema([
+                                TextInput::make('question')
+                                    ->required()
+                                    ->live(onBlur: true),
+                                TextInput::make('answer')
+                                    ->required()
+                                    ->live(onBlur: true),
+                            ])
+                            ->columnSpan('full')
+                            ->itemLabel(fn(array $state): ?string => $state['name'] ?? null),
+
+                        Forms\Components\Toggle::make('popular_course')
+                            ->label('Is Popular Course')
+                            ->required(),
+                    ])->columns(2),
+
+                Section::make('SCO')
+                    ->schema([
+                        Forms\Components\TextInput::make('site_title')
+                            ->label('Site Title')
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('meta_keyword')
+                            ->label('Meta Keywords')
+                            ->autosize(),
+                        Forms\Components\Textarea::make('meta_description')
+                            ->label('Meta Description')
+                            ->autosize(),
+
+                    ])->columns(1),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            Tables\Columns\TextColumn::make(name:'name')
-            ->searchable()
-            ->sortable()
-            ->toggleable(),
-            Tables\Columns\TextColumn::make('courseCategory.name')
-            ->searchable()
-            ->sortable()
-            ->toggleable(),
-            Tables\Columns\ToggleColumn::make('popular_course')
-            ->onIcon('heroicon-m-bolt')
-            ->offIcon('heroicon-m-user'),
-            
+            ->columns([
+                Tables\Columns\TextColumn::make(name: 'name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('courseCategory.name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(),
+                Tables\Columns\ToggleColumn::make('popular_course')
+                    ->onIcon('heroicon-m-bolt')
+                    ->offIcon('heroicon-m-user'),
+
             ])
             ->filters([
                 //
@@ -166,9 +169,8 @@ class CourseResource extends Resource
             CourseResource\RelationManagers\CourseMentorRelationManager::class,
             CourseResource\RelationManagers\CourseSyllabusesRelationManager::class,
             CourseResource\RelationManagers\CourseToolRelationManager::class,
-            
-         ];
-       
+
+        ];
     }
 
     public static function getPages(): array
