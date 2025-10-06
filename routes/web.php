@@ -25,6 +25,9 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::post('/register-event', [App\Http\Controllers\EventRegistrationController::class, 'store'])->name('event.register');
       Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.submit');
 
+Route::get('/blogs', function () {
+    return view('blog'); // resources/views/blog.blade.php
+})->name('blogs');
 
    
 

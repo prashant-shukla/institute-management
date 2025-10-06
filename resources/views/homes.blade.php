@@ -496,8 +496,8 @@
                             <div
                                 class="relative h-48 overflow-hidden flex items-center justify-center {{ !$course->image ? $bgClass : '' }}">
                                 @if ($course->image)
-                                    <img src="{{ asset('storage/' . $course->image) }}"
-                                        alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
+                                        class="w-full h-full object-cover">
                                 @endif
 
                                 @if ($course->popular_course)
@@ -1040,9 +1040,8 @@
                             class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
                             <div class="h-48 relative overflow-hidden {{ $bgClass }}">
                                 @if ($course->image)
-                                    
-                                        <img src="{{ asset('storage/' . $course->image) }}"
-                                        alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
+                                        class="w-full h-full object-cover">
                                 @else
                                     <div
                                         class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold">
@@ -1053,9 +1052,7 @@
                                 <div class="absolute inset-0 bg-black opacity-20"></div>
 
                                 <div class="absolute bottom-4 left-4 text-white">
-                                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
-                                    <p class="text-sm opacity-90">{{ $course->course_duration ?? 'N/A' }}
-                                        Program</p>
+
                                     @if ($mode === 'offline')
                                         <span class="text-xs bg-red-600 px-2 py-1 rounded">Offline</span>
                                     @endif
@@ -1063,6 +1060,9 @@
                             </div>
 
                             <div class="p-4">
+                                <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                                <p class="text-sm opacity-90 mb-2">{{ $course->course_duration ?? 'N/A' }}
+                                    Program</p>
                                 <div class="flex justify-between items-center mb-3">
                                     {{-- Offer Fee on left --}}
                                     <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
@@ -1122,23 +1122,25 @@
                                     class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                                     LIVE
                                 </div>
-                                <div class="absolute bottom-4 left-4 text-white">
+                                {{-- <div class="absolute bottom-4 left-4 text-white">
                                     <h3 class="text-xl font-bold">{{ $course->name }}</h3>
                                     <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
-                                </div>
+                                </div> --}}
                             </div>
 
                             {{-- Body --}}
                             <div class="p-4">
+                                <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                                <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
                                 <div class="flex justify-between items-center mb-3">
-                                    <span
-                                        class="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
-                                        {{ $course->level ?? '' }}
-                                    </span>
-                                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400 transition-colors">
+                                    {{-- Offer Fee on left --}}
+                                    <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
                                         ₹{{ number_format($course->offer_fee, 2) }}
-                                        <span
-                                            class="line-through text-gray-500 ml-2">₹{{ number_format($course->fee, 2) }}</span>
+                                    </span>
+
+                                    {{-- Original Fee on right --}}
+                                    <span class="text-sm line-through text-gray-500">
+                                        ₹{{ number_format($course->fee, 2) }}
                                     </span>
                                 </div>
                                 <button
