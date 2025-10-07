@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CADADDA - Autodesk Authorized CAD/CAM Training Institute</title>
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -162,7 +157,7 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-2">
                     <div
-                        class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                        class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-lg">C</span>
                     </div>
                     <span
@@ -202,6 +197,8 @@
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
                         Us</a>
                 </div>
+
+
                 <!-- Dark Mode Toggle & Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
                     <!-- Dark Mode Toggle -->
@@ -221,14 +218,16 @@
                         </svg>
                     </button>
 
-                    <button
+                    <a href="{{ route('login') }}"
                         class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
                         Sign in
-                    </button>
-                    <button
+                    </a>
+
+                    <a href="{{ route('register') }}"
                         class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
                         Join Now
-                    </button>
+                    </a>
+
                 </div>
             </div>
 
@@ -262,194 +261,100 @@
             </div>
         </nav>
     </header>
+
+
     <!-- Header -->
-    <header class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-12 text-center">
-        <h1 class="text-4xl font-bold">Contact Us</h1>
-        <p class="mt-2 text-lg">Feel free to ask for details, don’t save any questions!</p>
-    </header>
 
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
+    <section class="max-w-5xl mx-auto px-6 py-12">
 
-            <!-- Contact Info Boxes -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
-
-                <!-- Email -->
-                <div
-                    class="rounded-xl transition-all duration-300 bg-white border border-gray-200 hover:shadow-lg hover:border-indigo-300 hover:-translate-y-1 p-6">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-indigo-50 text-indigo-600">
-                            <!-- Mail Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
-                                stroke-width="2" viewBox="0 0 24 24">
-                                <rect width="20" height="16" x="2" y="4" rx="2" />
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <p class="text-xs text-gray-500 font-medium">Email Us</p>
-                            <p class="text-sm font-bold text-gray-900">
-                                 {{ data_get($settings, 'contact.email', 'Institute Email') }},
-                            </p>
-
-                            <a href="mailto: {{ data_get($settings, 'contact.email', '') }}"
-                                class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                Send Email
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14" />
-                                    <path d="m12 5 7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Phone -->
-                <div
-                    class="rounded-xl transition-all duration-300 bg-white border border-gray-200 hover:shadow-lg hover:border-indigo-300 hover:-translate-y-1 p-6">
-                    <div class="flex items-start gap-4">
-                        <div
-                            class="w-12 h-12 rounded-xl flex items-center justify-center bg-indigo-50 text-indigo-600">
-                            <!-- Phone Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <p class="text-xs text-gray-500 font-medium">Call Us</p>
-                            <p class="text-sm font-bold text-gray-900">
-                             {{ data_get($settings, 'contact.phone_number', 'Institute Phone Number') }}
-                            </p>
-                            <p class="text-sm text-gray-600">Mon-Fri 9:00 AM - 6:00 PM</p>
-                            <a href="tel:{{ $settings['contact.phone_number'] ?? '' }}"
-                                class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                Call Now
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14" />
-                                    <path d="m12 5 7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Address -->
-                <div
-                    class="rounded-xl transition-all duration-300 bg-white border border-gray-200 hover:shadow-lg hover:border-indigo-300 hover:-translate-y-1 p-6">
-                    <div class="flex items-start gap-4">
-                        <div
-                            class="w-12 h-12 rounded-xl flex items-center justify-center bg-indigo-50 text-indigo-600">
-                            <!-- Map Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path
-                                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                        </div>
-                        <div class="flex-1">
-                            <p class="text-xs text-gray-500 font-medium">Visit Us</p>
-                            <p class="text-sm text-gray-600">
-                            <p class="text-sm text-gray-600">
-                                {{ data_get($settings, 'address.name', 'Institute Name') }},
-                                {{ data_get($settings, 'address.city', 'City') }},
-                                {{ data_get($settings, 'address.state', 'State') }} -
-                                {{ data_get($settings, 'address.zip_code', '') }}
-                            </p>
-                            <a href="{{ $settings['contact.map_link'] ?? '#' }}" target="_blank"
-                                class="inline-flex items-center gap-2 mt-3 text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                Get Directions
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14" />
-                                    <path d="m12 5 7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+        <!-- Header -->
+        <div class="mb-10 flex items-start gap-6">
+            <!-- Date Box -->
+            <div
+                class="flex flex-col items-center  bg-white justify-center w-14 h-16 rounded-lg shadow-md flex-shrink-0 overflow-hidden">
+                <!-- Day -->
+                <span class="bg-white text-black w-full text-center text-lg font-bold leading-none">
+                    {{ $blog->published_at?->format('d') }}
+                </span>
+                <!-- Month -->
+                <span class="bg-blue-600 text-white w-full text-center text-sm uppercase tracking-wide">
+                    {{ $blog->published_at?->format('M') }}
+                </span>
             </div>
 
 
-            <!-- Contact Form -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            <!-- Title and Meta -->
+            <div class="flex-1">
+                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
+                    {{ $blog->title }}
+                </h1>
+                <div class="flex items-center gap-4 text-sm text-gray-500 mt-1">
+                    <span>{{ $blog->category->name ?? 'Technology' }}</span>
+                    <div class="flex items-center gap-2 text-sm text-gray-500">
+                        <!-- Pen/Writing Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536M4 20h4.586a1 1 0 00.707-.293l10-10a1 1 0 00-1.414-1.414l-10 10A1 1 0 004 16.586V20z" />
+                        </svg>
+                        <span>By Site Administrator</span>
+                    </div>
 
-                <!-- Form -->
-                <div class="bg-white rounded-xl shadow p-8">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First
-                                    Name</label>
-                                <input type="text" id="firstName"
-                                    class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
-                                    placeholder="John">
-                            </div>
-                            <div>
-                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last
-                                    Name</label>
-                                <input type="text" id="lastName"
-                                    class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
-                                    placeholder="Doe">
-                            </div>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email"
-                                class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
-                                placeholder="you@example.com">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                            <textarea id="message" rows="4"
-                                class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500"
-                                placeholder="Tell us about your project..."></textarea>
-                        </div>
-                        <button type="submit"
-                            class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition">
-                            Send Message
-                        </button>
-                    </form>
                 </div>
-
-                <!-- Office Info -->
-                <div class="space-y-8">
-                    <div class="bg-gray-100 p-6 rounded-xl">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Office Hours</h3>
-                        <p class="flex justify-between text-gray-700"><span>Monday - Friday</span> <span>9:00 AM - 6:00
-                                PM</span></p>
-                        <p class="flex justify-between text-gray-700"><span>Saturday</span> <span>10:00 AM - 4:00
-                                PM</span></p>
-                        <p class="flex justify-between text-gray-500"><span>Sunday</span> <span>Closed</span></p>
-                    </div>
-                    <div class="bg-gray-100 p-6 rounded-xl">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
-                        <div class="flex gap-4">
-                            <a href="#"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition">
-                                <i class="fab fa-linkedin"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition"><i
-                                    class="fa-brands fa-square-instagram"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white border hover:bg-indigo-600 hover:text-white transition">
-                                <i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                    <div class="rounded-xl overflow-hidden h-64 bg-gray-200 flex items-center justify-center">
-                        <iframe class="w-full h-64 rounded-xl border-0"
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14309.885122799385!2d73.0173027!3d26.2788179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647efbb48fe80c75!2sCADADDA!5e0!3m2!1sen!2sin!4v1580292602941!5m2!1sen!2sin"
-                            allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-
             </div>
+        </div>
+
+
+        <!-- Blog Image -->
+        @if ($blog->image)
+            <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg mb-10">
+                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+            </div>
+        @endif
+
+        <!-- Blog Description -->
+        <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-12">
+            {!! $blog->content !!}
+        </div>
+
+
+        <div class="mt-6 text-gray-800">
+            <p class="text-lg font-semibold">
+                {{ $blog->title }}
+            </p>
+            <a href="https://youtu.be/c6GbkT10hZ8" target="_blank"
+                class="flex items-center gap-2 text-blue-600 font-medium mt-2 hover:underline">
+                <!-- Video Play Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 22v-20l18 10-18 10z" />
+                </svg>
+                Other Lecture
+            </a>
+        </div>
+
+
+        <!-- Tags -->
+
+        @if (!empty($blog->tags) && is_array($blog->tags))
+            <div class="mt-10">
+                <h3 class="text-lg font-semibold mb-3 text-gray-900">Tags:</h3>
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($blog->tags as $tag)
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                            #{{ trim($tag) }}
+                        </span>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
+        <!-- Back Button -->
+        <div class="mt-16 border-t border-gray-200 pt-8 text-center">
+            <a href="{{ route('blog') }}"
+                class="inline-flex items-center text-blue-600 font-semibold hover:underline transition">
+                ← Back to Blog
+            </a>
         </div>
     </section>
 
@@ -662,6 +567,8 @@
             }
         });
     </script>
+
+
 </body>
 
 </html>

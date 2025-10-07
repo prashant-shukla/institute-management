@@ -184,8 +184,11 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                    <a href="{{ url('/Gallery') }}"
+                                        <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
+
+                    <a href="{{ url('/blogs') }}"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Blogs</a>
 
                     <a href="{{ url('/placement') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>

@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use Spatie\Tags\HasTags;
 
-class Post extends Model 
+class Post extends Model
 {
     use HasFactory;
-    
+
 
     /**
      * @var string
@@ -32,15 +32,25 @@ class Post extends Model
         'published_at',
         'seo_title',
         'seo_description',
-        'is_featured'
+        'is_featured',
+        'image',
+        'tags',
+        'short_description',
+        'link',
+        'tags',
+        'site_title',
+        'meta_keywords',
+        'meta_description',
     ];
+
 
     /**
      * @var array<string, string>
      */
     protected $casts = [
         'published_at' => 'date',
-        'is_featured' => 'boolean'
+        'is_featured' => 'boolean',
+        'tags' => 'array',
     ];
 
     /** @return BelongsTo<User,self> */

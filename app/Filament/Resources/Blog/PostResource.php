@@ -13,7 +13,7 @@ use Filament\Tables;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Models\Blog\Category;
 use Illuminate\Support\Str;
 
 class PostResource extends Resource
@@ -21,110 +21,139 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
     protected static ?string $navigationGroup = 'CMS';
     protected static ?string $navigationIcon = 'heroicon-o-arrow-up-on-square-stack';
-  
+
     protected static ?int $navigationSort = 704;
 
     public static function form(Form $form): Form
     {
-      
         return $form
-        ->schema([
-            Forms\Components\Section::make('Image')
-                ->schema([
-                   FileUpload::make('media')->hiddenLabel()
-                      
-                        ->multiple()
-                        ->reorderable()
-                        ->required(),
-                ])
-                ->collapsible(),
-            Forms\Components\Section::make()
-                ->schema([
-                    Forms\Components\TextInput::make('title')
-                        ->required()
-                        ->live(onBlur: true)
-                        ->maxLength(255)
-                        ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+            ->schema([
+                // ====== BLOG IMAGE ======
+                Forms\Components\Section::make('Blog Image')
+                    ->schema([
+                        FileUpload::make('image')
+                            ->label('Blog Image')
+                            ->image()
+                            ->directory('blog')
+                            ->required()
+                            ->columnSpan('full'),
+                    ])
+                    ->collapsible(),
 
-                  
-                    Forms\Components\TextInput::make('slug')
-                        ->disabled()
-                        ->dehydrated()
-                        ->required()
-                        ->maxLength(255)
-                        ->unique(Post::class, 'slug', ignoreRecord: true),
-                    
-                    Forms\Components\Toggle::make('is_featured')
-                        ->required(),
+                // ====== BLOG DETAILS ======
+                Forms\Components\Section::make('Blog Details')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->live(onBlur: true)
+                            ->maxLength(255)
+                            ->afterStateUpdated(
+                                fn(string $operation, $state, Forms\Set $set) =>
+                                $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                            ),
 
-                    Forms\Components\RichEditor::make('content')
-                        ->columnSpan('full'), 
+                        Forms\Components\TextInput::make('slug')
+                            ->disabled()
+                            ->dehydrated()
+                            ->required()
+                            ->maxLength(255)
+                            ->unique(static::getModel(), 'slug', ignoreRecord: true),
 
-                    Forms\Components\MarkdownEditor::make('content')
-                        ->required()
-                        ->columnSpan('full'),
+                        Forms\Components\Select::make('blog_category_id')
+                            ->label('Category')
+                            ->options(Category::pluck('name', 'id'))
+                            ->searchable()
+                            ->required(),
 
-                    // Forms\Components\Select::make('blog_author_id')
-                    // ->options(User::all()->pluck('name', 'id'))
-                    //     ->searchable(['name'])
-                    //     ->required(),
+                        Forms\Components\Textarea::make('short_description')
+                            ->label('Short Description')
+                            ->rows(3)
+                            ->maxLength(500),
 
-                    // Forms\Components\Select::make('blog_category_id')
-                    //     ->relationship('category', 'name')
-                    //     ->searchable()
-                    //     ->required(),
-
-                    Forms\Components\DatePicker::make('published_at')
-                        ->label('Published Date'),
+                        Forms\Components\RichEditor::make('content')
+                            ->label('Blog Content')
+                            ->columnSpan('full')
+                            ->required(),
 
                         Forms\Components\TagsInput::make('tags')
-                ])
-                ->columns(2),
-        ]);
+                            ->label('Tags')
+                            ->placeholder('Type and press enter'),
+
+                        Forms\Components\TextInput::make('link')
+                            ->label('External or Reference Link')
+                            ->maxLength(256),
+                        Forms\Components\Toggle::make('is_featured')
+                            ->label('Featured Post')
+                            ->default(false),
+
+                        Forms\Components\DatePicker::make('published_at')
+                            ->label('Published Date'),
+                    ])
+                    ->columns(2),
+
+                // ====== SEO SECTION ======
+                Forms\Components\Section::make('SEO Settings')
+                    ->schema([
+                        Forms\Components\TextInput::make('site_title')
+                            ->label('Meta Title')
+                            ->maxLength(255),
+
+                        Forms\Components\Textarea::make('meta_keywords')
+                            ->label('Meta Keywords')
+                            ->rows(2),
+
+                        Forms\Components\Textarea::make('meta_description')
+                            ->label('Meta Description')
+                            ->rows(3),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
+            ]);
     }
+
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            // SpatieMediaLibraryImageColumn::make('media')->label('Image')
-            //     ->collection('blog/posts')
-            //     ->wrap(),
+            ->columns([
+                // SpatieMediaLibraryImageColumn::make('media')->label('Image')
+                //     ->collection('blog/posts')
+                //     ->wrap(),
 
-            Tables\Columns\TextColumn::make('title')
-                ->searchable()
-                ->sortable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('slug')
-                ->searchable()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-            // Tables\Columns\TextColumn::make('author.name')
-            //     ->searchable(['firstname', 'lastname'])
-            //     ->sortable()
-            //     ->toggleable(),
+                // Tables\Columns\TextColumn::make('author.name')
+                //     ->searchable(['firstname', 'lastname'])
+                //     ->sortable()
+                //     ->toggleable(),
 
-            Tables\Columns\TextColumn::make('status')
-                ->badge()
-                ->getStateUsing(fn(Post $record): string => $record->published_at?->isPast() ? 'Published' : 'Draft')
-                ->colors([
-                    'success' => 'Published',
-                ]),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->getStateUsing(fn(Post $record): string => $record->published_at?->isPast() ? 'Published' : 'Draft')
+                    ->colors([
+                        'success' => 'Published',
+                    ]),
 
-            Tables\Columns\TextColumn::make('category.name')
-                ->searchable()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-            Tables\Columns\TextColumn::make('published_at')
-                ->label('Published Date')
-                ->date(),
+                Tables\Columns\TextColumn::make('published_at')
+                    ->label('Published Date')
+                    ->date(),
 
-            Tables\Columns\TextColumn::make('updated_at')
-                ->label('Updated')
-                ->since(),
-        ])
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Updated')
+                    ->since(),
+            ])
             ->filters([
                 //
             ])

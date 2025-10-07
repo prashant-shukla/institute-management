@@ -12,6 +12,7 @@ use App\Models\CourseSyllabuses;
 use App\Models\CourseTool;
 use App\Models\CourseMentor;
 use App\Models\Banner;
+use App\Models\Blog\Post;
 use App\Models\Events;
 use App\Models\Client;
 use App\Models\Gallery;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Testimonial;
+use App\Models\Blog\Category;
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
 
@@ -163,42 +165,42 @@ class HomeController extends Controller
         $reviews = Reviews::where('course_id', $id)->get();
         $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
 
-    $totals = [];
+        $totals = [];
 
-    foreach ($coursesyllabuses as $syllabus) {
-        $extraInfo = $syllabus->extra_info;
+        foreach ($coursesyllabuses as $syllabus) {
+            $extraInfo = $syllabus->extra_info;
 
-        // अगर DB में stringified JSON है तो decode करो, वरना जैसा array आए वैसे काम करो
-        if (is_string($extraInfo)) {
-            $decoded = json_decode($extraInfo, true);
-            $extraInfo = $decoded ?? [];
-        }
-
-        if (!is_array($extraInfo)) {
-            continue;
-        }
-
-        foreach ($extraInfo as $item) {
-            // item कभी object आ सकता है, कभी array
-            if (is_object($item)) {
-                $item = (array) $item;
+            // अगर DB में stringified JSON है तो decode करो, वरना जैसा array आए वैसे काम करो
+            if (is_string($extraInfo)) {
+                $decoded = json_decode($extraInfo, true);
+                $extraInfo = $decoded ?? [];
             }
-            if (!isset($item['name'], $item['value'])) {
+
+            if (!is_array($extraInfo)) {
                 continue;
             }
-            $name = $item['name'];
-            $value = (int) $item['value'];
 
-            if (!isset($totals[$name])) {
-                $totals[$name] = 0;
+            foreach ($extraInfo as $item) {
+                // item कभी object आ सकता है, कभी array
+                if (is_object($item)) {
+                    $item = (array) $item;
+                }
+                if (!isset($item['name'], $item['value'])) {
+                    continue;
+                }
+                $name = $item['name'];
+                $value = (int) $item['value'];
+
+                if (!isset($totals[$name])) {
+                    $totals[$name] = 0;
+                }
+                $totals[$name] += $value;
             }
-            $totals[$name] += $value;
         }
-    }
 
-    // OPTIONAL: commonly used keys के लिए default बनाए रखें ताकि blade में हर key मौजूद रहे
-    $defaults = ['Video' => 0, 'Assignments' => 0, 'Projects' => 0, 'Tools' => 0];
-    $totals = array_merge($defaults, $totals);
+        // OPTIONAL: commonly used keys के लिए default बनाए रखें ताकि blade में हर key मौजूद रहे
+        $defaults = ['Video' => 0, 'Assignments' => 0, 'Projects' => 0, 'Tools' => 0];
+        $totals = array_merge($defaults, $totals);
 
         $coursetool = CourseTool::where('course_id', $id)->get();
         $faqs = [];
@@ -217,7 +219,7 @@ class HomeController extends Controller
             'coursetool' => $coursetool,
             'banners' => $banners,
             'faqs' => $faqs,
-            'totals'=> $totals,
+            'totals' => $totals,
         ]);
     }
 
@@ -234,14 +236,17 @@ class HomeController extends Controller
         // अब nested array को view में भेज दो
         return view('contacts', compact('nested'))->with('settings', $nested);
     }
-    public function about()
+    public function blog()
     {
-
-        // $banners = Banner::where('banner_page', 'about us')->get();
-        // $mentors = Mentor::all();
-        // $history = History::all();
-
-        // return view('aboutUs', ['banners' => $banners, 'mentors' => $mentors, 'history' => $history]);
-        return view('about');
+        $blogs = Post::with('category')->latest()->get();
+        $categories = Category::all();
+        return view('blog', compact('blogs', 'categories'));
     }
+    public function show($slug)
+    {
+        $blog = Post::with(['category'])->where('slug', $slug)->firstOrFail();
+        return view('blog_detail', compact('blog'));
+    }
+
+
 }

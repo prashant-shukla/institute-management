@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\ContactController;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\Blog;
 use App\Http\Controllers\FeeReceiptController;
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
@@ -25,9 +26,11 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
       Route::post('/register-event', [App\Http\Controllers\EventRegistrationController::class, 'store'])->name('event.register');
       Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.submit');
 
-Route::get('/blogs', function () {
-    return view('blog'); // resources/views/blog.blade.php
-})->name('blogs');
+      Route::get('/blogs',  [HomeController::class, 'blog'])->name('blog');
+
+
+
+     Route::get('/blogs/{slug}', [HomeController::class, 'show'])->name('blog.detail');
 
    
 

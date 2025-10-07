@@ -184,8 +184,14 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                    <a href="{{ url('/Gallery') }}"
+                     <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
+
+                    <a href="{{ url('/blogs') }}"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Blogs</a>
+
+                    <a href="{{ url('/blogs') }}"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Blogs</a>
 
                     <a href="{{ url('/placement') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
@@ -260,129 +266,91 @@
     </header>
 
 
-  <!-- Header -->
+    <!-- Header -->
 
-  <section class="text-center py-12">
-    <h1 class="text-4xl font-extrabold text-gray-900 mb-3">Our Latest Blogs</h1>
-    <p class="text-gray-600">Stay updated with the latest trends, tutorials, and insights.</p>
-  </section>
- <!-- Blogs & Categories Section -->
-<section class="max-w-7xl mx-auto mt-4 px-6 pb-16">
-  <div class="flex flex-col lg:flex-row gap-8 mt-3">
+    <section class="text-center py-12">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-3">Our Latest Blogs</h1>
+        <p class="text-gray-600">Stay updated with the latest trends, tutorials, and insights.</p>
+    </section>
 
-    <!-- Left: Blog Grid -->
-<div class="flex-1">
-  <div id="blogGrid" class="grid gap-8 sm:grid-cols-2">
-    <!-- Blog Card 1 -->
-    <div class="blog-card bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300" data-category="AutoCAD">
-      <div class="h-56 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
-             alt="Blog 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6">
-        <span class="text-sm text-blue-600 font-medium uppercase">AutoCAD</span>
-        <h2 class="text-xl font-bold text-gray-900 mt-2 mb-3">Master AutoCAD in 30 Days</h2>
-        <p class="text-gray-600 text-sm mb-4">
-          Learn the most powerful drafting and design tools to become a professional AutoCAD designer.
-        </p>
-        <div class="flex justify-between items-center text-sm text-gray-500">
-          <span>Oct 6, 2025</span>
-          <a href="#" class="text-blue-600 font-semibold hover:underline">Read More →</a>
+
+    <!-- Blogs & Categories Section -->
+    <!-- Blogs & Categories Section -->
+    <section class="max-w-7xl mx-auto mt-4 px-6 pb-16">
+        <div class="flex flex-col lg:flex-row gap-8 mt-3">
+
+            <!-- Left: Blog Grid -->
+            <div class="flex-1">
+                <div id="blogGrid" class="grid gap-8 sm:grid-cols-2">
+                    @foreach ($blogs as $blog)
+                        <div class="blog-card bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300"
+                            data-category="{{ $blog->category->name ?? 'Uncategorized' }}">
+                            <div class="h-56 overflow-hidden">
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-6">
+                                <span
+                                    class="text-sm text-blue-600 font-medium uppercase">{{ $blog->category->name ?? 'Blog' }}</span>
+                                <h2 class="text-xl font-bold text-gray-900 mt-2 mb-3">{{ $blog->title }}</h2>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    {{ $blog->short_description }}
+                                </p>
+                                <div class="flex justify-between items-center text-sm text-gray-500">
+                                    <span>{{ $blog->published_at?->format('M d, Y') }}</span>
+                                    <a href="{{ route('blog.detail', $blog->slug) }}"
+                                        class="text-blue-600 font-semibold hover:underline">Read More →</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Right: Categories Table -->
+            <div class="w-64 lg:w-72 flex-shrink-0">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
+                <div id="categoryFilter" class="flex flex-col gap-2">
+                    <span data-category="all"
+                        class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-300 transition">
+                        All
+                    </span>
+                    @foreach ($categories as $category)
+                        <span data-category="{{ $category->name }}"
+                            class="category-btn bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200 transition">
+                            {{ $category->name }}
+                        </span>
+                    @endforeach
+                </div>
+            </div>
+
         </div>
-      </div>
-    </div>
-
-    <!-- Blog Card 2 -->
-    <div class="blog-card bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300" data-category="Design Tips">
-      <div class="h-56 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702"
-             alt="Blog 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6">
-        <span class="text-sm text-green-600 font-medium uppercase">Design Tips</span>
-        <h2 class="text-xl font-bold text-gray-900 mt-2 mb-3">5 Mistakes Every Designer Should Avoid</h2>
-        <p class="text-gray-600 text-sm mb-4">
-          Discover common pitfalls in design and how to overcome them for better project results.
-        </p>
-        <div class="flex justify-between items-center text-sm text-gray-500">
-          <span>Sep 28, 2025</span>
-          <a href="#" class="text-blue-600 font-semibold hover:underline">Read More →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blog Card 3 -->
-    <div class="blog-card bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300" data-category="Photoshop">
-      <div class="h-56 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1537432376769-00a212b6c7b7"
-             alt="Blog 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="p-6">
-        <span class="text-sm text-pink-600 font-medium uppercase">Photoshop</span>
-        <h2 class="text-xl font-bold text-gray-900 mt-2 mb-3">Advanced Photoshop Techniques</h2>
-        <p class="text-gray-600 text-sm mb-4">
-          Enhance your photo editing skills with these advanced Photoshop tricks and tips.
-        </p>
-        <div class="flex justify-between items-center text-sm text-gray-500">
-          <span>Sep 15, 2025</span>
-          <a href="#" class="text-blue-600 font-semibold hover:underline">Read More →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add more blog cards here -->
-  </div>
-</div>
+    </section>
 
 
+    <script>
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
 
-    <!-- Right: Categories Table -->
-    <div class="w-64 lg:w-72 flex-shrink-0">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
-      <div id="categoryFilter" class="flex flex-col gap-2">
-        <span data-category="all" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-300 transition">All</span>
-        <span data-category="AutoCAD" class="category-btn bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200 transition">AutoCAD</span>
-        <span data-category="Photoshop" class="category-btn bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-pink-200 transition">Photoshop</span>
-        <span data-category="Revit Architecture" class="category-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-indigo-200 transition">Revit Architecture</span>
-        <span data-category="v-ray" class="category-btn bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-purple-200 transition">v-ray</span>
-        <span data-category="3ds Max" class="category-btn bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-orange-200 transition">3ds Max</span>
-        <span data-category="Mech. 3D Design" class="category-btn bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-teal-200 transition">Mech. 3D Design</span>
-        <span data-category="Staad Pro." class="category-btn bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-200 transition">Staad Pro.</span>
-        <span data-category="Primavera P6" class="category-btn bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-yellow-200 transition">Primavera P6</span>
-        <span data-category="MS Project" class="category-btn bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-red-200 transition">MS Project</span>
-        <span data-category="TRANSYS" class="category-btn bg-lime-100 text-lime-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-lime-200 transition">TRANSYS</span>
-        <span data-category="PLC & SCADA" class="category-btn bg-cyan-100 text-cyan-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-cyan-200 transition">PLC & SCADA</span>
-        <span data-category="Fusion 360" class="category-btn bg-fuchsia-100 text-fuchsia-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-fuchsia-200 transition">Fusion 360</span>
-        <span data-category="SketchUp" class="category-btn bg-rose-100 text-rose-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-rose-200 transition">SketchUp</span>
-        <span data-category="Lumion" class="category-btn bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-indigo-200 transition">Lumion</span>
-        <span data-category="AutoCAD Online" class="category-btn bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200 transition">AutoCAD Online</span>
-      </div>
-    </div>
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
 
-  </div>
-</section>
-<script>
-  const categoryButtons = document.querySelectorAll('.category-btn');
-  const blogCards = document.querySelectorAll('.blog-card');
+                // Highlight active button
+                categoryButtons.forEach(b => b.classList.remove('bg-gray-400', 'text-white'));
+                btn.classList.add('bg-gray-400', 'text-white');
 
-  categoryButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const category = btn.getAttribute('data-category');
-
-      // Highlight active button
-      categoryButtons.forEach(b => b.classList.remove('bg-gray-400', 'text-white'));
-      btn.classList.add('bg-gray-400', 'text-white');
-
-      blogCards.forEach(card => {
-        if(category === 'all' || card.getAttribute('data-category') === category) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  });
-</script>
+                blogCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
 
 
     <!-- Footer -->
@@ -595,32 +563,6 @@
         });
     </script>
 
-
-    <!-- Filter Script -->
-    <script>
-        const eventFilter = document.getElementById('eventFilter');
-        const yearFilter = document.getElementById('yearFilter');
-        const items = document.querySelectorAll('.gallery-item');
-
-        function filterGallery() {
-            const eventValue = eventFilter.value;
-            const yearValue = yearFilter.value;
-
-            items.forEach(item => {
-                const matchesEvent = (eventValue === 'all' || item.dataset.event === eventValue);
-                const matchesYear = (yearValue === 'all' || item.dataset.year === yearValue);
-
-                if (matchesEvent && matchesYear) {
-                    item.style.display = "block";
-                } else {
-                    item.style.display = "none";
-                }
-            });
-        }
-
-        eventFilter.addEventListener('change', filterGallery);
-        yearFilter.addEventListener('change', filterGallery);
-    </script>
 
 </body>
 
