@@ -515,7 +515,15 @@
 
                             {{-- ✅ Content --}}
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ $course->name }}
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">{{ $course->name }}
                                 </h3>
                                 <p class="text-sm text-gray-500 dark:text-gray-300 mb-3">{{ $course->sub_title }}</p>
 
@@ -905,7 +913,7 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $student->name }}
+                                    <h3 class="text-lg font-bold line-clamp-2 text-gray-800 dark:text-white">{{ $student->name }}
                                     </h3>
                                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
                                     <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
@@ -1047,7 +1055,15 @@
                                         class="w-full h-full object-cover">
                                 @else
                                     <div
-                                        class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold">
+                                        class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold" style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">
                                         {{ strtoupper(substr($course->name, 0, 1)) }}
                                     </div>
                                 @endif
@@ -1063,7 +1079,15 @@
                             </div>
 
                             <div class="p-4">
-                                <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                                <h3 class="text-xl font-bold" style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">{{ $course->name }}</h3>
                                 <p class="text-sm opacity-90 mb-2">{{ $course->course_duration ?? 'N/A' }}
                                     Program</p>
                                 <div class="flex justify-between items-center mb-3">
@@ -1133,7 +1157,15 @@
 
                             {{-- Body --}}
                             <div class="p-4">
-                                <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                                <h3 class="text-xl font-bold " style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">{{ $course->name }}</h3>
                                 <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
                                 <div class="flex justify-between items-center mb-3">
                                     {{-- Offer Fee on left --}}

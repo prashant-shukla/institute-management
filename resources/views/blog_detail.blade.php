@@ -265,98 +265,128 @@
 
     <!-- Header -->
 
-    <section class="max-w-5xl mx-auto px-6 py-12">
+  <section class="max-w-6xl mx-auto my-6 px-6 py-16 bg-gradient-to-b from-white via-gray-50 to-gray-100 rounded-2xl shadow-sm">
 
-        <!-- Header -->
-        <div class="mb-10 flex items-start gap-6">
-            <!-- Date Box -->
-            <div
-                class="flex flex-col items-center  bg-white justify-center w-14 h-16 rounded-lg shadow-md flex-shrink-0 overflow-hidden">
-                <!-- Day -->
-                <span class="bg-white text-black w-full text-center text-lg font-bold leading-none">
-                    {{ $blog->published_at?->format('d') }}
-                </span>
-                <!-- Month -->
-                <span class="bg-blue-600 text-white w-full text-center text-sm uppercase tracking-wide">
-                    {{ $blog->published_at?->format('M') }}
-                </span>
-            </div>
+    {{-- 🖼️ Blog Media (Image or YouTube Thumbnail) --}}
+  @php
+    $videoId = null;
+    $url = $blog->video_url ?? '';
 
+    // Extract YouTube video ID
+    if (preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([a-zA-Z0-9_-]{11})/', $url, $matches)) {
+        $videoId = $matches[1];
+    }
+@endphp
 
-            <!-- Title and Meta -->
-            <div class="flex-1">
-                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
-                    {{ $blog->title }}
-                </h1>
-                <div class="flex items-center gap-4 text-sm text-gray-500 mt-1">
-                    <span>{{ $blog->category->name ?? 'Technology' }}</span>
-                    <div class="flex items-center gap-2 text-sm text-gray-500">
-                        <!-- Pen/Writing Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536M4 20h4.586a1 1 0 00.707-.293l10-10a1 1 0 00-1.414-1.414l-10 10A1 1 0 004 16.586V20z" />
-                        </svg>
-                        <span>By Site Administrator</span>
-                    </div>
+{{-- Media Section --}}
+<div class="mb-2 relative rounded-2xl overflow-hidden ">
+    @if (!empty($blog->image))
+        {{-- Image --}}
+        <img src="{{ asset('storage/' . $blog->image) }}"
+            alt="{{ $blog->title }}"
+            class="w-full h-[450px] object-cover rounded-2xl">
+    @elseif ($videoId)
+        {{-- YouTube Video Embed --}}
+        <div class="w-full h-0 relative" style="padding-bottom:41.25%;">
+            <iframe class="absolute top-0 left-0 w-full h-[450px] rounded-2xl shadow-lg"
+                src="https://www.youtube.com/embed/{{ $videoId }}?rel=0&modestbranding=1"
+                title="{{ $blog->title }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+        {{-- Video Title Overlay --}}
+        {{-- <div class="absolute bottom-4 left-4 bg-black/60 text-white px-4 py-2 rounded-md text-lg font-semibold">
+            {{ $blog->title }}
+        </div> --}}
+    @else
+        {{-- Fallback --}}
+        <div class="w-full h-[450px] bg-gray-200 flex items-center justify-center text-gray-500 text-lg font-medium rounded-2xl">
+            No Media Available
+        </div>
+    @endif
+</div>
 
-                </div>
+{{-- Header Section --}}
+<div class="mb-12 flex flex-col md:flex-row items-start gap-6">
+    {{-- Date Card --}}
+    <div class="flex flex-col items-center justify-center w-16 h-18 rounded-lg overflow-hidden shadow-lg flex-shrink-0">
+        <span class="bg-white text-black w-full text-center text-xl font-extrabold leading-tight py-1">
+            {{ $blog->published_at?->format('d') }}
+        </span>
+        <span class="bg-blue-600 text-white w-full text-center text-sm uppercase tracking-wide py-1">
+            {{ $blog->published_at?->format('M') }}
+        </span>
+    </div>
+
+    {{-- Blog Title + Meta --}}
+    <div class="flex-1">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug mb-3">
+            {{ $blog->title }}
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 rounded-md font-medium">
+                {{ $blog->category->name ?? 'Technology' }}
+            </span>
+
+            <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536M4 20h4.586a1 1 0 00.707-.293l10-10a1 1 0 00-1.414-1.414l-10 10A1 1 0 004 16.586V20z" />
+                </svg>
+                <span>By <span class="font-medium text-gray-800">Site Administrator</span></span>
             </div>
         </div>
+    </div>
+</div>
 
 
-        <!-- Blog Image -->
-        @if ($blog->image)
-            <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg mb-10">
-                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-        @endif
 
-        <!-- Blog Description -->
-        <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-12">
-            {!! $blog->content !!}
-        </div>
+    {{-- 📝 Blog Content --}}
+    <article class="prose prose-lg prose-blue max-w-none text-gray-800 leading-relaxed mb-12">
+        {!! $blog->content !!}
+    </article>
 
-
-        <div class="mt-6 text-gray-800">
-            <p class="text-lg font-semibold">
-                {{ $blog->title }}
-            </p>
-            <a href="https://youtu.be/c6GbkT10hZ8" target="_blank"
-                class="flex items-center gap-2 text-blue-600 font-medium mt-2 hover:underline">
-                <!-- Video Play Icon -->
+    {{-- 🎥 Other Lecture Link --}}
+    @if (!empty($blog->link))
+        <div class="mt-6 text-gray-800 border-t border-gray-200 pt-6">
+            <p class="text-lg font-semibold mb-2">Watch Related Lecture:</p>
+            <a href="{{ $blog->link }}" target="_blank"
+                class="inline-flex items-center gap-2 text-blue-600 font-medium hover:text-blue-800 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3 22v-20l18 10-18 10z" />
                 </svg>
-                Other Lecture
+                Watch on YouTube
             </a>
         </div>
+    @endif
 
-
-        <!-- Tags -->
-
-        @if (!empty($blog->tags) && is_array($blog->tags))
-            <div class="mt-10">
-                <h3 class="text-lg font-semibold mb-3 text-gray-900">Tags:</h3>
-                <div class="flex flex-wrap gap-2">
-                    @foreach ($blog->tags as $tag)
-                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-                            #{{ trim($tag) }}
-                        </span>
-                    @endforeach
-                </div>
+    {{-- 🏷️ Tags --}}
+    @if (!empty($blog->tags))
+        <div class="mt-12 border-t border-gray-200 pt-6">
+            <h3 class="text-lg font-semibold mb-3 text-gray-900">Tags</h3>
+            <div class="flex flex-wrap gap-3">
+                @foreach (is_array($blog->tags) ? $blog->tags : explode(',', $blog->tags) as $tag)
+                    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                        #{{ trim($tag) }}
+                    </span>
+                @endforeach
             </div>
-        @endif
-
-        <!-- Back Button -->
-        <div class="mt-16 border-t border-gray-200 pt-8 text-center">
-            <a href="{{ route('blog') }}"
-                class="inline-flex items-center text-blue-600 font-semibold hover:underline transition">
-                ← Back to Blog
-            </a>
         </div>
-    </section>
+    @endif
+
+    {{-- 🔙 Back Button --}}
+    <div class="mt-16 text-center">
+        <a href="{{ route('blog') }}"
+            class="inline-flex items-center gap-2 text-blue-600 font-semibold hover:underline transition">
+            ← Back to Blog
+        </a>
+    </div>
+
+</section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">

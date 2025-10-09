@@ -19,9 +19,9 @@ use Illuminate\Support\Str;
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
-    protected static ?string $navigationGroup = 'CMS';
+    protected static ?string $navigationGroup = 'Content Management';
     protected static ?string $navigationIcon = 'heroicon-o-arrow-up-on-square-stack';
-
+    protected static ?string $navigationLabel = 'Blog';
     protected static ?int $navigationSort = 704;
 
     public static function form(Form $form): Form
@@ -29,16 +29,42 @@ class PostResource extends Resource
         return $form
             ->schema([
                 // ====== BLOG IMAGE ======
-                Forms\Components\Section::make('Blog Image')
+                Forms\Components\Section::make('Blog Media')
                     ->schema([
-                        FileUpload::make('image')
-                            ->label('Blog Image')
+                        // Step 1: Select media type first
+                        Forms\Components\Select::make('media_type')
+                            ->label('Select Media Type')
+                            ->options([
+                                'image' => 'Image',
+                                'video' => 'Video',
+                            ])
+                            ->default('image')
+                            ->reactive()
+                            ->required(),
+
+                        // Step 2: Image Upload (visible only if image selected)
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Upload Blog Image')
                             ->image()
                             ->directory('blog')
-                            ->required()
-                            ->columnSpan('full'),
+                            ->visibility('public')
+                            ->columnSpan('full')
+                            ->reactive()
+                            ->hidden(fn(callable $get) => $get('media_type') !== 'image'),
+
+                        // Step 3: Video URL Input (visible only if video selected)
+                        Forms\Components\TextInput::make('video_url')
+                            ->label('Video URL (YouTube / Vimeo)')
+                            ->placeholder('https://youtu.be/example')
+                            ->url()
+                            ->columnSpan('full')
+                            ->reactive()
+                            ->hidden(fn(callable $get) => $get('media_type') !== 'video'),
                     ])
+                    ->columns(1)
                     ->collapsible(),
+
+
 
                 // ====== BLOG DETAILS ======
                 Forms\Components\Section::make('Blog Details')

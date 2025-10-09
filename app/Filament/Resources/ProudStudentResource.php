@@ -16,7 +16,7 @@ class ProudStudentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?string $navigationLabel = 'Proud Students';
-    protected static ?string $navigationGroup = 'Students';
+    protected static ?string $navigationGroup = 'Institute';
 
     public static function form(Form $form): Form
     {

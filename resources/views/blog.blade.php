@@ -184,7 +184,7 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                     <a href="{{ url('/Gallery') }}"
+                    <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
 
                     <a href="{{ url('/blogs') }}"
@@ -282,10 +282,48 @@
                     @foreach ($blogs as $blog)
                         <div class="blog-card bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300"
                             data-category="{{ $blog->category->name ?? 'Uncategorized' }}">
-                            <div class="h-56 overflow-hidden">
-                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            
+                            <div class="h-56 overflow-hidden rounded-2xl shadow-md">
+                                @if (!empty($blog->image))
+                                    {{-- 🖼️ Show uploaded image --}}
+                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                @elseif (!empty($blog->video_url))
+                                    @php
+                                        $videoId = null;
+                                        $url = $blog->video_url;
+
+                                        // ✅ Extract YouTube video ID from all possible formats
+                                        if (
+                                            preg_match(
+                                                '/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([a-zA-Z0-9_-]{11})/',
+                                                $url,
+                                                $matches,
+                                            )
+                                        ) {
+                                            $videoId = $matches[1];
+                                        }
+                                    @endphp
+
+                                    @if ($videoId)
+                                        {{-- 🎬 Show YouTube thumbnail --}}
+                                        <div class="relative group">
+                                            <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg"
+                                                alt="{{ $blog->title }}"
+                                                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-500">
+                                            {{-- 🔗 Play button overlay --}}
+                                            <a href="{{ $blog->video_url }}" target="_blank"
+                                                class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="white"
+                                                    viewBox="0 0 24 24" class="w-12 h-12">
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endif
                             </div>
+
                             <div class="p-6">
                                 <span
                                     class="text-sm text-blue-600 font-medium uppercase">{{ $blog->category->name ?? 'Blog' }}</span>

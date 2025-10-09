@@ -38,6 +38,7 @@ class Post extends Model
         'short_description',
         'link',
         'tags',
+        'video_url',
         'site_title',
         'meta_keywords',
         'meta_description',

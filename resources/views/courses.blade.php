@@ -184,7 +184,7 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                                        <a href="{{ url('/Gallery') }}"
+                    <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
 
                     <a href="{{ url('/blogs') }}"
@@ -412,7 +412,7 @@
 
         <!-- Banner Image -->
         <div class="mt-8">
-            <img src="{{ asset('images/1080x200.svg') }}" alt="Students Learning Online"
+            <img src="{{ asset('images/course banner cadadda.jpg') }}" alt="Students Learning Online"
                 class="rounded-lg shadow-lg w-full object-cover" style="height:200px;">
 
         </div>
@@ -439,108 +439,140 @@
             </div>
 
             <!-- ===== Right Side Courses Section ===== -->
-<div class="md:col-span-3 space-y-10">
+            <div class="md:col-span-3 space-y-10">
 
-    <!-- Offline Courses -->
-    <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @forelse($offlineCourses as $course)
-        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 w-full">
-                    @if($course->image)
-                        <img src="{{ asset('storage/' . $course->image) }}"
-                             alt="{{ $course->name }}"
-                             class="w-full h-full object-cover">
-                    @else
-                        <div class="h-full w-full bg-blue-500"></div>
-                    @endif
-                </div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">{{ $course->name }}</h3>
-                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+                <!-- Offline Courses -->
+                <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @forelse($offlineCourses as $course)
+                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                            <div class="bg-white shadow rounded-xl overflow-hidden">
+                                <div class="h-40 w-full">
+                                    @if ($course->image)
+                                        <img src="{{ asset('storage/' . $course->image) }}"
+                                            alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="h-full w-full bg-blue-500"></div>
+                                    @endif
+                                </div>
+                                <div class="p-5">
+                                    <h3 class="text-lg font-bold line-clamp-2"
+                                        style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">
+                                        {{ $course->name }}</h3>
+                                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                    <div class="flex items-center justify-between mt-3">
-                        <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}</p>
-                        <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            Join Now
-                        </button>
-                    </div>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <p class="text-blue-600 font-semibold">
+                                            ₹{{ number_format($course->offer_fee, 2) }}</p>
+                                        <button
+                                            class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                            Join Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <p class="text-gray-500">No offline courses available.</p>
+                    @endforelse
                 </div>
+
+                <!-- Online Courses -->
+                <div id="online"
+                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    @forelse($onlineCourses as $course)
+                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                            <div class="bg-white shadow rounded-xl overflow-hidden">
+                                <div class="h-40 w-full">
+                                    @if ($course->image)
+                                        <img src="{{ asset('storage/' . $course->image) }}"
+                                            alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="h-full w-full bg-purple-500"></div>
+                                    @endif
+                                </div>
+                                <div class="p-5">
+
+                                    <h3 class="text-lg font-bold line-clamp-2"  style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">{{ $course->name }}</h3>
+                                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+
+                                    <div class="flex items-center justify-between mt-3">
+                                        <p class="text-blue-600 font-semibold">
+                                            ₹{{ number_format($course->offer_fee, 2) }}</p>
+                                        <button
+                                            class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                            Join Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <p class="text-gray-500">No online courses available.</p>
+                    @endforelse
+                </div>
+
+                <!-- Certifications -->
+                <div id="certifications"
+                    class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                    @forelse($certifications as $course)
+                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                            <div class="bg-white shadow rounded-xl overflow-hidden">
+                                <div class="h-40 w-full">
+                                    @if ($course->image)
+                                        <img src="{{ asset('storage/' . $course->image) }}"
+                                            alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="h-full w-full bg-red-500"></div>
+                                    @endif
+                                </div>
+                                <div class="p-5">
+                                    <h3 class="text-lg font-bold line-clamp-2"  style="
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+    line-height: 1.6em;
+">{{ $course->name }}</h3>
+                                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+
+                                    <div class="flex items-center justify-between mt-3">
+                                        <p class="text-blue-600 font-semibold">
+                                            ₹{{ number_format($course->offer_fee, 2) }}</p>
+                                        <button
+                                            class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                            Join Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <p class="text-gray-500">No certifications available.</p>
+                    @endforelse
+                </div>
+
             </div>
-        </a>
-        @empty
-            <p class="text-gray-500">No offline courses available.</p>
-        @endforelse
-    </div>
-
-    <!-- Online Courses -->
-    <div id="online" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-        @forelse($onlineCourses as $course)
-        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 w-full">
-                    @if($course->image)
-                        <img src="{{ asset('storage/' . $course->image) }}"
-                             alt="{{ $course->name }}"
-                             class="w-full h-full object-cover">
-                    @else
-                        <div class="h-full w-full bg-purple-500"></div>
-                    @endif
-                </div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">{{ $course->name }}</h3>
-                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
-
-                    <div class="flex items-center justify-between mt-3">
-                        <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}</p>
-                        <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            Join Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </a>
-        @empty
-            <p class="text-gray-500">No online courses available.</p>
-        @endforelse
-    </div>
-
-    <!-- Certifications -->
-    <div id="certifications" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-        @forelse($certifications as $course)
-        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-            <div class="bg-white shadow rounded-xl overflow-hidden">
-                <div class="h-40 w-full">
-                    @if($course->image)
-                        <img src="{{ asset('storage/' . $course->image) }}"
-                             alt="{{ $course->name }}"
-                             class="w-full h-full object-cover">
-                    @else
-                        <div class="h-full w-full bg-red-500"></div>
-                    @endif
-                </div>
-                <div class="p-5">
-                    <h3 class="text-lg font-bold">{{ $course->name }}</h3>
-                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
-
-                    <div class="flex items-center justify-between mt-3">
-                        <p class="text-blue-600 font-semibold">₹{{ number_format($course->offer_fee, 2) }}</p>
-                        <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            Join Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </a>
-        @empty
-            <p class="text-gray-500">No certifications available.</p>
-        @endforelse
-    </div>
-
-</div>
 
         </div>
     </div>
@@ -683,31 +715,30 @@
         </div>
 
         <!-- Slider main container -->
-<div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-        @foreach($proudStudents as $proudStudent)
-            <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                    <!-- Student Image -->
-                    <img src="{{ asset('storage/' . $proudStudent->image) }}"
-                         alt="{{ $proudStudent->name }}"
-                         class="mx-auto rounded-xl h-32 w-32 object-cover" />
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach ($proudStudents as $proudStudent)
+                    <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                        <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                            <!-- Student Image -->
+                            <img src="{{ asset('storage/' . $proudStudent->image) }}"
+                                alt="{{ $proudStudent->name }}" class="mx-auto rounded-xl h-32 w-32 object-cover" />
 
-                    <!-- Student Name -->
-                    <h4 class="font-semibold h-15 mt-3">{{ $proudStudent->name }}</h4>
+                            <!-- Student Name -->
+                            <h4 class="font-semibold h-15 mt-3">{{ $proudStudent->name }}</h4>
 
-                    <!-- Fixed Text -->
-                    {{-- <p class="text-sm text-gray-500">CADADDA Jodhpur</p> --}}
+                            <!-- Fixed Text -->
+                            {{-- <p class="text-sm text-gray-500">CADADDA Jodhpur</p> --}}
 
-                    <!-- Company Placed -->
-                    @if($proudStudent->company)
-                        <p class="text-xs text-gray-400 mt-1">Placed at {{ $proudStudent->company }}</p>
-                    @endif
-                </div>
+                            <!-- Company Placed -->
+                            @if ($proudStudent->company)
+                                <p class="text-xs text-gray-400 mt-1">Placed at {{ $proudStudent->company }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
-</div>
+        </div>
 
     </div>
     <!-- Swiper JS -->
@@ -1111,6 +1142,17 @@
                 document.getElementById(tab.dataset.target).classList.remove("hidden");
             });
         });
+    </script>
+    <script>
+        // tailwind.config.js
+        module.exports = {
+            theme: {
+                extend: {},
+            },
+            plugins: [
+                require('@tailwindcss/line-clamp'),
+            ],
+        }
     </script>
 
 </body>
