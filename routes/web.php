@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\ContactController;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\Blog;
 use App\Http\Controllers\FeeReceiptController;
-
+use App\Http\Controllers\CertificateController;
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     
       Route::get('/', [HomeController::class, 'Homes']);
@@ -61,6 +61,9 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
         
 
         Route::get('/fees/print/{id}', [FeeReceiptController::class, 'print'])->name('fees.print');
+
+
+Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
 
         
 });

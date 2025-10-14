@@ -24,6 +24,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
+use App\Models\Certificate;
+use Carbon\Carbon;
+use Filament\Tables\Columns\IconColumn;
 
 class StudentResource extends Resource
 {
@@ -111,20 +114,20 @@ class StudentResource extends Resource
                                 TextInput::make('reg_no')->label('Reg No')->maxLength(255),
                             ]),
 
-                            Forms\Components\Section::make('COURSE DETAILS')
+                        Forms\Components\Section::make('COURSE DETAILS')
                             ->schema([
                                 Select::make('course_id')
                                     ->label('Course Name')
                                     ->required()
                                     ->relationship('course', 'name'),
-        
-                                    Forms\Components\Toggle::make('calculate_gst')
+
+                                Forms\Components\Toggle::make('calculate_gst')
                                     ->label('Calculate GST?')
                                     ->default(true)
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, callable $set, $get) {
                                         $courseFee = $get('course_fee') ?? 0;
-                                
+
                                         if ($state) {
                                             $gst   = $courseFee * 0.18;
                                             $total = $courseFee + $gst;
@@ -135,7 +138,7 @@ class StudentResource extends Resource
                                             $set('total_fee', $courseFee);
                                         }
                                     }),
-                                
+
                                 Forms\Components\TextInput::make('course_fee')
                                     ->label('Course Fee')
                                     ->required()
@@ -163,18 +166,18 @@ class StudentResource extends Resource
                                             $set('total_fee', $state);
                                         }
                                     }),
-                                
+
                                 Forms\Components\TextInput::make('gst_amount')
                                     ->label('GST 18%')
                                     ->numeric()
                                     ->disabled()
-                                    ->dehydrated(fn ($state) => true),
-                                
+                                    ->dehydrated(fn($state) => true),
+
                                 Forms\Components\TextInput::make('total_fee')
                                     ->label('Total Fee')
                                     ->numeric()
                                     ->disabled()
-                                    ->dehydrated(fn ($state) => true),
+                                    ->dehydrated(fn($state) => true),
                             ])
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -187,46 +190,91 @@ class StudentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('reg_no')
-                ->label('Reg No')
-                ->action(
-                    Tables\Actions\Action::make('receipt')
-                    ->label('View Receipt')
-                    ->icon('heroicon-o-document-text')
-                    ->modalHeading('Student Details')
-                    ->modalContent(fn ($record) => view(
-                        'students.receipt',
-                        ['student' => Student::with('feeReceipts')->findOrFail($record->id)]
-                    ))
-                    ->modalSubmitAction(false)
-                    ->modalCancelActionLabel('Close'),
+                    ->label('Reg No')
+                    ->action(
+                        Tables\Actions\Action::make('receipt')
+                            ->label('View Receipt')
+                            ->icon('heroicon-o-document-text')
+                            ->modalHeading('Student Details')
+                            ->modalContent(fn($record) => view(
+                                'students.receipt',
+                                ['student' => Student::with('feeReceipts')->findOrFail($record->id)]
+                            ))
+                            ->modalSubmitAction(false)
+                            ->modalCancelActionLabel('Close'),
                     ),
-            
-    
+
+
                 Tables\Columns\TextColumn::make('user.full_name')
                     ->label('Full Name')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-    
+
                 Tables\Columns\TextColumn::make('course.name')
                     ->searchable()
                     ->sortable()
                     ->toggleable()
                     ->label('Course'),
-    
+
+                Tables\Columns\ToggleColumn::make('certificate_assigned')
+                    ->label('Certificate')
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->afterStateUpdated(function ($record, $state) {
+                        if ($state) {
+                            $student = Student::with('user')->find($record->id);
+                            $studentName = trim(($student->user->firstname ?? '') . ' ' . ($student->user->lastname ?? ''));
+                            // 🔹 Certificate create logic
+                            Certificate::create([
+                                'student_id' => $record->id,
+                                'course_id' => $record->course_id,
+                                'name' => $studentName,
+                                'certificate_no' => 'CAD-' . strtoupper(uniqid()),
+                                'issue_date' => Carbon::now(),
+                            ]);
+                        } else {
+                            // 🔹 Optional: certificate delete when turned off
+                            Certificate::where('student_id', $record->id)
+                                ->where('course_id', $record->course_id)
+                                ->delete();
+                        }
+                    }),
+
                 Tables\Columns\TextColumn::make('reg_date')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-    
+
+
+
+                // Tables\Columns\IconColumn::make('certificate')
+                //     ->label('Certificate')
+                //     ->icon(fn($record) => Certificate::where('student_id', $record->id)
+                //         ->where('course_id', $record->course_id)
+                //         ->exists()
+                //         ? 'heroicon-o-check-circle'
+                //         : null) // show nothing if no certificate
+                //     ->color(fn($record) => Certificate::where('student_id', $record->id)
+                //         ->where('course_id', $record->course_id)
+                //         ->exists()
+                //         ? 'success'
+                //         : 'secondary')
+                //     ->tooltip(fn($record) => Certificate::where('student_id', $record->id)
+                //         ->where('course_id', $record->course_id)
+                //         ->exists()
+                //         ? 'Certificate Assigned'
+                //         : 'No Certificate'),
+
+
                 Tables\Columns\BadgeColumn::make('is_online')
                     ->label('Status')
                     ->sortable()
                     ->colors([
-                        'success' => fn ($state): bool => $state === true,
-                        'danger' => fn ($state): bool => $state === false,
+                        'success' => fn($state): bool => $state === true,
+                        'danger' => fn($state): bool => $state === false,
                     ])
-                    ->formatStateUsing(fn ($state): string => $state ? 'Online' : 'Offline'),
+                    ->formatStateUsing(fn($state): string => $state ? 'Online' : 'Offline'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('is_online')
@@ -237,9 +285,40 @@ class StudentResource extends Resource
                     ]),
             ])
             ->actions([
+
                 Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
                 Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
                 Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
+                Tables\Actions\Action::make('certificate')
+                    ->icon('heroicon-o-check-circle')
+                    ->color(fn($record) => Certificate::where('student_id', $record->id)
+                        ->where('course_id', $record->course_id)
+                        ->exists() ? 'success' : 'secondary')
+                    ->tooltip(fn($record) => Certificate::where('student_id', $record->id)
+                        ->where('course_id', $record->course_id)
+                        ->exists() ? 'Certificate Assigned' : 'Assign Certificate')
+                    ->action(function ($record) {
+                        $certificateExists = Certificate::where('student_id', $record->id)
+                            ->where('course_id', $record->course_id)
+                            ->exists();
+
+                        if ($certificateExists) {
+                            Certificate::where('student_id', $record->id)
+                                ->where('course_id', $record->course_id)
+                                ->delete();
+                        } else {
+                            $student = Student::with('user')->find($record->id);
+                            $studentName = trim(($student->user->firstname ?? '') . ' ' . ($student->user->lastname ?? ''));
+                            Certificate::create([
+                                'student_id' => $student->id,
+                                'course_id' => $student->course_id,
+                                'name' => $studentName,
+                                'certificate_no' => 'CAD-' . strtoupper(uniqid()),
+                                'issue_date' => now(),
+                            ]);
+                        }
+                    }),
+
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -247,8 +326,8 @@ class StudentResource extends Resource
                 ]),
             ]);
     }
-    
-    
+
+
 
 
 

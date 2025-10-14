@@ -65,6 +65,14 @@ class Student extends Model
         $this->save();
     }
 
+
+   public function getCertificateAssignedAttribute()
+    {
+        return \App\Models\Certificate::where('student_id', $this->id)
+            ->where('course_id', $this->course_id)
+            ->exists();
+    }
+
     protected static function boot()
     {
         parent::boot();

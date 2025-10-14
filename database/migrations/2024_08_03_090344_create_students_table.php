@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('residential_no',25)->nullable();
             $table->string('office_no',25)->nullable();
             $table->string('mobile_no',25);
-
+            $table->unsignedBigInteger('student_id')->after('id');
             // $table->bigInteger('branch');
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('user_id')->nullable();

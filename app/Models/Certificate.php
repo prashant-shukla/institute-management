@@ -22,9 +22,7 @@ class Certificate extends Model
     {
         return $this->hasMany(Course::class);
     }
-    protected $fillable = [
-        'name', 'title', 'course_id', 'logo_path', 'background_path', 'elements'
-    ];
+
     protected $casts = ['elements' => 'array'];
     // protected $casts = [
     //     'elements' => 'array',
