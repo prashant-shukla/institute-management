@@ -12,6 +12,7 @@ use App\Models\User;
 class Student extends Model
 {
     use HasFactory;
+
     
     protected $table = 'students';
 

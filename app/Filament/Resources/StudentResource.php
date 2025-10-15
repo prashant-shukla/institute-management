@@ -296,28 +296,20 @@ class StudentResource extends Resource
                         ->exists() ? 'success' : 'secondary')
                     ->tooltip(fn($record) => Certificate::where('student_id', $record->id)
                         ->where('course_id', $record->course_id)
-                        ->exists() ? 'Certificate Assigned' : 'Assign Certificate')
-                    ->action(function ($record) {
-                        $certificateExists = Certificate::where('student_id', $record->id)
+                        ->exists() ? 'View Certificate' : 'No Certificate Assigned')
+                    ->url(function ($record) {
+                        $certificateId = Certificate::where('student_id', $record->id)
                             ->where('course_id', $record->course_id)
-                            ->exists();
+                            ->value('id');
 
-                        if ($certificateExists) {
-                            Certificate::where('student_id', $record->id)
-                                ->where('course_id', $record->course_id)
-                                ->delete();
-                        } else {
-                            $student = Student::with('user')->find($record->id);
-                            $studentName = trim(($student->user->firstname ?? '') . ' ' . ($student->user->lastname ?? ''));
-                            Certificate::create([
-                                'student_id' => $student->id,
-                                'course_id' => $student->course_id,
-                                'name' => $studentName,
-                                'certificate_no' => 'CAD-' . strtoupper(uniqid()),
-                                'issue_date' => now(),
-                            ]);
-                        }
-                    }),
+                        // ✅ Only return URL if certificate exists
+                        return $certificateId
+                            ? route('certificate.show', ['id' => $certificateId])
+                            : null;
+                    }, shouldOpenInNewTab: true) // open in new tab
+                    ->disabled(fn($record) => !Certificate::where('student_id', $record->id)
+                        ->where('course_id', $record->course_id)
+                        ->exists()),
 
             ])
             ->bulkActions([
