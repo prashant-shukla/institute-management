@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Models\Blog;
 use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\PaymentController;
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     
       Route::get('/', [HomeController::class, 'Homes']);
@@ -65,5 +66,10 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 
 Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
 
-        
+
+Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
+Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
+
+Route::view('/exam', 'exam.exam')->name('exam');
+
 });

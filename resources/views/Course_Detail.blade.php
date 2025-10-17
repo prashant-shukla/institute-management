@@ -184,7 +184,7 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                                        <a href="{{ url('/Gallery') }}"
+                    <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
 
                     <a href="{{ url('/blogs') }}"
@@ -260,86 +260,149 @@
     </header>
 
     <!-- Header Section -->
-<header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-300 text-white py-20">
-    <!-- Background image overlay -->
-    <div
-        class="absolute inset-0 bg-[url('{{ $course->banner_image ?? 'https://source.unsplash.com/1600x600/?autocad,architecture,design' }}')] bg-cover bg-center opacity-20">
-    </div>
-
-    <div
-        class="relative max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-between md:gap-16 gap-10">
-        <!-- Left: Main heading -->
-        <div class="text-center md:text-left flex-1">
-            <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
-                {{ $course->name }}
-            </h1>
-            <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-2xl">
-                {{ $course->sub_title }}
-            </p>
-            <button
-                class="mt-8 bg-white text-indigo-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-indigo-50 transition-transform">
-                🚀 Enroll Now
-            </button>
+    <header class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-300 text-white py-20">
+        <!-- Background image overlay -->
+        <div
+            class="absolute inset-0 bg-[url('{{ $course->banner_image ?? 'https://source.unsplash.com/1600x600/?autocad,architecture,design' }}')] bg-cover bg-center opacity-20">
         </div>
 
-        <!-- Right: Pricing & Enroll box -->
-        <div class="md:w-50 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 text-gray-900">
-            <div class="flex items-center justify-between">
-                <div>
-                    <span class="text-2xl font-bold">₹{{ number_format($course->offer_fee, 2) }}</span>
-                    <span class="text-gray-400 line-through ml-2">₹{{ number_format($course->fee, 2) }}</span>
-                </div>
-                <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
+        <div
+            class="relative max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-between md:gap-16 gap-10">
+            <!-- Left: Main heading -->
+            <div class="text-center md:text-left flex-1">
+                <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
+                    {{ $course->name }}
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-2xl">
+                    {{ $course->sub_title }}
+                </p>
+                <button id="enrollButton"
+                    class="mt-8 bg-white text-indigo-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-indigo-50 transition-transform">
+                    🚀 Enroll Now
+                </button>
             </div>
 
-            <a href="#"
-                class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition text-center">
-                Enroll Now
-            </a>
 
-            <button onclick="openForm()"
-                class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
-                View Curriculum
-            </button>
 
-            <p class="text-xs text-gray-500 mt-2">
-                Secure checkout via UPI / Cards. Instant confirmation.
-            </p>
-        </div>
-    </div>
 
-    <!-- Modal Form -->
-    <div id="curriculumForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
-            <h3 class="text-lg font-bold mb-4 text-indigo-600">Get Curriculum</h3>
-            <form id="downloadForm">
-                <input type="text" name="name" placeholder="Your Name" class="w-full border p-2 rounded mb-3"
-                    required>
-                <input type="email" name="email" placeholder="Your Email" class="w-full border p-2 rounded mb-3" required>
-                <button type="submit" class="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
-                    Submit & Download
+
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+                document.getElementById('enrollButton').addEventListener('click', async function() {
+                    const response = await fetch("{{ route('course.order', $course->id) }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    const options = {
+                        "key": data.key,
+                        "amount": data.amount,
+                        "currency": data.currency,
+                        "name": data.course_name,
+                        "description": "Course Enrollment Payment",
+                        "order_id": data.order_id,
+                        "handler": async function(response) {
+                            await fetch("{{ route('payment.verify') }}", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                    },
+                                    body: JSON.stringify({
+                                        razorpay_payment_id: response.razorpay_payment_id,
+                                        razorpay_order_id: response.razorpay_order_id,
+                                        razorpay_signature: response.razorpay_signature,
+                                        payment_record_id: data.payment_id
+                                    })
+                                }).then(res => res.json())
+                                .then(res => {
+                                    if (res.status === 'success') {
+                                        alert('✅ Payment Successful! You are now enrolled.');
+                                        window.location.reload();
+                                    } else {
+                                        alert('❌ Payment verification failed.');
+                                    }
+                                });
+                        },
+                        "theme": {
+                            "color": "#6366F1"
+                        }
+                    };
+
+                    const rzp = new Razorpay(options);
+                    rzp.open();
+                });
+            </script>
+
+
+
+
+
+            <!-- Right: Pricing & Enroll box -->
+            <div class="md:w-50 bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 text-gray-900">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-2xl font-bold">₹{{ number_format($course->offer_fee, 2) }}</span>
+                        <span class="text-gray-400 line-through ml-2">₹{{ number_format($course->fee, 2) }}</span>
+                    </div>
+                    <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
+                </div>
+
+                <a href="#" 
+                    class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition text-center">
+                    Enroll Now
+                </a>
+
+                <button onclick="openForm()"
+                    class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
+                    View Curriculum
                 </button>
-            </form>
-            <button onclick="closeForm()" class="mt-3 text-gray-500 hover:text-red-500">Close</button>
+
+                <p class="text-xs text-gray-500 mt-2">
+                    Secure checkout via UPI / Cards. Instant confirmation.
+                </p>
+            </div>
         </div>
-    </div>
 
-    <script>
-        function openForm() {
-            document.getElementById("curriculumForm").classList.remove("hidden");
-        }
+        <!-- Modal Form -->
+        <div id="curriculumForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
+                <h3 class="text-lg font-bold mb-4 text-indigo-600">Get Curriculum</h3>
+                <form id="downloadForm">
+                    <input type="text" name="name" placeholder="Your Name"
+                        class="w-full border p-2 rounded mb-3" required>
+                    <input type="email" name="email" placeholder="Your Email"
+                        class="w-full border p-2 rounded mb-3" required>
+                    <button type="submit"
+                        class="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
+                        Submit & Download
+                    </button>
+                </form>
+                <button onclick="closeForm()" class="mt-3 text-gray-500 hover:text-red-500">Close</button>
+            </div>
+        </div>
 
-        function closeForm() {
-            document.getElementById("curriculumForm").classList.add("hidden");
-        }
+        <script>
+            function openForm() {
+                document.getElementById("curriculumForm").classList.remove("hidden");
+            }
 
-        document.getElementById("downloadForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            window.location.href = "/storage/curriculum.pdf"; // replace with backend logic if needed
-            closeForm();
-        });
-    </script>
-</header>
+            function closeForm() {
+                document.getElementById("curriculumForm").classList.add("hidden");
+            }
+
+            document.getElementById("downloadForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+                window.location.href = "/storage/curriculum.pdf"; // replace with backend logic if needed
+                closeForm();
+            });
+        </script>
+    </header>
 
 
 
@@ -522,14 +585,14 @@
 
 
     <!-- About Section -->
-<section class="py-16 bg-white">
-    <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center">✨ About This Course</h2>
-        <div class="mt-6 text-lg text-gray-600 leading-relaxed prose mx-auto">
-            {!! $course->description !!}
+    <section class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center">✨ About This Course</h2>
+            <div class="mt-6 text-lg text-gray-600 leading-relaxed prose mx-auto">
+                {!! $course->description !!}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
@@ -543,28 +606,28 @@
             </h2>
 
             <!-- Brief Info -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-10">
-    <div class="flex flex-col items-center">
-        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/videos.png?v=5"
-            alt="{{ $totals['Video'] }} Video Tutorials" class="w-16 h-16 mb-2">
-        <p class="text-gray-700 font-semibold">{{ $totals['Video'] }} Video Tutorials</p>
-    </div>
-    <div class="flex flex-col items-center">
-        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/assignments.png?v=5"
-            alt="{{ $totals['Assignments'] }} Assignments" class="w-16 h-16 mb-2">
-        <p class="text-gray-700 font-semibold">{{ $totals['Assignments'] }} Assignments</p>
-    </div>
-    <div class="flex flex-col items-center">
-        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/projects.png?v=5"
-            alt="{{ $totals['Projects'] }} Projects" class="w-16 h-16 mb-2">
-        <p class="text-gray-700 font-semibold">{{ $totals['Projects'] }} Projects</p>
-    </div>
-    <div class="flex flex-col items-center">
-        <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/tools.png?v=5"
-            alt="{{ $totals['Tools'] }} Tools Covered" class="w-16 h-16 mb-2">
-        <p class="text-gray-700 font-semibold">{{ $totals['Tools'] }} Tools</p>
-    </div>
-</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-10">
+                <div class="flex flex-col items-center">
+                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/videos.png?v=5"
+                        alt="{{ $totals['Video'] }} Video Tutorials" class="w-16 h-16 mb-2">
+                    <p class="text-gray-700 font-semibold">{{ $totals['Video'] }} Video Tutorials</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/assignments.png?v=5"
+                        alt="{{ $totals['Assignments'] }} Assignments" class="w-16 h-16 mb-2">
+                    <p class="text-gray-700 font-semibold">{{ $totals['Assignments'] }} Assignments</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/projects.png?v=5"
+                        alt="{{ $totals['Projects'] }} Projects" class="w-16 h-16 mb-2">
+                    <p class="text-gray-700 font-semibold">{{ $totals['Projects'] }} Projects</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://training-comp-uploads.internshala.com/signup_ab/features/icons-s/tools.png?v=5"
+                        alt="{{ $totals['Tools'] }} Tools Covered" class="w-16 h-16 mb-2">
+                    <p class="text-gray-700 font-semibold">{{ $totals['Tools'] }} Tools</p>
+                </div>
+            </div>
 
 
             <p class="text-center text-gray-600 mb-10">
@@ -572,28 +635,29 @@
             </p>
 
             <!-- Accordion Modules -->
-<div class="space-y-4">
-    @foreach ($coursesyllabuses as $index => $syllabus)
-        <div class="border rounded-xl bg-white shadow-sm">
-            <button
-                class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                onclick="toggleAccordion(this)">
-                <span class="font-semibold text-gray-900">
-                    {{ $syllabus->title ?? 'Module ' . ($index + 1) }}
-                </span>
-                <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </button>
-            <div class="px-6 pb-4 hidden">
-                <div class="text-gray-700 space-y-2">
-                    {!! str_replace('<ul>', '<ul class="list-disc list-inside">', $syllabus->description) !!}
-                </div>
+            <div class="space-y-4">
+                @foreach ($coursesyllabuses as $index => $syllabus)
+                    <div class="border rounded-xl bg-white shadow-sm">
+                        <button
+                            class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
+                            onclick="toggleAccordion(this)">
+                            <span class="font-semibold text-gray-900">
+                                {{ $syllabus->title ?? 'Module ' . ($index + 1) }}
+                            </span>
+                            <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="px-6 pb-4 hidden">
+                            <div class="text-gray-700 space-y-2">
+                                {!! str_replace('<ul>', '<ul class="list-disc list-inside">', $syllabus->description) !!}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </div>
-    @endforeach
-</div>
 
 
 
@@ -714,63 +778,64 @@
 
 
     <!-- AutoCAD FAQ Section -->
-<section id="faq" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">
-            ❓ {{ $course->name }} FAQs
-        </h2>
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center">
+                ❓ {{ $course->name }} FAQs
+            </h2>
 
-        <div class="space-y-4">
-            @forelse($faqs as $faq)
-                <div class="border rounded-xl bg-white shadow-sm">
-                    <button
-                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                        onclick="toggleFAQ(this)">
-                        <span class="font-semibold text-gray-900">{{ $faq['question'] }}</span>
-                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="px-6 pb-4 hidden">
-                        <p class="text-gray-700">{{ $faq['answer'] }}</p>
+            <div class="space-y-4">
+                @forelse($faqs as $faq)
+                    <div class="border rounded-xl bg-white shadow-sm">
+                        <button
+                            class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
+                            onclick="toggleFAQ(this)">
+                            <span class="font-semibold text-gray-900">{{ $faq['question'] }}</span>
+                            <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div class="px-6 pb-4 hidden">
+                            <p class="text-gray-700">{{ $faq['answer'] }}</p>
+                        </div>
                     </div>
-                </div>
-            @empty
-                <p class="text-center text-gray-500">No FAQs available for this course yet.</p>
-            @endforelse
+                @empty
+                    <p class="text-center text-gray-500">No FAQs available for this course yet.</p>
+                @endforelse
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
     <!-- FAQ Accordion JS -->
-<script>
-    function toggleFAQ(button) {
-        const allContents = document.querySelectorAll('#faq .border > div'); // सब FAQ content
-        const allIcons = document.querySelectorAll('#faq .border button svg'); // सब arrow icons
+    <script>
+        function toggleFAQ(button) {
+            const allContents = document.querySelectorAll('#faq .border > div'); // सब FAQ content
+            const allIcons = document.querySelectorAll('#faq .border button svg'); // सब arrow icons
 
-        const content = button.nextElementSibling;
-        const icon = button.querySelector('svg');
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('svg');
 
-        // अगर current already open है तो उसे close करो और return
-        if (!content.classList.contains('hidden')) {
-            content.classList.add('hidden');
-            icon.classList.remove('rotate-180');
-            return;
+            // अगर current already open है तो उसे close करो और return
+            if (!content.classList.contains('hidden')) {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+                return;
+            }
+
+            // Pehle sabको close करो
+            allContents.forEach(c => c.classList.add('hidden'));
+            allIcons.forEach(i => i.classList.remove('rotate-180'));
+
+            // Ab current को open करो
+            content.classList.remove('hidden');
+            icon.classList.add('rotate-180');
         }
-
-        // Pehle sabको close करो
-        allContents.forEach(c => c.classList.add('hidden'));
-        allIcons.forEach(i => i.classList.remove('rotate-180'));
-
-        // Ab current को open करो
-        content.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-    }
-</script>
+    </script>
 
 
 
