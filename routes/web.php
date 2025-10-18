@@ -71,5 +71,6 @@ Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->na
 Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
 
 Route::view('/exam', 'exam.exam')->name('exam');
+Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
 
 });

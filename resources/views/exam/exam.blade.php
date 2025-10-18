@@ -20,7 +20,7 @@
   <!-- Main Layout -->
   <main class="pt-16 flex h-[calc(100vh-4rem)]">
 
-    <!-- Left Panel (Questions Only) -->
+    <!-- Question Panel -->
     <section class="w-full bg-white border-r border-gray-300 flex flex-col">
 
       <!-- Info Bar -->
@@ -30,47 +30,47 @@
         <span>Question <b>9-10 of 30</b></span>
       </div>
 
-      <!-- Scrollable Content -->
+      <!-- Content -->
       <div class="overflow-y-auto p-6 flex-1">
-        <!-- Question Title -->
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Question 9: Draw a Line</h2>
+        <!-- Question -->
+        <h2 class="text-lg font-semibold text-gray-800 mb-2">Question 9: Draw a Line</h2>
 
-        <!-- Question Text -->
-        <p class="text-gray-700 mb-3">
+        <p class="text-gray-700 mb-2">
           Insert the <b>Stamp</b> block using endpoint <b>1</b> as the insertion point.<br>
           Draw a line from the geometric center of the block perpendicular to <b>2</b>.
         </p>
-        <p class="text-gray-800 mb-3 font-medium">
+
+        <p class="text-gray-800 mb-2 font-medium">
           What is the length of the new line?
         </p>
 
         <!-- Answer Input -->
         <input type="number" step="0.001" placeholder="Enter value (e.g., 0.5243)"
-               class="w-56 border border-gray-300 rounded-md px-3 py-2 mb-5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+               class="w-56 border border-gray-300 rounded-md px-3 py-2 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-        <!-- Question Image (Now Below Question) -->
-        <div class="mb-6 flex justify-center">
+        <!-- Image (Smaller) -->
+        <div class="mb-4 flex justify-center">
           <img src="https://www.autodesk.com/blogs/autocad/wp-content/uploads/sites/35/2020/03/Web-Mobile-App-Extended-Feature-1536x830-1.jpg"
                alt="Question Reference"
-               class="rounded-lg shadow w-full max-h-[60vh] object-contain border border-gray-200">
+               class="rounded-lg shadow w-full max-h-[35vh] object-contain border border-gray-200">
         </div>
 
-        <!-- Action Buttons -->
-        <div class="flex flex-wrap gap-3 mb-6">
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-3 mb-4">
           <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">Next Question</button>
           <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition text-sm">Mark for Review</button>
           <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition text-sm">Mark for Comment</button>
         </div>
 
         <!-- Progress Section -->
-        <div class="border-t pt-3 text-sm text-gray-600">
+        <div class="border-t pt-2 text-sm text-gray-600">
           <p>✅ 17 Create a Hatch</p>
           <p>✅ 18 Array the Table and Chairs</p>
           <p>📘 19 Objects in a Drawing (Current)</p>
         </div>
       </div>
 
-      <!-- Bottom Navigation -->
+      <!-- Footer Buttons -->
       <div class="border-t bg-gray-50 px-6 py-3 flex justify-between items-center">
         <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 text-sm flex items-center gap-1">
           ⟳ Restart AutoCAD
@@ -81,6 +81,7 @@
           <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">Next ➡</button>
         </div>
       </div>
+
     </section>
   </main>
 
