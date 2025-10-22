@@ -29,18 +29,11 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 
       Route::get('/blogs',  [HomeController::class, 'blog'])->name('blog');
 
-
-
-     Route::get('/blogs/{slug}', [HomeController::class, 'show'])->name('blog.detail');
-
-   
-
+      Route::get('/blogs/{slug}', [HomeController::class, 'show'])->name('blog.detail');
       Route::get('/register', [UserController::class, 'register'])->name('register');
-      Route::post('/register', [UserController::class, 'storeRegister'])->name('register.store');
-      
+      Route::post('/register', [UserController::class, 'storeRegister'])->name('register.store');  
       Route::get('/login', [UserController::class, 'login'])->name('login');
       Route::post('/login', [UserController::class, 'storeLogin'])->name('login.store');
-      
       Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
       Route::get('/run-migrate', function () {
@@ -65,11 +58,8 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 
 
 Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
-
-
 Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
 Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
-
 Route::view('/exam', 'exam.exam')->name('exam');
 Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
 
