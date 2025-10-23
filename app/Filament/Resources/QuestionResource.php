@@ -13,6 +13,8 @@ use Filament\Tables\Actions\Action;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\QuestionImport;
 use Filament\Notifications\Notification;
+use App\Models\Exam;
+use App\Models\ExamQuestion;
 
 class QuestionResource extends Resource
 {
@@ -73,7 +75,13 @@ class QuestionResource extends Resource
                 Tables\Columns\ToggleColumn::make('status')->label('Active'),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
-            ->filters([])
+            ->filters([
+                Tables\Filters\SelectFilter::make('course_id')
+                    ->label('Course')
+                    ->relationship('course', 'name')
+                    ->searchable()
+                    ->preload(),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -82,28 +90,52 @@ class QuestionResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ])
             ->headerActions([
-                Action::make('import')
-                    ->label('Import Questions')
-                    ->icon('heroicon-o-arrow-up-tray') // correct icon
+                Action::make('assign_to_exam')
+                    ->label('Assign Questions to Exam')
+                    // ->icon('heroicon-s-clipboard-check')
                     ->form([
-                        Forms\Components\FileUpload::make('file')
-                            ->label('Upload Excel / CSV File')
-                            ->required()
-                            ->acceptedFileTypes([
-                                'text/csv',
-                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                            ]),
+                        Forms\Components\Select::make('exam_id')
+                            ->label('Select Exam')
+                            ->options(Exam::pluck('name', 'id'))
+                            ->reactive()
+                            ->required(),
+            
+                        Forms\Components\MultiSelect::make('question_ids')
+                            ->label('Select Questions')
+                            ->relationship('questions', 'question') 
+                            // ❌ We'll override the options dynamically below
+                            ->options(function ($get) {
+                                $examId = $get('exam_id');
+                                if (!$examId) return [];
+            
+                                $exam = Exam::find($examId);
+                                if (!$exam) return [];
+            
+                                // Return only questions matching the exam's category
+                                return \App\Models\Question::where('exam_category_id', $exam->exam_category_id)
+                                    ->pluck('question', 'id');
+                            })
+                            ->required(),
                     ])
                     ->action(function (array $data) {
-                        $filePath = storage_path('app/' . $data['file']);
-                        Excel::import(new QuestionImport, $filePath);
-
-                        Notification::make()
-                            ->title('Questions Imported Successfully!')
+                        $examId = $data['exam_id'];
+                        $questionIds = $data['question_ids'] ?? [];
+            
+                        foreach ($questionIds as $qid) {
+                            // Insert into exam_question pivot table, skip duplicates
+                            ExamQuestion::firstOrCreate([
+                                'exam_id' => $examId,
+                                'question_id' => $qid,
+                            ]);
+                        }
+            
+                        \Filament\Notifications\Notification::make()
+                            ->title('Questions assigned to exam successfully!')
                             ->success()
                             ->send();
                     }),
             ]);
+            
     }
 
     public static function getPages(): array
