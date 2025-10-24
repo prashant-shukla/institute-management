@@ -15,7 +15,7 @@ class ExamCategoryResource extends Resource
     protected static ?string $model = ExamCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Courses Management';
+    protected static ?string $navigationGroup = 'Exam Management';
     protected static ?string $pluralModelLabel = 'Exam Categories';
     protected static ?string $modelLabel = 'Exam Category';
 

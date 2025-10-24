@@ -21,7 +21,7 @@ class QuestionResource extends Resource
     protected static ?string $model = Question::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
-    protected static ?string $navigationGroup = 'Courses Management';
+    protected static ?string $navigationGroup = 'Exam Management';
     protected static ?string $pluralModelLabel = 'Questions';
     protected static ?string $modelLabel = 'Question';
 
@@ -89,52 +89,73 @@ class QuestionResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ])
+
             ->headerActions([
-                Action::make('assign_to_exam')
+                Action::make('import')
+                    ->label('Import Questions')
+                    ->icon('heroicon-o-arrow-up-tray')
+                    ->form([
+                        Forms\Components\Select::make('course_id')
+                            ->relationship('course', 'name')
+                            ->required()
+                            ->label('Course'),
+                        Forms\Components\FileUpload::make('file')
+                            ->label('Upload Excel / CSV File')
+                            ->required()
+                            ->directory('imports') // ✅ ensures file saved in storage/app/public/imports
+                            ->acceptedFileTypes([
+                                'text/csv',
+                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                            ]),
+                    ])
+                    ->action(function (array $data) {
+                        $filePath = storage_path('app/public/' . $data['file']); // path to uploaded file
+            
+                        // ✅ Pass the selected course_id into the import
+                        \Maatwebsite\Excel\Facades\Excel::import(
+                            new \App\Imports\QuestionImport($data['course_id']),
+                            $filePath
+                        );
+            
+                        \Filament\Notifications\Notification::make()
+                            ->title('Questions Imported Successfully!')
+                            ->success()
+                            ->send();
+                    }),
+            ])
+            
+            ->bulkActions([
+                // ✅ Assign selected questions to an exam
+                Tables\Actions\BulkAction::make('assignToExam')
                     ->label('Assign Questions to Exam')
-                    // ->icon('heroicon-s-clipboard-check')
+                    ->icon('heroicon-o-clipboard-document-check') // valid heroicon
                     ->form([
                         Forms\Components\Select::make('exam_id')
                             ->label('Select Exam')
-                            ->options(Exam::pluck('name', 'id'))
-                            ->reactive()
-                            ->required(),
-            
-                        Forms\Components\MultiSelect::make('question_ids')
-                            ->label('Select Questions')
-                            ->relationship('questions', 'question') 
-                            // ❌ We'll override the options dynamically below
-                            ->options(function ($get) {
-                                $examId = $get('exam_id');
-                                if (!$examId) return [];
-            
-                                $exam = Exam::find($examId);
-                                if (!$exam) return [];
-            
-                                // Return only questions matching the exam's category
-                                return \App\Models\Question::where('exam_category_id', $exam->exam_category_id)
-                                    ->pluck('question', 'id');
-                            })
+                            ->options(\App\Models\Exam::pluck('name', 'id'))
+                            ->searchable()
                             ->required(),
                     ])
-                    ->action(function (array $data) {
-                        $examId = $data['exam_id'];
-                        $questionIds = $data['question_ids'] ?? [];
-            
-                        foreach ($questionIds as $qid) {
-                            // Insert into exam_question pivot table, skip duplicates
-                            ExamQuestion::firstOrCreate([
-                                'exam_id' => $examId,
-                                'question_id' => $qid,
+                    ->action(function (array $data, $records): void {
+                        foreach ($records as $record) {
+                            // Prevent duplicate assignment
+                            \App\Models\ExamQuestion::firstOrCreate([
+                                'exam_id' => $data['exam_id'],
+                                'question_id' => $record->id,
                             ]);
                         }
             
                         \Filament\Notifications\Notification::make()
-                            ->title('Questions assigned to exam successfully!')
+                            ->title('Questions Assigned Successfully!')
                             ->success()
                             ->send();
-                    }),
-            ]);
+                    })
+                    ->color('warning')
+                    ->deselectRecordsAfterCompletion(),
+            
+                // ✅ Default Delete Action
+                Tables\Actions\DeleteBulkAction::make(),
+                ]);
             
     }
 

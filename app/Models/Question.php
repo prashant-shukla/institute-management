@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Exam;
+use App\Models\ExamCategory;
+use App\Models\ExamQuestion;
 
 class Question extends Model
 {
@@ -27,8 +30,9 @@ class Question extends Model
         return $this->belongsTo(Course::class);
     }
     public function exams()
-{
-    return $this->belongsToMany(Exam::class, 'exam_question', 'question_id', 'exam_id');
-}
+    {
+        return $this->belongsToMany(Exam::class, 'exam_question', 'question_id', 'exam_id');
+    }
+    
 
 }
