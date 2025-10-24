@@ -1,3 +1,5 @@
+<!-- resources/views/exam.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en" class="light">
 
@@ -157,7 +159,7 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-2">
                     <div
-                        class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-lg">C</span>
                     </div>
                     <span
@@ -184,7 +186,7 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                    <a href="{{ url('/Gallery') }}"
+                                        <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
 
 
@@ -201,7 +203,6 @@
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
                         Us</a>
                 </div>
-
 
                 <!-- Dark Mode Toggle & Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
@@ -222,16 +223,14 @@
                         </svg>
                     </button>
 
-                    <a href="{{ route('login') }}"
+                    <button
                         class="px-4 py-2 text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors font-medium">
                         Sign in
-                    </a>
-
-                    <a href="{{ route('register') }}"
+                    </button>
+                    <button
                         class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
                         Join Now
-                    </a>
-
+                    </button>
                 </div>
             </div>
 
@@ -267,129 +266,49 @@
     </header>
 
 
-    <!-- Header -->
-
-    <section class="text-center py-12">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-3">Our Latest Blogs</h1>
-        <p class="text-gray-600">Stay updated with the latest trends, tutorials, and insights.</p>
-    </section>
 
 
-    <!-- Blogs & Categories Section -->
-    <!-- Blogs & Categories Section -->
-    <section class="max-w-7xl mx-auto mt-4 px-6 pb-16">
-        <div class="flex flex-col lg:flex-row gap-8 mt-3">
 
-            <!-- Left: Blog Grid -->
-            <div class="flex-1">
-                <div id="blogGrid" class="grid gap-8 sm:grid-cols-2">
-                    @foreach ($blogs as $blog)
-                        <div class="blog-card bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300"
-                            data-category="{{ $blog->category->name ?? 'Uncategorized' }}">
-                            
-                            <div class="h-56 overflow-hidden rounded-2xl shadow-md">
-                                @if (!empty($blog->image))
-                                    {{-- 🖼️ Show uploaded image --}}
-                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                                @elseif (!empty($blog->video_url))
-                                    @php
-                                        $videoId = null;
-                                        $url = $blog->video_url;
 
-                                        // ✅ Extract YouTube video ID from all possible formats
-                                        if (
-                                            preg_match(
-                                                '/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([a-zA-Z0-9_-]{11})/',
-                                                $url,
-                                                $matches,
-                                            )
-                                        ) {
-                                            $videoId = $matches[1];
-                                        }
-                                    @endphp
 
-                                    @if ($videoId)
-                                        {{-- 🎬 Show YouTube thumbnail --}}
-                                        <div class="relative group">
-                                            <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg"
-                                                alt="{{ $blog->title }}"
-                                                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-500">
-                                            {{-- 🔗 Play button overlay --}}
-                                            <a href="{{ $blog->video_url }}" target="_blank"
-                                                class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="white"
-                                                    viewBox="0 0 24 24" class="w-12 h-12">
-                                                    <path d="M8 5v14l11-7z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    @endif
-                                @endif
-                            </div>
-
+    <div class=" bg-gray-100 py-10" >
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">
+                {{ $category->name }} Exams
+            </h1>
+            <p class="text-gray-600 text-center mb-10 text-lg">
+                {{ $category->description }}
+            </p>
+    
+            @if($category->exams->count())
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach($category->exams as $exam)
+                        <div class="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition duration-300">
                             <div class="p-6">
-                                <span
-                                    class="text-sm text-blue-600 font-medium uppercase">{{ $blog->category->name ?? 'Blog' }}</span>
-                                <h2 class="text-xl font-bold text-gray-900 mt-2 mb-3">{{ $blog->title }}</h2>
-                                <p class="text-gray-600 text-sm mb-4">
-                                    {{ $blog->short_description }}
-                                </p>
-                                <div class="flex justify-between items-center text-sm text-gray-500">
-                                    <span>{{ $blog->published_at?->format('M d, Y') }}</span>
-                                    <a href="{{ route('blog.detail', $blog->slug) }}"
-                                        class="text-blue-600 font-semibold hover:underline">Read More →</a>
-                                </div>
-
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+                                    {{ $exam->name }}
+                                </h2>
+                                <ul class="text-gray-600 text-sm mb-4 space-y-1">
+                                    <li><strong>Total Questions:</strong> {{ $exam->total_questions }}</li>
+                                    <li><strong>Total Marks:</strong> {{ $exam->total_marks }}</li>
+                                    <li><strong>Duration:</strong> {{ $exam->duration }} mins</li>
+                                </ul>
+                                <a href=""
+                                   class="inline-block bg-blue-600 text-white text-base font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition">
+                                   Start Exam
+                                </a>
                             </div>
                         </div>
                     @endforeach
                 </div>
-            </div>
-
-            <!-- Right: Categories Table -->
-            <div class="w-64 lg:w-72 flex-shrink-0">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
-                <div id="categoryFilter" class="flex flex-col gap-2">
-                    <span data-category="all"
-                        class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-300 transition">
-                        All
-                    </span>
-                    @foreach ($categories as $category)
-                        <span data-category="{{ $category->name }}"
-                            class="category-btn bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200 transition">
-                            {{ $category->name }}
-                        </span>
-                    @endforeach
-                </div>
-            </div>
-
+            @else
+                <p class="text-center text-gray-500 text-lg mt-10">No exams available for this category.</p>
+            @endif
         </div>
-    </section>
+    </div>
 
 
-    <script>
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        const blogCards = document.querySelectorAll('.blog-card');
 
-        categoryButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.getAttribute('data-category');
-
-                // Highlight active button
-                categoryButtons.forEach(b => b.classList.remove('bg-gray-400', 'text-white'));
-                btn.classList.add('bg-gray-400', 'text-white');
-
-                blogCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-            });
-        });
-    </script>
 
 
     <!-- Footer -->
@@ -602,6 +521,32 @@
         });
     </script>
 
+
+    <!-- Filter Script -->
+    <script>
+        const eventFilter = document.getElementById('eventFilter');
+        const yearFilter = document.getElementById('yearFilter');
+        const items = document.querySelectorAll('.gallery-item');
+
+        function filterGallery() {
+            const eventValue = eventFilter.value;
+            const yearValue = yearFilter.value;
+
+            items.forEach(item => {
+                const matchesEvent = (eventValue === 'all' || item.dataset.event === eventValue);
+                const matchesYear = (yearValue === 'all' || item.dataset.year === yearValue);
+
+                if (matchesEvent && matchesYear) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        eventFilter.addEventListener('change', filterGallery);
+        yearFilter.addEventListener('change', filterGallery);
+    </script>
 
 </body>
 

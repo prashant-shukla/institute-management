@@ -184,7 +184,7 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                                        <a href="{{ url('/Gallery') }}"
+                    <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
 
                     <a href="{{ url('/blogs') }}"
@@ -192,6 +192,9 @@
 
                     <a href="{{ url('/placement') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Jobs</a>
+
+                    <a href="{{ url('/Exams') }}"
+                        class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Exams</a>
 
                     <a href="{{ url('/contact') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Contact
@@ -515,7 +518,8 @@
 
                             {{-- ✅ Content --}}
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" style="
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
+                                    style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -523,7 +527,8 @@
     text-overflow: ellipsis;
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
-">{{ $course->name }}
+">
+                                    {{ $course->name }}
                                 </h3>
                                 <p class="text-sm text-gray-500 dark:text-gray-300 mb-3">{{ $course->sub_title }}</p>
 
@@ -913,7 +918,8 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold line-clamp-2 text-gray-800 dark:text-white">{{ $student->name }}
+                                    <h3 class="text-lg font-bold line-clamp-2 text-gray-800 dark:text-white">
+                                        {{ $student->name }}
                                     </h3>
                                     <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
                                     <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
@@ -1054,8 +1060,8 @@
                                     <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
                                         class="w-full h-full object-cover">
                                 @else
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold" style="
+                                    <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold"
+                                        style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1079,7 +1085,8 @@
                             </div>
 
                             <div class="p-4">
-                                <h3 class="text-xl font-bold" style="
+                                <h3 class="text-xl font-bold"
+                                    style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1087,7 +1094,8 @@
     text-overflow: ellipsis;
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
-">{{ $course->name }}</h3>
+">
+                                    {{ $course->name }}</h3>
                                 <p class="text-sm opacity-90 mb-2">{{ $course->course_duration ?? 'N/A' }}
                                     Program</p>
                                 <div class="flex justify-between items-center mb-3">
@@ -1157,7 +1165,8 @@
 
                             {{-- Body --}}
                             <div class="p-4">
-                                <h3 class="text-xl font-bold " style="
+                                <h3 class="text-xl font-bold "
+                                    style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1165,7 +1174,8 @@
     text-overflow: ellipsis;
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
-">{{ $course->name }}</h3>
+">
+                                    {{ $course->name }}</h3>
                                 <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
                                 <div class="flex justify-between items-center mb-3">
                                     {{-- Offer Fee on left --}}

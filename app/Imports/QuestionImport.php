@@ -15,11 +15,7 @@ class QuestionImport implements ToModel, WithHeadingRow
     {
         $this->courseId = $courseId;
     }
-    public function exams()
-    {
-        return $this->belongsToMany(Exam::class, 'exam_question', 'question_id', 'exam_id');
-    }
-    
+
     public function model(array $row)
     {
         return new Question([

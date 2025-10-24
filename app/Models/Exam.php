@@ -19,7 +19,7 @@ class Exam extends Model
     ];
 
     /**
-     * Relationship: Each exam belongs to one exam category.
+     * Each Exam belongs to one ExamCategory.
      */
     public function category()
     {
@@ -27,15 +27,10 @@ class Exam extends Model
     }
 
     /**
-     * Relationship: Fetch questions linked to the same exam category.
+     * Each Exam has many Questions (via pivot table exam_question).
      */
-    // public function questions()
-    // {
-    //     return $this->hasMany(Question::class, 'exam_category_id', 'exam_category_id');
-    // }
     public function questions()
-{
-    return $this->belongsToMany(Question::class, 'exam_question', 'exam_id', 'question_id');
-}
-
+    {
+        return $this->belongsToMany(Question::class, 'exam_question', 'exam_id', 'question_id');
+    }
 }

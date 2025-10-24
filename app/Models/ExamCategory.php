@@ -14,7 +14,10 @@ class ExamCategory extends Model
         'description',
         'status',
     ];
-
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'exam_category_id');
+    }
     public function questions()
     {
         return $this->hasMany(Question::class);

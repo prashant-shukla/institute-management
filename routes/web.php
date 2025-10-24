@@ -9,6 +9,9 @@ use App\Models\Blog;
 use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ExamCategoryController;
+
+
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     
       Route::get('/', [HomeController::class, 'Homes']);
@@ -62,5 +65,15 @@ Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->na
 Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
 Route::view('/exam', 'exam.exam')->name('exam');
 Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
+
+
+
+
+
+
+
+// ✅ Frontend Exam Category Pages
+Route::get('/Exams', [ExamCategoryController::class, 'index'])->name('exam-categories.index');
+Route::get('/exams/{id}', [ExamCategoryController::class, 'show'])->name('exam-categories.show');
 
 });
