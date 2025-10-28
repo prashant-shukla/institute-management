@@ -48,11 +48,22 @@
         <input type="number" step="0.001" placeholder="Enter value (e.g., 0.5243)"
                class="w-56 border border-gray-300 rounded-md px-3 py-2 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 
-        <!-- Image (Smaller) -->
+        <!-- Question Image -->
         <div class="mb-4 flex justify-center">
           <img src="https://www.autodesk.com/blogs/autocad/wp-content/uploads/sites/35/2020/03/Web-Mobile-App-Extended-Feature-1536x830-1.jpg"
                alt="Question Reference"
                class="rounded-lg shadow w-full max-h-[35vh] object-contain border border-gray-200">
+        </div>
+
+        <!-- Download DWG File Button -->
+        <div class="flex justify-start mb-6">
+          <a href="/download-dwg/9"
+             class="inline-flex items-start gap-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-2.5 rounded-lg shadow hover:from-blue-700 hover:to-blue-600 transition duration-150 ease-in-out text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"/>
+            </svg>
+            Download DWG File
+          </a>
         </div>
 
         <!-- Buttons -->
@@ -84,6 +95,5 @@
 
     </section>
   </main>
-
 </body>
 </html>

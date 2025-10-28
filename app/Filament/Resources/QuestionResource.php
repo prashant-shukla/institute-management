@@ -49,10 +49,25 @@ class QuestionResource extends Resource
                     ])
                     ->required()
                     ->label('Correct Option'),
+
+
                 Forms\Components\TextInput::make('marks')
                     ->numeric()
                     ->default(1)
                     ->label('Marks'),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Question Image')
+                    ->directory('questions')
+                    ->image()
+                    ->maxSize(2048)
+                    ->columnSpan('full'),
+                    Forms\Components\FileUpload::make('dwg_file')
+                    ->label('Attach DWG File')
+                    ->directory('questions/dwg')
+                    ->acceptedFileTypes(['application/acad', '.dwg'])
+                    ->maxSize(10240)
+                    ->helperText('Upload related AutoCAD DWG file (optional)')
+                    ->columnSpan('full'),
                 Forms\Components\Toggle::make('status')
                     ->label('Active')
                     ->default(true),
@@ -110,20 +125,20 @@ class QuestionResource extends Resource
                     ])
                     ->action(function (array $data) {
                         $filePath = storage_path('app/public/' . $data['file']); // path to uploaded file
-            
+
                         // ✅ Pass the selected course_id into the import
                         \Maatwebsite\Excel\Facades\Excel::import(
                             new \App\Imports\QuestionImport($data['course_id']),
                             $filePath
                         );
-            
+
                         \Filament\Notifications\Notification::make()
                             ->title('Questions Imported Successfully!')
                             ->success()
                             ->send();
                     }),
             ])
-            
+
             ->bulkActions([
                 // ✅ Assign selected questions to an exam
                 Tables\Actions\BulkAction::make('assignToExam')
@@ -144,7 +159,7 @@ class QuestionResource extends Resource
                                 'question_id' => $record->id,
                             ]);
                         }
-            
+
                         \Filament\Notifications\Notification::make()
                             ->title('Questions Assigned Successfully!')
                             ->success()
@@ -152,11 +167,10 @@ class QuestionResource extends Resource
                     })
                     ->color('warning')
                     ->deselectRecordsAfterCompletion(),
-            
+
                 // ✅ Default Delete Action
                 Tables\Actions\DeleteBulkAction::make(),
-                ]);
-            
+            ]);
     }
 
     public static function getPages(): array
