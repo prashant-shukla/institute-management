@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Exam;
 use App\Models\ExamCategory;
@@ -10,6 +11,7 @@ use App\Models\ExamQuestion;
 
 class Question extends Model
 {
+    use HasRoles;
     use HasFactory;
 
     protected $fillable = [

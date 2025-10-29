@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
 use App\Models\Course;
 class Reviews extends Model
 {
+    use HasRoles;
     use HasFactory;
     protected $guarded = ['id'];
     protected $fillable = [

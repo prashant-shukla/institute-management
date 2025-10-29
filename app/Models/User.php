@@ -14,8 +14,10 @@ use Filament\Models\Contracts\HasName;
 class User extends Authenticatable implements HasName
 {
     const ADMIN_ROLE = 'admin';
+    const STUDENT_ROLE = 'student';
     use HasFactory, Notifiable;
     use HasRoles;
+    protected $guard_name = 'web';
     /**
      * The attributes that are mass assignable.
      *
