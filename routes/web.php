@@ -10,6 +10,8 @@ use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ExamCategoryController;
+use App\Http\Controllers\ExamController;
+
 
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
@@ -63,8 +65,12 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
 Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
 Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
-Route::view('/exam', 'exam.exam')->name('exam');
+Route::get('/exam/{id}', [ExamController::class, 'show'])->name('exam');
+
 Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
+Route::get('/exam/{id}/submit', [ExamController::class, 'submit'])->name('exam.submit');
+
+Route::post('/exam/save-answer', [ExamController::class, 'saveAnswer'])->name('exam.answer.save');
 
 
 

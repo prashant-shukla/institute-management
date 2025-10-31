@@ -293,10 +293,11 @@
                                     <li><strong>Total Marks:</strong> {{ $exam->total_marks }}</li>
                                     <li><strong>Duration:</strong> {{ $exam->duration }} mins</li>
                                 </ul>
-                                <a href=""
-                                   class="inline-block bg-blue-600 text-white text-base font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition">
-                                   Start Exam
-                                </a>
+                                <a href="{{ route('exam', ['id' => $exam->id]) }}"
+                                    class="inline-block bg-blue-600 text-white text-base font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition">
+                                    Start Exam
+                                 </a>
+                                 
                             </div>
                         </div>
                     @endforeach
