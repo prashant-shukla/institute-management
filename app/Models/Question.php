@@ -17,6 +17,7 @@ class Question extends Model
     protected $fillable = [
         'course_id',
         'question',
+        
         'image',
         'dwg_file',
         'option_a',
@@ -27,7 +28,8 @@ class Question extends Model
         'marks',
         'status',
     ];
-    
+   
+
 
     // 🔗 Relation: Each question belongs to a course
     public function course()

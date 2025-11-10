@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\User;
 use App\Models\StudentAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
@@ -12,7 +13,8 @@ class ExamController extends Controller
     public function show($id)
     {
         $exam = Exam::with(['questions', 'category'])->findOrFail($id);
-        return view('exam.exam', compact('exam'));
+        $student = auth()->user(); 
+        return view('exam.exam', compact('exam', 'student'));
     }
 
     public function saveAnswer(Request $request)
@@ -24,7 +26,7 @@ class ExamController extends Controller
                 'answer' => 'nullable|string|max:5',
             ]);
 
-            $userId = auth()->id();
+          $userId = auth()->id();
 
             StudentAnswer::updateOrCreate(
                 [
@@ -34,6 +36,7 @@ class ExamController extends Controller
                 ],
                 ['answer' => $request->answer]
             );
+
 
             return response()->json(['success' => true, 'message' => 'Answer saved successfully']);
         } catch (\Exception $e) {

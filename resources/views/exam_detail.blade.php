@@ -186,7 +186,7 @@
                     <a href="{{ url('/events') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Event</a>
 
-                                        <a href="{{ url('/Gallery') }}"
+                    <a href="{{ url('/Gallery') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Gallery</a>
 
 
@@ -271,7 +271,7 @@
 
 
 
-    <div class=" bg-gray-100 py-10" >
+    <div class=" bg-gray-100 py-10">
         <div class="max-w-7xl mx-auto px-4">
             <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">
                 {{ $category->name }} Exams
@@ -279,11 +279,12 @@
             <p class="text-gray-600 text-center mb-10 text-lg">
                 {{ $category->description }}
             </p>
-    
-            @if($category->exams->count())
+
+            @if ($category->exams->count())
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach($category->exams as $exam)
-                        <div class="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition duration-300">
+                    @foreach ($category->exams as $exam)
+                        <div
+                            class="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition duration-300">
                             <div class="p-6">
                                 <h2 class="text-2xl font-semibold text-gray-800 mb-2">
                                     {{ $exam->name }}
@@ -293,11 +294,12 @@
                                     <li><strong>Total Marks:</strong> {{ $exam->total_marks }}</li>
                                     <li><strong>Duration:</strong> {{ $exam->duration }} mins</li>
                                 </ul>
-                                <a href="{{ route('exam', ['id' => $exam->id]) }}"
+                                <a href="{{ route('exam.show', ['id' => $exam->id]) }}"
                                     class="inline-block bg-blue-600 text-white text-base font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition">
                                     Start Exam
-                                 </a>
-                                 
+                                </a>
+
+
                             </div>
                         </div>
                     @endforeach
