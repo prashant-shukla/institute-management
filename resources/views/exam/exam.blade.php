@@ -185,30 +185,31 @@
                 const answer = selected.val();
                 const studentId = "{{ $student->id ?? auth()->id() }}"; // adjust as needed
 
-                fetch("{{ route('exam.answer.save') }}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        },
-                        body: JSON.stringify({
-                            exam_id: examId,
-                            question_id: questionId,
-                            answer: answer,
-                            student_id: studentId, // ✅ added
-                        }),
-                    })
-
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
+                $.ajax({
+                    url: "{{ route('exam.answer.save') }}", // 👈 Laravel route
+                    type: "POST",
+                    data: {
+                        exam_id: "{{ $exam->id }}",
+                        question_id: questionId,
+                        answer: answer,
+                        student_id: studentId,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res) {
+                        if (res.success) {
                             questionNav.eq(current).addClass('bg-green-500 text-white');
                             if (current < total - 1) showQuestion(current + 1);
                             else alert('✅ This was the last question.');
-                        } else alert('Error saving answer.');
-                    })
-                    .catch(() => alert('Server error while saving.'));
+                        } else {
+                            alert('⚠️ Error saving answer.');
+                        }
+                    },
+                    error: function() {
+                        alert('🚨 Server error while saving.');
+                    }
+                });
             });
+
 
             // ⭐ Mark Question
             markBtn.on('click', () => {
@@ -218,9 +219,11 @@
 
             // ✅ Submit Exam
             submitBtn.on('click', () => {
-                if (confirm('Are you sure you want to submit the exam?'))
+                if (confirm('Are you sure you want to submit the exam?')) {
                     window.location.href = `/exam/${examId}/submit`;
+                }
             });
+
 
             // ⏱️ Timer
             let [minutes, seconds] = "{{ $exam->duration }}:00".split(':').map(Number);

@@ -40,7 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -58,18 +64,18 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'students' => [ // 👈 provider name MUST match 'provider' key in guard
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
