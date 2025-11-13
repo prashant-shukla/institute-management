@@ -68,12 +68,17 @@ Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'
 
 
 Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
+Route::get('/exam/history', [ExamController::class, 'examHistory'])->name('exam.history');
+
 Route::get('/exam/{id}', [ExamController::class, 'show'])
     ->middleware('auth')
     ->name('exam.show');
 
 Route::post('/exam/save-answer', [ExamController::class, 'saveAnswer'])->name('exam.answer.save');
 Route::get('/exam/{examId}/submit', [ExamController::class, 'showResult'])->name('exam_result');
+
+
+
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Exam;
 use App\Models\User;
 use App\Models\StudentAnswer;
@@ -61,42 +62,93 @@ class ExamController extends Controller
         return view('exam.exam_result', compact('exam'));
     }
 
+    public function showResult($examId)
+    {
+        // Exam + questions load
+        $exam = Exam::with('questions')->findOrFail($examId);
+        $user = Auth::user();
 
-public function showResult($examId)
-{
-    // exam और logged-in user लें
-    $exam = Exam::with('questions')->findOrFail($examId);
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please login to view your exam result.');
+        }
 
-    // आप जो guard use कर रहे हैं: अगर normal web user है तो auth()->user()
-    $user = auth()->user();
-    if (! $user) {
-        return redirect()->route('login')->with('error', 'Please login to view your exam result.');
+        $studentId = $user->id;
+
+        // Get all student answers for this exam
+        $answers = StudentAnswer::where('exam_id', $examId)
+            ->where('student_id', $studentId)
+            ->get();
+
+        $totalQuestions = $exam->questions->count();
+        $attempted = $answers->count();
+
+        $correct = 0;
+        $wrong = 0;
+
+        foreach ($answers as $ans) {
+            $question = $exam->questions->firstWhere('id', $ans->question_id);
+            if ($question) {
+                if (strtoupper(trim($ans->answer)) === strtoupper(trim($question->correct_option))) {
+                    $correct++;
+                    // Optional: Update student_answers table
+                    $ans->is_correct = 1;
+                } else {
+                    $wrong++;
+                    $ans->is_correct = 0;
+                }
+                $ans->save();
+            }
+        }
+
+        $percentage = $totalQuestions > 0 ? round(($correct / $totalQuestions) * 100, 2) : 0;
+
+        $result = [
+            'total_questions' => $totalQuestions,
+            'attempted' => $attempted,
+            'correct' => $correct,
+            'wrong' => $wrong,
+            'percentage' => $percentage,
+        ];
+        return view('exam.exam_result', compact('exam', 'user', 'answers', 'result'));
     }
-    $studentId = $user->id;
 
-    // यहाँ answers लीजिए और calculations कीजिये
-    $answers = StudentAnswer::where('exam_id', $examId)
-                ->where('student_id', $studentId)
-                ->get();
+    public function examHistory()
+    {
+        $user = Auth::user();
 
-    $totalQuestions = $exam->questions->count();
-    $attempted = $answers->count();
+        // user ne jin exams me answer diye hain unke exam IDs lo
+        $examIds = StudentAnswer::where('student_id', $user->id)
+            ->pluck('exam_id')
+            ->unique();
 
-    // अगर StudentAnswer में boolean column `is_correct` है:
-    $correct = $answers->where('is_correct', 1)->count();
-    $wrong = $attempted - $correct;
-    $percentage = $totalQuestions > 0 ? round(($correct / $totalQuestions) * 100, 2) : 0;
+        // exams ke saath questions aur user ke answers load karo
+        $exams = Exam::with([
+            'questions',
+            'studentAnswers' => function ($q) use ($user) {
+                $q->where('student_id', $user->id);
+            }
+        ])->whereIn('id', $examIds)->get();
 
-    $result = [
-        'total_questions' => $totalQuestions,
-        'attempted' => $attempted,
-        'correct' => $correct,
-        'wrong' => $wrong,
-        'percentage' => $percentage,
-    ];
+        // result summary array banao
+        $summaries = $exams->map(function ($exam) {
+            $answers = $exam->studentAnswers;
+            $total = $exam->questions->count();
+            $attempted = $answers->count();
+            $correct = $answers->where('is_correct', 1)->count();
+            $wrong = $attempted - $correct;
+            $percentage = $total > 0 ? round(($correct / $total) * 100, 2) : 0;
 
-    // **pass $answers भी view को भेज रहे हैं** (this fixes your undefined variable)
-    return view('exam.exam_result', compact('exam', 'user', 'answers', 'result'));
-}
+            return [
+                'exam' => $exam,
+                'total' => $total,
+                'attempted' => $attempted,
+                'correct' => $correct,
+                'wrong' => $wrong,
+                'percentage' => $percentage,
+                'date' => optional($answers->min('created_at'))->format('Y-m-d H:i:s'),
+            ];
+        });
 
+        return view('exam.exam_summary', compact('user', 'summaries'));
+    }
 }

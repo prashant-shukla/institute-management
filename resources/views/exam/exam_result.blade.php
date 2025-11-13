@@ -81,7 +81,7 @@
                 🔁 Retake Exam
             </a>
         </div>
-
+<a href="{{ route('exam.history') }}">History</a>
 
         <!-- Footer -->
         <div class="mt-8 text-xs text-gray-500">

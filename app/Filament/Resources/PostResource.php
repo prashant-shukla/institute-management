@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\Blog;
+namespace App\Filament\Resources;
 
-use App\Filament\Resources\Blog\PostResource\Pages;
-use App\Filament\Resources\Blog\PostResource\RelationManagers;
+use App\Filament\Resources\PostResource\Pages;
+use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Blog\Post;
-use App\Models\Blog\User;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Blog;
+namespace App\Filament\Resources;
 
-use App\Filament\Resources\Blog\CategoryResource\Pages;
-use App\Filament\Resources\Blog\CategoryResource\RelationManagers;
+use App\Filament\Resources\BlogCategoryResource\Pages;
 use App\Models\Blog\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class CategoryResource extends Resource
+class BlogCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
@@ -94,10 +93,10 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'view' => Pages\ViewCategory::route('/{record}'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListBlogCategory::route('/'),
+            'create' => Pages\CreateBlogCategory::route('/create'),
+            'view' => Pages\ViewBlogCategory::route('/{record}'),
+            'edit' => Pages\EditBlogCategory::route('/{record}/edit'),
         ];
     }
 }

@@ -35,7 +35,7 @@
             <div class="px-4 py-3 border-b font-semibold text-gray-700 text-center">
                 Questions
             </div>
-            <div id="question-nav" class="overflow-y-auto p-4 flex flex-col gap-3">
+            <div id="question-nav" class="overflow-y-auto p-4 flex  gap-3">
                 @foreach ($exam->questions as $index => $q)
                     <button data-index="{{ $index }}" data-id="{{ $q->id }}"
                         class="question-btn w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-blue-500 hover:text-white text-sm font-semibold text-gray-700 transition">
@@ -54,48 +54,14 @@
                     @foreach ($exam->questions as $index => $question)
                         <div id="question-{{ $index }}"
                             class="question-box @if ($index !== 0) hidden @endif">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-2">
-                                Q{{ $index + 1 }}.
-                                {{ $question->question ?? ($question->question_text ?? 'No question text found') }}
-                            </h2>
-
-                            @if (!empty($question->image))
-                                <div class="my-4 flex justify-center">
-                                    <img src="{{ asset('storage/' . $question->image) }}"
-                                        class="rounded-lg shadow w-full max-h-[35vh] object-contain border border-gray-200">
-                                </div>
-                            @endif
-
-                            <div class="mt-3 space-y-2">
-                                @foreach (['A', 'B', 'C', 'D'] as $opt)
-                                    @php
-                                        // Support for both naming styles (option_a / options JSON)
-                                        $field = 'option_' . strtolower($opt);
-                                        $label = $question->$field ?? null;
-                                    @endphp
-
-                                    @if ($label)
-                                        <label class="flex items-center gap-2">
-                                            <input type="radio" name="answer_{{ $question->id }}"
-                                                value="{{ $opt }}" class="answer text-blue-600"
-                                                data-qindex="{{ $index }}" data-id="{{ $question->id }}">
-                                            <span>{{ $opt }}. {{ $label }}</span>
-                                        </label>
-                                    @endif
-                                @endforeach
-
-                                {{-- If stored in JSON (fallback) --}}
-                                @if (!$question->option_a && $question->options)
-                                    @foreach (json_decode($question->options, true) as $key => $option)
-                                        <label class="flex items-center gap-2">
-                                            <input type="radio" name="answer_{{ $question->id }}"
-                                                value="{{ $key }}" class="answer text-blue-600"
-                                                data-qindex="{{ $index }}" data-id="{{ $question->id }}">
-                                            <span>{{ $key }}. {{ $option }}</span>
-                                        </label>
-                                    @endforeach
-                                @endif
-                            </div>
+                            <h2 class="text-lg font-semibold mb-4">{{ $index + 1 }}. {{ $question->question }}</h2>
+                            @foreach (['A', 'B', 'C', 'D'] as $option)
+                                <label class="block p-2 border rounded mb-2 cursor-pointer hover:bg-blue-50">
+                                    <input type="radio" name="answer_{{ $question->id }}"
+                                        value="{{ $option }}" data-id="{{ $question->id }}" class="mr-2">
+                                    {{ $question->{'option_' . strtolower($option)} }}
+                                </label>
+                            @endforeach
                         </div>
                     @endforeach
                 @else
@@ -128,124 +94,132 @@
 
     </main>
 
-    <!-- ✅ Add this before your custom script -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            const questionNav = $('.question-btn');
-            const questions = $('[id^="question-"]');
-            const prevBtn = $('#prev-btn');
-            const nextBtn = $('#next-btn');
-            const saveNextBtn = $('#save-next-btn');
-            const markBtn = $('#mark-btn');
-            const submitBtn = $('#submit-btn');
-            const examId = "{{ $exam->id }}";
+<script>
+$(function () {
+    const $questionNav = $('#question-nav .question-btn');
+    const $questions = $('.question-box');
+    const $prev = $('#prev-btn');
+    const $next = $('#next-btn');
+    const $saveNext = $('#save-next-btn');
+    const $mark = $('#mark-btn');
+    const $submit = $('#submit-btn');
+    const examId = "{{ $exam->id }}";
+    const studentId = "{{ $student->id ?? auth()->id() }}";
 
-            let current = 0;
-            const total = questions.length;
+    let current = 0;
+    const total = $questions.length;
 
-            // ✅ Question button click
-            questionNav.on('click', function() {
-                questionNav.removeClass('active');
-                $(this).addClass('active');
-            });
+    if (total === 0) return console.warn("No questions found!");
 
-            // ✅ Show question by index
-            function showQuestion(index) {
-                questions.addClass('hidden').eq(index).removeClass('hidden');
-                questionNav.removeClass('ring-2 ring-blue-500')
-                    .eq(index).addClass('ring-2 ring-blue-500');
-                prevBtn.prop('disabled', index === 0);
-                nextBtn.prop('disabled', index === total - 1);
-                current = index;
-            }
+    // 🔹 Initial setup
+    $questions.hide().eq(0).show();
+    $questionNav.removeClass('active ring-2 ring-blue-500').eq(0).addClass('active ring-2 ring-blue-500');
 
-            // 🧭 Navigation
-            nextBtn.on('click', () => {
-                if (current < total - 1) showQuestion(current + 1);
-            });
-            prevBtn.on('click', () => {
-                if (current > 0) showQuestion(current - 1);
-            });
-            questionNav.each(function(index) {
-                $(this).on('click', e => {
-                    e.preventDefault();
-                    showQuestion(index);
-                });
-            });
+    function showQuestion(index) {
+        $questions.hide().eq(index).show();
+        $questionNav.removeClass('ring-2 ring-blue-500').eq(index).addClass('ring-2 ring-blue-500');
+        $prev.prop('disabled', index === 0);
+        $next.prop('disabled', index === total - 1);
+        current = index;
+    }
 
-            // 💾 Save & Next
-            saveNextBtn.on('click', () => {
-                const currentQuestion = questions.eq(current);
-                const selected = currentQuestion.find('input[type="radio"]:checked');
-                if (!selected.length) return alert('Please select an answer before saving!');
+    // 🔹 Navigation (Prev/Next)
+    $next.on('click', () => {
+        if (current < total - 1) showQuestion(current + 1);
+    });
+    $prev.on('click', () => {
+        if (current > 0) showQuestion(current - 1);
+    });
 
-                const questionId = selected.data('id');
-                const answer = selected.val();
-                const studentId = "{{ $student->id ?? auth()->id() }}"; // adjust as needed
+    // 🔹 Sidebar Click
+    $questionNav.on('click', function (e) {
+        e.preventDefault();
+        showQuestion(Number($(this).data('index')));
+    });
 
-                $.ajax({
-                    url: "{{ route('exam.answer.save') }}", // 👈 Laravel route
-                    type: "POST",
-                    data: {
-                        exam_id: "{{ $exam->id }}",
-                        question_id: questionId,
-                        answer: answer,
-                        student_id: studentId,
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(res) {
-                        if (res.success) {
-                            questionNav.eq(current).addClass('bg-green-500 text-white');
-                            if (current < total - 1) showQuestion(current + 1);
-                            else alert('✅ This was the last question.');
-                        } else {
-                            alert('⚠️ Error saving answer.');
-                        }
-                    },
-                    error: function() {
-                        alert('🚨 Server error while saving.');
-                    }
-                });
-            });
+    // 🔹 Save & Next (Answer)
+    $saveNext.on('click', function () {
+        const $currQ = $questions.eq(current);
+        const $selected = $currQ.find('input[type="radio"]:checked');
 
+        if (!$selected.length) {
+            alert("Please select an answer before saving!");
+            return;
+        }
 
-            // ⭐ Mark Question
-            markBtn.on('click', () => {
-                questionNav.eq(current).addClass('bg-yellow-400 text-white');
-                if (current < total - 1) showQuestion(current + 1);
-            });
+        const questionId = $selected.data('id');
+        const answer = $selected.val();
 
-            // ✅ Submit Exam
-            submitBtn.on('click', () => {
-                if (confirm('Are you sure you want to submit the exam?')) {
-                    window.location.href = `/exam/${examId}/submit`;
+        $.ajax({
+            url: "{{ route('exam.answer.save') }}",
+            method: "POST",
+            data: {
+                exam_id: examId,
+                question_id: questionId,
+                answer: answer,
+                student_id: studentId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (res) {
+                if (res.success) {
+                    // 🟢 Mark this question as answered
+                    $questionNav.eq(current)
+                        .removeClass('bg-red-500 bg-purple-500')
+                        .addClass('bg-green-500 text-white');
+
+                    if (current < total - 1) showQuestion(current + 1);
+                    else alert("✅ This was the last question.");
+                } else {
+                    alert("Error saving answer!");
                 }
-            });
-
-
-            // ⏱️ Timer
-            let [minutes, seconds] = "{{ $exam->duration }}:00".split(':').map(Number);
-            const timer = $('#timer');
-            const countdown = setInterval(() => {
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        clearInterval(countdown);
-                        alert('⏰ Time is up! Submitting your exam.');
-                        window.location.href = `/exam/${examId}/submit`;
-                        return;
-                    }
-                    minutes--;
-                    seconds = 59;
-                } else seconds--;
-                timer.text(`${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
-            }, 1000);
-
-            // 🧩 Init first question
-            showQuestion(0);
+            },
+            error: function () {
+                alert("Server error while saving answer!");
+            }
         });
-    </script>
+    });
+
+    // 🔹 Mark for Review
+    $mark.on('click', function () {
+        $questionNav.eq(current)
+            .removeClass('bg-green-500 bg-red-500')
+            .addClass('bg-purple-500 text-white');
+        if (current < total - 1) showQuestion(current + 1);
+    });
+
+    // 🔹 Submit Exam
+    $submit.on('click', function () {
+        if (confirm("Are you sure you want to submit the exam?")) {
+            window.location.href = `/exam/${examId}/submit`;
+        }
+    });
+
+    // 🔹 Timer
+    let [min, sec] = "{{ $exam->duration }}:00".split(':').map(Number);
+    const $timer = $('#timer');
+    const timerId = setInterval(() => {
+        if (sec === 0) {
+            if (min === 0) {
+                clearInterval(timerId);
+                alert("⏰ Time is up! Submitting your exam.");
+                window.location.href = `/exam/${examId}/submit`;
+                return;
+            }
+            min--; sec = 59;
+        } else sec--;
+        $timer.text(`${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`);
+    }, 1000);
+
+    // 🔹 On load → mark all unanswered as red 🔴
+    $questionNav.each(function (i) {
+        $(this).addClass('bg-red-500 text-white');
+    });
+});
+</script>
+
+
 
 
 </body>
