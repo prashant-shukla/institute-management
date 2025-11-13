@@ -24,7 +24,6 @@
             <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Wrong</th>
             <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Score (%)</th>
             <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Date</th>
-            <th class="px-4 py-2 text-center text-sm font-semibold text-gray-600">Action</th>
           </tr>
         </thead>
 
@@ -44,12 +43,7 @@
               <td class="px-4 py-2 text-center text-sm text-gray-500">
                 {{ \Carbon\Carbon::parse($s['date'])->format('d M Y') }}
               </td>
-              <td class="px-4 py-2 text-center">
-                <a href="{{ route('exam.result', $s['exam']->id) }}"
-                   class="bg-blue-600 text-white text-xs px-3 py-1 rounded hover:bg-blue-700">
-                  View
-                </a>
-              </td>
+
             </tr>
           @empty
             <tr>

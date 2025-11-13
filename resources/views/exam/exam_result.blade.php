@@ -81,8 +81,9 @@
                 🔁 Retake Exam
             </a>
         </div>
-<a href="{{ route('exam.history') }}">History</a>
-
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+<a href="{{ route('exam.history') }}"  class="bg-gray-200 text-gray-800 px-5 py-2 rounded-md hover:bg-gray-300 transition">History</a>
+</div>
         <!-- Footer -->
         <div class="mt-8 text-xs text-gray-500">
             © {{ date('Y') }} CADADDA | AutoCAD Certification Platform
