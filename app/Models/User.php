@@ -28,6 +28,7 @@ class User extends Authenticatable implements HasName
         'email',
         'firstname',
         'lastname',
+        'role_id',
         'password',
         'status',
         'name',
@@ -74,7 +75,18 @@ class User extends Authenticatable implements HasName
         ];
     }
 
+public function canAccessPanel($panel): bool
+{
+    if ($panel->getId() === 'admin') {
+        return $this->role_id == 20; // केवल super admin
+    }
 
+    if ($panel->getId() === 'student') {
+        return $this->role_id == 22; // केवल students
+    }
+
+    return false;
+}
   
   
 }

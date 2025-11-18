@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Override\Resources\MenuResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -11,6 +10,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -18,22 +18,23 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+
 use Outerweb\FilamentSettings\Filament\Plugins\FilamentSettingsPlugin;
 use App\Filament\Pages\Settings\Settings;
 use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationGroup;
-use TomatoPHP\FilamentMenus\FilamentMenuLoader;
+use TomatoPHP\FilamentMenus\FilamentMenusPlugin;
+
 use Datlechin\FilamentMenuBuilder\FilamentMenuBuilderPlugin;
 use Datlechin\FilamentMenuBuilder\MenuPanel\StaticMenuPanel;
 use Datlechin\FilamentMenuBuilder\MenuPanel\ModelMenuPanel;
+
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use App\Models\Menu;
-use App\Models\MenuItem;
-use App\Models\MenuLocation;
+
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+
 use App\Filament\Pages\Dashboard\Dashboard;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -43,19 +44,29 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->authGuard('web')
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->resources([
-                MenuResource::class,
-            ])
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                // Dashboard::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->login()   // 👈 This line is required for /admin/login
+        ->registration()
+        ->passwordReset()
+            ->brandName('Admin Panel')
+            ->discoverResources(
+                in: app_path('Filament/Resources'),
+                for: 'App\\Filament\\Resources'
+            )
+
+            ->discoverPages(
+                in: app_path('Filament/Pages'),
+                for: 'App\\Filament\\Pages'
+            )
+
+            ->discoverWidgets(
+                in: app_path('Filament/Widgets'),
+                for: 'App\\Filament\\Widgets'
+            )
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -68,17 +79,21 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 \Shipu\WebInstaller\Middleware\RedirectIfNotInstalled::class,
             ])
+
             ->authMiddleware([
                 Authenticate::class,
-            ])->plugins([
+                \App\Http\Middleware\BlockStudentFromFilament::class,
+            ])
 
+            ->plugins([
                 FilamentShieldPlugin::make(),
+
                 FilamentSettingsPlugin::make()->pages([
                     Settings::class,
                 ]),
+
                 FilamentFabricatorPlugin::make(),
-            
-                // ✅ Only ONE instance of FilamentMenuBuilderPlugin
+
                 FilamentMenuBuilderPlugin::make()
                     ->addLocation('header', 'Header')
                     ->addLocation('footer', 'Footer')
@@ -91,22 +106,17 @@ class AdminPanelProvider extends PanelProvider
                             ->collapsed(true)
                             ->collapsible(true)
                             ->paginate(perPage: 5, condition: true),
-                        ModelMenuPanel::make()
-                            ->model(\App\Models\MenuCategory::class),
+                        ModelMenuPanel::make()->model(\App\Models\MenuCategory::class),
                     ])
                     ->addMenuFields([
                         Toggle::make('is_logged_in'),
                     ])
                     ->addMenuItemFields([
                         TextInput::make('classes'),
-                    ])
-                    ->usingResource(MenuResource::class) // 👈 now only your custom resource is used
-                    ->usingMenuModel(Menu::class)
-                    ->usingMenuItemModel(MenuItem::class)
-                    ->usingMenuLocationModel(MenuLocation::class),
-            
+                    ]),
+
                 \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'ar']),
-                \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
+                FilamentMenusPlugin::make(),
             ]);
     }
 }

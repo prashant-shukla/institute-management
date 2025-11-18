@@ -25,7 +25,10 @@ class Dashboard extends BaseDashboard
     {
         return 2;
     }
-
+public static function canAccess(): bool
+{
+    return auth()->user()?->hasRole('super_admin');
+}
     function getWidgets(): array
     {
         return [

@@ -12,7 +12,7 @@ use App\Models\CourseSyllabuses;
 use App\Models\CourseTool;
 use App\Models\CourseMentor;
 use App\Models\Banner;
-use App\Models\Blog\Post;
+use App\Models\Post;
 use App\Models\Events;
 use App\Models\Client;
 use App\Models\Gallery;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Testimonial;
-use App\Models\Blog\Category;
+use App\Models\Category;
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
 

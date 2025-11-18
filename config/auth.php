@@ -48,6 +48,8 @@ return [
     ],
 
 
+
+
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -70,11 +72,12 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'students' => [ // 👈 provider name MUST match 'provider' key in guard
+        'students' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Student::class,
+            'model' => App\Models\Student::class, // <-- Student Model
         ],
     ],
+
 
 
     /*

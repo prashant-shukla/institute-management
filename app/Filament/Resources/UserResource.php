@@ -70,33 +70,18 @@ class UserResource extends Resource
                 Forms\Components\Group::make()
                     ->schema([
                         Forms\Components\Section::make('Role')
-                        ->schema([
-                            Select::make('roles')
-                                ->label('Role')
-                                ->options(\App\Models\Role::pluck('name', 'id')) // Sare roles dikhayega
-                                ->getOptionLabelFromRecordUsing(fn(Model $record) => Str::headline($record->name))
-                                ->saveRelationshipsUsing(function ($component, $state, $record) {
-                                    if ($state) {
-                                        app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId(1);
-                    
-                                        $role = \App\Models\Role::find($state);
-                    
-                                        if ($role) {
-                                            // ✅ User ke roles sync kar dega
-                                            $record->syncRoles([$role]);
-                    
-                                            // ✅ Role ka name users table ke `name` column me save karega
-                                            $record->name = $role->name;
-                                            $record->save();
-                                        }
-                                    }
-                                })
-                                ->native(false),
-                        ])
-                        ->compact(),
-                    
+                            ->schema([
+                                Select::make('role_id')
+                                    ->label('Role')
+                                    ->options(\App\Models\Role::pluck('name', 'id'))
+                                    ->required()
+                                    ->native(false),
+                            ])
+                            ->compact(),
 
-                            
+
+
+
 
 
 

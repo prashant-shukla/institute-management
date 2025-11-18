@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
-use App\Models\Blog\Post;
+use App\Models\Post;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,7 +13,7 @@ use Filament\Tables;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Blog\Category;
+use App\Models\Category;
 use Illuminate\Support\Str;
 
 class PostResource extends Resource
