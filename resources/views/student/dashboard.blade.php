@@ -1,24 +1,23 @@
-
 @extends('student.layout')
 
 @section('content')
 <div class="space-y-6">
 
+    @foreach($courses as $course)
     {{-- Course Card --}}
     <div class="bg-white shadow rounded-lg p-6">
-        <h2 class="text-2xl font-semibold">Fusion 360 masterclass</h2>
-        <p class="text-gray-500 mt-1">Designing / Marketing</p>
+        <h2 class="text-2xl font-semibold">{{ $course->title ?? $course->name }}</h2>
+        <p class="text-gray-500 mt-1">{{ $course->category ?? '' }}</p>
 
         <div class="mt-4">
-            <p class="font-medium">Ends on: <span class="text-red-500">2025/11/24</span></p>
+            <p class="font-medium">Ends on:
+                <span class="text-red-500">
+                    {{ optional($course->end_date)->format('Y/m/d') ?? 'N/A' }}
+                </span>
+            </p>
         </div>
 
-        <p class="mt-4 text-gray-700">
-            🌟 3-Day Live Webinar on Autodesk Fusion 360
-            <br> For Mechanical & Handicraft Industries
-            <br> 21st – 23rd November
-            <br> 🔥 Limited Seats | Certificate Included
-        </p>
+        <p class="mt-4 text-gray-700">{!! $course->description ?? '' !!}</p>
     </div>
 
     {{-- Content Summary --}}
@@ -26,26 +25,56 @@
         <h3 class="font-semibold text-lg">Content Summary</h3>
 
         <div class="flex justify-between mt-3 text-sm">
-            <p>1 file(s)</p>
-            <p>Remove Course: <strong>2025/11/24</strong></p>
+            <p>{{ $course->files_count ?? 0 }} file(s)</p>
+            <p>Remove Course:
+                <strong>{{ optional($course->end_date)->format('Y/m/d') ?? 'N/A' }}</strong>
+            </p>
         </div>
     </div>
 
-    {{-- Payment Summary --}}
-    <div class="bg-white shadow rounded-lg p-6">
-        <h3 class="font-semibold text-lg">Payment Summary</h3>
+{{-- Payment Summary --}}
+<div class="bg-white shadow rounded-lg p-6">
+    <h3 class="font-semibold text-lg">Payment Summary</h3>
 
-        <div class="mt-3 space-y-2 text-sm">
-            <p>Amount Paid: <strong>₹1200</strong></p>
-            <p>Purchased Date: <strong>2025/11/20</strong></p>
-        </div>
+    <div class="mt-3 space-y-2 text-sm">
 
-        <div class="mt-4 flex space-x-3">
-            <button class="px-4 py-2 bg-gray-200 rounded">Download Receipt</button>
-            <button class="px-4 py-2 bg-gray-200 rounded">Platform Fee Invoice</button>
-        </div>
+        <p>Course Fee (Base):
+            <strong>₹{{ number_format($courseFee, 2) }}</strong>
+        </p>
+
+        <p>Total Fee (with GST):
+            <strong>₹{{ number_format($totalFee, 2) }}</strong>
+        </p>
+
+        <p>Total Paid:
+            <strong>₹{{ number_format($totalPaid, 2) }}</strong>
+        </p>
+
+        <p>Balance Due:
+            <strong>₹{{ number_format($balance, 2) }}</strong>
+        </p>
+
+        <p>Last Payment Date:
+            <strong>{{ $lastPaymentDate ?? 'N/A' }}</strong>
+        </p>
+
     </div>
-
 </div>
 
+
+
+        <div class="mt-4 flex space-x-3">
+            @if(isset($course->id))
+                <a 
+                   class="px-4 py-2 bg-gray-200 rounded">Download Receipt</a>
+
+                <a 
+                   class="px-4 py-2 bg-gray-200 rounded">Platform Fee Invoice</a>
+            @endif
+        </div>
+    </div>
+
+    @endforeach
+
+</div>
 @endsection

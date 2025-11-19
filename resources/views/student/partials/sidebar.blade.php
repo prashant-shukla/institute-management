@@ -7,50 +7,66 @@
     <nav class="p-4">
         <ul class="space-y-3">
 
+            {{-- Overview --}}
             <li>
                 <a href="{{ route('student.dashboard') }}"
-                    class="block p-2 rounded hover:bg-gray-200">
+                   class="block p-2 rounded hover:bg-gray-200
+                          {{ request()->routeIs('student.dashboard') ? 'bg-gray-200 font-semibold' : '' }}">
                     Overview
                 </a>
             </li>
 
+            {{-- Live Classes --}}
             <li>
-                <a href="#" class="block p-2 rounded hover:bg-gray-200">
-                    Content
-                </a>
-            </li>
-
-            <li>
-                <a href="#" class="block p-2 rounded hover:bg-gray-200">
+                <a href="#"
+                   class="block p-2 rounded hover:bg-gray-200">
                     Live Classes
                 </a>
             </li>
 
+            {{-- Attendance --}}
             <li>
-                <a href="#" class="block p-2 rounded hover:bg-gray-200">
+                <a href="{{ route('student.attendance') }}"
+                   class="block p-2 rounded hover:bg-gray-200
+                          {{ request()->routeIs('student.attendance') ? 'bg-gray-200 font-semibold' : '' }}">
                     Attendance
                 </a>
             </li>
 
+            {{-- Exams --}}
             <li>
-                <a href="#" class="block p-2 rounded hover:bg-gray-200">
+                <a href="{{ route('student.exams') }}"
+                   class="block p-2 rounded hover:bg-gray-200
+                          {{ request()->routeIs('student.exams') ? 'bg-gray-200 font-semibold' : '' }}">
+                    Exams
+                </a>
+            </li>
+
+            {{-- Announcements --}}
+            <li>
+                <a href="#"
+                   class="block p-2 rounded hover:bg-gray-200">
                     Announcements
                 </a>
             </li>
 
+            {{-- Payments --}}
             <li>
-                <a href="#" class="block p-2 rounded hover:bg-gray-200">
+                <a href="{{ route('student.payments') }}"
+                   class="block p-2 rounded hover:bg-gray-200
+                          {{ request()->routeIs('student.payments') ? 'bg-gray-200 font-semibold' : '' }}">
                     Payments
                 </a>
             </li>
 
+            {{-- Chats --}}
             <li>
-                <a href="#" class="block p-2 rounded hover:bg-gray-200">
+                <a href="#"
+                   class="block p-2 rounded hover:bg-gray-200">
                     Chats
                 </a>
             </li>
 
         </ul>
     </nav>
-
 </div>

@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers\FeesRelationManager;
-use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,20 +12,16 @@ use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Models\Certificate;
 use Carbon\Carbon;
-use Filament\Tables\Columns\IconColumn;
 
 class StudentResource extends Resource
 {
@@ -42,34 +37,62 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
+                // LEFT SIDE (2 columns): User + Personal details
                 Forms\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make('User')
-                            // Fieldset::make('User')
+                        Section::make('User')
                             ->relationship('user')
                             ->schema([
-                                TextInput::make('firstname')->required(),
+                                TextInput::make('firstname')
+                                    ->required(),
+
                                 TextInput::make('lastname'),
-                                TextInput::make('username')->required()->unique(ignoreRecord: true),
-                                TextInput::make('email')->required()->unique(ignoreRecord: true),
+
+                                TextInput::make('username')
+                                    ->required()
+                                    ->unique(ignoreRecord: true),
+
+                                TextInput::make('email')
+                                    ->required()
+                                    ->email()
+                                    ->unique(ignoreRecord: true),
+
                                 TextInput::make('password')
+                                    ->label('Password')
                                     ->password()
-                                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                                    ->nullable()
+                                    ->revealable()
+                                    // sirf value di ho tab hi hash kare
+                                    ->dehydrateStateUsing(fn($state) =>
+                                        filled($state) ? Hash::make($state) : null
+                                    )
+                                    // agar field khali ho to DB me password update na ho
                                     ->dehydrated(fn($state) => filled($state)),
                             ])
                             ->columns(2),
 
-                        Forms\Components\Section::make('PERSONAL DETAILS')
+                        Section::make('PERSONAL DETAILS')
                             ->schema([
                                 FileUpload::make('photo')
                                     ->image()
                                     ->imageEditor(),
-                                TextInput::make('father_name')->required()->maxLength(255),
+
+                                TextInput::make('father_name')
+                                    ->required()
+                                    ->maxLength(255),
+
                                 DatePicker::make('date_of_birth')
                                     ->label('Date of Birth')
                                     ->required(),
-                                TextInput::make('mobile_no')->label('Phone No')->required()->numeric(),
-                                Textarea::make('correspondence_add')->required()->label('Correspondence Address')
+
+                                TextInput::make('mobile_no')
+                                    ->label('Phone No')
+                                    ->required()
+                                    ->numeric(),
+
+                                Textarea::make('correspondence_add')
+                                    ->required()
+                                    ->label('Correspondence Address')
                                     ->reactive()
                                     ->afterStateUpdated(function ($state, callable $set, $get) {
                                         if ($get('same_Address')) {
@@ -77,6 +100,7 @@ class StudentResource extends Resource
                                         }
                                     })
                                     ->autosize(),
+
                                 Checkbox::make('same_Address')
                                     ->label('Same Address')
                                     ->inline(false)
@@ -86,35 +110,48 @@ class StudentResource extends Resource
                                             $set('permanent_add', $get('correspondence_add'));
                                         }
                                     }),
+
                                 Textarea::make('permanent_add')
                                     ->required()
                                     ->label('Permanent Address')
                                     ->autosize(),
-                                TextInput::make('qualification')->required(),
-                                TextInput::make('college_workplace')->label('College/Workplace'),
-                                TextInput::make('residential_no')->label('Residential No'),
-                                TextInput::make('office_no')->label('Office No'),
+
+                                TextInput::make('qualification')
+                                    ->required(),
+
+                                TextInput::make('college_workplace')
+                                    ->label('College/Workplace'),
+
+                                TextInput::make('residential_no')
+                                    ->label('Residential No'),
+
+                                TextInput::make('office_no')
+                                    ->label('Office No'),
+
                                 Forms\Components\Toggle::make('is_online')
                                     ->label('Is Online?')
-                                    ->default(false) // offline by default
+                                    ->default(false)
                                     ->inline(false)
                                     ->hidden(),
-
-
                             ])
                             ->columns(2),
                     ])
                     ->columnSpan(['lg' => 2]),
 
+                // RIGHT SIDE (1 column): Registration + Course
                 Forms\Components\Group::make()
                     ->schema([
-                        Forms\Components\Section::make('REGISTRATION DETAILS')
+                        Section::make('REGISTRATION DETAILS')
                             ->schema([
-                                DatePicker::make('reg_date')->label('Reg Date'),
-                                TextInput::make('reg_no')->label('Reg No')->maxLength(255),
+                                DatePicker::make('reg_date')
+                                    ->label('Reg Date'),
+
+                                TextInput::make('reg_no')
+                                    ->label('Reg No')
+                                    ->maxLength(255),
                             ]),
 
-                        Forms\Components\Section::make('COURSE DETAILS')
+                        Section::make('COURSE DETAILS')
                             ->schema([
                                 Select::make('course_id')
                                     ->label('Course Name')
@@ -139,7 +176,7 @@ class StudentResource extends Resource
                                         }
                                     }),
 
-                                Forms\Components\TextInput::make('course_fee')
+                                TextInput::make('course_fee')
                                     ->label('Course Fee')
                                     ->required()
                                     ->numeric()
@@ -167,13 +204,13 @@ class StudentResource extends Resource
                                         }
                                     }),
 
-                                Forms\Components\TextInput::make('gst_amount')
+                                TextInput::make('gst_amount')
                                     ->label('GST 18%')
                                     ->numeric()
                                     ->disabled()
                                     ->dehydrated(fn($state) => true),
 
-                                Forms\Components\TextInput::make('total_fee')
+                                TextInput::make('total_fee')
                                     ->label('Total Fee')
                                     ->numeric()
                                     ->disabled()
@@ -204,7 +241,6 @@ class StudentResource extends Resource
                             ->modalCancelActionLabel('Close'),
                     ),
 
-
                 Tables\Columns\TextColumn::make('user.full_name')
                     ->label('Full Name')
                     ->searchable()
@@ -224,17 +260,19 @@ class StudentResource extends Resource
                     ->afterStateUpdated(function ($record, $state) {
                         if ($state) {
                             $student = Student::with('user')->find($record->id);
-                            $studentName = trim(($student->user->firstname ?? '') . ' ' . ($student->user->lastname ?? ''));
-                            // 🔹 Certificate create logic
+                            $studentName = trim(
+                                ($student->user->firstname ?? '') . ' ' .
+                                ($student->user->lastname ?? '')
+                            );
+
                             Certificate::create([
-                                'student_id' => $record->id,
-                                'course_id' => $record->course_id,
-                                'name' => $studentName,
+                                'student_id'     => $record->id,
+                                'course_id'      => $record->course_id,
+                                'name'           => $studentName,
                                 'certificate_no' => 'CAD-' . strtoupper(uniqid()),
-                                'issue_date' => Carbon::now(),
+                                'issue_date'     => Carbon::now(),
                             ]);
                         } else {
-                            // 🔹 Optional: certificate delete when turned off
                             Certificate::where('student_id', $record->id)
                                 ->where('course_id', $record->course_id)
                                 ->delete();
@@ -246,33 +284,12 @@ class StudentResource extends Resource
                     ->sortable()
                     ->toggleable(),
 
-
-
-                // Tables\Columns\IconColumn::make('certificate')
-                //     ->label('Certificate')
-                //     ->icon(fn($record) => Certificate::where('student_id', $record->id)
-                //         ->where('course_id', $record->course_id)
-                //         ->exists()
-                //         ? 'heroicon-o-check-circle'
-                //         : null) // show nothing if no certificate
-                //     ->color(fn($record) => Certificate::where('student_id', $record->id)
-                //         ->where('course_id', $record->course_id)
-                //         ->exists()
-                //         ? 'success'
-                //         : 'secondary')
-                //     ->tooltip(fn($record) => Certificate::where('student_id', $record->id)
-                //         ->where('course_id', $record->course_id)
-                //         ->exists()
-                //         ? 'Certificate Assigned'
-                //         : 'No Certificate'),
-
-
                 Tables\Columns\BadgeColumn::make('is_online')
                     ->label('Status')
                     ->sortable()
                     ->colors([
                         'success' => fn($state): bool => $state === true,
-                        'danger' => fn($state): bool => $state === false,
+                        'danger'  => fn($state): bool => $state === false,
                     ])
                     ->formatStateUsing(fn($state): string => $state ? 'Online' : 'Offline'),
             ])
@@ -285,10 +302,10 @@ class StudentResource extends Resource
                     ]),
             ])
             ->actions([
-
                 Tables\Actions\ViewAction::make()->hiddenLabel()->tooltip('Detail'),
                 Tables\Actions\EditAction::make()->hiddenLabel()->tooltip('Edit'),
                 Tables\Actions\DeleteAction::make()->hiddenLabel()->tooltip('Delete'),
+
                 Tables\Actions\Action::make('certificate')
                     ->icon('heroicon-o-check-circle')
                     ->color(fn($record) => Certificate::where('student_id', $record->id)
@@ -302,15 +319,13 @@ class StudentResource extends Resource
                             ->where('course_id', $record->course_id)
                             ->value('id');
 
-                        // ✅ Only return URL if certificate exists
                         return $certificateId
                             ? route('certificate.show', ['id' => $certificateId])
                             : null;
-                    }, shouldOpenInNewTab: true) // open in new tab
+                    }, shouldOpenInNewTab: true)
                     ->disabled(fn($record) => !Certificate::where('student_id', $record->id)
                         ->where('course_id', $record->course_id)
                         ->exists()),
-
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -319,23 +334,20 @@ class StudentResource extends Resource
             ]);
     }
 
-
-
-
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListStudents::route('/'),
-            'create' => Pages\CreateStudent::route('/create'),
-            'view' => Pages\ViewStudent::route('/{record}'),
-            'edit' => Pages\EditStudent::route('/{record}/edit'),
-        ];
-    }
     public static function getRelations(): array
     {
         return [
             FeesRelationManager::class,
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index'  => Pages\ListStudents::route('/'),
+            'create' => Pages\CreateStudent::route('/create'),
+            'view'   => Pages\ViewStudent::route('/{record}'),
+            'edit'   => Pages\EditStudent::route('/{record}/edit'),
         ];
     }
 }

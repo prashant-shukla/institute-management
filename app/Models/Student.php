@@ -13,21 +13,25 @@ class Student extends Model
 {
     use HasFactory;
 
-    
+
     protected $table = 'students';
 
     protected $guarded = ['id'];
 
     protected $casts = ['software_covered' => 'array'];
-   
+
     public function course(): BelongsTo
     {
-        return $this->belongsTo(Course::class);        
+        return $this->belongsTo(Course::class);
     }
 
     public function student_fees(): HasMany
     {
         return $this->hasMany(StudentFees::class);
+    }
+    public function attendances()
+    {
+        return $this->hasMany(\App\Models\StudentAttendance::class, 'student_id');
     }
 
     public function user(): BelongsTo
@@ -42,10 +46,10 @@ class Student extends Model
     // {
     //     return $this->belongsTo(Reviews::class);
     // }
-    public function student_courses(): BelongsTo
-    {
-        return $this->belongsTo(StudentCourse::class);
-    }
+    // public function student_courses(): BelongsTo
+    // {
+    //     return $this->belongsTo(StudentCourse::class);
+    // }
     public function feeReceipts()
     {
         return $this->hasMany(StudentFees::class, 'student_id');
@@ -55,7 +59,7 @@ class Student extends Model
     // {
     //     return $this->belongsTo(StudentFees::class);
     // }
-    
+
     public function getFullNameAttribute()
     {
         return $this->user->firstname . ' ' . $this->user->lastname;
@@ -67,7 +71,7 @@ class Student extends Model
     }
 
 
-   public function getCertificateAssignedAttribute()
+    public function getCertificateAssignedAttribute()
     {
         return \App\Models\Certificate::where('student_id', $this->id)
             ->where('course_id', $this->course_id)
@@ -87,5 +91,3 @@ class Student extends Model
         });
     }
 }
-
-

@@ -87,6 +87,10 @@ public function canAccessPanel($panel): bool
 
     return false;
 }
-  
+      public function student()
+    {
+        // ek user ka ek hi student record hoga
+        return $this->hasOne(\App\Models\Student::class);
+    }
   
 }

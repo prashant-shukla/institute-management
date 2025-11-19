@@ -9,10 +9,15 @@ use App\Models\Blog;
 use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Student\PaymentController as StudentPaymentController;
+
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\Student\ExamController as StudentExamController;
 use App\Http\Controllers\Student\AuthController;
 use App\Http\Controllers\Student\DashboardController;
+use App\Http\Controllers\Student\AttendanceController;
+
 
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
@@ -97,14 +102,35 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     Route::get('/Exams', [ExamCategoryController::class, 'index'])->name('exam-categories.index');
     Route::get('/exams/{id}', [ExamCategoryController::class, 'show'])->name('exam-categories.show');
 });
-// Student Login
-Route::get('/student/login', [AuthController::class, 'showLogin'])->name('student.login');
-Route::post('/student/login', [AuthController::class, 'login'])->name('student.login.submit');
 
-// Student Dashboard
-Route::prefix('student')->middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('student.dashboard');
-    })->name('student.dashboard');
+Route::prefix('student')->group(function () {
 
+    // login routes
+    Route::get('/login',  [AuthController::class, 'showLogin'])->name('student.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('student.login.submit');
+
+    // protected routes
+    Route::middleware('auth')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('student.dashboard');
+    });
 });
+
+
+Route::middleware('auth')->prefix('student')->group(function () {
+
+
+    Route::get('/attendance', [AttendanceController::class, 'create'])->name('student.attendance');
+    Route::post('/attendance', [AttendanceController::class, 'store'])->name('student.attendance.store');
+
+    // ✅ All Exams page
+    Route::get('/exams', [StudentExamController::class, 'index'])->name('student.exams');
+        Route::get('/exams/{exam}/start', [StudentExamController::class, 'start'])
+        ->name('student.exam.start');
+
+    // ✅ Payments detail page
+Route::get('/payments', [StudentPaymentController::class, 'index'])
+    ->name('student.payments');
+});
+
+
