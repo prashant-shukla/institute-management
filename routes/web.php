@@ -17,7 +17,8 @@ use App\Http\Controllers\Student\ExamController as StudentExamController;
 use App\Http\Controllers\Student\AuthController;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\AttendanceController;
-
+use App\Http\Controllers\Student\ProfileController as StudentProfileController;
+use App\Http\Controllers\Student\LiveClassController as StudentLiveClassController;
 
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
@@ -131,6 +132,10 @@ Route::middleware('auth')->prefix('student')->group(function () {
     // ✅ Payments detail page
 Route::get('/payments', [StudentPaymentController::class, 'index'])
     ->name('student.payments');
+        Route::get('/profile', [StudentProfileController::class, 'index'])->name('student.profile');
+
+            Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
+        ->name('student.live');
 });
 
 
