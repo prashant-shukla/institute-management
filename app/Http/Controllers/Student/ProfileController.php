@@ -31,7 +31,6 @@ class ProfileController extends Controller
         $attendancePercent = $totalSessions > 0
             ? round(($presentCount / $totalSessions) * 100, 1)
             : 0;
-
         return view('student.profile', [
             'user'              => $user,
             'student'           => $student,

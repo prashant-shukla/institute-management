@@ -10,7 +10,6 @@ use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Student\PaymentController as StudentPaymentController;
-
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\Student\ExamController as StudentExamController;
@@ -19,6 +18,8 @@ use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\AttendanceController;
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 use App\Http\Controllers\Student\LiveClassController as StudentLiveClassController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::group(['middleware' => 'redirect.if.not.installed'], function () {
@@ -138,4 +139,10 @@ Route::get('/payments', [StudentPaymentController::class, 'index'])
         ->name('student.live');
 });
 
+Route::post('/student/logout', function (Request $request) {
+    Auth::logout();                             // user logout
+    $request->session()->invalidate();         // session clear
+    $request->session()->regenerateToken();    // CSRF token regenerate
 
+    return redirect()->route('student.login'); // login page pe bhej do
+})->name('student.logout');

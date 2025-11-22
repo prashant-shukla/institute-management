@@ -51,12 +51,15 @@
             <div class="space-y-2 text-sm">
                 <p>
                     <span class="text-gray-500">Reg No:</span>
-                    <span class="font-medium">{{ $student->reg_no ?? '-' }}</span>
+                    <span class="font-medium">
+                        {{ $student->reg_no ?? '-' }}
+                    </span>
                 </p>
+
                 <p>
                     <span class="text-gray-500">Reg Date:</span>
                     <span class="font-medium">
-                        {{ optional($student->reg_date)->format('Y-m-d') ?? '-' }}
+                        {{ $student->reg_date ? \Carbon\Carbon::parse($student->reg_date)->format('d-m-Y') : '-' }}
                     </span>
                 </p>
                 <p>
@@ -66,9 +69,10 @@
                 <p>
                     <span class="text-gray-500">Date of Birth:</span>
                     <span class="font-medium">
-                        {{ optional($student->date_of_birth)->format('Y-m-d') ?? '-' }}
+                        {{ $student->date_of_birth ? \Carbon\Carbon::parse($student->date_of_birth)->format('d-m-Y') : '-' }}
                     </span>
                 </p>
+
                 <p>
                     <span class="text-gray-500">Qualification:</span>
                     <span class="font-medium">{{ $student->qualification ?? '-' }}</span>
@@ -123,7 +127,7 @@
             </div>
 
             <a href="{{ route('student.payments') }}"
-               class="inline-block mt-4 text-sm text-blue-600 hover:underline">
+                class="inline-block mt-4 text-sm text-blue-600 hover:underline">
                 View payment history →
             </a>
         </div>
@@ -148,7 +152,7 @@
             </div>
 
             <a href="{{ route('student.attendance') }}"
-               class="inline-block mt-4 text-sm text-blue-600 hover:underline">
+                class="inline-block mt-4 text-sm text-blue-600 hover:underline">
                 Go to attendance →
             </a>
         </div>
