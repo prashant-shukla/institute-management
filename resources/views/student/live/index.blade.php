@@ -58,13 +58,11 @@
             </div>
         </div>
 
-    @empty
-
-        <div class="col-span-2 text-center py-10 text-gray-500">
-            No live classes available.
-        </div>
-
-    @endforelse
+@empty
+    <div class="col-span-2 text-center py-10 text-gray-500">
+        No live classes available.
+    </div>
+@endforelse
 
 </div>
 @endsection

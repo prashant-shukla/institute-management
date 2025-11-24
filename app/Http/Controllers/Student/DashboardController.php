@@ -4,46 +4,40 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class DashboardController extends Controller
 {
-
-public function index()
+public function index(Request $request)
 {
     $user = Auth::user();
     $student = $user?->student;
 
-    $courses = collect();
+    $currentCourse = $student?->course;
 
-    if ($student && $student->course) {
-        $courses = collect([$student->course]);
+    $filter = $request->get('category'); // online / offline / certifications
+
+    $query = \App\Models\Course::where('status', 'active');
+
+    if ($filter === 'online') {
+        $query->whereIn('mode', ['online', 'both']);
+    }
+    elseif ($filter === 'offline') {
+        $query->whereIn('mode', ['offline', 'both']);
+    }
+    elseif ($filter === 'certifications') {
+        // Certification category = 3 (example) 
+        $query->where('course_categories_id', 3);
     }
 
-    // Student ke course ki fees
-    $courseFee = $student?->course_fee ?? 0;
-    $totalFee  = $student?->total_fee ?? $courseFee;
+    $allCourses = $query->orderBy('id', 'desc')->get();
 
-    // Student ka total paid amount
-    $totalPaid = $student?->feeReceipts()->sum('fee_amount') ?? 0;
-
-    // Balance due
-    $balance = max($totalFee - $totalPaid, 0);
-
-    // Last Payment record
-    $lastPayment = $student?->feeReceipts()->latest()->first();
-
-    // Last payment date (null safe)
-    $lastPaymentDate = optional($lastPayment?->created_at)->format('Y/m/d');
-
-    return view('student.dashboard', [
-        'courses'          => $courses,
-        'courseFee'        => $courseFee,
-        'totalFee'         => $totalFee,
-        'totalPaid'        => $totalPaid,
-        'balance'          => $balance,
-        'lastPaymentDate'  => $lastPaymentDate,
-    ]);
+    return view('student.dashboard', compact(
+        'currentCourse',
+        'allCourses',
+        'filter'
+    ));
 }
-
 
 }
