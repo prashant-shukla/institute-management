@@ -23,10 +23,10 @@
             {{-- Details --}}
             <div class="flex-1">
                 <h2 class="text-2xl font-semibold">{{ $currentCourse->name }}</h2>
+<p class="mt-2 text-gray-600 text-sm leading-6">
+    {{ \Illuminate\Support\Str::limit(strip_tags($currentCourse->description), 250) }}
+</p>
 
-                <p class="mt-2 text-gray-600 text-sm leading-6">
-                    {{ Str::limit(strip_tags($currentCourse->description), 250) }}
-                </p>
 
                 <p class="mt-3 font-medium">
                     Duration:
