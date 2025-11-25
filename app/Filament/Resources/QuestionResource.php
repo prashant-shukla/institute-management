@@ -10,11 +10,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Actions\Action;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\QuestionImport;
 use Filament\Notifications\Notification;
-use App\Models\Exam;
-use App\Models\ExamQuestion;
+use Maatwebsite\Excel\Facades\Excel;
 
 class QuestionResource extends Resource
 {
@@ -33,13 +30,22 @@ class QuestionResource extends Resource
                     ->relationship('course', 'name')
                     ->required()
                     ->label('Course'),
+
                 Forms\Components\Textarea::make('question')
                     ->required()
                     ->label('Question'),
-                Forms\Components\TextInput::make('option_a')->required()->label('Option A'),
-                Forms\Components\TextInput::make('option_b')->required()->label('Option B'),
-                Forms\Components\TextInput::make('option_c')->label('Option C'),
-                Forms\Components\TextInput::make('option_d')->label('Option D'),
+
+                Forms\Components\TextInput::make('option_a')
+                    ->required()
+                    ->label('Option A'),
+                Forms\Components\TextInput::make('option_b')
+                    ->required()
+                    ->label('Option B'),
+                Forms\Components\TextInput::make('option_c')
+                    ->label('Option C'),
+                Forms\Components\TextInput::make('option_d')
+                    ->label('Option D'),
+
                 Forms\Components\Select::make('correct_option')
                     ->options([
                         'A' => 'A',
@@ -50,24 +56,26 @@ class QuestionResource extends Resource
                     ->required()
                     ->label('Correct Option'),
 
-
                 Forms\Components\TextInput::make('marks')
                     ->numeric()
                     ->default(1)
                     ->label('Marks'),
+
                 Forms\Components\FileUpload::make('image')
                     ->label('Question Image')
                     ->directory('questions')
                     ->image()
                     ->maxSize(2048)
                     ->columnSpan('full'),
-                    Forms\Components\FileUpload::make('dwg_file')
+
+                Forms\Components\FileUpload::make('dwg_file')
                     ->label('Attach DWG File')
                     ->directory('questions/dwg')
                     ->acceptedFileTypes(['application/acad', '.dwg'])
                     ->maxSize(10240)
                     ->helperText('Upload related AutoCAD DWG file (optional)')
                     ->columnSpan('full'),
+
                 Forms\Components\Toggle::make('status')
                     ->label('Active')
                     ->default(true),
@@ -104,7 +112,6 @@ class QuestionResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ])
-
             ->headerActions([
                 Action::make('import')
                     ->label('Import Questions')
@@ -114,36 +121,34 @@ class QuestionResource extends Resource
                             ->relationship('course', 'name')
                             ->required()
                             ->label('Course'),
+
                         Forms\Components\FileUpload::make('file')
                             ->label('Upload Excel / CSV File')
                             ->required()
-                            ->directory('imports') // ✅ ensures file saved in storage/app/public/imports
+                            ->directory('imports')
                             ->acceptedFileTypes([
                                 'text/csv',
                                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                             ]),
                     ])
                     ->action(function (array $data) {
-                        $filePath = storage_path('app/public/' . $data['file']); // path to uploaded file
+                        $filePath = storage_path('app/public/' . $data['file']);
 
-                        // ✅ Pass the selected course_id into the import
-                        \Maatwebsite\Excel\Facades\Excel::import(
+                        Excel::import(
                             new \App\Imports\QuestionImport($data['course_id']),
                             $filePath
                         );
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title('Questions Imported Successfully!')
                             ->success()
                             ->send();
                     }),
             ])
-
             ->bulkActions([
-                // ✅ Assign selected questions to an exam
                 Tables\Actions\BulkAction::make('assignToExam')
                     ->label('Assign Questions to Exam')
-                    ->icon('heroicon-o-clipboard-document-check') // valid heroicon
+                    ->icon('heroicon-o-clipboard-document-check')
                     ->form([
                         Forms\Components\Select::make('exam_id')
                             ->label('Select Exam')
@@ -153,14 +158,13 @@ class QuestionResource extends Resource
                     ])
                     ->action(function (array $data, $records): void {
                         foreach ($records as $record) {
-                            // Prevent duplicate assignment
                             \App\Models\ExamQuestion::firstOrCreate([
-                                'exam_id' => $data['exam_id'],
-                                'question_id' => $record->id,
+                                'exam_id'    => $data['exam_id'],
+                                'question_id'=> $record->id,
                             ]);
                         }
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title('Questions Assigned Successfully!')
                             ->success()
                             ->send();
@@ -168,7 +172,6 @@ class QuestionResource extends Resource
                     ->color('warning')
                     ->deselectRecordsAfterCompletion(),
 
-                // ✅ Default Delete Action
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
@@ -176,9 +179,9 @@ class QuestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuestions::route('/'),
+            'index'  => Pages\ListQuestions::route('/'),
             'create' => Pages\CreateQuestion::route('/create'),
-            'edit' => Pages\EditQuestion::route('/{record}/edit'),
+            'edit'   => Pages\EditQuestion::route('/{record}/edit'),
         ];
     }
 }

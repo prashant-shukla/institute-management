@@ -10,7 +10,6 @@ class QuestionImport implements ToModel, WithHeadingRow
 {
     protected $courseId;
 
-    // 👇 Constructor to accept course_id
     public function __construct($courseId)
     {
         $this->courseId = $courseId;
@@ -19,15 +18,17 @@ class QuestionImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Question([
-            'course_id' => $this->courseId, // ✅ use selected course
-            'question' => $row['question'],
-            'option_a' => $row['option_a'] ?? null,
-            'option_b' => $row['option_b'] ?? null,
-            'option_c' => $row['option_c'] ?? null,
-            'option_d' => $row['option_d'] ?? null,
-            'correct_option' => $row['correct_option'],
-            'marks' => $row['marks'] ?? 1,
-            'status' => $row['status'] ?? 1,
+            'course_id'      => $this->courseId,
+            'question'       => $row['question'] ?? null,
+            'image'          => $row['image'] ?? null,
+            'dwg_file'       => $row['dwg_file'] ?? null,
+            'option_a'       => $row['option_a'] ?? null,
+            'option_b'       => $row['option_b'] ?? null,
+            'option_c'       => $row['option_c'] ?? null,
+            'option_d'       => $row['option_d'] ?? null,
+            'correct_option' => $row['correct_option'] ?? 'A',
+            'marks'          => $row['marks'] ?? 1,
+            'status'         => $row['status'] ?? 1,
         ]);
     }
 }

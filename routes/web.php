@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Artisan;
 use App\Models\Blog;
 use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\Student\PaymentController as StudentPaymentController;
+use App\Http\Controllers\PaymentController; // global / admin wala
+use App\Http\Controllers\Student\PaymentController as StudentPaymentController; // student wala
+
+
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\Student\ExamController as StudentExamController;
@@ -137,7 +139,22 @@ Route::get('/payments', [StudentPaymentController::class, 'index'])
 
             Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
         ->name('student.live');
+
+
+
 });
+
+Route::middleware(['auth'])
+    ->prefix('student')
+    ->name('student.')
+    ->group(function () {
+
+        Route::get('payments/download', [StudentPaymentController::class, 'downloadPaymentsPdf'])
+            ->name('payments.download');
+
+        // ... baaki routes
+    });
+
 
 Route::post('/student/logout', function (Request $request) {
     Auth::logout();                             // user logout
