@@ -35,7 +35,8 @@
             <div class="px-4 py-3 border-b font-semibold text-gray-700 text-center">
                 Questions
             </div>
-            <div id="question-nav" class="overflow-y-auto p-4 flex  gap-3">
+
+            <div id="question-nav" class="overflow-y-auto p-4 grid grid-cols-5 gap-3">
                 @foreach ($exam->questions as $index => $q)
                 <button data-index="{{ $index }}" data-id="{{ $q->id }}"
                     class="question-btn w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-blue-500 hover:text-white text-sm font-semibold text-gray-700 transition">
@@ -44,6 +45,7 @@
                 @endforeach
             </div>
         </aside>
+
 
 
 
@@ -62,11 +64,10 @@
 
                     {{-- 🔹 Agar image hai to dikhaye --}}
                     @if ($question->image)
-                    <div class="mb-4">
-                        <img src="{{ asset('storage/' . $question->image) }}"
-                            alt="Question Image"
-                            class="max-h-64 rounded shadow">
-                    </div>
+                    <img src="{{ asset('storage/' . $question->image) }}"
+                        alt="Question Image"
+                        class="max-h-72 w-1/2 rounded shadow mx-auto">
+
                     @endif
 
                     {{-- 🔹 Agar DWG file hai to download/view link dikhaye --}}
