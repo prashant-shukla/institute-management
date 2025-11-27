@@ -11,6 +11,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\PaymentController; // global / admin wala
 use App\Http\Controllers\Student\PaymentController as StudentPaymentController; // student wala
 
+use App\Http\Controllers\Student\StudentCertificateController;
 
 use App\Http\Controllers\ExamCategoryController;
 use App\Http\Controllers\ExamController;
@@ -129,19 +130,16 @@ Route::middleware('auth')->prefix('student')->group(function () {
 
     // ✅ All Exams page
     Route::get('/exams', [StudentExamController::class, 'index'])->name('student.exams');
-        Route::get('/exams/{exam}/start', [StudentExamController::class, 'start'])
+    Route::get('/exams/{exam}/start', [StudentExamController::class, 'start'])
         ->name('student.exam.start');
 
     // ✅ Payments detail page
-Route::get('/payments', [StudentPaymentController::class, 'index'])
-    ->name('student.payments');
-        Route::get('/profile', [StudentProfileController::class, 'index'])->name('student.profile');
+    Route::get('/payments', [StudentPaymentController::class, 'index'])
+        ->name('student.payments');
+    Route::get('/profile', [StudentProfileController::class, 'index'])->name('student.profile');
 
-            Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
+    Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
         ->name('student.live');
-
-
-
 });
 
 Route::middleware(['auth'])
@@ -152,8 +150,13 @@ Route::middleware(['auth'])
         Route::get('payments/download', [StudentPaymentController::class, 'downloadPaymentsPdf'])
             ->name('payments.download');
 
-        // ... baaki routes
+        Route::get('/certificate', [StudentCertificateController::class, 'index'])
+            ->name('certificate');
+
+        Route::get('/certificate/download', [StudentCertificateController::class, 'download'])
+            ->name('certificate.download');
     });
+
 
 
 Route::post('/student/logout', function (Request $request) {

@@ -8,7 +8,7 @@
             {{-- Overview --}}
             <li>
                 <a href="{{ route('student.dashboard') }}"
-                   class="block p-2 rounded hover:bg-gray-200
+                    class="block p-2 rounded hover:bg-gray-200
                           {{ request()->routeIs('student.dashboard') ? 'bg-gray-200 font-semibold' : '' }}">
                     Overview
                 </a>
@@ -17,7 +17,7 @@
             {{-- Live Classes --}}
             <li>
                 <a href="{{ route('student.live') }}"
-                   class="block p-2 rounded hover:bg-gray-200
+                    class="block p-2 rounded hover:bg-gray-200
                           {{ request()->routeIs('student.live') ? 'bg-gray-200 font-semibold' : '' }}">
                     Live Classes
                 </a>
@@ -26,7 +26,7 @@
             {{-- Attendance --}}
             <li>
                 <a href="{{ route('student.attendance') }}"
-                   class="block p-2 rounded hover:bg-gray-200
+                    class="block p-2 rounded hover:bg-gray-200
                           {{ request()->routeIs('student.attendance') ? 'bg-gray-200 font-semibold' : '' }}">
                     Attendance
                 </a>
@@ -35,7 +35,7 @@
             {{-- Exams --}}
             <li>
                 <a href="{{ route('student.exams') }}"
-                   class="block p-2 rounded hover:bg-gray-200
+                    class="block p-2 rounded hover:bg-gray-200
                           {{ request()->routeIs('student.exams') ? 'bg-gray-200 font-semibold' : '' }}">
                     Exams
                 </a>
@@ -44,16 +44,27 @@
             {{-- Payments --}}
             <li>
                 <a href="{{ route('student.payments') }}"
-                   class="block p-2 rounded hover:bg-gray-200
+                    class="block p-2 rounded hover:bg-gray-200
                           {{ request()->routeIs('student.payments') ? 'bg-gray-200 font-semibold' : '' }}">
                     Payments
                 </a>
             </li>
 
+            {{-- certificate --}}
+            <li>
+                <a href="{{ route('student.certificate') }}"
+                    class="block p-2 rounded hover:bg-gray-200
+              {{ request()->routeIs('student.certificate') ? 'bg-gray-200 font-semibold' : '' }}">
+                    Certificate
+                </a>
+            </li>
+
+
+
             {{-- Profile --}}
             <li>
                 <a href="{{ route('student.profile') }}"
-                   class="block p-2 rounded hover:bg-gray-200
+                    class="block p-2 rounded hover:bg-gray-200
                           {{ request()->routeIs('student.profile') ? 'bg-gray-200 font-semibold' : '' }}">
                     My Profile
                 </a>
