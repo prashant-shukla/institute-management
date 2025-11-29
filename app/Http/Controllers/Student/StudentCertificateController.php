@@ -27,7 +27,7 @@ class StudentCertificateController extends Controller
         return view('student.certificate.index', compact('student'));
     }
 
-    public function download()
+public function download()
 {
     $student = Auth::user()->student;
 
@@ -35,8 +35,11 @@ class StudentCertificateController extends Controller
         abort(403, 'Certificate not assigned yet.');
     }
 
-    // Student full name
-    $studentName = trim(($student->first_name ?? '') . ' ' . ($student->last_name ?? ''));
+    // ✨ Get User record linked to student
+    $user = $student->user;   // Make sure relation exists: Student belongsTo User
+
+    // ✨ Student full name from USERS table
+    $studentName = trim(($user->firstname ?? '') . ' ' . ($user->lastname ?? ''));
 
     // Course
     $course = $student->course;
@@ -48,17 +51,21 @@ class StudentCertificateController extends Controller
         ->orderBy('course_tools.sort', 'asc')
         ->pluck('tools.name');
 
-    // Optional: certificate record
+    // Certificate record
     $certificate = Certificate::where('student_id', $student->id)->first();
 
+    // Generate PDF
     $pdf = Pdf::loadView('student.certificate.pdf', [
         'studentName' => $studentName,
         'course'      => $course,
         'tools'       => $tools,
         'certificate' => $certificate,
+        'student'     => $student,
+        'user'        => $user,
     ]);
 
     return $pdf->setPaper('a4', 'landscape')->download('certificate-'.$student->id.'.pdf');
 }
+
 
 }

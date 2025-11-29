@@ -31,8 +31,8 @@
         /* Approx positions – tum baad me adjust kar sakte ho */
         .student-name {
             position: absolute;
-            top: 210px;      /* yahan se vertical position control karo */
-            left: 200px;     /* yahan se horizontal position */
+            top: 310px;      /* yahan se vertical position control karo */
+            left: 450px;     /* yahan se horizontal position */
             font-size: 20px;
             font-weight: bold;
             color: #000;
@@ -40,8 +40,8 @@
 
         .course-name {
             position: absolute;
-            top: 260px;
-            left: 200px;
+            top: 355px;
+            left: 370px;
             font-size: 18px;
             color: #000;
         }
@@ -49,8 +49,8 @@
 
         .tools {
             position: absolute;
-            top: 300px;
-            left: 200px;
+            top: 415px;
+            left: 350px;
             font-size: 14px;
             color: #000;
             max-width: 500px;
@@ -58,17 +58,17 @@
 
         .cert-no {
             position: absolute;
-            bottom: 65px;
-            left: 220px;
-            font-size: 12px;
+            bottom: 115px;
+            left: 400px;
+            font-size: 14px;
             color: #000;
         }
 
         .issue-date {
             position: absolute;
-            bottom: 65px;
-            left: 400px;
-            font-size: 12px;
+            bottom: 115px;
+            left: 620px;
+            font-size: 14px;
             color: #000;
         }
     </style>

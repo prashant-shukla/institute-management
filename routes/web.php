@@ -122,24 +122,31 @@ Route::prefix('student')->group(function () {
 });
 
 
-Route::middleware('auth')->prefix('student')->group(function () {
+Route::middleware('auth')->prefix('student')->name('student.')->group(function () {
 
 
-    Route::get('/attendance', [AttendanceController::class, 'create'])->name('student.attendance');
-    Route::post('/attendance', [AttendanceController::class, 'store'])->name('student.attendance.store');
+    Route::get('/attendance', [AttendanceController::class, 'create'])->name('attendance');
+    Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
 
     // ✅ All Exams page
-    Route::get('/exams', [StudentExamController::class, 'index'])->name('student.exams');
+    Route::get('/exam', [StudentExamController::class, 'index'])->name('exams');
+    Route::get('/exam/{id}', [StudentExamController::class, 'show'])->name('exam-categories.show');
+    Route::get('/exam/{id}', [StudentExamController::class, 'show'])
+        ->middleware('auth')
+        ->name('exams.show');
     Route::get('/exams/{exam}/start', [StudentExamController::class, 'start'])
-        ->name('student.exam.start');
+        ->name('exam.start');
+    Route::get('/exam/{examId}/submit', [StudentExamController::class, 'showResult'])->name('exam_result');
 
+    Route::get('/exam/history', [StudentExamController::class, 'examHistory'])
+        ->name('exam.history');
     // ✅ Payments detail page
     Route::get('/payments', [StudentPaymentController::class, 'index'])
-        ->name('student.payments');
-    Route::get('/profile', [StudentProfileController::class, 'index'])->name('student.profile');
+        ->name('payments');
+    Route::get('/profile', [StudentProfileController::class, 'index'])->name('profile');
 
     Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
-        ->name('student.live');
+        ->name('live');
 });
 
 Route::middleware(['auth'])

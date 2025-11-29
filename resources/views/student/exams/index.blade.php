@@ -40,7 +40,7 @@
 
                     {{-- Start Button --}}
                     <div class="mt-6">
-                        <a href="{{ route('exam.show', ['id' => $exam->id]) }}"
+                        <a href="{{ route('exams.show', ['id' => $exam->id]) }}"
                            class="inline-flex items-center justify-center px-6 py-3 rounded-xl
                                   bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
                             Start Exam

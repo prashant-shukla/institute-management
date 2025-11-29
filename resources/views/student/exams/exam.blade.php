@@ -18,7 +18,6 @@
 </head>
 
 <body class="bg-gray-100 text-gray-800 h-screen overflow-hidden">
-
     <!-- Header -->
     <header class="bg-white shadow fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
@@ -226,7 +225,7 @@
             // 🔹 Submit Exam
             $submit.on('click', function() {
                 if (confirm("Are you sure you want to submit the exam?")) {
-                    window.location.href = `/exam/${examId}/submit`;
+                    window.location.href = `/student/exam/${examId}/submit`;
                 }
             });
 
@@ -238,7 +237,7 @@
                     if (min === 0) {
                         clearInterval(timerId);
                         alert("⏰ Time is up! Submitting your exam.");
-                        window.location.href = `/exam/${examId}/submit`;
+                        window.location.href = `/student/exam/${examId}/submit`;
                         return;
                     }
                     min--;
@@ -253,6 +252,9 @@
             });
         });
     </script>
+
+
+
 
 </body>
 
