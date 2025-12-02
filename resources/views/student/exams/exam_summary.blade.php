@@ -1,7 +1,6 @@
-extends('student.layout')
+@extends('student.layout')
 
 @section('content')
-{{dd($exams)}}
 <div class="bg-gray-100 text-gray-800">
 
   <div class="max-w-6xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-6">
@@ -40,11 +39,10 @@ extends('student.layout')
               <td class="px-4 py-2 text-center text-sm text-gray-500">
                 {{ \Carbon\Carbon::parse($s['date'])->format('d M Y') }}
               </td>
-
             </tr>
           @empty
             <tr>
-              <td colspan="9" class="text-center py-6 text-gray-500">
+              <td colspan="8" class="text-center py-6 text-gray-500">
                 No exams attempted yet.
               </td>
             </tr>
@@ -54,9 +52,9 @@ extends('student.layout')
     </div>
 
     <div class="mt-6 text-center">
-      <a href="{{ url('/') }}"
+      <a href="{{ route('student.exams') }}"
          class="bg-gray-200 text-gray-800 px-5 py-2 rounded-md hover:bg-gray-300 transition">
-        🏠 Back to Dashboard
+        🏠 Back to Exams
       </a>
     </div>
   </div>

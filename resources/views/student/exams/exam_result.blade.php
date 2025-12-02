@@ -74,7 +74,7 @@
                 🔁 Retake Exam
             </a>
         </div>
-        <a href="{{ route('student.exam.history') }}"
+        <a href="{{  route('student.exam.history') }}"
             class="bg-gray-200 text-gray-800 px-5 mt-6 py-2 rounded-md hover:bg-gray-300 transition">
             History
         </a>

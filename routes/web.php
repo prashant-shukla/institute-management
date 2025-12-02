@@ -129,6 +129,9 @@ Route::middleware('auth')->prefix('student')->name('student.')->group(function (
     Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
 
     // ✅ All Exams page
+
+    Route::get('/exam/history', [StudentExamController::class, 'examHistory'])
+        ->name('exam.history');
     Route::get('/exam', [StudentExamController::class, 'index'])->name('exams');
     Route::get('/exam/{id}', [StudentExamController::class, 'show'])->name('exam-categories.show');
     Route::get('/exam/{id}', [StudentExamController::class, 'show'])
@@ -138,8 +141,6 @@ Route::middleware('auth')->prefix('student')->name('student.')->group(function (
         ->name('exam.start');
     Route::get('/exam/{examId}/submit', [StudentExamController::class, 'showResult'])->name('exam_result');
 
-    Route::get('/exam/history', [StudentExamController::class, 'examHistory'])
-        ->name('exam.history');
     // ✅ Payments detail page
     Route::get('/payments', [StudentPaymentController::class, 'index'])
         ->name('payments');
