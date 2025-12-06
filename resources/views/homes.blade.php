@@ -1275,18 +1275,18 @@
     </section>
 
     <!-- Company Feedback & Hiring Partners -->
-    <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <!-- <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div class="container mx-auto px-4">
             <h2
                 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-300">
                 Company Feedback & Our Hiring Partners
             </h2>
 
-            <!-- Testimonials -->
+           
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 @foreach ($testimonials as $testimonial)
                 <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                    <!-- ⭐ Star Rating -->
+                    
                     <div class="flex mb-4">
                         @for ($i = 1; $i <= 5; $i++)
                             <span
@@ -1296,12 +1296,12 @@
                             @endfor
                     </div>
 
-                    <!-- Review -->
+                    
                     <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
                         "{{ $testimonial->review }}"
                     </p>
 
-                    <!-- User Info -->
+                   
                     <div class="flex items-center">
                         @if ($testimonial->image)
                         <img src="{{ asset('storage/' . $testimonial->image) }}"
@@ -1324,7 +1324,7 @@
             </div>
 
 
-            <!-- Hiring Partners Logos -->
+           
             <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold mb-8 text-gray-800 dark:text-white transition-colors duration-300">
                     Companies Hiring From Us</h3>
@@ -1343,7 +1343,7 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Our Free Lectures Section -->
     <section
