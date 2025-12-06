@@ -290,10 +290,12 @@
                             Get-ready, Get hired! Hands-on CAD & Interior training with real projects.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                            <button
-                                class="px-6 py-3 bg-white text-blue-500 font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl">
-                                Explore Courses
-                            </button>
+                            <a href="{{ url('/Course') }}">
+                                <button
+                                    class="px-6 py-3 bg-white text-blue-500 font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl">
+                                    Explore Courses
+                                </button>
+                            </a>
                             <button
                                 class="px-6 py-3 bg-transparent text-white border-2 border-white font-bold rounded-full hover:bg-white hover:text-blue-500 transform hover:scale-105 transition-all duration-300 shadow-xl">
                                 Free 3-Day Trial
@@ -400,7 +402,7 @@
                 <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
                     style="animation-delay: 0.3s;">
                     <div class="text-2xl md:text-3xl font-bold text-white mb-1">
-                        <span class="counter" data-target="10" data-suffix="K+">0</span>
+                        <span class="counter" data-target="5" data-suffix="K+">0</span>
                     </div>
                     <div class="text-blue-200 text-xs">Students Trained</div>
                 </div>
@@ -408,7 +410,7 @@
                 <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
                     style="animation-delay: 0.4s;">
                     <div class="text-2xl md:text-3xl font-bold text-white mb-1">
-                        <span class="counter" data-target="200" data-suffix="+">0</span>
+                        <span class="counter" data-target="20" data-suffix="+">0</span>
                     </div>
                     <div class="text-blue-200 text-xs">Courses Available</div>
                 </div>
@@ -416,7 +418,7 @@
                 <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
                     style="animation-delay: 0.5s;">
                     <div class="text-2xl md:text-3xl font-bold text-white mb-1">
-                        <span class="counter" data-target="4.5" data-suffix="/5">0</span>
+                        <span class="counter" data-target="4.7" data-suffix="/5">0</span>
                     </div>
                     <div class="text-blue-200 text-xs">Average Rating</div>
                 </div>
@@ -424,7 +426,7 @@
                 <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4 hover:bg-white hover:bg-opacity-20 transition-all duration-300 slide-in-up"
                     style="animation-delay: 0.6s;">
                     <div class="text-2xl md:text-3xl font-bold text-white mb-1">
-                        <span class="counter" data-target="1.3" data-suffix="M+">0</span>
+                        <span class="counter" data-target="5" data-suffix="L+">0</span>
                     </div>
                     <div class="text-blue-200 text-xs">Training Hours</div>
                 </div>
@@ -473,53 +475,53 @@
 
                 <!-- Featured Courses Grid -->
                 @php
-                    // Different background color sets for fallback
-                    $bgColors = [
-                        'bg-gradient-to-r from-blue-500 to-indigo-600',
-                        'bg-gradient-to-r from-green-500 to-emerald-600',
-                        'bg-gradient-to-r from-pink-500 to-rose-600',
-                    ];
+                // Different background color sets for fallback
+                $bgColors = [
+                'bg-gradient-to-r from-blue-500 to-indigo-600',
+                'bg-gradient-to-r from-green-500 to-emerald-600',
+                'bg-gradient-to-r from-pink-500 to-rose-600',
+                ];
 
-                    // Different button colors
-                    $btnColors = [
-                        'bg-blue-500 hover:bg-blue-600',
-                        'bg-green-500 hover:bg-green-600',
-                        'bg-pink-500 hover:bg-pink-600',
-                    ];
+                // Different button colors
+                $btnColors = [
+                'bg-blue-500 hover:bg-blue-600',
+                'bg-green-500 hover:bg-green-600',
+                'bg-pink-500 hover:bg-pink-600',
+                ];
                 @endphp
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     @foreach ($latestCourses as $index => $course)
-                        @php
-                            $bgClass = $bgColors[$index % count($bgColors)];
-                            $btnClass = $btnColors[$index % count($btnColors)];
-                        @endphp
+                    @php
+                    $bgClass = $bgColors[$index % count($bgColors)];
+                    $btnClass = $btnColors[$index % count($btnColors)];
+                    @endphp
 
+                    <div
+                        class="group bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden">
+
+                        {{-- ✅ Header (Course Image or Default Background) --}}
                         <div
-                            class="group bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden">
+                            class="relative h-48 overflow-hidden flex items-center justify-center {{ !$course->image ? $bgClass : '' }}">
+                            @if ($course->image)
+                            <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
+                                class="w-full h-full object-cover">
+                            @endif
 
-                            {{-- ✅ Header (Course Image or Default Background) --}}
+                            @if ($course->popular_course)
                             <div
-                                class="relative h-48 overflow-hidden flex items-center justify-center {{ !$course->image ? $bgClass : '' }}">
-                                @if ($course->image)
-                                    <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
-                                        class="w-full h-full object-cover">
-                                @endif
-
-                                @if ($course->popular_course)
-                                    <div
-                                        class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                        POPULAR
-                                    </div>
-                                @endif
-
-
+                                class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                POPULAR
                             </div>
+                            @endif
 
-                            {{-- ✅ Content --}}
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                                    style="
+
+                        </div>
+
+                        {{-- ✅ Content --}}
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
+                                style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -528,33 +530,33 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">
-                                    {{ $course->name }}
-                                </h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-300 mb-3">{{ $course->sub_title }}</p>
+                                {{ $course->name }}
+                            </h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-300 mb-3">{{ $course->sub_title }}</p>
 
-                                {{-- Course Details --}}
-                                <div class="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                                    <p>{{ $course->course_duration ?? 'N/A' }} Online</p>
-                                    <p>{{ $course->projects ?? '0' }} Projects</p>
-                                </div>
-
-                                {{-- Price --}}
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="text-2xl font-bold text-gray-800 dark:text-white">
-                                        ₹{{ number_format($course->offer_fee, 2) }}
-                                    </div>
-                                    <div class="text-sm text-gray-500 line-through">
-                                        ₹{{ number_format($course->fee, 2) }}
-                                    </div>
-                                </div>
-
-                                {{-- ✅ Enroll Button --}}
-                                <a href="{{ url('course/' . $course->slug) }}"
-                                    class="block w-full py-3 {{ $btnClass }} text-white text-center font-semibold rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
-                                    Enroll Now
-                                </a>
+                            {{-- Course Details --}}
+                            <div class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                                <p>{{ $course->course_duration ?? 'N/A' }} Online</p>
+                                <p>{{ $course->projects ?? '0' }} Projects</p>
                             </div>
+
+                            {{-- Price --}}
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-2xl font-bold text-gray-800 dark:text-white">
+                                    ₹{{ number_format($course->offer_fee, 2) }}
+                                </div>
+                                <div class="text-sm text-gray-500 line-through">
+                                    ₹{{ number_format($course->fee, 2) }}
+                                </div>
+                            </div>
+
+                            {{-- ✅ Enroll Button --}}
+                            <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}"
+                                class="block w-full py-3 {{ $btnClass }} text-white text-center font-semibold rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                                Enroll Now
+                            </a>
                         </div>
+                    </div>
                     @endforeach
                 </div>
 
@@ -562,10 +564,12 @@
 
                 <!-- View All Courses Button -->
                 <div class="text-center">
-                    <button
-                        class="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
-                        View All Courses
-                    </button>
+                    <a href="{{ url('/Course') }}">
+                        <button
+                            class="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
+                            View All Courses
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -612,14 +616,14 @@
                             Official Autodesk Authorized training Institute since 2017, ensuring you receive certified,
                             industry-recognized education.
                         </p>
-                        <div class="mt-4 flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                        <!-- <div class="mt-4 flex items-center text-blue-600 dark:text-blue-400 font-medium">
                             <span>Learn More</span>
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Highlight 2 -->
@@ -641,14 +645,14 @@
                             All our instructors are Autodesk Certified Professionals with extensive industry experience
                             and proven teaching methodologies.
                         </p>
-                        <div class="mt-4 flex items-center text-green-600 dark:text-green-400 font-medium">
+                        <!-- <div class="mt-4 flex items-center text-green-600 dark:text-green-400 font-medium">
                             <span>Learn More</span>
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Highlight 3 -->
@@ -670,14 +674,14 @@
                             Every faculty member is a technical expert with engineering backgrounds and interior design
                             expertise.
                         </p>
-                        <div class="mt-4 flex items-center text-purple-600 dark:text-purple-400 font-medium">
+                        <!-- <div class="mt-4 flex items-center text-purple-600 dark:text-purple-400 font-medium">
                             <span>Learn More</span>
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Highlight 4 -->
@@ -698,14 +702,14 @@
                             We are a specialized CAD training institute, focusing exclusively on CAD/CAM technologies -
                             no other courses to dilute our expertise.
                         </p>
-                        <div class="mt-4 flex items-center text-orange-600 dark:text-orange-400 font-medium">
+                        <!-- <div class="mt-4 flex items-center text-orange-600 dark:text-orange-400 font-medium">
                             <span>Learn More</span>
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Highlight 5 -->
@@ -726,14 +730,14 @@
                             Over a decade of experience in CAD training, continuously evolving our curriculum to meet
                             industry demands.
                         </p>
-                        <div class="mt-4 flex items-center text-red-600 dark:text-red-400 font-medium">
+                        <!-- <div class="mt-4 flex items-center text-red-600 dark:text-red-400 font-medium">
                             <span>Learn More</span>
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Highlight 6 -->
@@ -755,14 +759,14 @@
                             Every year we receive over 300 job queries from companies seeking our well-trained
                             graduates.
                         </p>
-                        <div class="mt-4 flex items-center text-indigo-600 dark:text-indigo-400 font-medium">
+                        <!-- <div class="mt-4 flex items-center text-indigo-600 dark:text-indigo-400 font-medium">
                             <span>Learn More</span>
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -786,10 +790,12 @@
                                     class="px-8 py-4 bg-white text-blue-500 font-bold rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl">
                                     Start Your Journey
                                 </button>
-                                <button
-                                    class="px-8 py-4 bg-transparent text-white border-2 border-white font-bold rounded-lg hover:bg-white hover:text-blue-500 transform hover:scale-105 transition-all duration-300">
-                                    Download Brochure
-                                </button>
+                                <a href="{{ asset('brochure.pdf') }}" download>
+                                    <button
+                                        class="px-8 py-4 bg-transparent text-white border-2 border-white font-bold rounded-lg hover:bg-white hover:text-blue-500 transform hover:scale-105 transition-all duration-300">
+                                        Download Brochure
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -899,40 +905,40 @@
                 </div> --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($proudStudents as $student)
-                        <div
-                            class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
+                    <div
+                        class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
 
-                            <!-- Top Section -->
-                            <div class="flex items-center mb-6">
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 overflow-hidden">
+                        <!-- Top Section -->
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 overflow-hidden">
 
-                                    @if ($student->image)
-                                        <img src="{{ asset('storage/' . $student->image) }}"
-                                            alt="{{ $student->name }}"
-                                            class="w-full h-full object-cover rounded-full">
-                                    @else
-                                        <span class="text-white font-bold text-xl">
-                                            {{ strtoupper(substr($student->name, 0, 1)) }}
-                                        </span>
-                                    @endif
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold line-clamp-2 text-gray-800 dark:text-white">
-                                        {{ $student->name }}
-                                    </h3>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
-                                    <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
-                                </div>
+                                @if ($student->image)
+                                <img src="{{ asset('storage/' . $student->image) }}"
+                                    alt="{{ $student->name }}"
+                                    class="w-full h-full object-cover rounded-full">
+                                @else
+                                <span class="text-white font-bold text-xl">
+                                    {{ strtoupper(substr($student->name, 0, 1)) }}
+                                </span>
+                                @endif
                             </div>
+                            <div>
+                                <h3 class="text-lg font-bold line-clamp-2 text-gray-800 dark:text-white">
+                                    {{ $student->name }}
+                                </h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
+                                <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
+                            </div>
+                        </div>
 
-                            <!-- Rating -->
-                            <div class="flex mb-4">
-                                <div class="text-yellow-400">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        ★
+                        <!-- Rating -->
+                        <div class="flex mb-4">
+                            <div class="text-yellow-400">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    ★
                                     @endfor
-                                </div>
+                                    </div>
                             </div>
 
                             <!-- Review -->
@@ -941,40 +947,40 @@
                             </p>
 
                             <!-- Package -->
-                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                            <!-- <div class="text-sm text-gray-500 dark:text-gray-400">
                                 <span class="font-semibold">Package:</span> ₹{{ $student->package }}
-                            </div>
+                            </div> -->
                         </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
 
 
-                <!-- Success Stats -->
-                <div class="mt-16 text-center">
-                    <div class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg">
-                        <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Student Success Metrics</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            <div>
-                                <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">94%</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Placement Rate</div>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">₹6.2L</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Average Package</div>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">2.3</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Months to Job</div>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">500+</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Companies Hiring</div>
+                    <!-- Success Stats -->
+                    <div class="mt-16 text-center">
+                        <div class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg">
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Student Success Metrics</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <div>
+                                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">5K+</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">students trained</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">₹1.8-3.6L</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Fresher Package</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">2.0</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Months to Job</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">50+</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Companies Hiring</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
 
@@ -992,76 +998,76 @@
                     courses at our center</p>
 
                 @php
-                    $latestCourses = \App\Models\Course::orderBy('created_at', 'desc')->take(4)->get();
+                $latestCourses = \App\Models\Course::orderBy('created_at', 'desc')->take(4)->get();
 
-                    $bgColors = [
-                        'online' => [
-                            'bg-gradient-to-br from-blue-400 to-blue-600',
-                            'bg-gradient-to-br from-green-400 to-green-600',
-                            'bg-gradient-to-br from-purple-400 to-purple-600',
-                        ],
-                        'offline' => [
-                            'bg-gradient-to-br from-orange-400 to-red-600',
-                            'bg-gradient-to-br from-pink-400 to-rose-600',
-                            'bg-gradient-to-br from-yellow-400 to-orange-500',
-                        ],
-                        'both' => [
-                            // 👈 new safe key
-                            'bg-gradient-to-br from-teal-400 to-teal-600',
-                            'bg-gradient-to-br from-indigo-400 to-indigo-600',
-                            'bg-gradient-to-br from-cyan-400 to-cyan-600',
-                        ],
-                    ];
+                $bgColors = [
+                'online' => [
+                'bg-gradient-to-br from-blue-400 to-blue-600',
+                'bg-gradient-to-br from-green-400 to-green-600',
+                'bg-gradient-to-br from-purple-400 to-purple-600',
+                ],
+                'offline' => [
+                'bg-gradient-to-br from-orange-400 to-red-600',
+                'bg-gradient-to-br from-pink-400 to-rose-600',
+                'bg-gradient-to-br from-yellow-400 to-orange-500',
+                ],
+                'both' => [
+                // 👈 new safe key
+                'bg-gradient-to-br from-teal-400 to-teal-600',
+                'bg-gradient-to-br from-indigo-400 to-indigo-600',
+                'bg-gradient-to-br from-cyan-400 to-cyan-600',
+                ],
+                ];
 
-                    $btnColors = [
-                        'online' => [
-                            'bg-blue-500 hover:bg-blue-600',
-                            'bg-green-500 hover:bg-green-600',
-                            'bg-purple-500 hover:bg-purple-600',
-                        ],
-                        'offline' => [
-                            'bg-orange-500 hover:bg-orange-600',
-                            'bg-pink-500 hover:bg-rose-600',
-                            'bg-yellow-500 hover:bg-orange-500',
-                        ],
-                        'both' => [
-                            // 👈 new safe key
-                            'bg-teal-500 hover:bg-teal-600',
-                            'bg-indigo-500 hover:bg-indigo-600',
-                            'bg-cyan-500 hover:bg-cyan-600',
-                        ],
-                    ];
+                $btnColors = [
+                'online' => [
+                'bg-blue-500 hover:bg-blue-600',
+                'bg-green-500 hover:bg-green-600',
+                'bg-purple-500 hover:bg-purple-600',
+                ],
+                'offline' => [
+                'bg-orange-500 hover:bg-orange-600',
+                'bg-pink-500 hover:bg-rose-600',
+                'bg-yellow-500 hover:bg-orange-500',
+                ],
+                'both' => [
+                // 👈 new safe key
+                'bg-teal-500 hover:bg-teal-600',
+                'bg-indigo-500 hover:bg-indigo-600',
+                'bg-cyan-500 hover:bg-cyan-600',
+                ],
+                ];
                 @endphp
 
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($latestCourses as $index => $course)
-                        @php
-                            // Agar mode invalid hai to default 'online' use karein
-                            $mode = $course->mode ?? 'online';
-                            $mode = array_key_exists($mode, $bgColors) ? $mode : 'online';
+                    @php
+                    // Agar mode invalid hai to default 'online' use karein
+                    $mode = $course->mode ?? 'online';
+                    $mode = array_key_exists($mode, $bgColors) ? $mode : 'online';
 
-                            $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
-                            $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
-                        @endphp
+                    $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
+                    $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
+                    @endphp
                     @endforeach
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($latestCourses as $index => $course)
-                        @php
-                            $mode = $course->mode ?? 'online';
-                            $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
-                            $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
-                        @endphp
+                    @php
+                    $mode = $course->mode ?? 'online';
+                    $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
+                    $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
+                    @endphp
 
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-                            <div class="h-48 relative overflow-hidden {{ $bgClass }}">
-                                @if ($course->image)
-                                    <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
-                                        class="w-full h-full object-cover">
-                                @else
-                                    <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold"
-                                        style="
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                        <div class="h-48 relative overflow-hidden {{ $bgClass }}">
+                            @if ($course->image)
+                            <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
+                                class="w-full h-full object-cover">
+                            @else
+                            <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold"
+                                style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1070,23 +1076,23 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">
-                                        {{ strtoupper(substr($course->name, 0, 1)) }}
-                                    </div>
-                                @endif
-
-                                <div class="absolute inset-0 bg-black opacity-20"></div>
-
-                                <div class="absolute bottom-4 left-4 text-white">
-
-                                    @if ($mode === 'offline')
-                                        <span class="text-xs bg-red-600 px-2 py-1 rounded">Offline</span>
-                                    @endif
-                                </div>
+                                {{ strtoupper(substr($course->name, 0, 1)) }}
                             </div>
+                            @endif
 
-                            <div class="p-4">
-                                <h3 class="text-xl font-bold"
-                                    style="
+                            <div class="absolute inset-0 bg-black opacity-20"></div>
+
+                            <div class="absolute bottom-4 left-4 text-white">
+
+                                @if ($mode === 'offline')
+                                <span class="text-xs bg-red-600 px-2 py-1 rounded">Offline</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold"
+                                style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1095,37 +1101,42 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">
-                                    {{ $course->name }}</h3>
-                                <p class="text-sm opacity-90 mb-2">{{ $course->course_duration ?? 'N/A' }}
-                                    Program</p>
-                                <div class="flex justify-between items-center mb-3">
-                                    {{-- Offer Fee on left --}}
-                                    <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
-                                        ₹{{ number_format($course->offer_fee, 2) }}
-                                    </span>
+                                {{ $course->name }}
+                            </h3>
+                            <p class="text-sm opacity-90 mb-2">{{ $course->course_duration ?? 'N/A' }}
+                                Program</p>
+                            <div class="flex justify-between items-center mb-3">
+                                {{-- Offer Fee on left --}}
+                                <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
+                                    ₹{{ number_format($course->offer_fee, 2) }}
+                                </span>
 
-                                    {{-- Original Fee on right --}}
-                                    <span class="text-sm line-through text-gray-500">
-                                        ₹{{ number_format($course->fee, 2) }}
-                                    </span>
-                                </div>
-
+                                {{-- Original Fee on right --}}
+                                <span class="text-sm line-through text-gray-500">
+                                    ₹{{ number_format($course->fee, 2) }}
+                                </span>
+                            </div>
+                            <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}"
+                                class=" text-white">
                                 <button
                                     class="w-full py-2 {{ $btnClass }} text-white rounded-lg transition-colors">
                                     Enroll Now
                                 </button>
-                            </div>
+                            </a>
                         </div>
+                    </div>
                     @endforeach
                 </div>
 
 
 
                 <div class="text-center mt-8">
-                    <button
-                        class="px-8 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
-                        View More Offline Courses →
-                    </button>
+                    <a href="{{ url('/Course') }}">
+                        <button
+                            class="px-8 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
+                            View More Offline Courses →
+                        </button>
+                    </a>
                 </div>
 
             </div>
@@ -1141,32 +1152,32 @@
                     courses via Zoom platform</p>
 
                 @php
-                    $onlineCourses = \App\Models\Course::where('mode', 'online')
-                        ->orderBy('created_at', 'desc')
-                        ->take(4)
-                        ->get();
+                $onlineCourses = \App\Models\Course::where('mode', 'online')
+                ->orderBy('created_at', 'desc')
+                ->take(4)
+                ->get();
                 @endphp
 
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($onlineCourses as $course)
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-                            {{-- Header --}}
-                            <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 relative overflow-hidden">
-                                <div
-                                    class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                    LIVE
-                                </div>
-                                {{-- <div class="absolute bottom-4 left-4 text-white">
-                                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
-                                    <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
-                                </div> --}}
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                        {{-- Header --}}
+                        <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 relative overflow-hidden">
+                            <div
+                                class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                LIVE
                             </div>
+                            {{-- <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
+                            <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
+                        </div> --}}
+                    </div>
 
-                            {{-- Body --}}
-                            <div class="p-4">
-                                <h3 class="text-xl font-bold "
-                                    style="
+                    {{-- Body --}}
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold "
+                            style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1175,36 +1186,43 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">
-                                    {{ $course->name }}</h3>
-                                <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
-                                <div class="flex justify-between items-center mb-3">
-                                    {{-- Offer Fee on left --}}
-                                    <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
-                                        ₹{{ number_format($course->offer_fee, 2) }}
-                                    </span>
+                            {{ $course->name }}
+                        </h3>
+                        <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
+                        <div class="flex justify-between items-center mb-3">
+                            {{-- Offer Fee on left --}}
+                            <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
+                                ₹{{ number_format($course->offer_fee, 2) }}
+                            </span>
 
-                                    {{-- Original Fee on right --}}
-                                    <span class="text-sm line-through text-gray-500">
-                                        ₹{{ number_format($course->fee, 2) }}
-                                    </span>
-                                </div>
-                                <button
-                                    class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                                    Join Online
-                                </button>
-                            </div>
+                            {{-- Original Fee on right --}}
+                            <span class="text-sm line-through text-gray-500">
+                                ₹{{ number_format($course->fee, 2) }}
+                            </span>
                         </div>
-                    @endforeach
+                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                            <button
+                                class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+
+                                Join Online
+
+                            </button>
+                        </a>
+                    </div>
                 </div>
+                @endforeach
+            </div>
 
 
-                <div class="text-center mt-8">
+            <div class="text-center mt-8">
+                <a href="{{ url('/Course') }}">
                     <button
                         class="px-8 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
                         View More Online Courses →
                     </button>
-                </div>
+                </a>
             </div>
+        </div>
         </div>
     </section>
 
@@ -1267,41 +1285,41 @@
             <!-- Testimonials -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 @foreach ($testimonials as $testimonial)
-                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                        <!-- ⭐ Star Rating -->
-                        <div class="flex mb-4">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <span
-                                    class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
-                                    ★
-                                </span>
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                    <!-- ⭐ Star Rating -->
+                    <div class="flex mb-4">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span
+                            class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
+                            ★
+                            </span>
                             @endfor
-                        </div>
+                    </div>
 
-                        <!-- Review -->
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                            "{{ $testimonial->review }}"
-                        </p>
+                    <!-- Review -->
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                        "{{ $testimonial->review }}"
+                    </p>
 
-                        <!-- User Info -->
-                        <div class="flex items-center">
-                            @if ($testimonial->image)
-                                <img src="{{ asset('storage/' . $testimonial->image) }}"
-                                    alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full mr-3 object-cover">
-                            @else
-                                <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                            @endif
+                    <!-- User Info -->
+                    <div class="flex items-center">
+                        @if ($testimonial->image)
+                        <img src="{{ asset('storage/' . $testimonial->image) }}"
+                            alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full mr-3 object-cover">
+                        @else
+                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                        @endif
 
-                            <div>
-                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                                    {{ $testimonial->name }}
-                                </div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                    "{{ $testimonial->short_description }}"
-                                </div>
+                        <div>
+                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
+                                {{ $testimonial->name }}
+                            </div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                "{{ $testimonial->short_description }}"
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
 
@@ -1312,14 +1330,14 @@
                     Companies Hiring From Us</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
                     @foreach ($clients as $client)
-                        <div
-                            class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 p-2">
+                    <div
+                        class="h-20 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 p-2">
 
-                            <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
-                                class="max-h-full max-w-full object-contain">
+                        <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
+                            class="max-h-full max-w-full object-contain">
 
 
-                        </div>
+                    </div>
                     @endforeach
                 </div>
 
@@ -1386,7 +1404,7 @@
                                     </svg>
                                     <span>15:32</span>
                                 </div>
-                                <a href="https://www.youtube.com/@cadadda" target="_blank"
+                                <a href="https://youtu.be/LWl_sD8RdME" target="_blank"
                                     class="inline-flex items-center px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors">
                                     Watch Now
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
@@ -1438,7 +1456,7 @@
                                     </svg>
                                     <span>22:15</span>
                                 </div>
-                                <a href="https://www.youtube.com/@cadadda" target="_blank"
+                                <a href="https://youtu.be/eSHE6v3pzhk" target="_blank"
                                     class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors">
                                     Watch Now
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
@@ -1535,10 +1553,11 @@
                                     </svg>
                                     Subscribe Now
                                 </a>
-                                <button
+
+                                <a href="https://www.youtube.com/@cadadda/playlists" target="_blank"
                                     class="px-8 py-4 bg-transparent text-white border-2 border-white font-bold rounded-lg hover:bg-white hover:text-red-600 transform hover:scale-105 transition-all duration-300">
                                     View All Videos
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1740,7 +1759,7 @@
                 <div class="text-center">
                     <button
                         class="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
-                        View All Blog Posts
+                        View All News Posts
                     </button>
                 </div>
             </div>
@@ -1834,7 +1853,7 @@
                     <h3 class="text-lg font-bold mb-4">Contact Us</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start space-x-3">
-                            <svg class="w-5 h-5 text-blue-500 dark:text-blue-400 mt-1" fill="none"
+                            <svg class="w-5 h-5 text-blue-500 dark:text-blue-400 " fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
@@ -1842,7 +1861,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <span class="text-gray-400">123 Training Center, Education Hub, City - 110001</span>
+                            <span class="text-gray-400">PL No-8, Behind mahaveer complex, Opp. Bheru bagh jain Mandir, C road, Sardarpura, Jodhpur, Rajasthan, 342001</span>
                         </li>
                         <li class="flex items-center space-x-3">
                             <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="none"
@@ -1851,7 +1870,7 @@
                                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
                                 </path>
                             </svg>
-                            <span class="text-gray-400">+91 98765 43210</span>
+                            <span class="text-gray-400">9261077888</span>
                         </li>
                         <li class="flex items-center space-x-3">
                             <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="none"
@@ -1860,7 +1879,7 @@
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                 </path>
                             </svg>
-                            <span class="text-gray-400">info@cadadda.com</span>
+                            <span class="text-gray-400"><a href="mailto:info@cadadda.com" class="m-0">info@cadadda.com</a></span>
                         </li>
                     </ul>
                 </div>
@@ -1873,12 +1892,14 @@
                         © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
                     </p>
                     <div class="flex space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy
-                            Policy</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of
-                            Service</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Refund
-                            Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Refund Policy</a>
+<a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
+    Terms of Service
+</a>
+<a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
+    Privacy Policy
+</a>
+
                     </div>
                 </div>
             </div>

@@ -51,6 +51,12 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');
     Route::post('/login', [UserController::class, 'storeLogin'])->name('login.store');
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::view('/terms-and-conditions', 'terms')->name('terms.conditions');
+    Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+
+
+
+
 
     Route::get('/run-migrate', function () {
         Artisan::call('migrate', [
