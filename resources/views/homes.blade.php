@@ -1566,71 +1566,108 @@
         </div>
     </section>
 
-    <!-- Our Latest News Feed Section -->
-    <section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto">
-                <!-- Section Header -->
-                <div class="text-center mb-16">
-                    <h2
-                        class="text-4xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-white transition-colors duration-300">
-                        Our Latest News Feed
-                    </h2>
-                    <p
-                        class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto transition-colors duration-300 leading-relaxed">
-                        Stay updated with the latest trends, industry insights, and CAD technology news from our expert
-                        team.
-                    </p>
-                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
-                </div>
 
-                <!-- Blog Posts Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    <!-- Blog Post 1 -->
+<!-- Our Latest News Feed Section -->
+<section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-white">
+                    Our Latest Blogs Feed
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Stay updated with the latest trends, industry insights, and CAD technology blods.
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Blog Posts Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+
+                @foreach ($latestBlogs as $blog)
                     <article
                         class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
+
                         <div class="relative">
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-black opacity-20"></div>
-                                <div
-                                    class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                    CAD Tips
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                                </div>
+                                                      <div class="h-56 overflow-hidden rounded-2xl shadow-md">
+                                @if (!empty($blog->image))
+                                    {{-- 🖼️ Show uploaded image --}}
+                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                @elseif (!empty($blog->video_url))
+                                    @php
+                                        $videoId = null;
+                                        $url = $blog->video_url;
+
+                                        // ✅ Extract YouTube video ID from all possible formats
+                                        if (
+                                            preg_match(
+                                                '/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([a-zA-Z0-9_-]{11})/',
+                                                $url,
+                                                $matches,
+                                            )
+                                        ) {
+                                            $videoId = $matches[1];
+                                        }
+                                    @endphp
+
+                                    @if ($videoId)
+                                        {{-- 🎬 Show YouTube thumbnail --}}
+                                        <div class="relative group">
+                                            <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg"
+                                                alt="{{ $blog->title }}"
+                                                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-500">
+                                            {{-- 🔗 Play button overlay --}}
+                                            <a href="{{ $blog->video_url }}" target="_blank"
+                                                class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="white"
+                                                    viewBox="0 0 24 24" class="w-12 h-12">
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endif
                             </div>
+
+                            <div class="absolute inset-0 bg-black opacity-20"></div>
+
+                            <!-- <div
+                                class="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                {{ $blog->category ?? 'Blog' }}
+                            </div> -->
                         </div>
+
                         <div class="p-6">
+
+                            <!-- Date -->
                             <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                     </path>
                                 </svg>
-                                <span>March 15, 2025</span>
+                                <span>{{ $blog->created_at->format('M d, Y') }}</span>
                             </div>
+
+                            <!-- Title -->
                             <h3
-                                class="text-xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 group-hover:text-blue-500 dark:group-hover:text-blue-400">
-                                Top 10 AutoCAD Shortcuts Every Designer Should Know
+                                class="text-xl font-bold mb-3 text-gray-800 dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-400">
+                                {{ $blog->title }}
                             </h3>
+
+                            <!-- Short Description -->
                             <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                                Discover the most essential AutoCAD keyboard shortcuts that will dramatically improve
-                                your design workflow and productivity.
+                              {{ \Illuminate\Support\Str::limit(strip_tags($blog->description), 120) }}
                             </p>
+
+                            <!-- Footer -->
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                        </path>
-                                    </svg>
-                                    <span>2.5k views</span>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center text-blue-500 dark:text-blue-400 font-semibold hover:text-blue-600 dark:hover:text-blue-300 transition-colors">
+                                <a href="{{ url('/blogs/' . $blog->slug) }}"
+                                    class="inline-flex items-center text-blue-500 dark:text-blue-400 font-semibold hover:text-blue-600 dark:hover:text-blue-300">
                                     Read More
                                     <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1639,132 +1676,25 @@
                                     </svg>
                                 </a>
                             </div>
+
                         </div>
                     </article>
+                @endforeach
 
-                    <!-- Blog Post 2 -->
-                    <article
-                        class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
-                        <div class="relative">
-                            <div class="h-48 bg-gradient-to-br from-green-500 to-green-700 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-black opacity-20"></div>
-                                <div
-                                    class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                    Industry News
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                <span>March 12, 2025</span>
-                            </div>
-                            <h3
-                                class="text-xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 group-hover:text-green-600 dark:group-hover:text-green-400">
-                                The Future of BIM: What's Coming in 2025
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                                Explore the latest developments in Building Information Modeling and how they're shaping
-                                the future of construction and design.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                        </path>
-                                    </svg>
-                                    <span>1.8k views</span>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center text-green-600 dark:text-green-400 font-semibold hover:text-green-700 dark:hover:text-green-300 transition-colors">
-                                    Read More
-                                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
+            </div>
 
-                    <!-- Blog Post 3 -->
-                    <article
-                        class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
-                        <div class="relative">
-                            <div class="h-48 bg-gradient-to-br from-purple-500 to-purple-700 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-black opacity-20"></div>
-                                <div
-                                    class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                    Career Guide
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                <span>March 10, 2025</span>
-                            </div>
-                            <h3
-                                class="text-xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                                How to Build a Winning CAD Portfolio
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                                Learn the essential elements of a professional CAD portfolio that will impress employers
-                                and help you land your dream job.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                        </path>
-                                    </svg>
-                                    <span>3.2k views</span>
-                                </div>
-                                <a href="#"
-                                    class="inline-flex items-center text-purple-600 dark:text-purple-400 font-semibold hover:text-purple-700 dark:hover:text-purple-300 transition-colors">
-                                    Read More
-                                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <!-- View All Blogs Button -->
-                <div class="text-center">
+            <!-- View All Blogs Button -->
+            <div class="text-center">
+                <a href="{{ url('/blogs') }}">
                     <button
                         class="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
                         View All News Posts
                     </button>
-                </div>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">
@@ -1892,7 +1822,8 @@
                         © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
                     </p>
                     <div class="flex space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Refund Policy</a>
+                       <a href="{{ route('refund.policy') }}">Refund Policy</a>
+
 <a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
     Terms of Service
 </a>

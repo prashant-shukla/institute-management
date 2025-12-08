@@ -790,7 +790,8 @@
                         © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
                     </p>
                     <div class="flex space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Refund Policy</a>
+                       <a href="{{ route('refund.policy') }}">Refund Policy</a>
+
                         <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms
                             of Service</a>
 <a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">

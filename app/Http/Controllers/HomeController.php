@@ -13,6 +13,7 @@ use App\Models\CourseTool;
 use App\Models\CourseMentor;
 use App\Models\Banner;
 use App\Models\Post;
+use App\Models\Blog;
 use App\Models\Events;
 use App\Models\Client;
 use App\Models\Gallery;
@@ -26,6 +27,7 @@ use App\Models\Testimonial;
 use App\Models\Category;
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
+
 
 use Illuminate\Http\Request;
 use Datlechin\FilamentMenuBuilder\Models\Menu as DatlechinMenu;
@@ -50,22 +52,28 @@ class HomeController extends Controller
      */
 
 
-    public function Homes()
-    {
-        $testimonials = Testimonial::where('status', 1)->latest()->get();
-        $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
-        $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
-        $proudStudents = ProudStudent::latest()->take(3)->get();
+public function Homes()
+{
+    $testimonials = Testimonial::where('status', 1)->latest()->get();
+    $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
+    $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
+    $proudStudents = ProudStudent::latest()->take(3)->get();
 
-        $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
-        return view('homes', [
-            'courses' => $courses,
-            'latestCourses' => $latestCourses,
-            'testimonials' => $testimonials,
-            'proudStudents' => $proudStudents,
-            'clients' => $clients,
-        ]);
-    }
+    $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
+
+    // ⬇️ New: Latest 3 Blogs
+    //  $blogs = Post::with('category')->latest()->get();
+    $latestBlogs = Post::orderBy('created_at', 'desc')->take(3)->get();
+    return view('homes', [
+        'courses'       => $courses,
+        'latestCourses' => $latestCourses,
+        'testimonials'  => $testimonials,
+        'proudStudents' => $proudStudents,
+        'clients'       => $clients,
+        'latestBlogs'   => $latestBlogs, // 👈 Add this
+    ]);
+}
+
     public function Courses()
     {
         $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline','both')")->get();

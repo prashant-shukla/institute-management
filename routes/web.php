@@ -53,6 +53,7 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::view('/terms-and-conditions', 'terms')->name('terms.conditions');
     Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
+    Route::view('/refund-policy', 'refund-policy')->name('refund.policy');
 
 
 
