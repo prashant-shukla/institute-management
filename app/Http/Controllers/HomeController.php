@@ -60,6 +60,11 @@ public function Homes()
     $proudStudents = ProudStudent::latest()->take(3)->get();
 
     $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
+   $reviews = Reviews::with(['student', 'course'])
+        ->where('status', 1)
+        ->orderBy('created_at', 'desc')
+        ->limit(6)
+        ->get();
 
     // ⬇️ New: Latest 3 Blogs
     //  $blogs = Post::with('category')->latest()->get();
@@ -71,6 +76,7 @@ public function Homes()
         'proudStudents' => $proudStudents,
         'clients'       => $clients,
         'latestBlogs'   => $latestBlogs, // 👈 Add this
+        'reviews'       => $reviews,
     ]);
 }
 

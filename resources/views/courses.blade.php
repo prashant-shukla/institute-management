@@ -348,14 +348,14 @@
             <div class="overflow-hidden relative w-full">
                 <div class="marquee flex space-x-10">
                     @foreach ($clients as $client)
-                        <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
-                            class="h-12 object-contain" />
+                    <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
+                        class="h-12 object-contain" />
                     @endforeach
 
                     {{-- Duplicate set for infinite scroll --}}
                     @foreach ($clients as $client)
-                        <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
-                            class="h-12 object-contain" />
+                    <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
+                        class="h-12 object-contain" />
                     @endforeach
                 </div>
             </div>
@@ -448,19 +448,19 @@
                 <!-- Offline Courses -->
                 <div id="offline" class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse($offlineCourses as $course)
-                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                            <div class="bg-white shadow rounded-xl overflow-hidden">
-                                <div class="h-40 w-full">
-                                    @if ($course->image)
-                                        <img src="{{ asset('storage/' . $course->image) }}"
-                                            alt="{{ $course->name }}" class="w-full h-full object-cover">
-                                    @else
-                                        <div class="h-full w-full bg-blue-500"></div>
-                                    @endif
-                                </div>
-                                <div class="p-5">
-                                    <h3 class="text-lg font-bold line-clamp-2"
-                                        style="
+                    <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                        <div class="bg-white shadow rounded-xl overflow-hidden">
+                            <div class="h-40 w-full">
+                                @if ($course->image)
+                                <img src="{{ asset('storage/' . $course->image) }}"
+                                    alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                @else
+                                <div class="h-full w-full bg-blue-500"></div>
+                                @endif
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-lg font-bold line-clamp-2"
+                                    style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -469,23 +469,24 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">
-                                        {{ $course->name }}</h3>
-                                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+                                    {{ $course->name }}
+                                </h3>
+                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                                    <div class="flex items-center justify-between mt-3">
-                                        <p class="text-blue-600 font-semibold">
-                                            ₹{{ number_format($course->offer_fee, 2) }}</p>
-                                        <button
-                                            class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                            Join Now
-                                        </button>
-                                    </div>
+                                <div class="flex items-center justify-between mt-3">
+                                    <p class="text-blue-600 font-semibold">
+                                        ₹{{ number_format($course->offer_fee, 2) }}</p>
+                                    <button
+                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                        Join Now
+                                    </button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                    </a>
                     @empty
-                        <p class="text-gray-500">No offline courses available.</p>
+                    <p class="text-gray-500">No offline courses available.</p>
                     @endforelse
                 </div>
 
@@ -493,19 +494,19 @@
                 <div id="online"
                     class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
                     @forelse($onlineCourses as $course)
-                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                            <div class="bg-white shadow rounded-xl overflow-hidden">
-                                <div class="h-40 w-full">
-                                    @if ($course->image)
-                                        <img src="{{ asset('storage/' . $course->image) }}"
-                                            alt="{{ $course->name }}" class="w-full h-full object-cover">
-                                    @else
-                                        <div class="h-full w-full bg-purple-500"></div>
-                                    @endif
-                                </div>
-                                <div class="p-5">
+                    <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                        <div class="bg-white shadow rounded-xl overflow-hidden">
+                            <div class="h-40 w-full">
+                                @if ($course->image)
+                                <img src="{{ asset('storage/' . $course->image) }}"
+                                    alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                @else
+                                <div class="h-full w-full bg-purple-500"></div>
+                                @endif
+                            </div>
+                            <div class="p-5">
 
-                                    <h3 class="text-lg font-bold line-clamp-2"  style="
+                                <h3 class="text-lg font-bold line-clamp-2" style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -514,22 +515,22 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">{{ $course->name }}</h3>
-                                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                                    <div class="flex items-center justify-between mt-3">
-                                        <p class="text-blue-600 font-semibold">
-                                            ₹{{ number_format($course->offer_fee, 2) }}</p>
-                                        <button
-                                            class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                            Join Now
-                                        </button>
-                                    </div>
+                                <div class="flex items-center justify-between mt-3">
+                                    <p class="text-blue-600 font-semibold">
+                                        ₹{{ number_format($course->offer_fee, 2) }}</p>
+                                    <button
+                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                        Join Now
+                                    </button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                    </a>
                     @empty
-                        <p class="text-gray-500">No online courses available.</p>
+                    <p class="text-gray-500">No online courses available.</p>
                     @endforelse
                 </div>
 
@@ -537,18 +538,18 @@
                 <div id="certifications"
                     class="course-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
                     @forelse($certifications as $course)
-                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                            <div class="bg-white shadow rounded-xl overflow-hidden">
-                                <div class="h-40 w-full">
-                                    @if ($course->image)
-                                        <img src="{{ asset('storage/' . $course->image) }}"
-                                            alt="{{ $course->name }}" class="w-full h-full object-cover">
-                                    @else
-                                        <div class="h-full w-full bg-red-500"></div>
-                                    @endif
-                                </div>
-                                <div class="p-5">
-                                    <h3 class="text-lg font-bold line-clamp-2"  style="
+                    <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
+                        <div class="bg-white shadow rounded-xl overflow-hidden">
+                            <div class="h-40 w-full">
+                                @if ($course->image)
+                                <img src="{{ asset('storage/' . $course->image) }}"
+                                    alt="{{ $course->name }}" class="w-full h-full object-cover">
+                                @else
+                                <div class="h-full w-full bg-red-500"></div>
+                                @endif
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-lg font-bold line-clamp-2" style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -557,22 +558,22 @@
     min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
     line-height: 1.6em;
 ">{{ $course->name }}</h3>
-                                    <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
-                                    <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
+                                <p class="text-gray-600">{{ $course->course_duration ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-500 mt-2">{{ $course->short_description }}</p>
 
-                                    <div class="flex items-center justify-between mt-3">
-                                        <p class="text-blue-600 font-semibold">
-                                            ₹{{ number_format($course->offer_fee, 2) }}</p>
-                                        <button
-                                            class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                            Join Now
-                                        </button>
-                                    </div>
+                                <div class="flex items-center justify-between mt-3">
+                                    <p class="text-blue-600 font-semibold">
+                                        ₹{{ number_format($course->offer_fee, 2) }}</p>
+                                    <button
+                                        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                        Join Now
+                                    </button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                    </a>
                     @empty
-                        <p class="text-gray-500">No certifications available.</p>
+                    <p class="text-gray-500">No certifications available.</p>
                     @endforelse
                 </div>
 
@@ -722,24 +723,24 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach ($proudStudents as $proudStudent)
-                    <div class="swiper-slide flex justify-center items-stretch h-[300px]">
-                        <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
-                            <!-- Student Image -->
-                            <img src="{{ asset('storage/' . $proudStudent->image) }}"
-                                alt="{{ $proudStudent->name }}" class="mx-auto rounded-xl h-32 w-32 object-cover" />
+                <div class="swiper-slide flex justify-center items-stretch h-[300px]">
+                    <div class="bg-white rounded-2xl shadow p-4 text-center w-full h-full">
+                        <!-- Student Image -->
+                        <img src="{{ asset('storage/' . $proudStudent->image) }}"
+                            alt="{{ $proudStudent->name }}" class="mx-auto rounded-xl h-32 w-32 object-cover" />
 
-                            <!-- Student Name -->
-                            <h4 class="font-semibold h-15 mt-3">{{ $proudStudent->name }}</h4>
+                        <!-- Student Name -->
+                        <h4 class="font-semibold h-15 mt-3">{{ $proudStudent->name }}</h4>
 
-                            <!-- Fixed Text -->
-                            {{-- <p class="text-sm text-gray-500">CADADDA Jodhpur</p> --}}
+                        <!-- Fixed Text -->
+                        {{-- <p class="text-sm text-gray-500">CADADDA Jodhpur</p> --}}
 
-                            <!-- Company Placed -->
-                            @if ($proudStudent->company)
-                                <p class="text-xs text-gray-400 mt-1">Placed at {{ $proudStudent->company }}</p>
-                            @endif
-                        </div>
+                        <!-- Company Placed -->
+                        @if ($proudStudent->company)
+                        <p class="text-xs text-gray-400 mt-1">Placed at {{ $proudStudent->company }}</p>
+                        @endif
                     </div>
+                </div>
                 @endforeach
             </div>
         </div>
@@ -801,41 +802,41 @@
             <!-- Testimonials -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 @foreach ($testimonials as $testimonial)
-                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
-                        <!-- ⭐ Star Rating -->
-                        <div class="flex mb-4">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <span
-                                    class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
-                                    ★
-                                </span>
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300">
+                    <!-- ⭐ Star Rating -->
+                    <div class="flex mb-4">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span
+                            class="{{ $i <= $testimonial->star_rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-500' }}">
+                            ★
+                            </span>
                             @endfor
-                        </div>
+                    </div>
 
-                        <!-- Review -->
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                            "{{ $testimonial->review }}"
-                        </p>
+                    <!-- Review -->
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                        "{{ $testimonial->review }}"
+                    </p>
 
-                        <!-- User Info -->
-                        <div class="flex items-center">
-                            @if ($testimonial->image)
-                                <img src="{{ asset('storage/' . $testimonial->image) }}"
-                                    alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full mr-3 object-cover">
-                            @else
-                                <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
-                            @endif
+                    <!-- User Info -->
+                    <div class="flex items-center">
+                        @if ($testimonial->image)
+                        <img src="{{ asset('storage/' . $testimonial->image) }}"
+                            alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full mr-3 object-cover">
+                        @else
+                        <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+                        @endif
 
-                            <div>
-                                <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                                    {{ $testimonial->name }}
-                                </div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                    "{{ $testimonial->short_description }}"
-                                </div>
+                        <div>
+                            <div class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
+                                {{ $testimonial->name }}
+                            </div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                "{{ $testimonial->short_description }}"
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
 
@@ -1020,14 +1021,14 @@
                         © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
                     </p>
                     <div class="flex space-x-6">
-                       <a href="{{ route('refund.policy') }}">Refund Policy</a>
+                        <a href="{{ route('refund.policy') }}">Refund Policy</a>
 
-<a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
-    Terms of Service
-</a>
-<a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
-    Privacy Policy
-</a>
+                        <a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
+                            Terms of Service
+                        </a>
+                        <a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
+                            Privacy Policy
+                        </a>
 
                     </div>
                 </div>

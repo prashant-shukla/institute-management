@@ -60,6 +60,16 @@
             </li>
 
 
+                        {{-- feedback --}}
+   <li>
+    <a href="{{ route('feedback.form') }}"
+       class="block p-2 rounded hover:bg-gray-200
+              {{ request()->routeIs('feedback.form') ? 'bg-gray-200 font-semibold' : '' }}">
+        Feedback
+    </a>
+</li>
+
+
 
             {{-- Profile --}}
             <li>

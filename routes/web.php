@@ -155,6 +155,7 @@ Route::middleware('auth')->prefix('student')->name('student.')->group(function (
 
     Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
         ->name('live');
+
 });
 
 Route::middleware(['auth'])
@@ -181,3 +182,5 @@ Route::post('/student/logout', function (Request $request) {
 
     return redirect()->route('student.login'); // login page pe bhej do
 })->name('student.logout');
+Route::get('/feedback-form', [DashboardController::class, 'feedbackForm'])->name('feedback.form');
+Route::post('/feedback-submit', [DashboardController::class, 'store'])->name('feedback.store');

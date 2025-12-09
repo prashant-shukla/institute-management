@@ -804,11 +804,15 @@
         </div>
     </section>
 
-    <!-- Student Testimonials Section -->
+
+
+    <!-- Student Testimonials / Reviews Section -->
+    <!-- Student Testimonials / Reviews Section -->
     <section
         class="py-20 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
+
                 <!-- Section Header -->
                 <div class="text-center mb-16">
                     <h2
@@ -816,149 +820,72 @@
                         Our students, making us proud everyday!
                     </h2>
                     <p
-                        class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto transition-colors duration-300 leading-relaxed">
-                        Hear from our successful graduates who have transformed their careers and are now working in top
-                        companies worldwide.
+                        class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+                        Hear from our successful students and recruiters who trust CADADDA for industry-ready talent.
                     </p>
                     <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
                 </div>
 
-                <!-- Student Testimonials Grid -->
-                {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Student 1 -->
-                    <div
-                        class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
-                        <div class="flex items-center mb-6">
-                            <div
-                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-white font-bold text-xl">R</span>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-white">Rahul Sharma</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">AutoCAD Specialist</p>
-                                <p class="text-sm text-blue-600 dark:text-blue-400">Tech Solutions Ltd.</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-4">
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
-                            "CADADDA transformed my career completely. The hands-on training and industry projects made
-                            me job-ready. I got placed within 2 months of completing the course!"
-                        </p>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                            <span class="font-semibold">Package:</span> ₹6.5 LPA
-                        </div>
-                    </div>
-
-                    <!-- Student 2 -->
-                    <div
-                        class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
-                        <div class="flex items-center mb-6">
-                            <div
-                                class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-white font-bold text-xl">P</span>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-white">Priya Patel</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">3D Visualizer</p>
-                                <p class="text-sm text-green-600 dark:text-green-400">Design Studio Pro</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-4">
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
-                            "The 3DS Max course at CADADDA was exceptional. The instructors are industry experts and the
-                            portfolio I built helped me land my dream job!"
-                        </p>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                            <span class="font-semibold">Package:</span> ₹5.8 LPA
-                        </div>
-                    </div>
-
-                    <!-- Student 3 -->
-                    <div
-                        class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
-                        <div class="flex items-center mb-6">
-                            <div
-                                class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-white font-bold text-xl">A</span>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-white">Amit Kumar</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">BIM Engineer</p>
-                                <p class="text-sm text-purple-600 dark:text-purple-400">BuildTech International</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-4">
-                            <div class="text-yellow-400">★★★★★</div>
-                        </div>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
-                            "Revit Architecture course at CADADDA opened doors to international opportunities. The BIM
-                            training is world-class and I'm now working on global projects."
-                        </p>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                            <span class="font-semibold">Package:</span> ₹8.2 LPA
-                        </div>
-                    </div>
-                </div> --}}
+                <!-- Reviews Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach ($proudStudents as $student)
+                    @foreach ($reviews as $review)
+                    @php
+                    $student = $review->student; // student_id se aaya
+                    $course = $review->course; // course_id se aaya
+
+                    // student photo column: photo / image jo bhi ho
+                    $studentImage = $student->photo ?? $student->image ?? null;
+                    $imagePath = $studentImage
+                    ? asset('storage/' . $studentImage)
+                    : asset('images/blue-circle-with-white-user_78370-4707.avif');
+                    @endphp
+
                     <div
                         class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-600">
 
                         <!-- Top Section -->
                         <div class="flex items-center mb-6">
                             <div
-                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4 overflow-hidden">
-
-                                @if ($student->image)
-                                <img src="{{ asset('storage/' . $student->image) }}"
-                                    alt="{{ $student->name }}"
-                                    class="w-full h-full object-cover rounded-full">
-                                @else
-                                <span class="text-white font-bold text-xl">
-                                    {{ strtoupper(substr($student->name, 0, 1)) }}
-                                </span>
-                                @endif
+                                class="w-16 h-16 rounded-full overflow-hidden mr-4 shadow-md ring-2 ring-blue-200 dark:ring-blue-500/40">
+                                <img src="{{ $imagePath }}"
+                                    alt="{{ $student->name ?? 'User' }}"
+                                    class="w-full h-full object-cover">
                             </div>
+
                             <div>
                                 <h3 class="text-lg font-bold line-clamp-2 text-gray-800 dark:text-white">
-                                    {{ $student->name }}
+                                    {{ $student->user->firstname ?? '' }} {{ $student->user->lastname ?? '' }}
                                 </h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">{{ $student->role }}</p>
-                                <p class="text-sm text-blue-600 dark:text-blue-400">{{ $student->company }}</p>
+
+                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                    {{ $course->name ?? 'Course Student' }}
+                                </p>
                             </div>
                         </div>
 
-                        <!-- Rating -->
+                        <!-- Rating (no column, so default 5) -->
                         <div class="flex mb-4">
-                            <div class="text-yellow-400">
+                            <div class="text-yellow-400 text-lg">
                                 @for ($i = 1; $i <= 5; $i++)
                                     ★
                                     @endfor
                                     </div>
                             </div>
 
-                            <!-- Review -->
+                            <!-- Review Message -->
                             <p class="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
-                                "{{ $student->message }}"
+                                "{{ trim($review->review, '\"') }}"
                             </p>
-
-                            <!-- Package -->
-                            <!-- <div class="text-sm text-gray-500 dark:text-gray-400">
-                                <span class="font-semibold">Package:</span> ₹{{ $student->package }}
-                            </div> -->
                         </div>
                         @endforeach
                     </div>
 
-
-                    <!-- Success Stats -->
+                    <!-- Success Stats (same as before) -->
                     <div class="mt-16 text-center">
                         <div class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg">
-                            <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Student Success Metrics</h3>
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+                                Student Success Metrics
+                            </h3>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                                 <div>
                                     <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">5K+</div>
@@ -979,9 +906,15 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
     </section>
+
+
+
+
+
 
 
 
@@ -1567,68 +1500,68 @@
     </section>
 
 
-<!-- Our Latest News Feed Section -->
-<section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
-    <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
+    <!-- Our Latest News Feed Section -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
 
-            <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-white">
-                    Our Latest Blogs Feed
-                </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                    Stay updated with the latest trends, industry insights, and CAD technology blods.
-                </p>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
-            </div>
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800 dark:text-white">
+                        Our Latest Blogs Feed
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                        Stay updated with the latest trends, industry insights, and CAD technology blods.
+                    </p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
+                </div>
 
-            <!-- Blog Posts Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Blog Posts Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
 
-                @foreach ($latestBlogs as $blog)
+                    @foreach ($latestBlogs as $blog)
                     <article
                         class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
 
                         <div class="relative">
-                                                      <div class="h-56 overflow-hidden rounded-2xl shadow-md">
+                            <div class="h-56 overflow-hidden rounded-2xl shadow-md">
                                 @if (!empty($blog->image))
-                                    {{-- 🖼️ Show uploaded image --}}
-                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                {{-- 🖼️ Show uploaded image --}}
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                                 @elseif (!empty($blog->video_url))
-                                    @php
-                                        $videoId = null;
-                                        $url = $blog->video_url;
+                                @php
+                                $videoId = null;
+                                $url = $blog->video_url;
 
-                                        // ✅ Extract YouTube video ID from all possible formats
-                                        if (
-                                            preg_match(
-                                                '/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([a-zA-Z0-9_-]{11})/',
-                                                $url,
-                                                $matches,
-                                            )
-                                        ) {
-                                            $videoId = $matches[1];
-                                        }
-                                    @endphp
+                                // ✅ Extract YouTube video ID from all possible formats
+                                if (
+                                preg_match(
+                                '/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([a-zA-Z0-9_-]{11})/',
+                                $url,
+                                $matches,
+                                )
+                                ) {
+                                $videoId = $matches[1];
+                                }
+                                @endphp
 
-                                    @if ($videoId)
-                                        {{-- 🎬 Show YouTube thumbnail --}}
-                                        <div class="relative group">
-                                            <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg"
-                                                alt="{{ $blog->title }}"
-                                                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-500">
-                                            {{-- 🔗 Play button overlay --}}
-                                            <a href="{{ $blog->video_url }}" target="_blank"
-                                                class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="white"
-                                                    viewBox="0 0 24 24" class="w-12 h-12">
-                                                    <path d="M8 5v14l11-7z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    @endif
+                                @if ($videoId)
+                                {{-- 🎬 Show YouTube thumbnail --}}
+                                <div class="relative group">
+                                    <img src="https://img.youtube.com/vi/{{ $videoId }}/hqdefault.jpg"
+                                        alt="{{ $blog->title }}"
+                                        class="w-full h-56 object-cover hover:scale-105 transition-transform duration-500">
+                                    {{-- 🔗 Play button overlay --}}
+                                    <a href="{{ $blog->video_url }}" target="_blank"
+                                        class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="white"
+                                            viewBox="0 0 24 24" class="w-12 h-12">
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                @endif
                                 @endif
                             </div>
 
@@ -1661,7 +1594,7 @@
 
                             <!-- Short Description -->
                             <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                              {{ \Illuminate\Support\Str::limit(strip_tags($blog->description), 120) }}
+                                {{ \Illuminate\Support\Str::limit(strip_tags($blog->description), 120) }}
                             </p>
 
                             <!-- Footer -->
@@ -1679,22 +1612,22 @@
 
                         </div>
                     </article>
-                @endforeach
+                    @endforeach
 
-            </div>
+                </div>
 
-            <!-- View All Blogs Button -->
-            <div class="text-center">
-                <a href="{{ url('/blogs') }}">
-                    <button
-                        class="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
-                        View All News Posts
-                    </button>
-                </a>
+                <!-- View All Blogs Button -->
+                <div class="text-center">
+                    <a href="{{ url('/blogs') }}">
+                        <button
+                            class="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-300 shadow-xl">
+                            View All News Posts
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">
@@ -1822,14 +1755,14 @@
                         © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
                     </p>
                     <div class="flex space-x-6">
-                       <a href="{{ route('refund.policy') }}">Refund Policy</a>
+                        <a href="{{ route('refund.policy') }}">Refund Policy</a>
 
-<a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
-    Terms of Service
-</a>
-<a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
-    Privacy Policy
-</a>
+                        <a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
+                            Terms of Service
+                        </a>
+                        <a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
+                            Privacy Policy
+                        </a>
 
                     </div>
                 </div>
