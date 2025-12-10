@@ -62,7 +62,7 @@
     <!-- Buttons -->
     <div class="mt-8 flex justify-end gap-3">
         <a href="{{ url()->previous() }}"
-           class="px-5 py-3.5 border border-gray-300 rounded-md text-sm md:text-base text-gray-700
+           class="px-3.5 py-3.5 border border-gray-300 rounded-md text-sm md:text-base text-gray-700
                   hover:bg-gray-100 transition">
             Back
         </a>

@@ -20,6 +20,8 @@ use App\Models\Gallery;
 use App\Models\ProudStudent;
 use App\Models\History;
 use App\Models\Setting;
+use App\Models\Video;
+use App\Models\Feature;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
@@ -58,8 +60,9 @@ public function Homes()
     $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
     $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
     $proudStudents = ProudStudent::latest()->take(3)->get();
-
+ $videos = Video::latest()->take(3)->get(); 
     $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
+    $features = Feature::all();
    $reviews = Reviews::with(['student', 'course'])
         ->where('status', 1)
         ->orderBy('created_at', 'desc')
@@ -77,6 +80,8 @@ public function Homes()
         'clients'       => $clients,
         'latestBlogs'   => $latestBlogs, // 👈 Add this
         'reviews'       => $reviews,
+        'videos' => $videos,
+        'features'      => $features,
     ]);
 }
 

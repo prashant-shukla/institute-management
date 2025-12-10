@@ -1197,10 +1197,17 @@
                             </div>
                         </div>
 
-                        <button
-                            class="px-6 py-3 bg-white text-blue-500 font-bold rounded-lg hover:bg-gray-100 transition-colors">
-                            View More Features →
-                        </button>
+@php
+    $featuresUrl = \App\Models\Feature::query()->value('button_url');
+@endphp
+
+<a href="{{ $featuresUrl ?? '#' }}" target="_blank">
+    <button
+        class="px-6 py-3 bg-white text-blue-500 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+        View More Features →
+    </button>
+</a>
+
                     </div>
                 </div>
             </div>
@@ -1299,150 +1306,68 @@
 
                 <!-- YouTube Videos Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    <!-- Video 1 -->
-                    <div
-                        class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
-                        <div class="relative">
-                            <div
-                                class="aspect-video bg-gradient-to-br from-red-500 to-red-700 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-black opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div
-                                        class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
-                                    FREE
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3
-                                class="text-lg font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300">
-                                AutoCAD Basics Tutorial
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
-                                Learn the fundamentals of AutoCAD with this comprehensive beginner tutorial. Perfect for
-                                those starting their CAD journey.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    <span>15:32</span>
-                                </div>
-                                <a href="https://youtu.be/LWl_sD8RdME" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors">
-                                    Watch Now
-                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @php
+                    // Thoda colour variety ke liye
+                    $colorSets = [
+                    ['from' => 'from-red-500', 'to' => 'to-red-700', 'badge' => 'bg-red-600'],
+                    ['from' => 'from-blue-500', 'to' => 'to-blue-700', 'badge' => 'bg-blue-500'],
+                    ['from' => 'from-purple-500', 'to' => 'to-purple-700', 'badge' => 'bg-purple-600'],
+                    ];
+                    @endphp
 
-                    <!-- Video 2 -->
-                    <div
-                        class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
-                        <div class="relative">
-                            <div
-                                class="aspect-video bg-gradient-to-br from-blue-500 to-blue-700 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-black opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div
-                                        class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-3 right-3 bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">
-                                    FREE
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3
-                                class="text-lg font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300">
-                                3DS Max Modeling Tips
-                            </h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
-                                Advanced 3D modeling techniques in 3DS Max. Discover professional tips and tricks used
-                                by industry experts.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    <span>22:15</span>
-                                </div>
-                                <a href="https://youtu.be/eSHE6v3pzhk" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors">
-                                    Watch Now
-                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @forelse ($videos as $video)
+                    @php
+                    $set = $colorSets[$loop->index % count($colorSets)];
+                    @endphp
 
-                    <!-- Video 3 -->
                     <div
                         class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100 dark:border-gray-600 overflow-hidden group">
+
+                        <!-- Top banner / thumbnail -->
                         <div class="relative">
-                            <div
-                                class="aspect-video bg-gradient-to-br from-purple-500 to-purple-700 relative overflow-hidden">
+                            <div class="aspect-video bg-gradient-to-br {{ $set['from'] }} {{ $set['to'] }} relative overflow-hidden">
                                 <div class="absolute inset-0 bg-black opacity-20"></div>
+
+                                {{-- Play icon --}}
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div
                                         class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-8 h-8 text-white/90" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M8 5v14l11-7z" />
                                         </svg>
                                     </div>
                                 </div>
+
+                                {{-- Badge --}}
                                 <div
-                                    class="absolute top-3 right-3 bg-purple-600 text-white px-2 py-1 rounded text-xs font-bold">
-                                    FREE
+                                    class="absolute top-3 right-3 {{ $set['badge'] }} text-white px-2 py-1 rounded text-xs font-bold">
+                                    {{ $video->is_free ? 'FREE' : 'PREMIUM' }}
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Content -->
                         <div class="p-6">
                             <h3
                                 class="text-lg font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300">
-                                Revit Architecture Guide
+                                {{ $video->title }}
                             </h3>
+
                             <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
-                                Complete guide to Revit Architecture for BIM modeling. Learn building information
-                                modeling from scratch.
+                                {{ $video->description }}
                             </p>
+
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
-                                    <span>18:47</span>
+                                    <span>{{ $video->duration ?? '--:--' }}</span>
                                 </div>
-                                <a href="https://www.youtube.com/@cadadda" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-lg hover:bg-purple-700 transition-colors">
+
+                                <a href="{{ $video->youtube_url }}" target="_blank"
+                                    class="inline-flex items-center px-4 py-2 {{ $set['badge'] }} text-white text-sm font-semibold rounded-lg hover:brightness-110 transition-colors">
                                     Watch Now
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -1454,7 +1379,13 @@
                             </div>
                         </div>
                     </div>
+                    @empty
+                    <p class="text-gray-500 dark:text-gray-400 col-span-full text-center">
+                        No tutorial videos added yet.
+                    </p>
+                    @endforelse
                 </div>
+
 
                 <!-- YouTube Channel CTA -->
                 <div class="text-center">
