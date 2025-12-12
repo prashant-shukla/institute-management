@@ -35,7 +35,7 @@
                 <!-- Select Box (Fixed Width 70px) -->
                 <div class="w-[150px]">
                     <select name="q{{ $index }}"
-                            class="w-[150px] border border-gray-300 rounded-md px-2 py-1 
+                            class="w-[150px] border border-gray-300 rounded-md  py-1 
                                    text-sm focus:outline-none focus:ring-2
                                    focus:ring-blue-500 focus:border-blue-500">
                         <option value="">--</option>

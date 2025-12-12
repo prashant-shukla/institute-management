@@ -993,13 +993,13 @@
                     @endphp
 
                     <div
-                        class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                        class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group ">
                         <div class="h-48 relative overflow-hidden {{ $bgClass }}">
                             @if ($course->image)
                             <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
                                 class="w-full h-full object-cover">
                             @else
-                            <div class="absolute inset-0 flex items-center justify-center text-white text-3xl font-bold"
+                            <div class="absolute inset-0 flex items-center justify-center text-white dark:text-white text-3xl font-bold"
                                 style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1024,7 +1024,7 @@
                         </div>
 
                         <div class="p-4">
-                            <h3 class="text-xl font-bold"
+                            <h3 class="text-xl font-bold dark:text-white"
                                 style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1036,7 +1036,7 @@
 ">
                                 {{ $course->name }}
                             </h3>
-                            <p class="text-sm opacity-90 mb-2">{{ $course->course_duration ?? 'N/A' }}
+                            <p class="text-sm opacity-90 mb-2 dark:text-gray-400">{{ $course->course_duration ?? 'N/A' }}
                                 Program</p>
                             <div class="flex justify-between items-center mb-3">
                                 {{-- Offer Fee on left --}}
@@ -1101,15 +1101,15 @@
                                 class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                                 LIVE
                             </div>
-                            {{-- <div class="absolute bottom-4 left-4 text-white">
+                            {{-- <div class="absolute bottom-4 left-4 text-white dark:text-white">
                                     <h3 class="text-xl font-bold">{{ $course->name }}</h3>
-                            <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
+                            <p class="text-sm opacity-90 dark:text-gray-400">{{ $course->course_duration }} Online</p>
                         </div> --}}
                     </div>
 
                     {{-- Body --}}
                     <div class="p-4">
-                        <h3 class="text-xl font-bold "
+                        <h3 class="text-xl font-bold dark:text-white"
                             style="
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1121,7 +1121,7 @@
 ">
                             {{ $course->name }}
                         </h3>
-                        <p class="text-sm opacity-90">{{ $course->course_duration }} Online</p>
+                        <p class="text-sm opacity-90 dark:text-gray-400">{{ $course->course_duration }} Online</p>
                         <div class="flex justify-between items-center mb-3">
                             {{-- Offer Fee on left --}}
                             <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
