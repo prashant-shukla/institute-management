@@ -61,7 +61,7 @@
             <div class="mb-6 flex items-center justify-between bg-gray-100 p-4 rounded-lg">
                 <span class="font-medium text-gray-700">Mark as Present:</span>
 
-                <label class="inline-flex items-center cursor-pointer">
+                <label class=" items-center cursor-pointer">
 
                     {{-- Toggle: default OFF --}}
                     <input type="checkbox" id="statusToggle" class="sr-only peer">

@@ -59,6 +59,7 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 
 
 
+
     Route::get('/run-migrate', function () {
         Artisan::call('migrate', [
             '--force' => true, // required in production
@@ -83,7 +84,9 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
     Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
     Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
-
+Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
+    ->name('payment.page');
+    Route::post('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 
     Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
     Route::get('/exam/history', [ExamController::class, 'examHistory'])->name('exam.history');
@@ -155,7 +158,6 @@ Route::middleware('auth')->prefix('student')->name('student.')->group(function (
 
     Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
         ->name('live');
-
 });
 
 Route::middleware(['auth'])

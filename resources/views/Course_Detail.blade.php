@@ -357,10 +357,11 @@
                     <span class="bg-pink-100 text-pink-500 text-xs px-2 py-1 rounded-full">Limited seats</span>
                 </div>
 
-                <a href="#" 
+                <a href="{{ route('payment.page', $course->id) }}"
                     class="w-full bg-indigo-500 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition text-center">
                     Enroll Now
                 </a>
+
 
                 <button onclick="openForm()"
                     class="w-full border border-indigo-500 text-indigo-500 font-semibold py-3 rounded-lg hover:bg-indigo-50 transition">
@@ -641,25 +642,25 @@
             <!-- Accordion Modules -->
             <div class="space-y-4">
                 @foreach ($coursesyllabuses as $index => $syllabus)
-                    <div class="border rounded-xl bg-white shadow-sm">
-                        <button
-                            class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                            onclick="toggleAccordion(this)">
-                            <span class="font-semibold text-gray-900">
-                                {{ $syllabus->title ?? 'Module ' . ($index + 1) }}
-                            </span>
-                            <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="px-6 pb-4 hidden">
-                            <div class="text-gray-700 space-y-2">
-                                {!! str_replace('<ul>', '<ul class="list-disc list-inside">', $syllabus->description) !!}
-                            </div>
+                <div class="border rounded-xl bg-white shadow-sm">
+                    <button
+                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
+                        onclick="toggleAccordion(this)">
+                        <span class="font-semibold text-gray-900">
+                            {{ $syllabus->title ?? 'Module ' . ($index + 1) }}
+                        </span>
+                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-4 hidden">
+                        <div class="text-gray-700 space-y-2">
+                            {!! str_replace('<ul>', '<ul class="list-disc list-inside">', $syllabus->description) !!}
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
 
@@ -700,36 +701,36 @@
                 <div class="swiper-wrapper">
 
                     @forelse($reviews as $review)
-                        <div
-                            class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300 min-h-[230px]">
-                            <div class="flex mb-4">
-                                <div class="text-yellow-400">★★★★★</div> {{-- Always show 5 stars --}}
+                    <div
+                        class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md transition-colors duration-300 min-h-[230px]">
+                        <div class="flex mb-4">
+                            <div class="text-yellow-400">★★★★★</div> {{-- Always show 5 stars --}}
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
+                            "{{ $review->review }}"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3 overflow-hidden">
+                                <img src="{{ asset('images/default-avatar.jpg') }}" alt="Reviewer"
+                                    class="w-12 h-12 object-cover rounded-full">
                             </div>
-                            <p class="text-gray-700 dark:text-gray-300 mb-4 italic transition-colors duration-300">
-                                "{{ $review->review }}"
-                            </p>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full mr-3 overflow-hidden">
-                                    <img src="{{ asset('images/default-avatar.jpg') }}" alt="Reviewer"
-                                        class="w-12 h-12 object-cover rounded-full">
+                            <div>
+                                <div
+                                    class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
+                                    Student #{{ $review->student_id }}
                                 </div>
-                                <div>
-                                    <div
-                                        class="font-bold text-gray-800 dark:text-white transition-colors duration-300">
-                                        Student #{{ $review->student_id }}
-                                    </div>
-                                    <div
-                                        class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                                        Verified Student
-                                    </div>
+                                <div
+                                    class="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                                    Verified Student
                                 </div>
                             </div>
                         </div>
+                    </div>
                     @empty
-                        <div
-                            class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md text-center min-h-[230px]">
-                            <p class="text-gray-500 dark:text-gray-300">No reviews available yet.</p>
-                        </div>
+                    <div
+                        class="swiper-slide bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md text-center min-h-[230px]">
+                        <p class="text-gray-500 dark:text-gray-300">No reviews available yet.</p>
+                    </div>
                     @endforelse
 
                 </div>
@@ -790,24 +791,24 @@
 
             <div class="space-y-4">
                 @forelse($faqs as $faq)
-                    <div class="border rounded-xl bg-white shadow-sm">
-                        <button
-                            class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
-                            onclick="toggleFAQ(this)">
-                            <span class="font-semibold text-gray-900">{{ $faq['question'] }}</span>
-                            <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7">
-                                </path>
-                            </svg>
-                        </button>
-                        <div class="px-6 pb-4 hidden">
-                            <p class="text-gray-700">{{ $faq['answer'] }}</p>
-                        </div>
+                <div class="border rounded-xl bg-white shadow-sm">
+                    <button
+                        class="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none group"
+                        onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900">{{ $faq['question'] }}</span>
+                        <svg class="w-6 h-6 transform transition-transform group-rotate-180" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-4 hidden">
+                        <p class="text-gray-700">{{ $faq['answer'] }}</p>
                     </div>
+                </div>
                 @empty
-                    <p class="text-center text-gray-500">No FAQs available for this course yet.</p>
+                <p class="text-center text-gray-500">No FAQs available for this course yet.</p>
                 @endforelse
             </div>
         </div>
@@ -986,14 +987,14 @@
                         © 2025 CADADDA. All rights reserved. | Autodesk Authorized Training Institute
                     </p>
                     <div class="flex space-x-6">
-                       <a href="{{ route('refund.policy') }}">Refund Policy</a>
+                        <a href="{{ route('refund.policy') }}">Refund Policy</a>
 
-<a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
-    Terms of Service
-</a>
-<a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
-    Privacy Policy
-</a>
+                        <a href="{{ route('terms.conditions') }}" class="text-gray-400 hover:text-white">
+                            Terms of Service
+                        </a>
+                        <a href="{{ route('privacy.policy') }}" class="text-gray-400 hover:text-white">
+                            Privacy Policy
+                        </a>
 
                     </div>
                 </div>

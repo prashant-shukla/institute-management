@@ -17,7 +17,7 @@
             </p>
 
             <a href="{{ route('student.certificate.download') }}"
-               class="inline-block px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+               class="inline-block px-2 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                 ⬇ Download Certificate
             </a>
 
