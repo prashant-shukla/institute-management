@@ -48,31 +48,29 @@ public function paymentSuccess(Request $request)
         !$request->razorpay_order_id ||
         !$request->razorpay_signature
     ) {
-        return "Payment Failed! Missing Razorpay Data.";
+        return redirect()->back()->with('error', 'Payment Failed! Missing Razorpay data.');
     }
 
-    // 2️⃣ Verify signature
-    $signatureStatus = $this->verifySignature(
+    // 2️⃣ Verify Razorpay signature
+    if (!$this->verifySignature(
         $request->razorpay_order_id,
         $request->razorpay_payment_id,
         $request->razorpay_signature
-    );
-
-    if (!$signatureStatus) {
-        return "Payment Failed! Signature mismatch.";
+    )) {
+        return redirect()->back()->with('error', 'Payment Failed! Signature mismatch.');
     }
 
-    // 3️⃣ Course से amount निकालो (IMPORTANT FIX)
+    // 3️⃣ Course & amount
     $course = Course::findOrFail($request->course_id);
-    $amount = $course->offer_fee; // NEVER NULL now
+    $amount = $course->offer_fee ?? $course->fee;
 
-    // 4️⃣ Save payment
-    Payment::create([
-        'user_id'            => Auth::id(),
+    // 4️⃣ SAVE PAYMENT (GUARANTEED CHECK)
+    $payment = Payment::create([
+        'user_id'            => Auth::id(), // null allowed
         'course_id'          => $course->id,
         'gateway'            => 'razorpay',
         'gateway_payment_id' => $request->razorpay_payment_id,
-        'amount'             => $amount, // ✅ FIXED
+        'amount'             => $amount,
         'currency'           => 'INR',
         'status'             => 'success',
         'meta'               => json_encode([
@@ -81,7 +79,22 @@ public function paymentSuccess(Request $request)
         ]),
     ]);
 
-    return "Payment Successful & Saved!";
+    // ❌ Agar payment save nahi hui
+    if (!$payment || !$payment->id) {
+        return redirect()->back()->with('error', 'Payment failed. Please contact support.');
+    }
+
+    // 5️⃣ Session set (ONLY AFTER payment saved)
+    session([
+        'payment_success' => true,
+        'course_id'       => $course->id,
+        'amount'          => $amount,
+        'payment_id'      => $payment->id,
+    ]);
+
+    // 6️⃣ Redirect to student register
+    return redirect()->route('student.register')
+        ->with('success', 'Payment successful! Please complete your registration.');
 }
 
 

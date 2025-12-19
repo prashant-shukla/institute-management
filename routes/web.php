@@ -21,6 +21,7 @@ use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\AttendanceController;
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 use App\Http\Controllers\Student\LiveClassController as StudentLiveClassController;
+use App\Http\Controllers\StudentRegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,12 +81,14 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 
     Route::get('/fees/print/{id}', [FeeReceiptController::class, 'print'])->name('fees.print');
 
-
+Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
+    ->middleware('auth:web')
+    ->name('payment.page');
     Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
     Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
     Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
-Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
-    ->name('payment.page');
+// Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
+//     ->name('payment.page');
     Route::post('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 
     Route::view('/exam_result', 'exam.exam_result')->name('exam_result');
@@ -98,7 +101,11 @@ Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
     Route::post('/exam/save-answer', [ExamController::class, 'saveAnswer'])->name('exam.answer.save');
     Route::get('/exam/{examId}/submit', [ExamController::class, 'showResult'])->name('exam_result');
 
+Route::get('/student/register', [StudentRegisterController::class, 'create'])
+    ->name('student.register');
 
+Route::post('/student/register', [StudentRegisterController::class, 'store'])
+    ->name('student.register.store');
 
 
 
