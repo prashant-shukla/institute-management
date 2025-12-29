@@ -7,42 +7,45 @@ use Razorpay\Api\Api;
 use App\Models\Course;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student;      // ✅ THIS IS IMPORTANT
+use App\Models\StudentFees;
 
 
 class PaymentController extends Controller
 {
-public function createOrder($course_id)
-{
-    $course = Course::findOrFail($course_id);
+    public function createOrder($course_id)
+    {
+        $course = Course::findOrFail($course_id);
 
-    $amount = $course->offer_fee; // FINAL payable
-    $original_fee = $course->fee; // Original fee
-    $offer_fee = $course->offer_fee; // Discounted fee
+        $amount = $course->offer_fee; // FINAL payable
+        $original_fee = $course->fee; // Original fee
+        $offer_fee = $course->offer_fee; // Discounted fee
 
-    $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
 
-    $order = $api->order->create([
-        'receipt'  => 'order_rcpt_' . $course_id,
-        'amount'   => $amount * 100,
-        'currency' => 'INR'
-    ]);
+        $order = $api->order->create([
+            'receipt'  => 'order_rcpt_' . $course_id,
+            'amount'   => $amount * 100,
+            'currency' => 'INR'
+        ]);
 
-    return view('payment', [
-        'key'         => env('RAZORPAY_KEY'),
-        'amount'      => $amount,
-        'orderId'     => $order->id,
-        'courseId'    => $course_id,
-        'courseName'  => $course->name,
-        'fees'        => $original_fee,
-        'offer_fees'  => $offer_fee,
-    ]);
-}
+        return view('payment', [
+            'key'         => env('RAZORPAY_KEY'),
+            'amount'      => $amount,
+            'orderId'     => $order->id,
+            'courseId'    => $course_id,
+            'courseName'  => $course->name,
+            'fees'        => $original_fee,
+            'offer_fees'  => $offer_fee,
+        ]);
+    }
 
 
 
 public function paymentSuccess(Request $request)
 {
-    // 1️⃣ Razorpay required fields check
+   
+    // 1️⃣ Required Razorpay fields
     if (
         !$request->razorpay_payment_id ||
         !$request->razorpay_order_id ||
@@ -60,13 +63,13 @@ public function paymentSuccess(Request $request)
         return redirect()->back()->with('error', 'Payment Failed! Signature mismatch.');
     }
 
-    // 3️⃣ Course & amount
+    // 3️⃣ Course & Amount (SECURE)
     $course = Course::findOrFail($request->course_id);
     $amount = $course->offer_fee ?? $course->fee;
 
-    // 4️⃣ SAVE PAYMENT (GUARANTEED CHECK)
+    // 4️⃣ Save PAYMENT
     $payment = Payment::create([
-        'user_id'            => Auth::id(), // null allowed
+        'user_id'            => auth()->id(),
         'course_id'          => $course->id,
         'gateway'            => 'razorpay',
         'gateway_payment_id' => $request->razorpay_payment_id,
@@ -79,12 +82,34 @@ public function paymentSuccess(Request $request)
         ]),
     ]);
 
-    // ❌ Agar payment save nahi hui
     if (!$payment || !$payment->id) {
         return redirect()->back()->with('error', 'Payment failed. Please contact support.');
     }
 
-    // 5️⃣ Session set (ONLY AFTER payment saved)
+    // 5️⃣ Find STUDENT (linked with user + course)
+$student = Student::where('user_id', auth()->id())
+    ->first();
+
+
+    if (!$student) {
+        return redirect()->back()->with('error', 'Student record not found.');
+    }
+
+    // 6️⃣ SAVE INTO student_fees (NO DUPLICATE)
+    \App\Models\StudentFees::firstOrCreate(
+        [
+            'student_id' => $student->id,
+            'course_id'  => $course->id,
+        ],
+        [
+            'fee_amount'   => $amount,
+            'gst_amount'   => null, // or calculate if needed
+            'payment_mode' => 'razorpay',
+            'received_on'  => now(),
+            'remark'       => 'Online payment successful',
+        ]
+    );
+    // 7️⃣ Session set
     session([
         'payment_success' => true,
         'course_id'       => $course->id,
@@ -92,10 +117,11 @@ public function paymentSuccess(Request $request)
         'payment_id'      => $payment->id,
     ]);
 
-    // 6️⃣ Redirect to student register
-    return redirect()->route('student.register')
-        ->with('success', 'Payment successful! Please complete your registration.');
+    // 8️⃣ Redirect to dashboard
+    return redirect()->route('student.dashboard')
+        ->with('success', 'Payment successful! Enrollment completed.');
 }
+
 
 
     private function verifySignature($orderId, $paymentId, $signature)
@@ -104,5 +130,4 @@ public function paymentSuccess(Request $request)
 
         return $generated === $signature;
     }
-    
 }

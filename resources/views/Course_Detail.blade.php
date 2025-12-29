@@ -284,67 +284,144 @@
                     class="mt-8 bg-white text-indigo-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-indigo-50 transition-transform">
                     🚀 Enroll Now
                 </button>
+
             </div>
 
 
 
 
 
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <div id="studentModal"
+                class="fixed inset-0 z-50 hidden items-center justify-center
+            bg-black/60 backdrop-blur-sm">
+
+                <div class="relative w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto
+                bg-white rounded-2xl shadow-2xl p-8">
+
+                    <button type="button"
+                        onclick="closeStudentModal()"
+                        class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-red-500">✕</button>
+
+                    <h2 class="text-2xl font-bold mb-6">Student Registration</h2>
+
+                    <form method="POST" action="{{ route('student.register.store') }}" class="space-y-8">
+                        @csrf
+
+                        <!-- USER DETAILS -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-600 mb-4">User Details</h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-black mb-1">First Name</label>
+                                    <input name="firstname"
+                                        value="{{ auth()->user()->firstname ?? '' }}"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300
+              focus:ring-2 focus:ring-blue-500"
+                                        required>
+
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-black mb-1">Last Name</label>
+                                    <input name="lastname"
+                                        value="{{ auth()->user()->lastname ?? '' }}"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300
+              focus:ring-2 focus:ring-blue-500">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PERSONAL DETAILS -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-600 mb-4">Personal Details</h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm text-black font-medium mb-1">Father Name</label>
+                                    <input name="father_name"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300"
+                                        required>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm text-black font-medium mb-1">Date of Birth</label>
+                                    <input type="date" name="date_of_birth"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 text-black"
+                                        required>
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm text-black font-medium mb-1">Correspondence Address</label>
+                                    <textarea name="correspondence_add" rows="3"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300"
+                                        required></textarea>
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm text-black font-medium mb-1">Permanent Address</label>
+                                    <textarea name="permanent_add" rows="3"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300"
+                                        required></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm text-black font-medium mb-1">Qualification</label>
+                                    <input name="qualification"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300"
+                                        required>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm text-black font-medium mb-1">Mobile No</label>
+                                    <input name="mobile_no"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COURSE -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-600 mb-4">Course</h3>
+
+                            <!-- Hidden course id -->
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
+
+                            <label class="block text-sm text-black font-medium mb-1">Course Fee</label>
+                            <input name="course_fee"
+                                value="{{ $course->offer_fee }}"
+                                class="w-full px-4 py-3 rounded-lg text-black border bg-gray-100"
+                                readonly>
+                        </div>
+
+
+                        <div class="text-right">
+                            <button type="submit"
+                                class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                                Save & Continue to Payment →
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <script>
-                document.getElementById('enrollButton').addEventListener('click', async function() {
-                    const response = await fetch("{{ route('course.order', $course->id) }}", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        }
-                    });
+                const enrollBtn = document.getElementById('enrollButton');
+                const modal = document.getElementById('studentModal');
 
-                    const data = await response.json();
-
-                    const options = {
-                        "key": data.key,
-                        "amount": data.amount,
-                        "currency": data.currency,
-                        "name": data.course_name,
-                        "description": "Course Enrollment Payment",
-                        "order_id": data.order_id,
-                        "handler": async function(response) {
-                            await fetch("{{ route('payment.verify') }}", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                    },
-                                    body: JSON.stringify({
-                                        razorpay_payment_id: response.razorpay_payment_id,
-                                        razorpay_order_id: response.razorpay_order_id,
-                                        razorpay_signature: response.razorpay_signature,
-                                        payment_record_id: data.payment_id
-                                    })
-                                }).then(res => res.json())
-                                .then(res => {
-                                    if (res.status === 'success') {
-                                        alert('✅ Payment Successful! You are now enrolled.');
-                                        window.location.reload();
-                                    } else {
-                                        alert('❌ Payment verification failed.');
-                                    }
-                                });
-                        },
-                        "theme": {
-                            "color": "#6366F1"
-                        }
-                    };
-
-                    const rzp = new Razorpay(options);
-                    rzp.open();
+                enrollBtn.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.classList.add('overflow-hidden');
                 });
+
+                function closeStudentModal() {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.classList.remove('overflow-hidden');
+                }
             </script>
-
-
-
 
 
             <!-- Right: Pricing & Enroll box -->

@@ -148,6 +148,19 @@
             will-change: transform, opacity;
         }
     </style>
+
+    <style>
+    .tw-input {
+        @apply w-full px-4 py-3 rounded-lg border border-gray-300 
+        bg-white text-gray-800 
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+        dark:bg-gray-700 dark:text-white dark:border-gray-600;
+    }
+
+    .tw-label {
+        @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+    }
+</style>
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -271,16 +284,17 @@
 
 
 
+
 <div class="max-w-5xl mx-auto my-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
 
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+    <h2 class="text-2xl font-bold mb-8 text-gray-800 dark:text-white">
         Student Registration
     </h2>
 
     {{-- Validation Errors --}}
     @if ($errors->any())
-        <div class="mb-6 bg-red-100 text-red-700 p-4 rounded-lg">
-            <ul class="list-disc pl-5">
+        <div class="mb-6 rounded-lg bg-red-100 p-4 text-red-700">
+            <ul class="list-disc pl-5 space-y-1">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -288,88 +302,134 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('student.register.store') }}">
+    <form method="POST" action="{{ route('student.register.store') }}" class="space-y-10">
         @csrf
 
         {{-- USER DETAILS --}}
-        <h3 class="text-lg font-semibold mb-4 text-blue-500">User Details</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input name="firstname" value="{{ old('firstname') }}" placeholder="First Name"
-                class="input" required>
+        <div>
+            <h3 class="text-lg font-semibold mb-4 text-blue-600">User Details</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="tw-label">First Name</label>
+                    <input name="firstname" value="{{ old('firstname') }}"
+                        class="tw-input" required>
+                </div>
 
-            <input name="lastname" value="{{ old('lastname') }}" placeholder="Last Name"
-                class="input">
+                <div>
+                    <label class="tw-label">Last Name</label>
+                    <input name="lastname" value="{{ old('lastname') }}"
+                        class="tw-input">
+                </div>
 
-            <input name="email" type="email" value="{{ old('email') }}" placeholder="Email"
-                class="input" required>
+                <div>
+                    <label class="tw-label">Email</label>
+                    <input name="email" type="email" value="{{ old('email') }}"
+                        class="tw-input" required>
+                </div>
 
-            <input name="password" type="password" placeholder="Password"
-                class="input" required>
+                <div>
+                    <label class="tw-label">Password</label>
+                    <input name="password" type="password"
+                        class="tw-input" required>
+                </div>
+            </div>
         </div>
 
-        {{-- REGISTRATION --}}
-        <h3 class="text-lg font-semibold mt-8 mb-4 text-blue-500">Registration</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input name="reg_date" type="date"
-                value="{{ old('reg_date', now()->toDateString()) }}"
-                class="input" required>
-
-            <input name="reg_no"
-                value="{{ old('reg_no', 'REG-' . time()) }}"
-                class="input" required>
-        </div>
+        {{-- REGISTRATION (HIDDEN) --}}
+        <input type="hidden" name="reg_date" value="{{ now()->toDateString() }}">
+        <input type="hidden" name="reg_no" value="REG-{{ time() }}">
 
         {{-- PERSONAL DETAILS --}}
-        <h3 class="text-lg font-semibold mt-8 mb-4 text-blue-500">Personal Details</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input name="father_name" value="{{ old('father_name') }}"
-                placeholder="Father Name" class="input" required>
+        <div>
+            <h3 class="text-lg font-semibold mb-4 text-blue-600">Personal Details</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <input name="date_of_birth" type="date"
-                value="{{ old('date_of_birth') }}"
-                class="input" required>
+                <div>
+                    <label class="tw-label">Father Name</label>
+                    <input name="father_name" value="{{ old('father_name') }}"
+                        class="tw-input" required>
+                </div>
 
-            <textarea name="correspondence_add" placeholder="Correspondence Address"
-                class="input md:col-span-2" required>{{ old('correspondence_add') }}</textarea>
+                <div>
+                    <label class="tw-label">Date of Birth</label>
+                    <input name="date_of_birth" type="date"
+                        value="{{ old('date_of_birth') }}"
+                        class="tw-input" required>
+                </div>
 
-            <textarea name="permanent_add" placeholder="Permanent Address"
-                class="input md:col-span-2" required>{{ old('permanent_add') }}</textarea>
+                <div class="md:col-span-2">
+                    <label class="tw-label">Correspondence Address</label>
+                    <textarea name="correspondence_add" rows="3"
+                        class="tw-input" required>{{ old('correspondence_add') }}</textarea>
+                </div>
 
-            <input name="qualification" value="{{ old('qualification') }}"
-                placeholder="Qualification" class="input" required>
+                <div class="md:col-span-2">
+                    <label class="tw-label">Permanent Address</label>
+                    <textarea name="permanent_add" rows="3"
+                        class="tw-input" required>{{ old('permanent_add') }}</textarea>
+                </div>
 
-            <input name="college_workplace" value="{{ old('college_workplace') }}"
-                placeholder="College / Workplace" class="input">
+                <div>
+                    <label class="tw-label">Qualification</label>
+                    <input name="qualification" value="{{ old('qualification') }}"
+                        class="tw-input" required>
+                </div>
 
-            <input name="mobile_no" value="{{ old('mobile_no') }}"
-                placeholder="Mobile No" class="input" required>
+                <div>
+                    <label class="tw-label">College / Workplace</label>
+                    <input name="college_workplace" value="{{ old('college_workplace') }}"
+                        class="tw-input">
+                </div>
 
-            <input name="residential_no" value="{{ old('residential_no') }}"
-                placeholder="Residential No" class="input">
+                <div>
+                    <label class="tw-label">Mobile No</label>
+                    <input name="mobile_no" value="{{ old('mobile_no') }}"
+                        class="tw-input" required>
+                </div>
 
-            <input name="office_no" value="{{ old('office_no') }}"
-                placeholder="Office No" class="input">
+                <div>
+                    <label class="tw-label">Residential No</label>
+                    <input name="residential_no" value="{{ old('residential_no') }}"
+                        class="tw-input">
+                </div>
+
+                <div>
+                    <label class="tw-label">Office No</label>
+                    <input name="office_no" value="{{ old('office_no') }}"
+                        class="tw-input">
+                </div>
+            </div>
         </div>
 
         {{-- COURSE --}}
-        <h3 class="text-lg font-semibold mt-8 mb-4 text-blue-500">Course</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="hidden" name="course_id" value="{{ session('course_id') }}">
+        <div>
+            <h3 class="text-lg font-semibold mb-4 text-blue-600">Course</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="hidden" name="course_id" value="{{ session('course_id') }}">
 
-            <input name="course_fee"
-                value="{{ session('amount') }}"
-                class="input bg-gray-100 dark:bg-gray-700" readonly>
+                <div>
+                    <label class="tw-label">Course Fee</label>
+                    <input name="course_fee"
+                        value="{{ session('amount') }}"
+                        class="tw-input bg-gray-100 dark:bg-gray-600" readonly>
+                </div>
+            </div>
         </div>
 
         {{-- SUBMIT --}}
-        <div class="mt-8 text-right">
+        <div class="text-right">
             <button type="submit"
-                class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">
+                class="inline-flex items-center justify-center px-8 py-3
+                bg-blue-600 hover:bg-blue-700
+                text-white font-semibold rounded-lg
+                transition duration-200">
                 Submit & Continue
             </button>
         </div>
+
     </form>
 </div>
+
 
 
 

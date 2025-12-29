@@ -6,42 +6,36 @@
 
 <div class="space-y-10">
 
-    {{-- ------------------------------- --}}
-    {{-- 🔥 1) Current Enrolled Course Card (Full Width) --}}
-    {{-- ------------------------------- --}}
-    @if($currentCourse)
-    <div class="bg-white shadow-md rounded-xl p-6 flex gap-6 w-full">
+  <h2 class="text-xl font-bold mb-4">My Courses</h2>
 
-        {{-- Image --}}
-        <div class="w-64 h-40 rounded-lg overflow-hidden bg-blue-200">
-            @if($currentCourse->image)
-            <img src="{{ asset('storage/'.$currentCourse->image) }}"
-                class="w-full h-full object-cover">
-            @endif
-        </div>
+@if($myCourses->count())
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        @foreach($myCourses as $item)
+            <div class="border rounded-lg p-4 bg-white shadow">
+                <h3 class="font-semibold text-lg">
+                    {{ $item->course->title }}
+                </h3>
 
-        {{-- Details --}}
-        <div class="flex-1">
-            <h2 class="text-2xl font-semibold">{{ $currentCourse->name }}</h2>
-            <p class="mt-2 text-gray-600 text-sm leading-6">
-                {{ \Illuminate\Support\Str::limit(strip_tags($currentCourse->description), 250) }}
-            </p>
+                <p class="text-sm text-gray-500">
+                    Mode: {{ ucfirst($item->course->mode) }}
+                </p>
 
+                <p class="text-green-600 font-semibold">
+                    Fee: ₹{{ number_format($item->fee_amount) }}
+                </p>
 
-            <p class="mt-3 font-medium">
-                Duration:
-                <span class="text-gray-700">{{ $currentCourse->course_duration }}</span>
-            </p>
-
-            <a href="{{ route('course', ['slug' => $currentCourse->slug, 'id' => $currentCourse->id]) }}"
-                class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">
-                Go to Course
-            </a>
-
-        </div>
+                <span class="inline-block mt-2 px-3 py-1 text-xs rounded
+                    {{ $item->status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                    {{ ucfirst($item->status) }}
+                </span>
+            </div>
+        @endforeach
     </div>
-    
-    @endif
+@else
+    <p class="text-gray-500">You have not enrolled in any course yet.</p>
+@endif
+
+  
 
 
     {{-- ------------------------------- --}}

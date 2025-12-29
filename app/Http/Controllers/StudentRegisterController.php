@@ -7,6 +7,11 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\StudentFee;
+use App\Models\Course;
+use App\Models\Payment;
+use App\Models\StudentFees;
+use Illuminate\Support\Facades\DB;
 
 class StudentRegisterController extends Controller
 {
@@ -37,97 +42,72 @@ class StudentRegisterController extends Controller
      * 3️⃣ Student record create karta hai
      * 4️⃣ Student ko login kar deta hai
      */
-    public function store(Request $request)
-    {
-        // -----------------------------
-        // 1️⃣ Form Validation
-        // -----------------------------
-        $request->validate([
-            'firstname'            => 'required|string|max:255',
-            'lastname'             => 'nullable|string|max:255',
-            'email'                => 'required|email|unique:users,email',
-            'password'             => 'required|min:6',
 
-            'reg_date'             => 'required|date',
-            'reg_no'               => 'required|unique:students,reg_no',
 
-            'father_name'          => 'required|string|max:255',
-            'date_of_birth'        => 'required|date',
-
-            'correspondence_add'   => 'required|string',
-            'permanent_add'        => 'required|string',
-
-            'qualification'        => 'required|string|max:255',
-            'college_workplace'    => 'nullable|string|max:255',
-
-            'mobile_no'            => 'required|string|max:25',
-            'residential_no'       => 'nullable|string|max:25',
-            'office_no'            => 'nullable|string|max:25',
-
-            'course_id'            => 'required|exists:courses,id',
-            'course_fee'           => 'required|numeric',
-        ]);
-
-        // -----------------------------
-        // 2️⃣ Create User
-        // -----------------------------
-        $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname'  => $request->lastname,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password), // Password hash
-        ]);
-
-        // -----------------------------
-        // 3️⃣ GST Calculation
-        // -----------------------------
-        $gstAmount   = $request->course_fee * 0.18;
-        $totalAmount = $request->course_fee + $gstAmount;
-
-        // -----------------------------
-        // 4️⃣ Create Student
-        // -----------------------------
-        Student::create([
-            'user_id'            => $user->id,
-
-            'reg_date'           => $request->reg_date,
-            'reg_no'             => $request->reg_no,
-
-            'father_name'        => $request->father_name,
-            'date_of_birth'      => $request->date_of_birth,
-
-            'correspondence_add' => $request->correspondence_add,
-            'permanent_add'      => $request->permanent_add,
-
-            'qualification'      => $request->qualification,
-            'college_workplace'  => $request->college_workplace,
-
-            'mobile_no'          => $request->mobile_no,
-            'residential_no'     => $request->residential_no,
-            'office_no'          => $request->office_no,
-
-            'course_id'          => $request->course_id,
-            'course_fee'         => $request->course_fee,
-            'gst_amount'         => $gstAmount,
-            'total_fee'          => $totalAmount,
-
-            'is_online'          => 1, // Online student
-        ]);
-
-        // -----------------------------
-        // 5️⃣ Login Student
-        // -----------------------------
-        auth()->login($user);
-
-        // -----------------------------
-        // 6️⃣ Clear Payment Session
-        // -----------------------------
-        session()->forget(['payment_success', 'course_id', 'amount']);
-
-        // -----------------------------
-        // 7️⃣ Redirect to Student Dashboard
-        // -----------------------------
-        return redirect()->route('student.dashboard')
-            ->with('success', 'Student registered successfully!');
+public function store(Request $request)
+{
+    if (!auth()->check()) {
+        return redirect()->route('login');
     }
+
+    $validated = $request->validate([
+        'firstname'          => 'required|string|max:255',
+        'lastname'           => 'nullable|string|max:255',
+
+        'father_name'        => 'required|string|max:255',
+        'date_of_birth'      => 'required|date',
+
+        'correspondence_add' => 'required|string',
+        'permanent_add'      => 'required|string',
+
+        'qualification'      => 'required|string|max:255',
+
+        'mobile_no'          => 'required|string|max:25',
+
+        'course_id'          => 'required|exists:courses,id',
+    ]);
+
+    return DB::transaction(function () use ($validated) {
+
+        $user = auth()->user();
+
+        // 1️⃣ Update user name
+        $user->update([
+            'firstname' => $validated['firstname'],
+            'lastname'  => $validated['lastname'],
+        ]);
+
+        // 2️⃣ STUDENT (ONE PER USER)
+        $student = Student::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'reg_no'             => 'REG-' . now()->format('Ymd') . '-' . rand(100,999),
+                'father_name'        => $validated['father_name'],
+                'date_of_birth'      => $validated['date_of_birth'],
+                'correspondence_add' => $validated['correspondence_add'],
+                'permanent_add'      => $validated['permanent_add'],
+                'qualification'      => $validated['qualification'],
+                'mobile_no'          => $validated['mobile_no'],
+                'is_online'          => 1,
+            ]
+        );
+
+       $course = Course::findOrFail($validated['course_id']);
+       
+        // 3️⃣ Store session for payment
+        session([
+            'student_id' => $student->id,
+            'course_id'  => $course->id,
+            'amount'     => $course->offer_fee,
+        ]);
+
+        // 6️⃣ Redirect to payment page
+        return redirect()->route('payment.page', $course->id)
+            ->with('success', 'Student registered. Please complete payment.');
+    });
+}
+
+
+
+
 }

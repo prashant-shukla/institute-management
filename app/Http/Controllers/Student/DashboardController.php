@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Feedback;
 use App\Models\StudentsFeedback;
+use App\Models\StudentFees;
 
 
 class DashboardController extends Controller
@@ -17,8 +18,20 @@ public function index(Request $request)
     $user = Auth::user();
     $student = $user?->student;
 
-    $currentCourse = $student?->course;
+    // ✅ Student ke ALL enrolled courses
+    $myCourses = collect();
 
+    if ($student) {
+        $myCourses = \App\Models\StudentFees::with('course')
+            ->where('student_id', $student->id)
+        //    ->where('status', 'paid') // optional
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
+    // ----------------------------
+    // FILTER LOGIC (All Courses)
+    // ----------------------------
     $filter = $request->get('category'); // online / offline / certifications
 
     $query = \App\Models\Course::where('status', 'active');
@@ -30,18 +43,18 @@ public function index(Request $request)
         $query->whereIn('mode', ['offline', 'both']);
     }
     elseif ($filter === 'certifications') {
-        // Certification category = 3 (example) 
         $query->where('course_categories_id', 3);
     }
 
     $allCourses = $query->orderBy('id', 'desc')->get();
 
     return view('student.dashboard', compact(
-        'currentCourse',
+        'myCourses',
         'allCourses',
         'filter'
     ));
 }
+
 // Example controller method
 public function feedbackForm()
 {
