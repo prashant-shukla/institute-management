@@ -63,7 +63,8 @@ class StudentResource extends Resource
                                     ->nullable()
                                     ->revealable()
                                     // sirf value di ho tab hi hash kare
-                                    ->dehydrateStateUsing(fn($state) =>
+                                    ->dehydrateStateUsing(
+                                        fn($state) =>
                                         filled($state) ? Hash::make($state) : null
                                     )
                                     // agar field khali ho to DB me password update na ho
@@ -262,7 +263,7 @@ class StudentResource extends Resource
                             $student = Student::with('user')->find($record->id);
                             $studentName = trim(
                                 ($student->user->firstname ?? '') . ' ' .
-                                ($student->user->lastname ?? '')
+                                    ($student->user->lastname ?? '')
                             );
 
                             Certificate::create([

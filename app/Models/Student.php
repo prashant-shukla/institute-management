@@ -19,6 +19,8 @@ class Student extends Model
     protected $guarded = ['id'];
 
     protected $casts = ['software_covered' => 'array'];
+protected $appends = ['full_name'];
+
 
     public function course(): BelongsTo
     {
@@ -76,6 +78,11 @@ class Student extends Model
         return \App\Models\Certificate::where('student_id', $this->id)
             ->where('course_id', $this->course_id)
             ->exists();
+    }
+
+    public function studentCourses()
+    {
+        return $this->hasMany(StudentCourse::class);
     }
 
     protected static function boot()

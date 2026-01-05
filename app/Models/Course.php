@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\CourseCategory;
 use App\Models\CourseMentor;
-use App\Models\Mentor; 
-use App\Models\Tool; 
-use App\Models\CourseSyllabuses; 
+use App\Models\Mentor;
+use App\Models\Tool;
+use App\Models\CourseSyllabuses;
 
 class Course extends Model
 {
@@ -31,8 +31,8 @@ class Course extends Model
     {
         return $this->belongsTo(CourseCategory::class, 'course_categories_id'); // Assuming this is the correct foreign key
     }
-    
-   
+
+
 
     public function mentors(): BelongsToMany
     {
@@ -46,5 +46,10 @@ class Course extends Model
     public function courseTool()
     {
         return $this->hasMany(CourseTool::class);
+    }
+
+    public function studentCourses()
+    {
+        return $this->hasMany(StudentCourse::class);
     }
 }
