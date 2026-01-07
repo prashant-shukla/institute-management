@@ -10,7 +10,7 @@ use App\Http\Controllers\FeeReceiptController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\PaymentController; // global / admin wala
 use App\Http\Controllers\Student\PaymentController as StudentPaymentController; // student wala
-
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Student\StudentCertificateController;
 
 use App\Http\Controllers\ExamCategoryController;
@@ -26,9 +26,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::group(['middleware' => 'redirect.if.not.installed'], function () {
 
-    Route::get('/', [HomeController::class, 'Homes']);
+
+    Route::get('/', [HomeController::class, 'Homes'])->name('home');
     Route::get('/Course', [HomeController::class, 'Courses']);
     Route::get('/Course_Detail', [HomeController::class, 'Course_Detail']);
     Route::get('/contacts', [HomeController::class, 'contacts']);
@@ -51,35 +51,18 @@ Route::group(['middleware' => 'redirect.if.not.installed'], function () {
     Route::post('/register', [UserController::class, 'storeRegister'])->name('register.store');
     Route::get('/login', [UserController::class, 'login'])->name('login');
     Route::post('/login', [UserController::class, 'storeLogin'])->name('login.store');
-    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::post('/logout', [UserController::class, 'logout'])->name('web-logout');
     Route::view('/terms-and-conditions', 'terms')->name('terms.conditions');
     Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
     Route::view('/refund-policy', 'refund-policy')->name('refund.policy');
 
-
-
-
-
-
-    Route::get('/run-migrate', function () {
-        Artisan::call('migrate', [
-            '--force' => true, // required in production
-        ]);
-
-        return 'Migrations have been run successfully!';
-    });
-
-
-    Route::get('/seed', function () {
-        Artisan::call('db:seed', [
-            '--force' => true, // allow in production
-        ]);
-
-        return 'Database seeding completed!';
-    });
-
-
-    Route::get('/fees/print/{id}', [FeeReceiptController::class, 'print'])->name('fees.print');
+Route::post('/web-logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('web-logout');
+ Route::get('/fees/print/{id}', [FeeReceiptController::class, 'print'])->name('fees.print');
 
 Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
     ->middleware('auth:web')
@@ -123,25 +106,28 @@ Route::post('/student/register', [StudentRegisterController::class, 'store'])
     // ✅ Frontend Exam Category Pages
     Route::get('/Exams', [ExamCategoryController::class, 'index'])->name('exam-categories.index');
     Route::get('/exams/{id}', [ExamCategoryController::class, 'show'])->name('exam-categories.show');
-});
+
 
 Route::prefix('student')->group(function () {
 
     // login routes
-    Route::get('/login',  [AuthController::class, 'showLogin'])->name('student.login');
-    Route::post('/login', [AuthController::class, 'login'])->name('student.login.submit');
+    // Route::get('/login',  [AuthController::class, 'showLogin'])->name('student.login');
+    // Route::post('/login', [AuthController::class, 'login'])->name('student.login.submit');
 
     // protected routes
-    Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])
-            ->name('student.dashboard');
-    });
+    // Route::middleware('auth')->group(function () {
+    //     Route::get('/dashboard', [DashboardController::class, 'index'])
+    //         ->name('student.dashboard');
+    // });
 });
 
 
 Route::middleware('auth')->prefix('student')->name('student.')->group(function () {
 
-
+ Route::middleware('auth')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
+    });
     Route::get('/attendance', [AttendanceController::class, 'create'])->name('attendance');
     Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
 
@@ -165,12 +151,6 @@ Route::middleware('auth')->prefix('student')->name('student.')->group(function (
 
     Route::get('/live-classes', [StudentLiveClassController::class, 'index'])
         ->name('live');
-});
-
-Route::middleware(['auth'])
-    ->prefix('student')
-    ->name('student.')
-    ->group(function () {
 
         Route::get('payments/download', [StudentPaymentController::class, 'downloadPaymentsPdf'])
             ->name('payments.download');
@@ -180,16 +160,15 @@ Route::middleware(['auth'])
 
         Route::get('/certificate/download', [StudentCertificateController::class, 'download'])
             ->name('certificate.download');
-    });
+//             Route::get('/feedback-form', [DashboardController::class, 'feedbackForm'])->name('feedback.form');
+// Route::post('/feedback-submit', [DashboardController::class, 'store'])->name('feedback.store');
+});
 
 
 
-Route::post('/student/logout', function (Request $request) {
-    Auth::logout();                             // user logout
-    $request->session()->invalidate();         // session clear
-    $request->session()->regenerateToken();    // CSRF token regenerate
 
-    return redirect()->route('student.login'); // login page pe bhej do
-})->name('student.logout');
-Route::get('/feedback-form', [DashboardController::class, 'feedbackForm'])->name('feedback.form');
+
+Route::post('/logout', [LogoutController::class, 'logout'])
+    ->name('logout');
+            Route::get('/feedback-form', [DashboardController::class, 'feedbackForm'])->name('feedback.form');
 Route::post('/feedback-submit', [DashboardController::class, 'store'])->name('feedback.store');

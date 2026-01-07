@@ -16,7 +16,6 @@
         "maatwebsite/excel": "^3.1",
         "outerweb/filament-settings": "^1.2",
         "razorpay/razorpay": "^2.9",
-        "shipu/web-installer": "^1.0",
         "spatie/laravel-permission": "^6.9",
         "tomatophp/filament-menus": "^1.0",
         "z3d0x/filament-fabricator": "^2.2"

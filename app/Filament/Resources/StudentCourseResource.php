@@ -27,11 +27,22 @@ class StudentCourseResource extends Resource
         return $form->schema([
 
             /* STUDENT */
-            Forms\Components\Select::make('student_id')
-                ->label('Student')
-                ->relationship('student', 'Username')
-                ->searchable()
-                ->required(),
+Forms\Components\Select::make('student_id')
+    ->label('Student')
+    ->options(
+        \App\Models\Student::with('user')
+            ->get()
+            ->mapWithKeys(fn ($student) => [
+                $student->id =>
+                    trim(
+                        ($student->user->firstname ?? '') . ' ' .
+                        ($student->user->lastname ?? '')
+                    )
+            ])
+    )
+    ->searchable()
+    ->required(),
+
 
             /* COURSE */
             Forms\Components\Select::make('course_id')

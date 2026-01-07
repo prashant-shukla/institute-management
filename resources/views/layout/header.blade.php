@@ -232,16 +232,77 @@
                 <!-- SIMPLE NAVIGATION LINK -->
                 <li class="nl-simple" aria-haspopup="true"><a href="#faqs-3" class="h-link">FAQs</a>
                 </li>
-                <!-- SIGN IN LINK -->
-                <li class="nl-simple reg-fst-link mobile-last-link" aria-haspopup="true">
-                  <a href="login-2.html" class="h-link">Sign in</a>
-                </li>
-                <!-- SIGN UP BUTTON -->
-                <li class="nl-simple" aria-haspopup="true">
-                  <a href="signup-2.html"
-                    class="btn r-04 !rounded-[4px] btn--theme hover--tra-black last-link">Sign
-                    up</a>
-                </li>
+                
+{{-- ========================= --}}
+{{-- GUEST USER (NOT LOGGED IN) --}}
+{{-- ========================= --}}
+@if(!Auth::check())
+
+    <li class="nl-simple">
+        <a href="{{ route('login') }}" class="h-link">Sign in</a>
+    </li>
+
+    <li class="nl-simple">
+        <a href="{{ route('register') }}"
+           class="btn r-04 btn--theme hover--tra-black last-link">
+            Sign up
+        </a>
+    </li>
+@endif
+
+
+
+{{-- ========================= --}}
+{{-- AUTH USER (LOGGED IN) --}}
+{{-- ========================= --}}
+@if(Auth::check())
+<li aria-haspopup="true" class="relative">
+    <a href="javascript:void(0)"
+       class="h-link flex items-center gap-2">
+
+        <!-- 👤 PROFILE IMAGE -->
+        <img
+            src="{{ auth()->user()->profile_photo_url ?? asset('images/user.png') }}"
+            class="w-8 h-8 rounded-full object-cover border"
+            alt="User">
+
+        <!-- 👤 NAME -->
+        <span>
+            {{ auth()->user()->firstname }}
+            {{ auth()->user()->lastname }}
+        </span>
+
+        <span class="wsarrow"></span>
+    </a>
+
+    <!-- 🔽 DROPDOWN -->
+    <ul class="sub-menu">
+        <li>
+            <a href="{{ route('student.dashboard') }}">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('student.profile') }}">
+                My Profile
+            </a>
+        </li>
+
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                        class="w-full text-left px-4 py-2 hover:bg-gray-100">
+                    Logout
+                </button>
+            </form>
+        </li>
+    </ul>
+</li>
+@endif
+
+
               </ul>
             </nav>
             <!-- END MAIN MENU -->
