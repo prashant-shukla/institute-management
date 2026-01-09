@@ -242,7 +242,8 @@
         <!-- Dropdown -->
         <div id="userMenu"
              class="hidden absolute right-0 top-12 w-44 bg-white shadow-lg rounded-lg overflow-hidden z-50">
-            <a href=""
+            <a href=" "
+          
                class="block px-4 py-2 hover:bg-gray-100">
                 Profile
             </a>

@@ -1,68 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Registration</title>
+    <title>Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-10">
-        <h2 class="text-2xl font-bold text-center mb-6">Student Registration Form</h2>
 
-        <form action="{{ route('register.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-            @csrf
+<div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
 
-            <!-- Row 1 -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-medium mb-1">First Name</label>
-                    <input type="text" name="firstname" class="w-full border rounded-lg px-3 py-2" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Last Name</label>
-                    <input type="text" name="lastname" class="w-full border rounded-lg px-3 py-2">
-                </div>
-            </div>
+    <!-- Heading -->
+    <h2 class="text-2xl font-bold text-center text-gray-800">
+        Create Account
+    </h2>
+    <p class="text-sm text-gray-500 text-center mb-6">
+        Fill in the details to create your account
+    </p>
 
-            <!-- Row 2 -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Username</label>
-                    <input type="text" name="username" class="w-full border rounded-lg px-3 py-2" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Email</label>
-                    <input type="email" name="email" class="w-full border rounded-lg px-3 py-2" required>
-                </div>
-            </div>
+    <!-- Errors -->
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-700 p-2 rounded text-sm mb-4">
+            {{ $errors->first() }}
+        </div>
+    @endif
 
-            <!-- Row 3 -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Password</label>
-                    <input type="password" name="password" class="w-full border rounded-lg px-3 py-2" required
-                        autocomplete="new-password">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Confirm Password</label>
-                    <input type="password" name="password_confirmation" class="w-full border rounded-lg px-3 py-2"
-                        required autocomplete="new-password">
-                </div>
-            </div>
+    <!-- Form -->
+    <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
+        @csrf
 
+        <!-- First Name -->
+        <input type="text" name="firstname"
+               placeholder="First Name"
+               class="border p-2 w-full rounded"
+               required>
 
+        <!-- Last Name -->
+        <input type="text" name="lastname"
+               placeholder="Last Name"
+               class="border p-2 w-full rounded">
 
+        <!-- Username -->
+        <input type="text" name="username"
+               placeholder="Username"
+               class="border p-2 w-full rounded"
+               required>
 
-            <div class="text-center">
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
-                    Register
-                </button>
-            </div>
-        </form>
-    </div>
+        <!-- Email -->
+        <input type="email" name="email"
+               placeholder="Email"
+               class="border p-2 w-full rounded"
+               required>
+
+        <!-- Password -->
+        <input type="password" name="password"
+               placeholder="Password"
+               class="border p-2 w-full rounded"
+               required autocomplete="new-password">
+
+        <!-- Confirm Password -->
+        <input type="password" name="password_confirmation"
+               placeholder="Confirm Password"
+               class="border p-2 w-full rounded"
+               required autocomplete="new-password">
+
+        <!-- Button -->
+        <button type="submit"
+                class="w-full bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+            Register
+        </button>
+    </form>
+
+    <!-- Login link -->
+    <p class="mt-6 text-sm text-center text-gray-600">
+        Already have an account?
+        <a href="{{ route('login') }}"
+           class="text-indigo-600 font-medium hover:underline">
+            Login
+        </a>
+    </p>
+
+</div>
+
 </body>
-
 </html>
