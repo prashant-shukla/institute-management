@@ -7,45 +7,126 @@
 
 
 
+<div class="bg-gray-100 py-10">
+    <div class="max-w-7xl mx-auto px-4">
 
-    <div class=" bg-gray-100 py-10">
-        <div class="max-w-7xl mx-auto px-4">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">
-                {{ $category->name }} Exams
-            </h1>
-            <p class="text-gray-600 text-center mb-10 text-lg">
-                {{ $category->description }}
-            </p>
+        <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">
+            {{ $category->name }} Exams
+        </h1>
 
-            @if ($category->exams->count())
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach ($category->exams as $exam)
-                        <div
-                            class="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition duration-300">
-                            <div class="p-6">
-                                <h2 class="text-2xl font-semibold text-gray-800 mb-2">
-                                    {{ $exam->name }}
-                                </h2>
-                                <ul class="text-gray-600 text-sm mb-4 space-y-1">
-                                    <li><strong>Total Questions:</strong> {{ $exam->total_questions }}</li>
-                                    <li><strong>Total Marks:</strong> {{ $exam->total_marks }}</li>
-                                    <li><strong>Duration:</strong> {{ $exam->duration }} mins</li>
-                                </ul>
-                                <a href="{{ route('exam.show', ['id' => $exam->id]) }}"
-                                    class="inline-block bg-blue-600 text-white text-base font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition">
-                                    Start Exam
-                                </a>
+        <p class="text-gray-600 text-center mb-10 text-lg">
+            {{ $category->description }}
+        </p>
 
+        @if ($category->exams->count())
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($category->exams as $exam)
+                    <div class="bg-white shadow-lg rounded-2xl p-6">
+                        <h2 class="text-xl font-semibold mb-2">{{ $exam->name }}</h2>
 
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <p class="text-center text-gray-500 text-lg mt-10">No exams available for this category.</p>
-            @endif
-        </div>
+                        <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                            <li><strong>Total Questions:</strong> {{ $exam->total_questions }}</li>
+                            <li><strong>Total Marks:</strong> {{ $exam->total_marks }}</li>
+                            <li><strong>Duration:</strong> {{ $exam->duration }} mins</li>
+                            <li><strong>Exam Fee:</strong> ₹{{ $exam->exam_fee }}</li>
+                        </ul>
+
+                        <!-- START EXAM -->
+                        <!-- <a href="{{ route('exam.show', $exam->id) }}"
+                           class="block text-center bg-blue-500 text-white py-2 rounded-lg mb-2">
+                            Start Exam
+                        </a> -->
+
+                        <!-- ENROLL NOW -->
+                        <button
+                            onclick="openEnrollModal({{ $exam->id }})"
+                            class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
+                            🚀 Enroll Now
+                        </button>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-center text-gray-500">No exams available.</p>
+        @endif
     </div>
+</div>
+
+
+<div id="studentModal"
+     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+
+    <div class="relative w-full max-w-4xl bg-white rounded-2xl p-8">
+
+        <button onclick="closeStudentModal()"
+                class="absolute top-4 right-4 text-xl">✕</button>
+
+        <h2 class="text-2xl font-bold mb-6">Student Registration</h2>
+
+        <form method="POST" action="{{ route('student.register.store') }}" class="space-y-6">
+            @csrf
+
+            <!-- hidden exam id -->
+            <input type="hidden" name="exam_id" id="exam_id">
+
+            <!-- USER -->
+            <div class="grid grid-cols-2 gap-4">
+                <input name="firstname"
+                       value="{{ auth()->user()->firstname ?? '' }}"
+                       placeholder="First Name"
+                       class="border p-3 rounded" required>
+
+                <input name="lastname"
+                       value="{{ auth()->user()->lastname ?? '' }}"
+                       placeholder="Last Name"
+                       class="border p-3 rounded">
+            </div>
+
+            <!-- PERSONAL -->
+            <div class="grid grid-cols-2 gap-4">
+                <input name="father_name" placeholder="Father Name" class="border p-3 rounded" required>
+                <input type="date" name="date_of_birth" class="border p-3 rounded" required>
+            </div>
+
+            <textarea name="correspondence_add"
+                      placeholder="Address"
+                      class="border p-3 rounded w-full"
+                      required></textarea>
+
+            <div class="grid grid-cols-2 gap-4">
+                <input name="qualification" placeholder="Qualification" class="border p-3 rounded" required>
+                <input name="mobile_no" placeholder="Mobile No" class="border p-3 rounded" required>
+            </div>
+
+            <div class="text-right">
+                <button type="submit"
+                        class="bg-indigo-600 text-white px-6 py-2 rounded-lg">
+                    Save & Continue →
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function openEnrollModal(examId) {
+        document.getElementById('exam_id').value = examId;
+
+        const modal = document.getElementById('studentModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeStudentModal() {
+        const modal = document.getElementById('studentModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    }
+</script>
+
 
 
 

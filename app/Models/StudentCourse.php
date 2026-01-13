@@ -9,6 +9,7 @@ class StudentCourse extends Model
     protected $fillable = [
         'student_id',
         'course_id',
+        'exam_id',
         'course_fee',
         'gst',
         'discount',
@@ -26,6 +27,10 @@ class StudentCourse extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+       public function exam()
+    {
+        return $this->belongsTo(Exam::class);
     }
     
 }
