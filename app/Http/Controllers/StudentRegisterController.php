@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StudentFee;
 use App\Models\Course;
+use App\Models\Exam;
 use App\Models\Payment;
 use App\Models\StudentFees;
 use Illuminate\Support\Facades\DB;
@@ -43,71 +44,93 @@ class StudentRegisterController extends Controller
      * 4️⃣ Student ko login kar deta hai
      */
 
+    public function store(Request $request)
+    {
+        if (! auth()->check()) {
+            return redirect()->route('login');
+        }
 
-public function store(Request $request)
-{
-    if (!auth()->check()) {
-        return redirect()->route('login');
+        $validated = $request->validate([
+            'firstname'          => 'required|string|max:255',
+            'lastname'           => 'nullable|string|max:255',
+            'father_name'        => 'required|string|max:255',
+            'date_of_birth'      => 'required|date',
+            'correspondence_add' => 'required|string',
+            'permanent_add'      => 'nullable|string',
+            'qualification'      => 'required|string|max:255',
+            'mobile_no'          => 'required|string|max:25',
+            'course_id'          => 'nullable|exists:courses,id',
+            'exam_id'            => 'nullable|exists:exams,id',
+        ]);
+
+        if (empty($validated['course_id']) && empty($validated['exam_id'])) {
+            return back()->withErrors([
+                'course_id' => 'Please select a course or exam',
+            ]);
+        }
+
+        return DB::transaction(function () use ($validated) {
+
+            $user = auth()->user();
+
+            $validated['permanent_add']
+                = $validated['permanent_add']
+                ?? $validated['correspondence_add'];
+
+            $user->update([
+                'firstname' => $validated['firstname'],
+                'lastname'  => $validated['lastname'],
+            ]);
+
+            $student = Student::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'reg_no'             => 'REG-' . now()->format('Ymd') . '-' . rand(100, 999),
+                    'father_name'        => $validated['father_name'],
+                    'date_of_birth'      => $validated['date_of_birth'],
+                    'correspondence_add' => $validated['correspondence_add'],
+                    'permanent_add'      => $validated['permanent_add'],
+                    'qualification'      => $validated['qualification'],
+                    'mobile_no'          => $validated['mobile_no'],
+                    'is_online'          => 1,
+                ]
+            );
+
+            /* =========================
+ * COURSE PAYMENT
+ * ========================= */
+            if (! empty($validated['course_id'])) {
+
+                $course = Course::findOrFail($validated['course_id']);
+
+                session([
+                    'student_id' => $student->id,
+                    'course_id'  => $course->id,
+                    'exam_id'    => null,
+                    'amount'     => $course->offer_fee,
+                    'type'       => 'course',
+                ]);
+
+                return redirect()->route('payment.page');
+            }
+
+            /* =========================
+ * EXAM PAYMENT
+ * ========================= */
+            if (! empty($validated['exam_id'])) {
+
+                $exam = Exam::findOrFail($validated['exam_id']);
+
+                session([
+                    'student_id' => $student->id,
+                    'course_id'  => null,
+                    'exam_id'    => $exam->id,
+                    'amount'     => $exam->exam_fee,
+                    'type'       => 'exam',
+                ]);
+
+                return redirect()->route('payment.page');
+            }
+        });
     }
-
-    $validated = $request->validate([
-        'firstname'          => 'required|string|max:255',
-        'lastname'           => 'nullable|string|max:255',
-
-        'father_name'        => 'required|string|max:255',
-        'date_of_birth'      => 'required|date',
-
-        'correspondence_add' => 'required|string',
-        'permanent_add'      => 'required|string',
-
-        'qualification'      => 'required|string|max:255',
-
-        'mobile_no'          => 'required|string|max:25',
-
-        'course_id'          => 'required|exists:courses,id',
-    ]);
-
-    return DB::transaction(function () use ($validated) {
-
-        $user = auth()->user();
-
-        // 1️⃣ Update user name
-        $user->update([
-            'firstname' => $validated['firstname'],
-            'lastname'  => $validated['lastname'],
-        ]);
-
-        // 2️⃣ STUDENT (ONE PER USER)
-        $student = Student::firstOrCreate(
-            ['user_id' => $user->id],
-            [
-                'reg_no'             => 'REG-' . now()->format('Ymd') . '-' . rand(100,999),
-                'father_name'        => $validated['father_name'],
-                'date_of_birth'      => $validated['date_of_birth'],
-                'correspondence_add' => $validated['correspondence_add'],
-                'permanent_add'      => $validated['permanent_add'],
-                'qualification'      => $validated['qualification'],
-                'mobile_no'          => $validated['mobile_no'],
-                'is_online'          => 1,
-            ]
-        );
-
-       $course = Course::findOrFail($validated['course_id']);
-       
-        // 3️⃣ Store session for payment
-        session([
-            'student_id' => $student->id,
-            'course_id'  => $course->id,
-            'amount'     => $course->offer_fee,
-        ]);
-
-        // 6️⃣ Redirect to payment page
-        return redirect()->route('payment.page', $course->id)
-            ->with('success', 'Student registered. Please complete payment.');
-    });
-}
-
-
-
-
 }

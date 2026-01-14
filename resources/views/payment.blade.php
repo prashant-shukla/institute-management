@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="light">
 
@@ -273,100 +272,116 @@
 
 
 
+    <div class="min-h-[calc(100vh-350px)] flex items-center justify-center px-4">
+
+        <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-lg w-full">
+
+            <!-- Header -->
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">
+                Complete Your Payment
+            </h1>
+
+            <!-- DETAILS -->
+            <div class="mb-6">
+                <p class="text-lg font-semibold text-gray-700 text-center">
+                    {{ $title }}
+                </p>
+
+                <div class="bg-gray-50 p-4 rounded-xl mt-3">
+
+                    @if ($type === 'course')
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Actual Fees:</span>
+                        <span class="line-through text-red-500 font-semibold">
+                            ₹{{ $fees }}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Offer Fees:</span>
+                        <span class="text-green-600 font-semibold">
+                            ₹{{ $offer_fees }}
+                        </span>
+                    </div>
+                    @endif
+                    @if ($type === 'exam')
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Exam Fees:</span>
+                        <span class="text-green-600 font-semibold">
+                            ₹{{ $fees }}
+                        </span>
+                    </div>
+                    @endif
 
 
-
-
-
-
-<div class="min-h-[calc(100vh-350px)] flex items-center justify-center px-4">
-
-    <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-lg w-full">
-
-        <!-- Header -->
-        <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">
-            Complete Your Payment
-        </h1>
-
-        <!-- Course Details -->
-        <div class="mb-6">
-            <p class="text-lg font-semibold text-gray-700 text-center">
-                {{ $courseName }}
-            </p>
-
-            <div class="bg-gray-50 p-4 rounded-xl mt-3">
-                <div class="flex justify-between mb-2">
-                    <span class="text-gray-600">Actual Fees:</span>
-                    <span class="line-through text-red-500 font-semibold">₹{{ $fees }}</span>
-                </div>
-
-                <div class="flex justify-between mb-2">
-                    <span class="text-gray-600">Offer Fees:</span>
-                    <span class="text-green-600 font-semibold">₹{{ $offer_fees }}</span>
-                </div>
-
-                <div class="flex justify-between border-t pt-3">
-                    <span class="text-lg font-bold text-gray-800">Payable Amount:</span>
-                    <span class="text-indigo-600 text-xl font-extrabold">₹{{ $amount }}</span>
+                    <div class="flex justify-between border-t pt-3">
+                        <span class="text-lg font-bold text-gray-800">Payable Amount:</span>
+                        <span class="text-indigo-600 text-xl font-extrabold">
+                            ₹{{ $amount }}
+                        </span>
+                    </div>
                 </div>
             </div>
+
+            <!-- PAY FORM -->
+            <form action="{{ route('payment.success') }}" method="POST" id="razorpay-form">
+                @csrf
+
+                <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+                <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+
+                <input type="hidden" name="type" value="{{ $type }}">
+
+                @if ($type === 'course')
+                <input type="hidden" name="course_id" value="{{ $courseId }}">
+                @endif
+
+                @if ($type === 'exam')
+                <input type="hidden" name="exam_id" value="{{ $examId }}">
+                @endif
+
+                <input type="hidden" name="amount" value="{{ $amount }}">
+
+                <button id="payBtn"
+                    class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl">
+                    Pay Securely with Razorpay
+                </button>
+            </form>
+
+
         </div>
-
-        <!-- Pay Button -->
-<form action="{{ route('payment.success') }}" method="POST" id="razorpay-form">
-    @csrf
-
-    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
-    <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
-    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
-
-    <input type="hidden" name="course_id" value="{{ $courseId }}">
-    <input type="hidden" name="amount" value="{{ $amount }}">
-
-    <button id="payBtn"
-        class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl">
-        Pay Securely with Razorpay
-    </button>
-</form>
-
-
-
     </div>
 
-</div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<!-- Razorpay Script -->
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        document.getElementById('payBtn').onclick = function(e) {
+            e.preventDefault();
 
-<script>
-document.getElementById('payBtn').onclick = function(e){
-    e.preventDefault();
+            var options = {
+                key: "{{ $key }}",
+                amount: "{{ $amount * 100 }}",
+                currency: "INR",
+                name: "{{ $title }}",
+                description: "{{ ucfirst($type) }} Payment",
+                order_id: "{{ $orderId }}",
+                theme: {
+                    color: "#4f46e5"
+                },
 
-    var options = {
-        "key": "{{ $key }}",
-        "amount": "{{ $amount * 100 }}",
-        "currency": "INR",
-        "name": "{{ $courseName }}",
-        "description": "Course Payment",
-        "order_id": "{{ $orderId }}",
-        "theme": {
-            "color": "#4f46e5"
-        },
-       handler: function (response) {
-    document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
-    document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
-    document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                handler: function(response) {
+                    document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                    document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+                    document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                    document.getElementById('razorpay-form').submit();
+                }
+            };
 
-    document.getElementById('razorpay-form').submit();
-}
+            new Razorpay(options).open();
+        };
+    </script>
 
-    };
-
-    var rzp = new Razorpay(options);
-    rzp.open();
-};
-
-</script>
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-white pt-16 pb-8 transition-colors duration-300">

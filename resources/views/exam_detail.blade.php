@@ -93,11 +93,25 @@
                       class="border p-3 rounded w-full"
                       required></textarea>
 
+            <textarea name="permanent_add"  placeholder="Permanent Address"
+                      class="border p-3 rounded w-full" required></textarea>
             <div class="grid grid-cols-2 gap-4">
                 <input name="qualification" placeholder="Qualification" class="border p-3 rounded" required>
                 <input name="mobile_no" placeholder="Mobile No" class="border p-3 rounded" required>
             </div>
+     <!-- COURSE -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-600 mb-4">Course</h3>
 
+                            <!-- Hidden exam id -->
+                            <input type="hidden" name="exam_id" value="{{ $exam->id }}">
+
+                            <label class="block text-sm text-black font-medium mb-1">Exam Fee</label>
+                            <input name="exam_fee"
+                                value="{{ $exam->total_fee }}"
+                                class="w-full px-4 py-3 rounded-lg text-black text-black border bg-gray-100"
+                                readonly>
+                        </div>
             <div class="text-right">
                 <button type="submit"
                         class="bg-indigo-600 text-white px-6 py-2 rounded-lg">

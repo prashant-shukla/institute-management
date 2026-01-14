@@ -9,118 +9,208 @@ use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;      // ✅ THIS IS IMPORTANT
 use App\Models\StudentFees;
-
-
+use App\Models\Exam;
+use App\Models\StudentCourse;
 class PaymentController extends Controller
 {
-    public function createOrder($course_id)
+    // public function createOrder()
+    // {
+
+    //     // 🔐 Session check
+    //     if (! session()->has('amount') || ! session()->has('type')) {
+    //         abort(403, 'Invalid payment request');
+    //         dd('hello');
+    //     }
+
+    //     $type   = session('type'); // course | exam
+    //     $amount = session('amount');
+
+    //     $title        = '';
+    //     $originalFee  = 0;
+    //     $offerFee     = $amount;
+    //     $itemId       = null;
+
+    //     /* ============================
+    //  * COURSE PAYMENT
+    //  * ============================ */
+    //     if ($type === 'course') {
+
+    //         $course = Course::findOrFail(session('course_id'));
+
+    //         $title       = $course->name;
+    //         $originalFee = $course->fee;
+    //         $offerFee    = $course->offer_fee;
+    //         $itemId      = $course->id;
+    //     }
+
+    //     /* ============================
+    //  * EXAM PAYMENT
+    //  * ============================ */
+    //     if ($type === 'exam') {
+
+    //         $exam = Exam::findOrFail(session('exam_id'));
+
+    //         $title       = $exam->name;
+    //         $originalFee = $exam->exam_fees;
+    //         $offerFee    = $exam->exam_fees;
+    //         $itemId      = $exam->id;
+    //     }
+
+    //     /* ============================
+    //  * RAZORPAY ORDER
+    //  * ============================ */
+    //     $api = new Api(
+    //         config('services.razorpay.key'),
+    //         config('services.razorpay.secret')
+    //     );
+
+    //     $order = $api->order->create([
+    //         'receipt'  => 'order_' . $type . '_' . $itemId,
+    //         'amount'   => $offerFee * 100, // paisa
+    //         'currency' => 'INR',
+    //     ]);
+
+    //     return view('payment', [
+    //         'key'        => config('services.razorpay.key'),
+    //         'orderId'    => $order->id,
+    //         'amount'     => $offerFee,
+    //         'type'       => $type,
+    //         'title'      => $title,
+    //         'fees'       => $originalFee,
+    //         'offer_fees' => $offerFee,
+    //     ]);
+    // }
+
+    public function createOrder()
     {
-        $course = Course::findOrFail($course_id);
+        if (! session('student_id') || ! session('amount')) {
+            abort(403, 'Invalid payment request');
+        }
 
-        $amount = $course->offer_fee; // FINAL payable
-        $original_fee = $course->fee; // Original fee
-        $offer_fee = $course->offer_fee; // Discounted fee
+        $type   = session('type');
+        $amount = session('amount');
 
-        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
 
         $order = $api->order->create([
-            'receipt'  => 'order_rcpt_' . $course_id,
+            'receipt'  => 'order_' . uniqid(),
             'amount'   => $amount * 100,
-            'currency' => 'INR'
+            'currency' => 'INR',
         ]);
 
-        return view('payment', [
-            'key'         => env('RAZORPAY_KEY'),
-            'amount'      => $amount,
-            'orderId'     => $order->id,
-            'courseId'    => $course_id,
-            'courseName'  => $course->name,
-            'fees'        => $original_fee,
-            'offer_fees'  => $offer_fee,
+        /* ======================
+     * COURSE PAYMENT
+     * ====================== */
+        if ($type === 'course') {
+
+            $course = Course::findOrFail(session('course_id'));
+
+            return view('payment', [
+                'key'         => config('services.razorpay.key'),
+                'orderId'     => $order->id,
+                'amount'      => $amount,
+                'type'        => 'course',
+
+                'title'       => $course->name,
+                'fees'        => $course->fee,
+                'offer_fees'  => $course->offer_fee,
+
+                'courseId'    => $course->id,
+                'examId'      => null,
+            ]);
+        }
+
+        /* ======================
+     * EXAM PAYMENT
+     * ====================== */
+        if ($type === 'exam') {
+
+            $exam = Exam::findOrFail(session('exam_id'));
+
+            return view('payment', [
+                'key'         => config('services.razorpay.key'),
+                'orderId'     => $order->id,
+                'amount'      => $amount,
+                'type'        => 'exam',
+
+                'title'       => $exam->name,
+                'fees'        => $exam->exam_fees,
+                'offer_fees'  => $exam->exam_fees,
+
+                'courseId'    => null,
+                'examId'      => $exam->id,
+            ]);
+        }
+
+        abort(403);
+    }
+
+
+
+    public function paymentSuccess(Request $request)
+    {
+        $request->validate([
+            'razorpay_payment_id' => 'required',
+            'razorpay_order_id'   => 'required',
+            'razorpay_signature'  => 'required',
+            'type'                => 'required|in:course,exam',
+            'amount'              => 'required|numeric',
+            'course_id'           => 'nullable|exists:courses,id',
+            'exam_id'             => 'nullable|exists:exams,id',
         ]);
+
+        $studentId = session('student_id');
+
+        if (! $studentId) {
+            abort(403, 'Invalid payment session');
+        }
+
+        /* =========================
+     * COURSE PAYMENT
+     * ========================= */
+        if ($request->type === 'course') {
+
+            if (! $request->course_id) {
+                abort(400, 'Course ID missing');
+            }
+
+            StudentCourse::create([
+                'student_id' => $studentId,
+                'course_id'  => $request->course_id,
+                'fee_amount' => $request->amount,
+                'paid_at'    => now(),
+            ]);
+        }
+
+        /* =========================
+     * EXAM PAYMENT
+     * ========================= */
+        if ($request->type === 'exam') {
+
+            if (! $request->exam_id) {
+                abort(400, 'Exam ID missing');
+            }
+
+            StudentCourse::create([
+                'student_id' => $studentId,
+                'exam_id'    => $request->exam_id,
+                'fee_amount' => $request->amount,
+                'paid_at'    => now(),
+            ]);
+        }
+
+        session()->forget([
+            'student_id',
+            'course_id',
+            'exam_id',
+            'amount',
+            'type'
+        ]);
+
+        return redirect()->route('student.dashboard')
+            ->with('success', 'Payment successful 🎉');
     }
 
-
-
-public function paymentSuccess(Request $request)
-{
-   
-    // 1️⃣ Required Razorpay fields
-    if (
-        !$request->razorpay_payment_id ||
-        !$request->razorpay_order_id ||
-        !$request->razorpay_signature
-    ) {
-        return redirect()->back()->with('error', 'Payment Failed! Missing Razorpay data.');
-    }
-
-    // 2️⃣ Verify Razorpay signature
-    if (!$this->verifySignature(
-        $request->razorpay_order_id,
-        $request->razorpay_payment_id,
-        $request->razorpay_signature
-    )) {
-        return redirect()->back()->with('error', 'Payment Failed! Signature mismatch.');
-    }
-
-    // 3️⃣ Course & Amount (SECURE)
-    $course = Course::findOrFail($request->course_id);
-    $amount = $course->offer_fee ?? $course->fee;
-
-    // 4️⃣ Save PAYMENT
-    $payment = Payment::create([
-        'user_id'            => auth()->id(),
-        'course_id'          => $course->id,
-        'gateway'            => 'razorpay',
-        'gateway_payment_id' => $request->razorpay_payment_id,
-        'amount'             => $amount,
-        'currency'           => 'INR',
-        'status'             => 'success',
-        'meta'               => json_encode([
-            'razorpay_order_id' => $request->razorpay_order_id,
-            'razorpay_signature' => $request->razorpay_signature,
-        ]),
-    ]);
-
-    if (!$payment || !$payment->id) {
-        return redirect()->back()->with('error', 'Payment failed. Please contact support.');
-    }
-
-    // 5️⃣ Find STUDENT (linked with user + course)
-$student = Student::where('user_id', auth()->id())
-    ->first();
-
-
-    if (!$student) {
-        return redirect()->back()->with('error', 'Student record not found.');
-    }
-
-    // 6️⃣ SAVE INTO student_fees (NO DUPLICATE)
-    \App\Models\StudentFees::firstOrCreate(
-        [
-            'student_id' => $student->id,
-            'course_id'  => $course->id,
-        ],
-        [
-            'fee_amount'   => $amount,
-            'gst_amount'   => null, // or calculate if needed
-            'payment_mode' => 'razorpay',
-            'received_on'  => now(),
-            'remark'       => 'Online payment successful',
-        ]
-    );
-    // 7️⃣ Session set
-    session([
-        'payment_success' => true,
-        'course_id'       => $course->id,
-        'amount'          => $amount,
-        'payment_id'      => $payment->id,
-    ]);
-
-    // 8️⃣ Redirect to dashboard
-    return redirect()->route('student.dashboard')
-        ->with('success', 'Payment successful! Enrollment completed.');
-}
 
 
 

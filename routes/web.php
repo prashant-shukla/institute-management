@@ -64,12 +64,17 @@ Route::post('/web-logout', function () {
 })->name('web-logout');
  Route::get('/fees/print/{id}', [FeeReceiptController::class, 'print'])->name('fees.print');
 
-Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
-    ->middleware('auth:web')
+// Route::get('/payment/{course_id}', [PaymentController::class, 'createOrder'])
+//     ->middleware('auth:web')
+//     ->name('payment.page');
+//     Route::get('/payment/{exam_id}', [PaymentController::class, 'createOrder'])
+//     ->middleware('auth:web')
+//     ->name('payment.page');
+Route::get('/payment', [PaymentController::class, 'createOrder'])
+    ->middleware(['web', 'auth'])
     ->name('payment.page');
-    Route::get('/payment/{exam_id}', [PaymentController::class, 'createOrder'])
-    ->middleware('auth:web')
-    ->name('payment.page');
+
+    
     Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
     Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
     Route::post('/course/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
