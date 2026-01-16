@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Course;
 use App\Models\User;
+use App\Models\StudentExam;
+use App\Models\StudentFees;
+
 
 class Student extends Model
 {
@@ -19,7 +22,7 @@ class Student extends Model
     protected $guarded = ['id'];
 
     protected $casts = ['software_covered' => 'array'];
-protected $appends = ['full_name'];
+    protected $appends = ['full_name'];
 
 
     public function course(): BelongsTo
@@ -84,7 +87,10 @@ protected $appends = ['full_name'];
     {
         return $this->hasMany(StudentCourse::class);
     }
-
+    public function exams()
+    {
+        return $this->hasMany(StudentExam::class);
+    }
     protected static function boot()
     {
         parent::boot();

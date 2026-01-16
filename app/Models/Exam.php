@@ -33,10 +33,12 @@ class Exam extends Model
     {
         return $this->belongsToMany(Question::class, 'exam_question', 'exam_id', 'question_id');
     }
-public function studentAnswers()
-{
-    return $this->hasMany(\App\Models\StudentAnswer::class, 'exam_id');
-}
-
-    
+    public function studentAnswers()
+    {
+        return $this->hasMany(\App\Models\StudentAnswer::class, 'exam_id');
+    }
+    public function students()
+    {
+        return $this->hasMany(StudentExam::class);
+    }
 }

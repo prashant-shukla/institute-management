@@ -11,6 +11,8 @@ use App\Models\Student;      // ✅ THIS IS IMPORTANT
 use App\Models\StudentFees;
 use App\Models\Exam;
 use App\Models\StudentCourse;
+use App\Models\StudentExam;
+
 class PaymentController extends Controller
 {
     // public function createOrder()
@@ -147,69 +149,91 @@ class PaymentController extends Controller
 
 
 
-    public function paymentSuccess(Request $request)
-    {
-        $request->validate([
-            'razorpay_payment_id' => 'required',
-            'razorpay_order_id'   => 'required',
-            'razorpay_signature'  => 'required',
-            'type'                => 'required|in:course,exam',
-            'amount'              => 'required|numeric',
-            'course_id'           => 'nullable|exists:courses,id',
-            'exam_id'             => 'nullable|exists:exams,id',
-        ]);
 
-        $studentId = session('student_id');
 
-        if (! $studentId) {
-            abort(403, 'Invalid payment session');
-        }
+  public function paymentSuccess(Request $request)
+{
+    $request->validate([
+        'razorpay_payment_id' => 'required',
+        'razorpay_order_id'   => 'required',
+        'razorpay_signature'  => 'required',
+        'type'                => 'required|in:course,exam',
+        'amount'              => 'required|numeric',
+        'course_id'           => 'nullable|exists:courses,id',
+        'exam_id'             => 'nullable|exists:exams,id',
+    ]);
 
-        /* =========================
+    $studentId = session('student_id');
+
+    if (! $studentId) {
+        abort(403, 'Invalid payment session');
+    }
+
+    /* =========================
      * COURSE PAYMENT
      * ========================= */
-        if ($request->type === 'course') {
+    if ($request->type === 'course') {
 
-            if (! $request->course_id) {
-                abort(400, 'Course ID missing');
-            }
-
-            StudentCourse::create([
-                'student_id' => $studentId,
-                'course_id'  => $request->course_id,
-                'fee_amount' => $request->amount,
-                'paid_at'    => now(),
-            ]);
+        if (! $request->course_id) {
+            abort(400, 'Course ID missing');
         }
 
-        /* =========================
+        $course = Course::findOrFail($request->course_id);
+
+        StudentCourse::create([
+            'student_id'  => $studentId,
+            'course_id'   => $course->id,
+            'course_fee'  => $course->offer_fee,
+            'gst_amount'  => 0,
+            'total_fee'   => $request->amount,
+            'status'      => 'paid',
+            'enrolled_at' => now(),
+        ]);
+    }
+
+    /* =========================
      * EXAM PAYMENT
      * ========================= */
-        if ($request->type === 'exam') {
+    if ($request->type === 'exam') {
 
-            if (! $request->exam_id) {
-                abort(400, 'Exam ID missing');
-            }
-
-            StudentCourse::create([
-                'student_id' => $studentId,
-                'exam_id'    => $request->exam_id,
-                'fee_amount' => $request->amount,
-                'paid_at'    => now(),
-            ]);
+        if (! $request->exam_id) {
+            abort(400, 'Exam ID missing');
         }
 
-        session()->forget([
-            'student_id',
-            'course_id',
-            'exam_id',
-            'amount',
-            'type'
-        ]);
+        $exam = Exam::findOrFail($request->exam_id);
 
-        return redirect()->route('student.dashboard')
-            ->with('success', 'Payment successful 🎉');
+        if ($exam->exam_fees === null) {
+            abort(500, 'Exam fee not set');
+        }
+
+        StudentExam::create([
+            'student_id'  => $studentId,
+            'exam_id'     => $exam->id,
+            'exam_fee'    => $exam->exam_fees,
+            'gst_amount'  => 0,
+            'total_fee'   => $request->amount,
+            'status'      => 'paid',
+            'enrolled_at' => now(),
+        ]);
     }
+
+    /* =========================
+     * CLEAR SESSION
+     * ========================= */
+    session()->forget([
+        'student_id',
+        'course_id',
+        'exam_id',
+        'amount',
+        'type',
+    ]);
+
+    return redirect()
+        ->route('student.dashboard')
+        ->with('success', 'Payment successful 🎉');
+}
+
+
 
 
 
