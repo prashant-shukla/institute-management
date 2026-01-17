@@ -150,8 +150,7 @@ class PaymentController extends Controller
 
 
 
-
-  public function paymentSuccess(Request $request)
+public function paymentSuccess(Request $request)
 {
     $request->validate([
         'razorpay_payment_id' => 'required',
@@ -170,13 +169,9 @@ class PaymentController extends Controller
     }
 
     /* =========================
-     * COURSE PAYMENT
-     * ========================= */
+     | COURSE PAYMENT
+     ========================= */
     if ($request->type === 'course') {
-
-        if (! $request->course_id) {
-            abort(400, 'Course ID missing');
-        }
 
         $course = Course::findOrFail($request->course_id);
 
@@ -192,24 +187,16 @@ class PaymentController extends Controller
     }
 
     /* =========================
-     * EXAM PAYMENT
-     * ========================= */
+     | EXAM PAYMENT
+     ========================= */
     if ($request->type === 'exam') {
 
-        if (! $request->exam_id) {
-            abort(400, 'Exam ID missing');
-        }
-
         $exam = Exam::findOrFail($request->exam_id);
-
-        if ($exam->exam_fees === null) {
-            abort(500, 'Exam fee not set');
-        }
 
         StudentExam::create([
             'student_id'  => $studentId,
             'exam_id'     => $exam->id,
-            'exam_fee'    => $exam->exam_fees,
+            'exam_fee'    => $request->amount, // ✅ REQUIRED FIELD
             'gst_amount'  => 0,
             'total_fee'   => $request->amount,
             'status'      => 'paid',
@@ -217,9 +204,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    /* =========================
-     * CLEAR SESSION
-     * ========================= */
+    // clear session
     session()->forget([
         'student_id',
         'course_id',
@@ -236,6 +221,25 @@ class PaymentController extends Controller
 
 
 
+public function examPayment($examId)
+{
+    $exam = Exam::findOrFail($examId);
+
+    session([
+        'exam_id' => $exam->id,
+        'type'    => 'exam',
+        'amount'  => $exam->exam_fees,
+    ]);
+
+   return view('payment', [
+    'type'    => 'exam',
+    'exam'    => $exam,
+    'title'   => $exam->name, // ✅ ADD THIS
+    'amount'  => $exam->exam_fees,
+    'key'     => config('services.razorpay.key'),
+    
+]);
+}
 
 
     private function verifySignature($orderId, $paymentId, $signature)

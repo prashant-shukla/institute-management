@@ -41,4 +41,5 @@ class Exam extends Model
     {
         return $this->hasMany(StudentExam::class);
     }
+    
 }

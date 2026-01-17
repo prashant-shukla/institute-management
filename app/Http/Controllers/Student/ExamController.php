@@ -11,31 +11,38 @@ use App\Models\Exam;   // 👈 exam model
 
 class ExamController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
-        $student = $user->student;
+public function index()
+{
+    $user = auth()->user();
+    $student = $user->student;
 
-        $exams = collect();
-
-        if ($student && $student->course) {
-            $courseName = $student->course->name;
-
-            if (! empty($courseName)) {
-                $category = ExamCategory::where('name', $courseName)->first();
-
-                if ($category && method_exists($category, 'exams')) {
-                    // simple: sab exams of that category
-                    $exams = $category->exams()->get();
-                }
-            }
-        }
-
-        return view('student.exams.index', [
-            'exams' => $exams,
-        ]);
+    if (! $student) {
+        return redirect()->back()->with('error', 'Student not found');
     }
-       public function show($id)
+
+    // 🔹 Student purchased exams
+    $purchasedExamIds = \App\Models\StudentExam::where('student_id', $student->id)
+        ->pluck('exam_id');
+
+    // 🔹 Purchased exams (top section)
+    $purchasedExams = \App\Models\Exam::with('category')
+        ->whereIn('id', $purchasedExamIds)
+        ->get();
+
+    // 🔹 All exams grouped by category
+    $allExams = \App\Models\Exam::with('category')
+        ->get()
+        ->groupBy('category.name');
+
+    return view('student.exams.index', [
+        'purchasedExams' => $purchasedExams,
+        'allExams'       => $allExams,
+    ]);
+}
+
+
+
+    public function show($id)
     {
         $exam = Exam::with(['questions', 'category'])->findOrFail($id);
         $student = Auth::user(); // ✅ uses default 'web' guard
@@ -77,7 +84,7 @@ class ExamController extends Controller
     }
 
 
-       public function submit($id)
+    public function submit($id)
     {
         $exam = Exam::findOrFail($id);
         return view('student.exams.exam_result', compact('exam'));

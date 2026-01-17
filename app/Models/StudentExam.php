@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\StudentCourse;
+use App\Models\Course;
+use App\Models\Exam;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentExam extends Model

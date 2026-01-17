@@ -73,7 +73,9 @@ Route::post('/web-logout', function () {
 Route::get('/payment', [PaymentController::class, 'createOrder'])
     ->middleware(['web', 'auth'])
     ->name('payment.page');
-
+Route::get('/exam/payment/{exam}', [PaymentController::class, 'examPayment'])
+    ->name('exam.payment')
+    ->middleware('auth');
     
     Route::get('/certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
     Route::post('/course/{id}/order', [PaymentController::class, 'createOrder'])->name('course.order');
