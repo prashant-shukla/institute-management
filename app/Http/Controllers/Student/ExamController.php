@@ -20,25 +20,33 @@ public function index()
         return redirect()->back()->with('error', 'Student not found');
     }
 
-    // 🔹 Student purchased exams
-    $purchasedExamIds = \App\Models\StudentExam::where('student_id', $student->id)
-        ->pluck('exam_id');
+    /* ============================
+     | PURCHASED EXAMS
+     ============================ */
+    $purchasedExams = \App\Models\Exam::whereIn(
+        'id',
+        \App\Models\StudentExam::where('student_id', $student->id)
+            ->pluck('exam_id')
+            ->unique() // ✅ safety
+    )
+    ->with('category')
+    ->get();
 
-    // 🔹 Purchased exams (top section)
-    $purchasedExams = \App\Models\Exam::with('category')
-        ->whereIn('id', $purchasedExamIds)
-        ->get();
-
-    // 🔹 All exams grouped by category
+    /* ============================
+     | ALL EXAMS (CATEGORY WISE)
+     ============================ */
     $allExams = \App\Models\Exam::with('category')
         ->get()
-        ->groupBy('category.name');
+        ->groupBy(function ($exam) {
+            return optional($exam->category)->name ?? 'Other';
+        });
 
-    return view('student.exams.index', [
-        'purchasedExams' => $purchasedExams,
-        'allExams'       => $allExams,
-    ]);
+    return view('student.exams.index', compact(
+        'purchasedExams',
+        'allExams'
+    ));
 }
+
 
 
 

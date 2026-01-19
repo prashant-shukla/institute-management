@@ -117,7 +117,6 @@ Route::post('/student/register', [StudentRegisterController::class, 'store'])
     Route::get('/Exams', [ExamCategoryController::class, 'index'])->name('exam-categories.index');
     Route::get('/exams/{id}', [ExamCategoryController::class, 'show'])->name('exam-categories.show');
 
-
 Route::prefix('student')->group(function () {
 
     // login routes
@@ -150,6 +149,7 @@ Route::middleware('auth')->prefix('student')->name('student.')->group(function (
     Route::get('/exam/{id}', [StudentExamController::class, 'show'])
         ->middleware('auth')
         ->name('exams.show');
+ 
     Route::get('/exams/{exam}/start', [StudentExamController::class, 'start'])
         ->name('exam.start');
     Route::get('/exam/{examId}/submit', [StudentExamController::class, 'showResult'])->name('exam_result');
