@@ -15,73 +15,7 @@ use App\Models\StudentExam;
 
 class PaymentController extends Controller
 {
-    // public function createOrder()
-    // {
 
-    //     // 🔐 Session check
-    //     if (! session()->has('amount') || ! session()->has('type')) {
-    //         abort(403, 'Invalid payment request');
-    //         dd('hello');
-    //     }
-
-    //     $type   = session('type'); // course | exam
-    //     $amount = session('amount');
-
-    //     $title        = '';
-    //     $originalFee  = 0;
-    //     $offerFee     = $amount;
-    //     $itemId       = null;
-
-    //     /* ============================
-    //  * COURSE PAYMENT
-    //  * ============================ */
-    //     if ($type === 'course') {
-
-    //         $course = Course::findOrFail(session('course_id'));
-
-    //         $title       = $course->name;
-    //         $originalFee = $course->fee;
-    //         $offerFee    = $course->offer_fee;
-    //         $itemId      = $course->id;
-    //     }
-
-    //     /* ============================
-    //  * EXAM PAYMENT
-    //  * ============================ */
-    //     if ($type === 'exam') {
-
-    //         $exam = Exam::findOrFail(session('exam_id'));
-
-    //         $title       = $exam->name;
-    //         $originalFee = $exam->exam_fees;
-    //         $offerFee    = $exam->exam_fees;
-    //         $itemId      = $exam->id;
-    //     }
-
-    //     /* ============================
-    //  * RAZORPAY ORDER
-    //  * ============================ */
-    //     $api = new Api(
-    //         config('services.razorpay.key'),
-    //         config('services.razorpay.secret')
-    //     );
-
-    //     $order = $api->order->create([
-    //         'receipt'  => 'order_' . $type . '_' . $itemId,
-    //         'amount'   => $offerFee * 100, // paisa
-    //         'currency' => 'INR',
-    //     ]);
-
-    //     return view('payment', [
-    //         'key'        => config('services.razorpay.key'),
-    //         'orderId'    => $order->id,
-    //         'amount'     => $offerFee,
-    //         'type'       => $type,
-    //         'title'      => $title,
-    //         'fees'       => $originalFee,
-    //         'offer_fees' => $offerFee,
-    //     ]);
-    // }
 
     public function createOrder()
     {
@@ -148,117 +82,117 @@ class PaymentController extends Controller
     }
 
 
-
-
-public function paymentSuccess(Request $request)
-{
-    $request->validate([
-        'razorpay_payment_id' => 'required',
-        'razorpay_order_id'   => 'required',
-        'razorpay_signature'  => 'required',
-        'type'                => 'required|in:course,exam',
-        'amount'              => 'required|numeric',
-        'course_id'           => 'nullable|exists:courses,id',
-        'exam_id'             => 'nullable|exists:exams,id',
-    ]);
-
-    $studentId = session('student_id');
-
-    if (! $studentId) {
-        abort(403, 'Invalid payment session');
-    }
-
-    /* =========================
-     | COURSE PAYMENT
-     ========================= */
-    if ($request->type === 'course') {
-
-        $course = Course::findOrFail($request->course_id);
-
-        StudentCourse::create([
-            'student_id'  => $studentId,
-            'course_id'   => $course->id,
-            'course_fee'  => $course->offer_fee,
-            'gst_amount'  => 0,
-            'total_fee'   => $request->amount,
-            'status'      => 'paid',
-            'enrolled_at' => now(),
+    public function paymentSuccess(Request $request)
+    {
+        $request->validate([
+            'razorpay_payment_id' => 'required',
+            'razorpay_order_id'   => 'required',
+            'razorpay_signature'  => 'required',
+            'type'                => 'required|in:course,exam',
+            'amount'              => 'required|numeric',
+            'course_id'           => 'nullable|exists:courses,id',
+            'exam_id'             => 'nullable|exists:exams,id',
         ]);
+
+        $studentId = session('student_id');
+
+        if (! $studentId) {
+            abort(403, 'Invalid payment session');
+        }
+
+        /* =================================
+       ✅ COURSE PAYMENT
+    ================================= */
+        if ($request->type === 'course') {
+
+            $course = Course::findOrFail($request->course_id);
+
+            /** 🔹 1. INSERT INTO student_courses (IMPORTANT) **/
+            \App\Models\StudentCourse::firstOrCreate(
+                [
+                    'student_id' => $studentId,
+                    'course_id'  => $course->id,
+                ],
+                [
+                    'course_fee'  => $course->offer_fee,
+                    'gst'         => 0,
+                    'discount'    => 0,
+                    'total_fee'   => $course->offer_fee,
+                    'status'      => 'active',
+                    'enrolled_at' => now(),
+                ]
+            );
+
+
+
+            /** 🔹 2. INSERT INTO student_fees **/
+            \App\Models\StudentFees::create([
+                'receipt_no'      => 'RCPT-' . time(),
+                'student_id'      => $studentId,
+                'course_id'       => $course->id,
+                'fee_amount'      => $course->offer_fee,
+                'gst_amount'      => 0,
+                'discount_amount' => 0,
+                'received_on'     => now(),
+                'payment_mode'    => 'online',
+                'remark'          => 'Course Purchase',
+            ]);
+
+            session()->forget([
+                'student_id',
+                'course_id',
+                'exam_id',
+                'amount',
+                'type',
+            ]);
+
+            return redirect()
+                ->route('student.dashboard')
+                ->with('success', 'Course purchased successfully 🎉');
+        }
+
+        /* =================================
+       ✅ EXAM PAYMENT
+    ================================= */
+        if ($request->type === 'exam') {
+
+            $exam = Exam::findOrFail($request->exam_id);
+
+            $already = \App\Models\StudentExam::where('student_id', $studentId)
+                ->where('exam_id', $exam->id)
+                ->exists();
+
+            if ($already) {
+                return redirect()
+                    ->route('student.dashboard')
+                    ->with('info', 'You already purchased this exam.');
+            }
+
+            \App\Models\StudentExam::create([
+                'student_id' => $studentId,
+                'exam_id'    => $exam->id,
+                'exam_fee'   => $exam->exam_fee,
+                'discount'   => 0,
+                'gst_amount' => 0,
+                'total_fee'  => $request->amount,
+                'status'     => 'paid',
+                'enrolled_at' => now(),
+            ]);
+
+            session()->forget([
+                'student_id',
+                'course_id',
+                'exam_id',
+                'amount',
+                'type',
+            ]);
+
+            return redirect()
+                ->route('student.dashboard')
+                ->with('success', 'Exam purchased successfully 🎉');
+        }
     }
 
-    /* =========================
-     | EXAM PAYMENT
-     ========================= */
-  if ($request->type === 'exam') {
-
-    if (! $request->exam_id) {
-        abort(400, 'Exam ID missing');
-    }
-
-    $exam = Exam::findOrFail($request->exam_id);
-
-    // ✅ CHECK: already purchased?
-    $alreadyPurchased = StudentExam::where('student_id', $studentId)
-        ->where('exam_id', $exam->id)
-        ->exists();
-
-    if ($alreadyPurchased) {
-        return redirect()
-            ->route('student.dashboard')
-            ->with('info', 'You have already purchased this exam.');
-    }
-
-    // ✅ Insert only if not exists
-    StudentExam::create([
-        'student_id' => $studentId,
-        'exam_id'    => $exam->id,
-        'exam_fee'   => $exam->exam_fees,
-        'gst_amount' => 0,
-        'total_fee'  => $request->amount,
-        'status'     => 'paid',
-        'enrolled_at'=> now(),
-    ]);
-
-    // clear session
-    session()->forget([
-        'student_id',
-        'course_id',
-        'exam_id',
-        'amount',
-        'type',
-    ]);
-
-    return redirect()
-        ->route('student.dashboard')
-        ->with('success', 'Payment successful 🎉');
-}
-
-
-}
-
-// public function examPayment($examId)
-// {
-//     $exam = Exam::findOrFail($examId);
-
-//     session([
-//         'exam_id' => $exam->id,
-//         'type'    => 'exam',
-//         'amount'  => $exam->exam_fees,
-//     ]);
-
-//  $exam = Exam::findOrFail($examId);
-
-//     return view('payment', [
-//         'key'     => config('services.razorpay.key'), // ✅ FIX
-//         'orderId'=> $order->id,
-//         'amount' => $exam->exam_fees,
-//         'type'   => 'exam',
-//         'title'  => $exam->name,
-//         'exam'   => $exam,
-//     ]);
-
-
-// }
 
 
     private function verifySignature($orderId, $paymentId, $signature)

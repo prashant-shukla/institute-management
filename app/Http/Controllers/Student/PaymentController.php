@@ -15,36 +15,48 @@ public function index()
     $user = Auth::user();
     $student = $user?->student;
 
-    $payments  = collect();
-    $totalPaid = 0;
-    $totalFee  = 0;
-    $balance   = 0;
+    $payments   = collect();
+    $examFees   = collect();
+    $totalFee   = 0;
+    $totalPaid  = 0;
+    $balance    = 0;
 
     if ($student) {
 
-        // ✅ All fee records
+        /* =============================
+           COURSE PAYMENTS
+        ============================= */
         $payments = $student->student_fees()
             ->orderByDesc('created_at')
             ->get();
 
-        // ✅ Total fee (all courses)
-        $totalFee = $payments->sum('fee_amount');
+        $courseTotal = $payments->sum('fee_amount');
 
-        // ✅ Paid amount only
-        $totalPaid = $payments
-            ->sum('fee_amount');
+        /* =============================
+           EXAM PAYMENTS
+        ============================= */
+        $examFees = \App\Models\StudentExam::where('student_id', $student->id)
+            ->get();
 
-        // ✅ Balance
-        $balance = max($totalFee - $totalPaid, 0);
+        $examTotal = $examFees->sum('total_fee');
+
+        /* =============================
+           FINAL TOTALS
+        ============================= */
+        $totalFee  = $courseTotal + $examTotal;
+        $totalPaid = $totalFee; // because fully paid
+        $balance   = 0;
     }
 
     return view('student.payments.index', compact(
         'payments',
+        'examFees',
         'totalPaid',
         'totalFee',
         'balance'
     ));
 }
+
 
 
 

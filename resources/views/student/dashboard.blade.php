@@ -6,34 +6,57 @@
 
 <div class="space-y-10">
 
-  <h2 class="text-xl font-bold mb-4">My Courses</h2>
+<h2 class="text-2xl font-bold mb-6 text-gray-800">📚 My Courses</h2>
 
 @if($myCourses->count())
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
         @foreach($myCourses as $item)
-            <div class="border rounded-lg p-4 bg-white shadow">
-                <h3 class="font-semibold text-lg">
-                    {{ $item->course->title }}
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border">
+
+                {{-- Course Title --}}
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    {{ $item->course->name }}
                 </h3>
 
-                <p class="text-sm text-gray-500">
-                    Mode: {{ ucfirst($item->course->mode) }}
-                </p>
+                {{-- Meta Info --}}
+                <div class="text-sm text-gray-600 space-y-1">
+                    <p>
+                        <span class="font-medium">Mode:</span>
+                        {{ ucfirst($item->course->mode ?? 'online') }}
+                    </p>
 
-                <p class="text-green-600 font-semibold">
-                    Fee: ₹{{ number_format($item->fee_amount) }}
-                </p>
+                    <p>
+                        <span class="font-medium">Fee:</span>
+                        <span class="text-green-600 font-semibold">
+                            ₹{{ number_format($item->course_fee) }}
+                        </span>
+                    </p>
+                </div>
 
-                <span class="inline-block mt-2 px-3 py-1 text-xs rounded
-                    {{ $item->status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
-                    {{ ucfirst($item->status) }}
-                </span>
+                {{-- Status Badge --}}
+                <div class="mt-3">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full
+                        {{ $item->status === 'active'
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-yellow-100 text-yellow-700' }}">
+                        {{ ucfirst($item->status) }}
+                    </span>
+                </div>
+
+              
+
             </div>
         @endforeach
+
     </div>
 @else
-    <p class="text-gray-500">You have not enrolled in any course yet.</p>
+    <div class="bg-white border rounded-xl p-6 text-center text-gray-500">
+        You have not enrolled in any course yet.
+    </div>
 @endif
+
+
 
   
 

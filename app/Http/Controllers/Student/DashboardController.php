@@ -15,34 +15,28 @@ class DashboardController extends Controller
 {
 public function index(Request $request)
 {
-    $user = Auth::user();
+    $user = auth()->user();
     $student = $user?->student;
 
-    // ✅ Student ke ALL enrolled courses
     $myCourses = collect();
 
     if ($student) {
-        $myCourses = \App\Models\StudentFees::with('course')
+        $myCourses = \App\Models\StudentCourse::with('course')
             ->where('student_id', $student->id)
-        //    ->where('status', 'paid') // optional
             ->orderBy('id', 'desc')
             ->get();
     }
 
-    // ----------------------------
-    // FILTER LOGIC (All Courses)
-    // ----------------------------
-    $filter = $request->get('category'); // online / offline / certifications
+    // Filter logic
+    $filter = $request->get('category');
 
     $query = \App\Models\Course::where('status', 'active');
 
     if ($filter === 'online') {
         $query->whereIn('mode', ['online', 'both']);
-    }
-    elseif ($filter === 'offline') {
+    } elseif ($filter === 'offline') {
         $query->whereIn('mode', ['offline', 'both']);
-    }
-    elseif ($filter === 'certifications') {
+    } elseif ($filter === 'certifications') {
         $query->where('course_categories_id', 3);
     }
 
@@ -54,6 +48,7 @@ public function index(Request $request)
         'filter'
     ));
 }
+
 
 // Example controller method
 public function feedbackForm()
