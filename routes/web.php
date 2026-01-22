@@ -131,9 +131,9 @@ Route::prefix('student')->group(function () {
 });
 
 
-Route::middleware('auth')->prefix('student')->name('student.')->group(function () {
+Route::middleware(['auth', 'student.check'])->prefix('student')->name('student.')->group(function () {
 
- Route::middleware('auth')->group(function () {
+ Route::middleware(['auth', 'student.check'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
     });

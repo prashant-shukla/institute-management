@@ -221,54 +221,57 @@
                         </svg>
                     </button>
 
-                  @php
-    $user = auth()->user();
-@endphp
+                    @php
+                    $user = auth()->user();
+                    @endphp
 
-@if($user)
-    {{-- ✅ Logged-in user --}}
-    <div class="relative flex items-center gap-3">
+                    @if($user)
+                    {{-- ✅ Logged-in user --}}
+                    <div class="relative flex items-center gap-3">
 
-        <button onclick="document.getElementById('userMenu').classList.toggle('hidden')"
-                class="flex items-center gap-2 focus:outline-none">
-            <img src="{{ $user->profile_photo_url ?? asset('images/profile.jpg') }}"
-                 class="w-8 h-8 rounded-full object-cover">
+                        <button onclick="document.getElementById('userMenu').classList.toggle('hidden')"
+                            class="flex items-center gap-2 focus:outline-none">
+                            <img src="{{ $user->profile_photo_url ?? asset('images/profile.jpg') }}"
+                                class="w-8 h-8 rounded-full object-cover">
 
-            <span class="text-gray-700 font-medium dark:text-gray-300">
-                {{ $user->firstname }} {{ $user->lastname }}
-            </span>
-        </button>
+                            <span class="text-gray-700 font-medium dark:text-gray-300">
+                                {{ $user->firstname }} {{ $user->lastname }}
+                            </span>
+                        </button>
 
-        <!-- Dropdown -->
-        <div id="userMenu"
-             class="hidden absolute right-0 top-12 w-44 bg-white shadow-lg rounded-lg overflow-hidden z-50">
-            <!-- <a href=" "
-          
-               class="block px-4 py-2 hover:bg-gray-100">
-                Profile
-            </a> -->
+                        <!-- Dropdown -->
+                        <div id="userMenu"
+                            class="hidden absolute right-0 top-12 w-44 bg-white shadow-lg rounded-lg overflow-hidden z-50">
+                            @auth
+                            @if(auth()->user()->student)
+                            <a href="{{ route('student.dashboard') }}"
+                                class="block px-4 py-2 hover:bg-gray-100">
+                                Dashboard
+                            </a>
+                            @endif
+                            @endauth
 
-            <form method="POST" action="{{ route('web-logout') }}">
-                @csrf
-                <button type="submit"
-                        class="w-full text-left px-4 py-2 hover:bg-gray-100">
-                    Logout
-                </button>
-            </form>
-        </div>
-    </div>
-@else
-    {{-- ❌ Guest user --}}
-    <a href="{{ route('login') }}"
-       class="px-4 py-2 text-blue-500 border border-blue-500 rounded-lg hover:bg-blue-50 transition-colors font-medium">
-        Sign in
-    </a>
+                            <form method="POST" action="{{ route('web-logout') }}">
+                                @csrf
+                                <button type="submit"
+                                    class="w-full text-left px-4 py-2 hover:bg-gray-100">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    @else
+                    {{-- ❌ Guest user --}}
+                    <a href="{{ route('login') }}"
+                        class="px-4 py-2 text-blue-500 border border-blue-500 rounded-lg hover:bg-blue-50 transition-colors font-medium">
+                        Sign in
+                    </a>
 
-    <a href="{{ route('register') }}"
-       class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
-        Join Now
-    </a>
-@endif
+                    <a href="{{ route('register') }}"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                        Join Now
+                    </a>
+                    @endif
 
 
                 </div>

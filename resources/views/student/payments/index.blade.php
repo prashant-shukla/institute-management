@@ -5,78 +5,76 @@
 <div class="max-w-4xl mx-auto space-y-6">
 
     {{-- Summary Card --}}
-    <div class="bg-white shadow-md rounded-xl p-6">
-        <h2 class="text-2xl font-semibold mb-4">💳 Payment Summary</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div class="p-3 rounded-lg bg-gray-50">
-                <p class="text-gray-500">Total Course Fee</p>
-                <p class="text-xl font-bold">₹{{ number_format($totalFee, 2) }}</p>
-            </div>
-
-            <div class="p-3 rounded-lg bg-green-50">
-                <p class="text-gray-500">Total Paid</p>
-                <p class="text-xl font-bold text-green-700">₹{{ number_format($totalPaid, 2) }}</p>
-            </div>
-
-            <div class="p-3 rounded-lg bg-red-50">
-                <p class="text-gray-500">Pending Amount</p>
-                <p class="text-xl font-bold text-red-700">₹{{ number_format($balance, 2) }}</p>
-            </div>
-        </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="p-4 bg-gray-100 rounded-lg">
+        <p>Total Amount</p>
+        <p class="text-xl font-bold">₹{{ number_format($totalFee,2) }}</p>
     </div>
+
+    <div class="p-4 bg-green-100 rounded-lg">
+        <p>Paid</p>
+        <p class="text-xl font-bold text-green-700">₹{{ number_format($totalPaid,2) }}</p>
+    </div>
+
+    <div class="p-4 bg-red-100 rounded-lg">
+        <p>Balance</p>
+        <p class="text-xl font-bold text-red-700">₹{{ number_format($balance,2) }}</p>
+    </div>
+</div>
+
 
     {{-- Payments Table --}}
-    <div class="bg-white shadow-md rounded-xl p-6">
-        <h3 class="text-xl font-semibold mb-4">Payment History</h3>
+ <h3 class="text-lg font-semibold mt-6 mb-3">📘 Course Payments</h3>
 
-        @if($payments->isEmpty())
-        <p class="text-gray-500 text-sm">No payments recorded yet.</p>
-        @else
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-                <thead>
-                    <tr class="border-b bg-gray-100">
-                        <th class="text-left px-3 py-2">Date</th>
-                        <th class="text-left px-3 py-2">Amount</th>
-                        <th class="text-left px-3 py-2">Mode</th>
-                        <th class="text-left px-3 py-2">Received</th>
-                        <th class="text-left px-3 py-2">Receipt</th> {{-- 🔹 New column --}}
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($payments as $payment)
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-3 py-2">
-                            {{ optional($payment->created_at)->format('Y-m-d') }}
-                        </td>
-                        <td class="px-3 py-2 font-medium">
-                            ₹{{ number_format($payment->fee_amount, 2) }}
-                        </td>
-                        <td class="px-3 py-2">
-                            {{ $payment->payment_mode ?? '-' }}
-                        </td>
-                        <td class="px-3 py-2">
-                            {{ $payment->received_on ?? '-' }}
-                        </td>
+@if($coursePayments->isEmpty())
+    <p class="text-gray-500">No course payments found.</p>
+@else
+<table class="w-full border rounded-lg overflow-hidden">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="p-2 text-left">Date</th>
+            <th class="p-2 text-left">Amount</th>
+            <th class="p-2 text-left">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($coursePayments as $payment)
+        <tr class="border-t">
+            <td class="p-2">{{ $payment->created_at->format('d M Y') }}</td>
+            <td class="p-2">₹{{ number_format($payment->fee_amount,2) }}</td>
+            <td class="p-2 text-green-600">Paid</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
 
-                        {{-- 🔹 Download Receipt Button --}}
-<td class="px-3 py-2">
-    <a href="{{ route('student.payments.download') }}"
-           class="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-            ⬇ Download
-        </a>
-</td>
+<h3 class="text-lg font-semibold mt-10 mb-3">📝 Exam Payments</h3>
 
-
-
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        @endif
-    </div>
+@if($examPayments->isEmpty())
+    <p class="text-gray-500">No exam payments found.</p>
+@else
+<table class="w-full border rounded-lg overflow-hidden">
+    <thead class="bg-gray-100">
+        <tr>
+            <th class="p-2 text-left">Date</th>
+            <th class="p-2 text-left">Exam</th>
+            <th class="p-2 text-left">Amount</th>
+            <th class="p-2 text-left">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($examPayments as $exam)
+        <tr class="border-t">
+            <td class="p-2">{{ $exam->created_at->format('d M Y') }}</td>
+            <td class="p-2">{{ $exam->exam->name ?? 'N/A' }}</td>
+            <td class="p-2">₹{{ number_format($exam->total_fee,2) }}</td>
+            <td class="p-2 text-green-600">Paid</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
 
 
 </div>

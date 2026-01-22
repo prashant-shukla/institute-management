@@ -109,28 +109,39 @@
 
         {{-- Fee Summary --}}
         <div class="bg-white shadow rounded-xl p-6">
-            <h3 class="text-lg font-semibold mb-4">Fee Summary</h3>
+            <h3 class="text-lg font-semibold mb-4">💳 Fee Summary</h3>
 
-            <div class="space-y-2 text-sm">
-                <p>
-                    <span class="text-gray-500">Total Fee (with GST):</span>
-                    <span class="font-bold">₹{{ number_format($totalFee, 2) }}</span>
-                </p>
-                <p>
-                    <span class="text-gray-500">Total Paid:</span>
-                    <span class="font-bold text-green-600">₹{{ number_format($totalPaid, 2) }}</span>
-                </p>
-                <p>
-                    <span class="text-gray-500">Pending Amount:</span>
-                    <span class="font-bold text-red-600">₹{{ number_format($balance, 2) }}</span>
-                </p>
+            <div class="space-y-3 text-sm">
+
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Total Fee (with GST)</span>
+                    <span class="font-bold">
+                        ₹{{ number_format($totalFee ?? 0, 2) }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Total Paid</span>
+                    <span class="font-bold text-green-600">
+                        ₹{{ number_format($totalPaid ?? 0, 2) }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Pending Amount</span>
+                    <span class="font-bold {{ $balance > 0 ? 'text-red-600' : 'text-green-600' }}">
+                        ₹{{ number_format($balance ?? 0, 2) }}
+                    </span>
+                </div>
+
             </div>
 
             <a href="{{ route('student.payments') }}"
-                class="inline-block mt-4 text-sm text-blue-600 hover:underline">
+                class="inline-block mt-5 text-sm font-semibold text-blue-600 hover:underline">
                 View payment history →
             </a>
         </div>
+
 
         {{-- Attendance Summary --}}
         <div class="bg-white shadow rounded-xl p-6">
