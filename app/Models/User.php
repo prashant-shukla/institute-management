@@ -34,6 +34,9 @@ class User extends Authenticatable implements HasName
         'name',
     ];
 
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

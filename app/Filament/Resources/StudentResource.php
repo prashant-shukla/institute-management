@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers\FeesRelationManager;
+use App\Filament\Resources\StudentResource\RelationManagers\UsersWithoutStudentRelationManager;
+use App\Filament\Widgets\UsersWithoutStudent;
 use App\Models\Student;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -22,6 +24,9 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Models\Certificate;
 use Carbon\Carbon;
+
+
+
 
 class StudentResource extends Resource
 {
@@ -339,9 +344,17 @@ class StudentResource extends Resource
     {
         return [
             FeesRelationManager::class,
+            // \App\Filament\Widgets\UsersWithoutStudent::class,
         ];
     }
 
+
+    public static function getWidgets(): array
+    {
+        return [
+            UsersWithoutStudent::class,
+        ];
+    }
     public static function getPages(): array
     {
         return [

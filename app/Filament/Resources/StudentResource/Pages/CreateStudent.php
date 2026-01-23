@@ -46,5 +46,6 @@ class CreateStudent extends CreateRecord
             'enrolled_at' => now(),
         ]);
     }
+
 }
 
