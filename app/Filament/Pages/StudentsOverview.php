@@ -2,25 +2,40 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\Student;
-use App\Models\User;
 use Filament\Pages\Page;
+use App\Models\User;
 
 class StudentsOverview extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationLabel = 'Students';
-    protected static ?string $title = 'Students';
-    protected static ?string $navigationGroup = 'Students';
-
     protected static string $view = 'filament.pages.students-overview';
+    protected static ?string $navigationLabel = 'Users Without Student';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public function getViewData(): array
     {
-        return [
-            'students' => Student::with('course')->latest()->get(),
+        $query = User::whereDoesntHave('student');
 
-            'usersWithoutStudent' => User::whereDoesntHave('student')->get(),
+        // ✅ Today filter
+        if (request('filter') === 'today') {
+            $query->whereDate('created_at', today());
+        }
+
+        // ✅ This month filter
+        if (request('filter') === 'month') {
+            $query->whereMonth('created_at', now()->month)
+                  ->whereYear('created_at', now()->year);
+        }
+
+        // ✅ Date range filter
+        if (request('from') && request('to')) {
+            $query->whereBetween('created_at', [
+                request('from'),
+                request('to'),
+            ]);
+        }
+
+        return [
+            'usersWithoutStudent' => $query->latest()->get(),
         ];
     }
 }
