@@ -8,7 +8,7 @@
             class="border px-3 py-2 rounded">
 
         <button type="submit"
-            class="px-6 py-2 border text-black rounded-md
+            class="px-6 py-2 bordergit text-black rounded-md
                transition">
             Filter
         </button>

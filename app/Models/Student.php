@@ -43,7 +43,7 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function review()
     {
         return $this->hasMany(Reviews::class);
@@ -68,8 +68,9 @@ class Student extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->user->firstname . ' ' . $this->user->lastname;
+        return trim(($this->user?->firstname ?? '') . ' ' . ($this->user?->lastname ?? ''));
     }
+
     public function storePhoto($photo)
     {
         $this->photo = $photo->store('photos', 'public');

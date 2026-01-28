@@ -25,6 +25,10 @@ class PaymentController extends Controller
 
         $type   = session('type');
         $amount = session('amount');
+        
+        if ($amount <= 1) {
+            abort(403, 'Amount must be greater than 1');
+        }
 
         $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
 
