@@ -736,14 +736,13 @@
                             @else
                             <div class="absolute inset-0 flex items-center justify-center text-white dark:text-white text-3xl font-bold"
                                 style="
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
-    line-height: 1.6em;
-">
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                             -webkit-box-orient: vertical;
+                             overflow: hidden;
+                              text-overflow: ellipsis;
+                            min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
+                            line-height: 1.6em;">
                                 {{ strtoupper(substr($course->name, 0, 1)) }}
                             </div>
                             @endif

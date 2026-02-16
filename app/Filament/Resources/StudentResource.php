@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+// use Adminer\Db;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers\FeesRelationManager;
 use App\Filament\Resources\StudentResource\RelationManagers\UsersWithoutStudentRelationManager;
@@ -20,6 +21,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Models\Certificate;
@@ -53,9 +55,9 @@ class StudentResource extends Resource
 
                                 TextInput::make('lastname'),
 
-                                TextInput::make('username')
-                                    ->required()
-                                    ->unique(ignoreRecord: true),
+                                // TextInput::make('username')
+                                //     ->required()
+                                //     ->unique(ignoreRecord: true),
 
                                 TextInput::make('email')
                                     ->required()
@@ -89,7 +91,11 @@ class StudentResource extends Resource
 
                                 DatePicker::make('date_of_birth')
                                     ->label('Date of Birth')
-                                    ->required(),
+                                    ->required()
+                                    ->native(false)   // ✅ Modern popup calendar
+                                    ->displayFormat('d M Y')
+                                    ->closeOnDateSelection()
+                                    ->maxDate(now()),
 
                                 TextInput::make('mobile_no')
                                     ->label('Phone No')
@@ -150,11 +156,26 @@ class StudentResource extends Resource
                         Section::make('REGISTRATION DETAILS')
                             ->schema([
                                 DatePicker::make('reg_date')
-                                    ->label('Reg Date'),
+                                    ->label('Reg Date')
+                                    ->default(now())
+                                    ->disabled()
+                                    ->dehydrated(true), // value save hogi database me
+
 
                                 TextInput::make('reg_no')
                                     ->label('Reg No')
-                                    ->maxLength(255),
+                                    ->default(function () {
+                                        $lastReg = DB::table('students')
+                                            ->orderBy('id', 'desc')
+                                            ->value('reg_no');
+
+                                        return $lastReg ? $lastReg + 1 : 1001;
+                                    })
+                                    ->disabled()
+                                    ->dehydrated(true)
+                                    ->numeric()
+                                    ->required(),
+
                             ]),
 
                         Section::make('COURSE DETAILS')

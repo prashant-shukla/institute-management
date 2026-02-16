@@ -47,7 +47,10 @@ class Course extends Model
     {
         return $this->hasMany(CourseTool::class);
     }
-
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
     public function studentCourses()
     {
         return $this->hasMany(StudentCourse::class);

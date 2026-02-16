@@ -59,16 +59,14 @@ class CourseResource extends Resource
                             ->searchable()
                             ->label('Course Category'),
 
-                        Forms\Components\TextInput::make('sub_title')
-                            ->label('Sub Title'),
-                        Forms\Components\TextInput::make('status')
-                            ->label('Status')
-                            ->default('active'),
-
                         Forms\Components\FileUpload::make('image')
                             ->label('Image')
                             ->directory('courses')   // uploaded files will go to storage/app/public/courses
                             ->disk('public')         // make sure you are using 'public' disk
+                            ->columnSpan('full'),
+
+                        Forms\Components\TextInput::make('sub_title')
+                            ->label('Sub Title')
                             ->columnSpan('full'),
 
                         Forms\Components\RichEditor::make('description')
@@ -97,6 +95,14 @@ class CourseResource extends Resource
                         TextInput::make('offer_fee')
                             ->label('Offer Fee')
                             ->numeric(),
+
+                        Toggle::make('status')
+                            ->label('Course Status')
+                            ->default(true)
+                            ->required()
+                            ->formatStateUsing(fn($state) => $state === 'active')
+                            ->dehydrateStateUsing(fn($state) => $state ? 'active' : 'inactive'),
+
 
                         Repeater::make('faqs')
                             ->schema([
@@ -146,6 +152,11 @@ class CourseResource extends Resource
                 Tables\Columns\ToggleColumn::make('popular_course')
                     ->onIcon('heroicon-m-bolt')
                     ->offIcon('heroicon-m-user'),
+                Tables\Columns\ToggleColumn::make('status')
+                    ->label('Active')
+                    ->onColor('success')
+                    ->offColor('danger'),
+
 
             ])
             ->filters([

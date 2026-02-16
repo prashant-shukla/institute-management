@@ -56,48 +56,107 @@ class HomeController extends Controller
 
 public function Homes()
 {
-    $testimonials = Testimonial::where('status', 1)->latest()->get();
-    $latestCourses = Course::orderBy('created_at', 'desc')->take(3)->get();
-    $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline')")->get();
-    $proudStudents = ProudStudent::latest()->take(3)->get();
- $videos = Video::latest()->take(3)->get(); 
-    $clients = Client::orderBy('created_at', 'desc')->limit(6)->get();
-    $features = Feature::all();
-   $reviews = Reviews::with(['student', 'course'])
-        ->where('status', 1)
-        ->orderBy('created_at', 'desc')
+    $testimonials = Testimonial::where('status', 1)
+        ->latest()
+        ->get();
+
+    // Latest 3 active courses
+    $latestCourses = Course::active()
+        ->latest()
+        ->take(3)
+        ->get();
+
+    // All active courses (ordered by mode)
+    $courses = Course::active()
+        ->orderByRaw("FIELD(mode, 'online', 'offline')")
+        ->get();
+
+    // Separate Offline Courses
+    $offlineCourses = Course::active()
+        ->whereIn('mode', ['offline', 'both'])
+        ->latest()
+        ->take(4)
+        ->get();
+
+    // Separate Online Courses
+    $onlineCourses = Course::active()
+        ->whereIn('mode', ['online', 'both'])
+        ->latest()
+        ->take(4)
+        ->get();
+
+    $proudStudents = ProudStudent::latest()
+        ->take(3)
+        ->get();
+
+    $videos = Video::latest()
+        ->take(3)
+        ->get();
+
+    $clients = Client::latest()
         ->limit(6)
         ->get();
 
-    // ⬇️ New: Latest 3 Blogs
-    //  $blogs = Post::with('category')->latest()->get();
-    $latestBlogs = Post::orderBy('created_at', 'desc')->take(3)->get();
-    return view('homes', [
-        'courses'       => $courses,
-        'latestCourses' => $latestCourses,
-        'testimonials'  => $testimonials,
-        'proudStudents' => $proudStudents,
-        'clients'       => $clients,
-        'latestBlogs'   => $latestBlogs, // 👈 Add this
-        'reviews'       => $reviews,
-        'videos' => $videos,
-        'features'      => $features,
-    ]);
+    $features = Feature::all();
+
+    $featuresUrl = Feature::value('button_url');
+
+    $reviews = Reviews::with(['student', 'course'])
+        ->where('status', 1)
+        ->latest()
+        ->limit(6)
+        ->get();
+
+    $latestBlogs = Post::latest()
+        ->take(3)
+        ->get();
+
+    return view('homes', compact(
+        'courses',
+        'offlineCourses',
+        'onlineCourses',
+        'featuresUrl',
+        'latestCourses',
+        'testimonials',
+        'proudStudents',
+        'clients',
+        'latestBlogs',
+        'reviews',
+        'videos',
+        'features'
+    ));
 }
+
+
 
     public function Courses()
     {
-        $courses = Course::orderByRaw("FIELD(mode, 'online', 'offline','both')")->get();
+        $courses = Course::where('status', 'active')
+            ->orderByRaw("FIELD(mode, 'online', 'offline','both')")
+            ->get();
+
         $clients = Client::latest()->get();
+
         $proudStudents = ProudStudent::all();
-        $testimonials = Testimonial::where('status', 1)->latest()->get();
+
+        $testimonials = Testimonial::where('status', 1)
+            ->latest()
+            ->get();
+
         $offlineCourses = $courses->whereIn('mode', ['offline', 'both']);
         $onlineCourses = $courses->whereIn('mode', ['online', 'both']);
-        $certifications = $courses->whereIn('mode', ['online', 'offline', 'both']);
+        $certifications = $courses; // already filtered active
 
-
-        return view('courses', compact('offlineCourses', 'onlineCourses', 'certifications', 'clients', 'testimonials', 'proudStudents'));
+        return view('courses', compact(
+            'offlineCourses',
+            'onlineCourses',
+            'certifications',
+            'clients',
+            'testimonials',
+            'proudStudents'
+        ));
     }
+
     public function Course_Detail($id)
     {
         $course_syllabuses = CourseSyllabuses::where('course_id', $id)->get();
@@ -159,29 +218,43 @@ public function Homes()
     public function filterCourses(Request $request)
     {
         $filter = $request->input('filter');
-        $coursecategories = CourseCategory::all();
-        // Assuming you have a relationship between courses and categories
-        if ($filter === '*') {
-            $courses = Course::all(); // Fetch all courses
-        } else {
-            $courses = Course::whereHas('coursecategory', function ($query) use ($filter) {
-                $query->where('id', $filter);
-            })->get();
+
+        $query = Course::active();
+
+        if ($filter !== '*') {
+            $query->whereHas(
+                'courseCategory',
+                fn($q) =>
+                $q->where('id', $filter)
+            );
         }
-        $coursecategories = CourseCategory::all();
-        $mentors = Mentor::all();
-        $reviews = Reviews::all();
-        return view('ajax', ['courses' => $courses, 'coursecategories' => $coursecategories, 'mentors' => $mentors, 'reviews' => $reviews])->render();
+
+        $courses = $query->get();
+
+        return view('ajax', [
+            'courses'          => $courses,
+            'coursecategories' => CourseCategory::all(),
+            'mentors'          => Mentor::all(),
+            'reviews'          => Reviews::where('status', 1)->get(),
+        ])->render();
     }
+
 
     public function Course($slug, $id)
     {
-        // Specific course by ID
-        $course = Course::findOrFail($id);
+        // Only Active Course
+        $course = Course::where('id', $id)
+            ->where('status', 'active') // 👈 Only Active
+            ->firstOrFail();
 
         $banners = Banner::where('banner_page', 'course')->get();
+
         $coursementors = CourseMentor::where('course_id', $id)->get();
-        $reviews = Reviews::where('course_id', $id)->get();
+
+        $reviews = Reviews::where('course_id', $id)
+            ->where('status', 1) // optional but recommended
+            ->get();
+
         $coursesyllabuses = CourseSyllabuses::where('course_id', $id)->get();
 
         $totals = [];
@@ -189,10 +262,8 @@ public function Homes()
         foreach ($coursesyllabuses as $syllabus) {
             $extraInfo = $syllabus->extra_info;
 
-            // अगर DB में stringified JSON है तो decode करो, वरना जैसा array आए वैसे काम करो
             if (is_string($extraInfo)) {
-                $decoded = json_decode($extraInfo, true);
-                $extraInfo = $decoded ?? [];
+                $extraInfo = json_decode($extraInfo, true) ?? [];
             }
 
             if (!is_array($extraInfo)) {
@@ -200,47 +271,51 @@ public function Homes()
             }
 
             foreach ($extraInfo as $item) {
-                // item कभी object आ सकता है, कभी array
+
                 if (is_object($item)) {
                     $item = (array) $item;
                 }
+
                 if (!isset($item['name'], $item['value'])) {
                     continue;
                 }
+
                 $name = $item['name'];
                 $value = (int) $item['value'];
 
-                if (!isset($totals[$name])) {
-                    $totals[$name] = 0;
-                }
-                $totals[$name] += $value;
+                $totals[$name] = ($totals[$name] ?? 0) + $value;
             }
         }
 
-        // OPTIONAL: commonly used keys के लिए default बनाए रखें ताकि blade में हर key मौजूद रहे
         $defaults = ['Video' => 0, 'Assignments' => 0, 'Projects' => 0, 'Tools' => 0];
         $totals = array_merge($defaults, $totals);
 
         $coursetool = CourseTool::where('course_id', $id)->get();
+
         $faqs = [];
+
         if (!empty($course->faqs)) {
-            $faqs = is_array($course->faqs) ? $course->faqs : json_decode($course->faqs, true);
+            $faqs = is_array($course->faqs)
+                ? $course->faqs
+                : json_decode($course->faqs, true);
+
             if (!is_array($faqs)) {
-                $faqs = []; // fallback if json_decode failed
+                $faqs = [];
             }
         }
 
-        return view('Course_Detail', [
-            'course' => $course,
-            'coursementors' => $coursementors,
-            'reviews' => $reviews,
-            'coursesyllabuses' => $coursesyllabuses,
-            'coursetool' => $coursetool,
-            'banners' => $banners,
-            'faqs' => $faqs,
-            'totals' => $totals,
-        ]);
+        return view('Course_Detail', compact(
+            'course',
+            'coursementors',
+            'reviews',
+            'coursesyllabuses',
+            'coursetool',
+            'banners',
+            'faqs',
+            'totals'
+        ));
     }
+
 
     public function contact()
     {
@@ -266,6 +341,4 @@ public function Homes()
         $blog = Post::with(['category'])->where('slug', $slug)->firstOrFail();
         return view('blog_detail', compact('blog'));
     }
-
-
 }

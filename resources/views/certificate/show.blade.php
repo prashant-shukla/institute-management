@@ -85,7 +85,7 @@
             @endforeach</div>
 
     </div>
-
+    
     <div class="details">
         <div class="details1">
             {{ $certificate->certificate_no }}
