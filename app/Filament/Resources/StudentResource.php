@@ -162,19 +162,24 @@ class StudentResource extends Resource
                                     ->dehydrated(true), // value save hogi database me
 
 
+                                // TextInput::make('reg_no')
+                                //     ->label('Reg No')
+                                //     ->default(function () {
+                                //         $lastReg = DB::table('students')
+                                //             ->orderBy('id', 'desc')
+                                //             ->value('reg_no');
+
+                                //         return $lastReg ? $lastReg + 1 : 'CA1001' / 1001;
+                                //     })
+                                //     ->disabled()
+                                //     ->dehydrated(true)
+                                //     ->numeric()
+                                //     ->required(),
+                                    
                                 TextInput::make('reg_no')
                                     ->label('Reg No')
-                                    ->default(function () {
-                                        $lastReg = DB::table('students')
-                                            ->orderBy('id', 'desc')
-                                            ->value('reg_no');
-
-                                        return $lastReg ? $lastReg + 1 : 1001;
-                                    })
                                     ->disabled()
-                                    ->dehydrated(true)
-                                    ->numeric()
-                                    ->required(),
+                                    ->dehydrated(false),
 
                             ]),
 

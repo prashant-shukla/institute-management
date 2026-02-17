@@ -93,16 +93,28 @@ class Student extends Model
     {
         return $this->hasMany(StudentExam::class);
     }
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
         static::creating(function ($student) {
-            $latestStudent = Student::orderBy('reg_no', 'desc')->first();
-            $student->reg_no = $latestStudent ? $latestStudent->reg_no + 1 : 10000;
-            if (empty($student->reg_date)) {
-                $student->reg_date = now();
+
+            $prefix = 'CA1001/';
+
+            $lastReg = self::where('reg_no', 'like', $prefix . '%')
+                ->orderByDesc('id')
+                ->value('reg_no');
+
+            if ($lastReg) {
+
+                // Slash ke baad ka number nikaalo
+                $parts = explode('/', $lastReg);
+                $number = isset($parts[1]) ? (int)$parts[1] : 1000;
+
+                $student->reg_no = $prefix . ($number + 1);
+            } else {
+
+                $student->reg_no = $prefix . '1001';
             }
         });
     }
+
 }

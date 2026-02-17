@@ -653,300 +653,143 @@
 
 
 
-    <!-- Courses Sections -->
-    <section id="courses" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <!-- Offline Courses -->
-            <div class="mb-16">
-                <h2
-                    class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white transition-colors duration-300">
-                    Popular Offline Courses
-                </h2>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-300">Offline
-                    courses at our center</p>
+{{-- ================= COURSES SECTION ================= --}}
+<section id="courses" class="py-16 bg-gray-50 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
 
-                @php
-                $latestCourses = \App\Models\Course::orderBy('created_at', 'desc')->take(4)->get();
+        {{-- ================= OFFLINE COURSES ================= --}}
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white">
+                Popular Offline Courses
+            </h2>
 
-                $bgColors = [
-                'online' => [
-                'bg-gradient-to-br from-blue-400 to-blue-600',
-                'bg-gradient-to-br from-green-400 to-green-600',
-                'bg-gradient-to-br from-purple-400 to-purple-600',
-                ],
-                'offline' => [
-                'bg-gradient-to-br from-orange-400 to-red-600',
-                'bg-gradient-to-br from-pink-400 to-rose-600',
-                'bg-gradient-to-br from-yellow-400 to-orange-500',
-                ],
-                'both' => [
-                // 👈 new safe key
-                'bg-gradient-to-br from-teal-400 to-teal-600',
-                'bg-gradient-to-br from-indigo-400 to-indigo-600',
-                'bg-gradient-to-br from-cyan-400 to-cyan-600',
-                ],
-                ];
+            <p class="text-center text-gray-600 dark:text-gray-400 mb-10">
+                Offline courses at our center
+            </p>
 
-                $btnColors = [
-                'online' => [
-                'bg-blue-500 hover:bg-blue-600',
-                'bg-green-500 hover:bg-green-600',
-                'bg-purple-500 hover:bg-purple-600',
-                ],
-                'offline' => [
-                'bg-orange-500 hover:bg-orange-600',
-                'bg-pink-500 hover:bg-rose-600',
-                'bg-yellow-500 hover:bg-orange-500',
-                ],
-                'both' => [
-                // 👈 new safe key
-                'bg-teal-500 hover:bg-teal-600',
-                'bg-indigo-500 hover:bg-indigo-600',
-                'bg-cyan-500 hover:bg-cyan-600',
-                ],
-                ];
-                @endphp
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    @foreach ($latestCourses as $index => $course)
-                    @php
-                    // Agar mode invalid hai to default 'online' use karein
-                    $mode = $course->mode ?? 'online';
-                    $mode = array_key_exists($mode, $bgColors) ? $mode : 'online';
+                @forelse ($offlineCourses as $course)
 
-                    $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
-                    $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
-                    @endphp
-                    @endforeach
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    @foreach ($latestCourses as $index => $course)
-                    @php
-                    $mode = $course->mode ?? 'online';
-                    $bgClass = $bgColors[$mode][$index % count($bgColors[$mode])];
-                    $btnClass = $btnColors[$mode][$index % count($btnColors[$mode])];
-                    @endphp
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden">
 
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group ">
-                        <div class="h-48 relative overflow-hidden {{ $bgClass }}">
+                        {{-- Image --}}
+                        <div class="h-48 relative overflow-hidden">
                             @if ($course->image)
-                            <img src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->name }}"
-                                class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $course->image) }}"
+                                     alt="{{ $course->name }}"
+                                     class="w-full h-full object-cover">
                             @else
-                            <div class="absolute inset-0 flex items-center justify-center text-white dark:text-white text-3xl font-bold"
-                                style="
-                            display: -webkit-box;
-                            -webkit-line-clamp: 2;
-                             -webkit-box-orient: vertical;
-                             overflow: hidden;
-                              text-overflow: ellipsis;
-                            min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
-                            line-height: 1.6em;">
-                                {{ strtoupper(substr($course->name, 0, 1)) }}
-                            </div>
+                                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-3xl font-bold text-gray-600 dark:text-gray-300">
+                                    {{ strtoupper(substr($course->name, 0, 1)) }}
+                                </div>
                             @endif
-
-                            <div class="absolute inset-0 bg-black opacity-20"></div>
-
-                            <div class="absolute bottom-4 left-4 text-white">
-
-                                @if ($mode === 'offline')
-                                <span class="text-xs bg-red-600 px-2 py-1 rounded">Offline</span>
-                                @endif
-                            </div>
                         </div>
 
+                        {{-- Content --}}
                         <div class="p-4">
-                            <h3 class="text-xl font-bold dark:text-white"
-                                style="
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
-    line-height: 1.6em;
-">
+                            <h3 class="text-lg font-bold dark:text-white line-clamp-2">
                                 {{ $course->name }}
                             </h3>
-                            <p class="text-sm opacity-90 mb-2 dark:text-gray-400">{{ $course->course_duration ?? 'N/A' }}
-                                Program</p>
+
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                {{ $course->course_duration ?? 'N/A' }} Program
+                            </p>
+
                             <div class="flex justify-between items-center mb-3">
-                                {{-- Offer Fee on left --}}
-                                <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
+                                <span class="font-bold text-gray-800 dark:text-gray-200">
                                     ₹{{ number_format($course->offer_fee, 2) }}
                                 </span>
 
-                                {{-- Original Fee on right --}}
-                                <span class="text-sm line-through text-gray-500">
+                                <span class="line-through text-gray-500">
                                     ₹{{ number_format($course->fee, 2) }}
                                 </span>
                             </div>
-                            <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}"
-                                class=" text-white">
-                                <button
-                                    class="w-full py-2 {{ $btnClass }} text-white rounded-lg transition-colors">
+
+                            <a href="{{ route('course', ['slug'=>$course->slug,'id'=>$course->id]) }}">
+                                <button class="w-full py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition">
                                     Enroll Now
                                 </button>
                             </a>
                         </div>
-                    </div>
-                    @endforeach
-                </div>
 
-
-
-                <div class="text-center mt-8">
-                    <a href="{{ url('/Course') }}">
-                        <button
-                            class="px-8 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
-                            View More Offline Courses →
-                        </button>
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- Online Courses -->
-            <div>
-                <h2
-                    class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white transition-colors duration-300">
-                    Online Courses
-                </h2>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-300">Online
-                    live
-                    courses via Zoom platform</p>
-
-                @php
-                $onlineCourses = \App\Models\Course::where('mode', 'online')
-                ->orderBy('created_at', 'desc')
-                ->take(4)
-                ->get();
-                @endphp
-
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    @foreach ($onlineCourses as $course)
-                    <div
-                        class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-                        {{-- Header --}}
-                        <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 relative overflow-hidden">
-                            <div
-                                class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                LIVE
-                            </div>
-                            {{-- <div class="absolute bottom-4 left-4 text-white dark:text-white">
-                                    <h3 class="text-xl font-bold">{{ $course->name }}</h3>
-                            <p class="text-sm opacity-90 dark:text-gray-400">{{ $course->course_duration }} Online</p>
-                        </div> --}}
                     </div>
 
-                    {{-- Body --}}
-                    <div class="p-4">
-                        <h3 class="text-xl font-bold dark:text-white"
-                            style="
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-height: 3.2em; /* यह line height × 2 के बराबर रखता है */
-    line-height: 1.6em;
-">
-                            {{ $course->name }}
-                        </h3>
-                        <p class="text-sm opacity-90 dark:text-gray-400">{{ $course->course_duration }} Online</p>
-                        <div class="flex justify-between items-center mb-3">
-                            {{-- Offer Fee on left --}}
-                            <span class="text-sm font-bold text-gray-700 dark:text-gray-300">
-                                ₹{{ number_format($course->offer_fee, 2) }}
-                            </span>
-
-                            {{-- Original Fee on right --}}
-                            <span class="text-sm line-through text-gray-500">
-                                ₹{{ number_format($course->fee, 2) }}
-                            </span>
-                        </div>
-                        <a href="{{ route('course', ['slug' => $course->slug, 'id' => $course->id]) }}">
-                            <button
-                                class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-
-                                Join Online
-
-                            </button>
-                        </a>
+                @empty
+                    <div class="col-span-4 text-center text-gray-500">
+                        No Offline Courses Available
                     </div>
-                </div>
-                @endforeach
-            </div>
+                @endforelse
 
-
-            <div class="text-center mt-8">
-                <a href="{{ url('/Course') }}">
-                    <button
-                        class="px-8 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition-colors">
-                        View More Online Courses →
-                    </button>
-                </a>
             </div>
         </div>
-        </div>
-    </section>
 
-    <!-- Values / Powerful Features Section -->
-    <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <h2
-                class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-300">
-                CADADDA Values
+
+
+        {{-- ================= ONLINE COURSES ================= --}}
+        <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white">
+                Online Courses
             </h2>
 
-            <div class="max-w-4xl mx-auto">
-                <div
-                    class="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
-                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full -ml-24 -mb-24">
-                    </div>
+            <p class="text-center text-gray-600 dark:text-gray-400 mb-10">
+                Online live courses via Zoom platform
+            </p>
 
-                    <div class="relative z-10">
-                        <h3 class="text-2xl md:text-3xl font-bold mb-4">POWERFUL FEATURES</h3>
-                        <p class="text-lg mb-8 text-blue-100">
-                            Experience cutting-edge training with our state-of-the-art facilities and expert
-                            instructors.
-                            We provide hands-on experience with the latest CAD/CAM software and tools.
-                        </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
-                                <div class="text-3xl font-bold mb-2">24/7</div>
-                                <div class="text-sm">Lab Access</div>
-                            </div>
-                            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
-                                <div class="text-3xl font-bold mb-2">100%</div>
-                                <div class="text-sm">Practical Training</div>
-                            </div>
-                            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
-                                <div class="text-3xl font-bold mb-2">1:1</div>
-                                <div class="text-sm">Mentorship</div>
+                @forelse ($onlineCourses as $course)
+
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden">
+
+                        {{-- Header --}}
+                        <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 relative">
+                            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                LIVE
                             </div>
                         </div>
 
-@php
-    $featuresUrl = \App\Models\Feature::query()->value('button_url');
-@endphp
+                        {{-- Content --}}
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold dark:text-white line-clamp-2">
+                                {{ $course->name }}
+                            </h3>
 
-<a href="{{ $featuresUrl ?? '#' }}" target="_blank">
-    <button
-        class="px-6 py-3 bg-white text-blue-500 font-bold rounded-lg hover:bg-gray-100 transition-colors">
-        View More Features →
-    </button>
-</a>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                {{ $course->course_duration ?? 'N/A' }} Online
+                            </p>
+
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-bold text-gray-800 dark:text-gray-200">
+                                    ₹{{ number_format($course->offer_fee, 2) }}
+                                </span>
+
+                                <span class="line-through text-gray-500">
+                                    ₹{{ number_format($course->fee, 2) }}
+                                </span>
+                            </div>
+
+                            <a href="{{ route('course', ['slug'=>$course->slug,'id'=>$course->id]) }}">
+                                <button class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                                    Join Online
+                                </button>
+                            </a>
+                        </div>
 
                     </div>
-                </div>
+
+                @empty
+                    <div class="col-span-4 text-center text-gray-500">
+                        No Online Courses Available
+                    </div>
+                @endforelse
+
             </div>
         </div>
-    </section>
+
+    </div>
+</section>
+
 
     <!-- Company Feedback & Hiring Partners -->
     <!-- <section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">

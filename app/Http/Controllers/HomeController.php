@@ -54,78 +54,73 @@ class HomeController extends Controller
      */
 
 
-public function Homes()
-{
-    $testimonials = Testimonial::where('status', 1)
-        ->latest()
-        ->get();
+    public function Homes()
+    {
+        $testimonials = Testimonial::where('status', 1)
+            ->latest()
+            ->get();
 
-    // Latest 3 active courses
-    $latestCourses = Course::active()
-        ->latest()
-        ->take(3)
-        ->get();
+        // Latest 3 Active Courses
+        $latestCourses = Course::active()
+            ->latest()
+            ->take(3)
+            ->get();
 
-    // All active courses (ordered by mode)
-    $courses = Course::active()
-        ->orderByRaw("FIELD(mode, 'online', 'offline')")
-        ->get();
-
-    // Separate Offline Courses
-    $offlineCourses = Course::active()
+        // Offline Courses
+        $offlineCourses = Course::active()
         ->whereIn('mode', ['offline', 'both'])
         ->latest()
         ->take(4)
         ->get();
 
-    // Separate Online Courses
+    // Online + Both (Only Active)
     $onlineCourses = Course::active()
         ->whereIn('mode', ['online', 'both'])
         ->latest()
         ->take(4)
         ->get();
 
-    $proudStudents = ProudStudent::latest()
-        ->take(3)
-        ->get();
+    
+        $proudStudents = ProudStudent::latest()
+            ->take(3)
+            ->get();
 
-    $videos = Video::latest()
-        ->take(3)
-        ->get();
+        $videos = Video::latest()
+            ->take(3)
+            ->get();
 
-    $clients = Client::latest()
-        ->limit(6)
-        ->get();
+        $clients = Client::latest()
+            ->limit(6)
+            ->get();
 
-    $features = Feature::all();
+        // Single query instead of 2
+        $featuresUrl = Feature::value('button_url');
 
-    $featuresUrl = Feature::value('button_url');
 
-    $reviews = Reviews::with(['student', 'course'])
-        ->where('status', 1)
-        ->latest()
-        ->limit(6)
-        ->get();
+        $reviews = Reviews::with(['student', 'course'])
+            ->where('status', 1)
+            ->latest()
+            ->limit(6)
+            ->get();
 
-    $latestBlogs = Post::latest()
-        ->take(3)
-        ->get();
+        $latestBlogs = Post::latest()
+            ->take(3)
+            ->get();
 
-    return view('homes', compact(
-        'courses',
-        'offlineCourses',
-        'onlineCourses',
-        'featuresUrl',
-        'latestCourses',
-        'testimonials',
-        'proudStudents',
-        'clients',
-        'latestBlogs',
-        'reviews',
-        'videos',
-        'features'
-    ));
-}
+        return view('homes', compact(
+            'offlineCourses',
+            'onlineCourses',
+            'featuresUrl',
+            'latestCourses',
+            'testimonials',
+            'proudStudents',
+            'clients',
+            'latestBlogs',
+            'reviews',
+            'videos'
+        ));
+    }
+
 
 
 

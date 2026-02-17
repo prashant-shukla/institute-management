@@ -1,102 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
- <script src="https://cdn.tailwindcss.com/3.4.1"></script>
 <head>
     <meta charset="UTF-8">
     <title>Certificate</title>
+
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+
     <style>
         body {
             margin: 0;
-            padding: 0;
-            background: url('{{ asset('images/certificate_background.jpg') }}') center center no-repeat fixed;
-            background-size: contain;
-            /* Ensures the whole image is visible */
-            background-color: #fff;
-            /* Adds white space if image doesn't cover fully */
-            width: 100vw;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-            overflow: hidden;
+            padding: 20px;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* ===== Certificate Wrapper ===== */
+        .certificate-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 12;   /* Maintain certificate ratio */
+            background: url('{{ asset('images/CERTICIATE-CADADDA.jpeg') }}') center center no-repeat;
+            background-size: contain;
+            background-color: #fff;
+        }
+
+        /* ===== Center Content ===== */
         .content {
             position: absolute;
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: 80%;
+            width: 100%;
         }
 
         .student-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000;
-           margin-bottom: 20px;
-            
+            font-size: 1vw;
+            color: #444;
+            margin-bottom: 1vw;
         }
 
         .course-name {
-            font-size: 24px;
+            font-size: 1vw;
             color: #444;
-          margin-top: 20px;
+            margin-top: 1vw;
         }
 
+        /* ===== Bottom Details ===== */
         .details {
-
             position: absolute;
-            bottom: 10%;
-            left: 10%;
-            right: 10%;
+            bottom: 16%;
+            left: 2%;
+            width: 100%;
             display: flex;
-            justify-content: space-between;
-            font-size: 16px;
-            color: #000;
-        }
-        .details1{
-            position: absolute;
-               left: 36%;
-               top:-60px;
-        }
- .details2{
-            position: absolute;
-               right: 36%;
-               top:-60px;
-        }
-        .sign {
-
-            text-align: center;
+            justify-content: center;
+            gap: 11%;
+            font-size: 0.8vw;
+            color: #444;
         }
 
-        .sign img {
-            height: 50px;
-        }
+        /* ===== Mobile Fix ===== */
+@media (min-width: 300px) and (max-width: 768px) {
+
+    .certificate-wrapper {
+        max-width: 100%;
+         font-size: 0.8vw;
+    }
+
+    .student-name {
+         font-size: 0.8vw; 
+   }
+
+    .course-name {
+        font-size: 0.8vw;
+    }
+
+    .details {
+        font-size: 0.8vw;
+    }
+}
+
     </style>
 </head>
 
 <body>
 
-    <div class="content">
-        <div class="student-name mt-6">{{ $studentName ?? 'Student Name' }}</div>
-        <div class="course-name  ">{{ $course->name ?? 'Course Name' }}</div>
-                <div class="course-name  "> @foreach($tools as $tool)
-             {{ $tool }},
-            @endforeach</div>
+    <div class="certificate-wrapper">
 
-    </div>
-    
-    <div class="details">
-        <div class="details1">
-            {{ $certificate->certificate_no }}
+        <div class="content">
+            <div class="student-name">
+                {{ $studentName ?? 'Student Name' }}
+            </div>
+
+            <div class="course-name">
+                {{ $course->name ?? 'Course Name' }}
+            </div>
+
+            <div class="course-name">
+                @foreach($tools as $tool)
+                    {{ $tool }}@if(!$loop->last), @endif
+                @endforeach
+            </div>
         </div>
-            <div class="details2">
-                  {{ \Carbon\Carbon::parse($certificate->issue_date)->format('d M, Y') }} /
-            {{ $course->course_duration }}
+
+        <div class="details">
+            <div>
+                {{ $student->reg_no ?? '' }}
+            </div>
+
+            <div>
+                {{ \Carbon\Carbon::parse($certificate->issue_date)->format('d M, Y') }}
+                /
+                {{ $course->course_duration ?? '' }}
+            </div>
         </div>
-        
+
     </div>
 
 </body>
-
 </html>
