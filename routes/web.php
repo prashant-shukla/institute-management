@@ -56,6 +56,11 @@ use Illuminate\Support\Facades\Auth;
     Route::view('/privacy-policy', 'privacy-policy')->name('privacy.policy');
     Route::view('/refund-policy', 'refund-policy')->name('refund.policy');
 
+    Route::get('/qr/{reg_no}', [HomeController::class, 'verify'])
+    ->name('student.verify');
+
+
+
 Route::post('/web-logout', function () {
     Auth::logout();
     request()->session()->invalidate();

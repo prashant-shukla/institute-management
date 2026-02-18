@@ -68,19 +68,19 @@ class HomeController extends Controller
 
         // Offline Courses
         $offlineCourses = Course::active()
-        ->whereIn('mode', ['offline', 'both'])
-        ->latest()
-        ->take(4)
-        ->get();
+            ->whereIn('mode', ['offline', 'both'])
+            ->latest()
+            ->take(4)
+            ->get();
 
-    // Online + Both (Only Active)
-    $onlineCourses = Course::active()
-        ->whereIn('mode', ['online', 'both'])
-        ->latest()
-        ->take(4)
-        ->get();
+        // Online + Both (Only Active)
+        $onlineCourses = Course::active()
+            ->whereIn('mode', ['online', 'both'])
+            ->latest()
+            ->take(4)
+            ->get();
 
-    
+
         $proudStudents = ProudStudent::latest()
             ->take(3)
             ->get();
@@ -196,10 +196,12 @@ class HomeController extends Controller
         $galleries = Gallery::all(); // DB se sab galleries fetch
         return view('Gallery', compact('galleries')); // variable view me pass karo
     }
+
     public function placement()
     {
         return view('placement');
     }
+
     public function category()
     {
         $courses = Course::all();
@@ -335,5 +337,16 @@ class HomeController extends Controller
     {
         $blog = Post::with(['category'])->where('slug', $slug)->firstOrFail();
         return view('blog_detail', compact('blog'));
+    }
+
+    public function verify($reg_no)
+    {
+        $reg_no = urldecode($reg_no);
+
+        $student = Student::where('reg_no', $reg_no)
+            ->with('course')
+            ->firstOrFail();
+
+        return view('student.verify', compact('student'));
     }
 }

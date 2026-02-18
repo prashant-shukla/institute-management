@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Certificate</title>
@@ -21,8 +22,9 @@
             position: relative;
             width: 100%;
             max-width: 1000px;
-            aspect-ratio: 16 / 12;   /* Maintain certificate ratio */
-            background: url('{{ asset('images/CERTICIATE-CADADDA.jpeg') }}') center center no-repeat;
+            aspect-ratio: 16 / 12;
+            /* Maintain certificate ratio */
+            background: url('{{ asset(' images/CERTICIATE-CADADDA.jpeg') }}') center center no-repeat;
             background-size: contain;
             background-color: #fff;
         }
@@ -30,23 +32,21 @@
         /* ===== Center Content ===== */
         .content {
             position: absolute;
-            top: 45%;
-            left: 50%;
+            top: 46%;
+            left: 45%;
             transform: translate(-50%, -50%);
             text-align: center;
             width: 100%;
         }
 
         .student-name {
-            font-size: 1vw;
             color: #444;
-            margin-bottom: 1vw;
+            margin-bottom: 0.8vw;
         }
 
         .course-name {
-            font-size: 1vw;
             color: #444;
-            margin-top: 1vw;
+            margin-top: 0.8vw;
         }
 
         /* ===== Bottom Details ===== */
@@ -58,31 +58,16 @@
             display: flex;
             justify-content: center;
             gap: 11%;
-            font-size: 0.8vw;
             color: #444;
         }
 
         /* ===== Mobile Fix ===== */
-@media (min-width: 300px) and (max-width: 768px) {
+        @media (min-width: 300px) and (max-width: 768px) {
 
-    .certificate-wrapper {
-        max-width: 100%;
-         font-size: 0.8vw;
-    }
-
-    .student-name {
-         font-size: 0.8vw; 
-   }
-
-    .course-name {
-        font-size: 0.8vw;
-    }
-
-    .details {
-        font-size: 0.8vw;
-    }
-}
-
+            .certificate-wrapper {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -101,11 +86,18 @@
 
             <div class="course-name">
                 @foreach($tools as $tool)
-                    {{ $tool }}@if(!$loop->last), @endif
+                {{ $tool }}@if(!$loop->last), @endif
                 @endforeach
             </div>
         </div>
-
+        <div class="qr">
+            <div class="absolute bottom-8 right-8">
+                {!! QrCode::size(120)
+                ->backgroundColor(255,255,255)
+                ->color(0,0,0)
+                ->generate(route('student.verify', urlencode($student->reg_no))) !!}
+            </div>
+        </div>
         <div class="details">
             <div>
                 {{ $student->reg_no ?? '' }}
@@ -121,4 +113,5 @@
     </div>
 
 </body>
+
 </html>
