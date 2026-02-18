@@ -24,7 +24,8 @@
             max-width: 1000px;
             aspect-ratio: 16 / 12;
             /* Maintain certificate ratio */
-            background: url('{{ asset(' images/CERTICIATE-CADADDA.jpeg') }}') center center no-repeat;
+            background: url('{{ asset('images/CERTICIATE-CADADDA.jpeg') }}') center center no-repeat;
+
             background-size: contain;
             background-color: #fff;
         }
@@ -91,8 +92,8 @@
             </div>
         </div>
         <div class="qr">
-            <div class="absolute bottom-8 right-8">
-                {!! QrCode::size(120)
+            <div class="absolute bottom-40 left-20">
+                {!! QrCode::size(80)
                 ->backgroundColor(255,255,255)
                 ->color(0,0,0)
                 ->generate(route('student.verify', urlencode($student->reg_no))) !!}

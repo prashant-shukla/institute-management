@@ -344,7 +344,7 @@ class HomeController extends Controller
         $reg_no = urldecode($reg_no);
 
         $student = Student::where('reg_no', $reg_no)
-            ->with('course')
+            ->with(['course', 'user'])
             ->firstOrFail();
 
         return view('student.verify', compact('student'));
