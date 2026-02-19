@@ -10,8 +10,6 @@
     <style>
         body {
             margin: 0;
-            padding: 20px;
-            background: #f3f4f6;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,30 +31,31 @@
         /* ===== Center Content ===== */
         .content {
             position: absolute;
-            top: 46%;
-            left: 49%;
+            top: 48%;
+            left: 80.5%;
             transform: translate(-50%, -50%);
-            text-align: center;
+            text-align: left;
             width: 100%;
         }
 
         .student-name {
+            position: absolute;
+            top: -17%;
+            left: 8%;
             color: #444;
-            margin-bottom: 0.8vw;
         }
 
         .course-name {
             color: #444;
-            margin-top: 0.8vw;
+            margin-top: 1.3vw;
         }
+
 
         /* ===== Bottom Details ===== */
         .details {
-
             width: 100%;
             display: flex;
             justify-content: center;
-           
             color: #444;
         }
        .details1 {
