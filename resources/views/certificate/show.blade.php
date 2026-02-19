@@ -34,7 +34,7 @@
         .content {
             position: absolute;
             top: 46%;
-            left: 45%;
+            left: 49%;
             transform: translate(-50%, -50%);
             text-align: center;
             width: 100%;
@@ -52,16 +52,27 @@
 
         /* ===== Bottom Details ===== */
         .details {
-            position: absolute;
-            bottom: 16%;
-            left: 2%;
+
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 11%;
+           
             color: #444;
         }
-
+       .details1 {
+            position: absolute;
+            bottom: 16%;
+            left: 36%;
+            width: 100%;
+            color: #444;
+        }
+       .details2 {
+            position: absolute;
+            bottom: 16%;
+            left: 54%;
+            width: 100%;
+            color: #444;
+        }
         /* ===== Mobile Fix ===== */
         @media (min-width: 300px) and (max-width: 768px) {
 
@@ -77,15 +88,15 @@
     <div class="certificate-wrapper">
 
         <div class="content">
-            <div class="student-name">
+            <div class="student-name font-bold ">
                 {{ $studentName ?? 'Student Name' }}
             </div>
 
-            <div class="course-name">
+            <div class="course-name font-bold">
                 {{ $course->name ?? 'Course Name' }}
             </div>
 
-            <div class="course-name">
+            <div class="course-name font-bold">
                 @foreach($tools as $tool)
                 {{ $tool }}@if(!$loop->last), @endif
                 @endforeach
@@ -99,12 +110,12 @@
                 ->generate(route('student.verify', urlencode($student->reg_no))) !!}
             </div>
         </div>
-        <div class="details">
-            <div>
+        <div class="details font-bold">
+            <div class="details1">
                 {{ $student->reg_no ?? '' }}
             </div>
 
-            <div>
+            <div class="details2 font-bold">
                 {{ \Carbon\Carbon::parse($certificate->issue_date)->format('d M, Y') }}
                 /
                 {{ $course->course_duration ?? '' }}
