@@ -140,48 +140,56 @@ class FeesRelationManager extends RelationManager
        Auto WhatsApp API Send (AiSensy)
     =================================== */
 
-    protected function sendWhatsAppMessage($record): void
-    {
-        try {
+protected function sendWhatsAppMessage($record): void
+{
+    try {
 
-            $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
+        $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
 
-            if (!$phone) {
-                return;
-            }
-
-            if (substr($phone, 0, 2) !== '91') {
-                $phone = '91' . $phone;
-            }
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('AISENSY_API_KEY'),
-                'Content-Type'  => 'application/json',
-            ])->post('https://backend.aisensy.com/campaign/t1/api/v2', [
-                "apiKey"       => env('AISENSY_API_KEY'),
-                "campaignName" => "fee_confirmation",
-                "destination"  => $phone,
-                "userName"     => $record->student->name,
-                "templateParams" => [
-                    number_format($record->fee_amount, 2),
-                    $record->course->name,
-                ],
-            ]);
-
-            if ($response->successful()) {
-                Notification::make()
-                    ->title('WhatsApp message sent successfully')
-                    ->success()
-                    ->send();
-            } else {
-                Notification::make()
-                    ->title('WhatsApp sending failed')
-                    ->danger()
-                    ->send();
-            }
-
-        } catch (\Exception $e) {
-            logger()->error('WhatsApp API Error: ' . $e->getMessage());
+        if (!$phone) {
+            logger()->error('Phone number empty');
+            return;
         }
+
+        if (substr($phone, 0, 2) !== '91') {
+            $phone = '91' . $phone;
+        }
+
+        $response = \Illuminate\Support\Facades\Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('AISENSY_API_KEY'),
+            'Content-Type'  => 'application/json',
+        ])->post('https://backend.aisensy.com/campaign/t1/api/v2', [
+
+            "apiKey"       => env('AISENSY_API_KEY'),
+            "campaignName" => "fee_confirmation_msg",
+            "destination"  => $phone,
+
+            // ✅ All template values here
+            "templateParams" => [
+                $record->student->name,
+                number_format($record->fee_amount, 2),
+                $record->course->name,
+            ],
+        ]);
+
+        // 🔥 IMPORTANT — log full response
+        logger()->info('AiSensy Response: ' . $response->body());
+
+        if ($response->successful()) {
+            \Filament\Notifications\Notification::make()
+                ->title('WhatsApp message sent successfully')
+                ->success()
+                ->send();
+        } else {
+
+            \Filament\Notifications\Notification::make()
+                ->title('WhatsApp sending failed')
+                ->danger()
+                ->send();
+        }
+
+    } catch (\Exception $e) {
+        logger()->error('WhatsApp API Error: ' . $e->getMessage());
     }
+}
 }

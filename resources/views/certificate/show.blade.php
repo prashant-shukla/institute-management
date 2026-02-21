@@ -41,7 +41,7 @@
         .student-name {
             position: absolute;
             top: -17%;
-            left: 8%;
+            left:11.5%;
             color: #444;
         }
 
