@@ -93,11 +93,11 @@ class FeesRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make(),
 
                 // Manual WhatsApp Web link
-                Tables\Actions\Action::make('whatsapp')
-                    ->label('Send via WhatsApp')
-                    ->icon('heroicon-o-chat-bubble-left-ellipsis')
-                    ->url(fn ($record) => $this->generateWhatsAppUrl($record))
-                    ->openUrlInNewTab(),
+                // Tables\Actions\Action::make('whatsapp')
+                //     ->label('Send via WhatsApp')
+                //     ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                //     ->url(fn ($record) => $this->generateWhatsAppUrl($record))
+                //     ->openUrlInNewTab(),
 
                 Tables\Actions\Action::make('print')
                     ->label('Print Receipt')
@@ -155,23 +155,26 @@ protected function sendWhatsAppMessage($record): void
             $phone = '91' . $phone;
         }
 
-        $response = \Illuminate\Support\Facades\Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('AISENSY_API_KEY'),
-            'Content-Type'  => 'application/json',
-        ])->post('https://backend.aisensy.com/campaign/t1/api/v2', [
+$fullName = preg_replace('/[^A-Za-z ]/', '', $record->student->full_name);
+$fullName = trim($fullName);
 
-            "apiKey"       => env('AISENSY_API_KEY'),
-            "campaignName" => "fee_confirmation_msg",
-            "destination"  => $phone,
+$response = \Illuminate\Support\Facades\Http::withHeaders([
+    'Authorization' => 'Bearer ' . env('AISENSY_API_KEY'),
+])->post('https://backend.aisensy.com/campaign/t1/api/v2', [
 
-            // ✅ All template values here
-            "templateParams" => [
-                $record->student->name,
-                number_format($record->fee_amount, 2),
-                $record->course->name,
-            ],
-        ]);
+    "apiKey"       => env('AISENSY_API_KEY'),
+    "campaignName" => "fee_confirmation_msg",
+    "destination"  => $phone,
 
+    // ✅ Mandatory clean username
+    "userName"     => $fullName,
+
+    "templateParams" => [
+        $fullName,
+        number_format($record->fee_amount, 2),
+        $record->course->name,
+    ],
+]);
         // 🔥 IMPORTANT — log full response
         logger()->info('AiSensy Response: ' . $response->body());
 
