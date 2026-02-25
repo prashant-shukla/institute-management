@@ -10,15 +10,33 @@ class StudentFeesExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return StudentFees::with(['student', 'course'])
+        return StudentFees::with(['student.user', 'course'])
             ->get()
             ->map(function ($fee) {
+
+                $student = $fee->student;
+                $user    = $student?->user;
+                $course  = $fee->course;
+
+                $baseAmount     = $fee->fee_amount ?? 0;
+                $gstAmount      = $fee->gst_amount ?? 0;
+                $discountAmount = $fee->discount_amount ?? 0;
+
+                // Total Fee Formula
+                $totalFee = ($baseAmount + $gstAmount) - $discountAmount;
+
+                // Amount Collected (Actual Paid Now)
+                $amountCollected = $fee->fee_amount ?? 0;
+
                 return [
-                    'Reg No'       => $fee->student->reg_no ?? '',
-                    // 'Student Name' => $fee->student->name ?? '',
-                    'Course'       => $fee->course->name ?? '',
-                    'Amount'       => $fee->fee_amount,
-                    'Date'         => $fee->received_on,
+                    'Reg No'            => $student->reg_no ?? '',
+                    'Student Name'      => $user ? $user->firstname . ' ' . $user->lastname : '',
+                    'Course'            => $course->name ?? '',
+                    'Total Fee'         => $totalFee,
+                    'Amount Collected'  => $amountCollected,
+                    'GST Amount'        => $gstAmount,
+                    'Discount'          => $discountAmount,
+                    'Date'              => $fee->received_on,
                 ];
             });
     }
@@ -27,9 +45,12 @@ class StudentFeesExport implements FromCollection, WithHeadings
     {
         return [
             'Reg No',
-            // 'Student Name',
+            'Student Name',
             'Course',
-            'Amount',
+            'Total Fee',
+            'Amount Collected',
+            'GST Amount',
+            'Discount',
             'Date',
         ];
     }

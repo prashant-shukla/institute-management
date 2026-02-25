@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListTools extends ListRecords
 {
     protected static string $resource = ToolResource::class;
+    protected static ?string $navigationLabel = 'Software';
 
     protected function getHeaderActions(): array
     {

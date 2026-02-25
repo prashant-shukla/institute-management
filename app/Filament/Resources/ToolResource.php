@@ -22,6 +22,10 @@ class ToolResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
     protected static ?string $navigationGroup = 'Courses';
+    protected static ?string $navigationLabel = 'Software';
+    protected static ?string $modelLabel = 'Software';
+    protected static ?string $pluralModelLabel = 'Software';
+
     protected static ?int $navigationSort = 403;
     public static function form(Form $form): Form
     {

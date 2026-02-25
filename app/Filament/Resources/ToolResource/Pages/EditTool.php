@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditTool extends EditRecord
 {
     protected static string $resource = ToolResource::class;
+    protected static ?string $navigationLabel = 'Software';
 
     protected function getHeaderActions(): array
     {

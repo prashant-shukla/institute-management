@@ -60,11 +60,10 @@ class Student extends Model
     {
         return $this->hasMany(StudentFees::class, 'student_id');
     }
-
-    // public function student_fees(): BelongsTo
-    // {
-    //     return $this->belongsTo(StudentFees::class);
-    // }
+    public function studentFees()
+    {
+        return $this->hasMany(\App\Models\StudentFees::class, 'student_id');
+    }
 
     public function getFullNameAttribute()
     {

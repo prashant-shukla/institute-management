@@ -12,8 +12,11 @@ class FeeReceiptController extends Controller
 {
     public function print($id)
     {
-        $fee = StudentFees::with(['student', 'course'])->findOrFail($id);
-       
+        $fee = \App\Models\StudentFees::with([
+            'student.user',
+            'course'
+        ])->findOrFail($id);
+    
         return view('receipts.fee', compact('fee'));
     }
  

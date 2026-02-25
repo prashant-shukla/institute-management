@@ -18,7 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CourseToolRelationManager extends RelationManager
 {
     protected static string $relationship = 'CourseTool';
-
+    protected static ?string $navigationLabel = 'Software';
+    
     public function form(Form $form): Form
     {
         return $form
@@ -35,10 +36,12 @@ class CourseToolRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('tool_id')
-            ->columns([
-                Tables\Columns\TextColumn::make('tool_id'),
-            ])
+        ->columns([
+            Tables\Columns\TextColumn::make('tool.name')
+                ->label('Tool')
+                ->sortable()
+                ->searchable(),
+        ])
             ->filters([
                 //
             ])
