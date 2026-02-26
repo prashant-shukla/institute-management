@@ -118,11 +118,23 @@ class StudentFeeReport extends Page implements HasTable
                         $query->whereMonth('received_on', $data['month']);
                     }
                 }),])
-            ->headerActions([Tables\Actions\Action::make('export')
-                ->label('Export Excel')->icon('heroicon-o-arrow-down-tray')
-                ->action(function () {
-                    return Excel::download(new StudentFeesExport(now()
-                        ->format('Y-m')), 'student-fees.xlsx');
-                })]);
+                ->headerActions([
+                    Tables\Actions\Action::make('export')
+                        ->label('Export Excel')
+                        ->icon('heroicon-o-arrow-down-tray')
+                        ->action(function () {
+                            return Excel::download(
+                                new StudentFeesExport(now()->format('Y-m')),
+                                'student-fees.xlsx'
+                            );
+                        }),
+                
+                    Tables\Actions\Action::make('add_fee')
+                        ->label('Add Student Fee')
+                        ->icon('heroicon-o-plus')
+                        ->color('success')
+                        ->url(route('filament.admin.resources.student-fees.create')),
+                    ]);
     }
+
 }

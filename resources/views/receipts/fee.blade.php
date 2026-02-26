@@ -153,7 +153,7 @@
         </div>
 
         <div class="section">
-            <h4>Receipt To</h4>
+        <h4>Receipt No: {{ $fee->receipt_no ?? '-' }}</h4>
 
             <p><strong>
                     {{ $user ? $user->firstname . ' ' . $user->lastname : '-' }}

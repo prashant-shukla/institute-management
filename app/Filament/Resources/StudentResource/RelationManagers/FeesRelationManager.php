@@ -87,7 +87,7 @@ class FeesRelationManager extends RelationManager
             ])
             ->headerActions([
                  Tables\Actions\CreateAction::make()
-                //     ->after(fn($record) => $this->sendWhatsAppMessage($record)),
+                    ->after(fn($record) => $this->sendWhatsAppMessage($record)),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -95,11 +95,11 @@ class FeesRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make(),
 
                 // Manual WhatsApp Web link
-                // Tables\Actions\Action::make('whatsapp')
-                //     ->label('Send via WhatsApp')
-                //     ->icon('heroicon-o-chat-bubble-left-ellipsis')
-                //     ->url(fn ($record) => $this->generateWhatsAppUrl($record))
-                //     ->openUrlInNewTab(),
+                Tables\Actions\Action::make('whatsapp')
+                    ->label('Send via WhatsApp')
+                    ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                    ->url(fn ($record) => $this->generateWhatsAppUrl($record))
+                    ->openUrlInNewTab(),
 
                 Tables\Actions\Action::make('print')
                     ->label('Print Receipt')
@@ -113,87 +113,87 @@ class FeesRelationManager extends RelationManager
        Manual WhatsApp Link
     =================================== */
 
-    // protected function generateWhatsAppUrl($record): string
-    // {
-    //     $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
+    protected function generateWhatsAppUrl($record): string
+    {
+        $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
 
-    //     if (!$phone) {
-    //         return '#';
-    //     }
+        if (!$phone) {
+            return '#';
+        }
 
-    //     if (substr($phone, 0, 2) !== '91') {
-    //         $phone = '91' . $phone;
-    //     }
+        if (substr($phone, 0, 2) !== '91') {
+            $phone = '91' . $phone;
+        }
 
-    //     $amount = number_format($record->fee_amount, 2);
-    //     $date = \Carbon\Carbon::parse($record->received_on)->format('d M Y');
+        $amount = number_format($record->fee_amount, 2);
+        $date = \Carbon\Carbon::parse($record->received_on)->format('d M Y');
 
-    //     $message = "Hello {$record->student->name},\n\n"
-    //         . "We have received your fee payment.\n"
-    //         . "Amount: ₹{$amount}\n"
-    //         . "Date: {$date}\n"
-    //         . "Course: {$record->course->name}\n\n"
-    //         . "Thank you!";
+        $message = "Hello {$record->student->name},\n\n"
+            . "We have received your fee payment.\n"
+            . "Amount: ₹{$amount}\n"
+            . "Date: {$date}\n"
+            . "Course: {$record->course->name}\n\n"
+            . "Thank you!";
 
-    //     return "https://wa.me/{$phone}?text=" . urlencode($message);
-    // }
+        return "https://wa.me/{$phone}?text=" . urlencode($message);
+    }
 
     /* ===================================
        Auto WhatsApp API Send (AiSensy)
     =================================== */
 
-    // protected function sendWhatsAppMessage($record): void
-    // {
-    //     try {
+    protected function sendWhatsAppMessage($record): void
+    {
+        try {
 
-    //         $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
+            $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
 
-    //         if (!$phone) {
-    //             logger()->error('Phone number empty');
-    //             return;
-    //         }
+            if (!$phone) {
+                logger()->error('Phone number empty');
+                return;
+            }
 
-    //         if (substr($phone, 0, 2) !== '91') {
-    //             $phone = '91' . $phone;
-    //         }
+            if (substr($phone, 0, 2) !== '91') {
+                $phone = '91' . $phone;
+            }
 
-    //         $fullName = preg_replace('/[^A-Za-z ]/', '', $record->student->full_name);
-    //         $fullName = trim($fullName);
+            $fullName = preg_replace('/[^A-Za-z ]/', '', $record->student->full_name);
+            $fullName = trim($fullName);
 
-    //         $response = \Illuminate\Support\Facades\Http::withHeaders([
-    //             'Authorization' => 'Bearer ' . env('AISENSY_API_KEY'),
-    //         ])->post('https://backend.aisensy.com/campaign/t1/api/v2', [
+            $response = \Illuminate\Support\Facades\Http::withHeaders([
+                'Authorization' => 'Bearer ' . env('AISENSY_API_KEY'),
+            ])->post('https://backend.aisensy.com/campaign/t1/api/v2', [
 
-    //             "apiKey"       => env('AISENSY_API_KEY'),
-    //             "campaignName" => "fee_confirmation_msg",
-    //             "destination"  => $phone,
+                "apiKey"       => env('AISENSY_API_KEY'),
+                "campaignName" => "fee_confirmation_msg",
+                "destination"  => $phone,
 
-    //             // ✅ Mandatory clean username
-    //             "userName"     => $fullName,
+                // ✅ Mandatory clean username
+                "userName"     => $fullName,
 
-    //             "templateParams" => [
-    //                 $fullName,
-    //                 number_format($record->fee_amount, 2),
-    //                 $record->course->name,
-    //             ],
-    //         ]);
-    //         // 🔥 IMPORTANT — log full response
-    //         logger()->info('AiSensy Response: ' . $response->body());
+                "templateParams" => [
+                    $fullName,
+                    number_format($record->fee_amount, 2),
+                    $record->course->name,
+                ],
+            ]);
+            // 🔥 IMPORTANT — log full response
+            logger()->info('AiSensy Response: ' . $response->body());
 
-    //         if ($response->successful()) {
-    //             \Filament\Notifications\Notification::make()
-    //                 ->title('WhatsApp message sent successfully')
-    //                 ->success()
-    //                 ->send();
-    //         } else {
+            if ($response->successful()) {
+                \Filament\Notifications\Notification::make()
+                    ->title('WhatsApp message sent successfully')
+                    ->success()
+                    ->send();
+            } else {
 
-    //             \Filament\Notifications\Notification::make()
-    //                 ->title('WhatsApp sending failed')
-    //                 ->danger()
-    //                 ->send();
-    //         }
-    //     } catch (\Exception $e) {
-    //         logger()->error('WhatsApp API Error: ' . $e->getMessage());
-    //     }
-    // }
+                \Filament\Notifications\Notification::make()
+                    ->title('WhatsApp sending failed')
+                    ->danger()
+                    ->send();
+            }
+        } catch (\Exception $e) {
+            logger()->error('WhatsApp API Error: ' . $e->getMessage());
+        }
+    }
 }
