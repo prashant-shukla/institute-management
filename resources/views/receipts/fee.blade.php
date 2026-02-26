@@ -172,8 +172,8 @@
                     <tr>
                         <th>Course</th>
                         <th> Course Fee</th>
-                        <th>Amount Received</th>
-                        <th>GST</th>
+                        <!-- <th>Amount Received</th> -->
+                        <th>IGST</th>
                         <!-- <th>Discount</th> -->
                         <th>Total Fees</th>
                     </tr>
@@ -187,7 +187,7 @@
                             </small>
                         </td>
                         <td>₹{{ number_format($courseFee, 2) }}</td>
-                        <td>₹{{ number_format($receivedAmount, 2) }}</td>
+                        <!-- <td>₹{{ number_format($receivedAmount, 2) }}</td> -->
                         <td>₹{{ number_format($gstAmount, 2) }}</td>
                         <!-- <td>₹{{ number_format($discountAmount, 2) }}</td> -->
                         <td>₹{{ number_format($totalFee, 2) }}</td>
@@ -227,7 +227,7 @@
 
         <div class="summary">
             <p>Total Course Fee: ₹{{ number_format($totalFee, 2) }}</p>
-            <p>Total Paid Till Now: ₹{{ number_format($totalPaid, 2) }}</p>
+            <p>Received : ₹{{ number_format($totalPaid, 2) }}</p>
             <p class="total">Current Due: ₹{{ number_format($dueAmount, 2) }}</p>
         </div>
 
