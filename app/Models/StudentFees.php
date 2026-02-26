@@ -28,7 +28,9 @@ class StudentFees extends Model
         return $this->belongsTo(Student::class, 'student_id');
     }
  
-
+    protected $casts = [
+        'received_on' => 'datetime',
+    ];
 
     protected $fillable = [
         'student_id',
