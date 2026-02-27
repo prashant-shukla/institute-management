@@ -3,92 +3,105 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CADADDA Fee Receipt</title>
+    <title>CADADDA Receipt</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 30px;
+            margin: 20px;
             color: #333;
         }
 
-        .container {
-            border: 1px solid #ddd;
-            padding: 20px;
-            max-width: 700px;
-            margin: auto;
+        .receipt {
+            padding: 15px 0;
         }
 
-        .header {
+        .top-bar {
             display: flex;
             justify-content: space-between;
         }
 
-        .header-left h2 {
+        .company h2 {
             margin: 0;
             color: #007BFF;
         }
 
-        .header-left p {
-            margin: 2px 0;
-            font-size: 13px;
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 25px;
         }
 
-        .header-right {
-            text-align: right;
-            font-size: 13px;
+        .left-box p,
+        .right-box p {
+            margin: 4px 0;
+            line-height: 1.6;
+            font-size: 14px;
         }
 
-        .section {
-            margin-top: 20px;
-        }
-
-        .section h4 {
+        .section-title {
+            font-weight: bold;
             margin-bottom: 8px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 3px;
+        }
+
+        .right-box {
+            text-align: right;
+        }
+
+        .company p {
+            margin: 4px 0;
+            font-size: 13px;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         th,
         td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            font-size: 14px;
-            text-align: center;
-            justify-content: center;
+            padding: 6px;
+            border: 1px solid #ccc;
+            font-size: 13px;
         }
 
         th {
-            background: #f8f8f8;
+            text-align: left;
+
         }
 
-        .summary {
-            margin-top: 20px;
+        .received {
+            margin-top: 15px;
             text-align: right;
-        }
-
-        .summary p {
-            margin: 5px 0;
-        }
-
-        .total {
             font-weight: bold;
-            color: #007BFF;
         }
 
-        .print-btn {
+        .copy-label {
             text-align: right;
-            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .divider {
+            border-top: 1px dashed #000;
+            margin: 25px 0;
         }
 
         @media print {
-            .print-btn {
+            .no-print {
                 display: none;
             }
         }
@@ -104,134 +117,121 @@
 
     $totalFee = $student->total_fee ?? 0;
     $courseFee = $student->course_fee ?? 0;
+    $igst = $student->gst_amount ?? 0;
+
     $totalPaid = \App\Models\StudentFees::where('student_id', $fee->student_id)
     ->where('course_id', $fee->course_id)
     ->sum('fee_amount');
 
     $receivedAmount = $fee->fee_amount ?? 0;
     $dueAmount = max($totalFee - $totalPaid, 0);
-
-    $gstAmount = $student->gst_amount ?? 0;
-    $discountAmount = $course_fee->discount_amount ?? 0;
-
-    $allPayments = \App\Models\StudentFees::where('student_id', $fee->student_id)
-    ->where('course_id', $fee->course_id)
-    ->orderBy('received_on', 'asc')
-    ->get();
-
     @endphp
 
-    <div class="container">
 
-        <div class="print-btn">
-            <button onclick="window.print()">🖨 Print</button>
+    @for($i = 0; $i < 2; $i++)
+
+        <div class="receipt">
+
+        <div class="copy-label">
+            {{ $i == 0 ? 'Office Copy' : 'Student Copy' }}
         </div>
 
-        <!-- ✅ HEADER (Same As You Wanted) -->
-        <div class="header">
-            <div class="header-left">
+        <!-- HEADER -->
+        <div class="top-bar">
+            <div class="company">
                 <h2>CADADDA</h2>
-                <p>8, Behind Mahaveer Complex, C Road, SardarPura, Jodhpur, Raj.</p>
-                <p>📞 +91-9261077888</p>
+                <p>8, Behind Mahaveer Complex, C Road</p>
+                <p>Sardarpura, Jodhpur, Raj.</p>
+                <p>+91 - 9261077888</p>
             </div>
 
-            <div class="header-right">
-                <h3>Receipt No: {{ $fee->receipt_no ?? '-' }}</h3>
-
+            <div class="right">
+                <h3>RECEIPT NO #{{ $fee->receipt_no }}</h3>
                 <p>
                     Date:
-                    {{ $fee->received_on 
-                      ? $fee->received_on->format('d/m/Y') 
-                      : '-' 
-                     }}
+                    {{ $fee->received_on
+                    ? \Carbon\Carbon::parse($fee->received_on)->format('d/m/Y')
+                    : '-' }}
                 </p>
-
-                @if(($gstAmount ?? 0) > 0)
-                <p>GST No: 08DAZPK3683R1ZB</p>
-                @endif
             </div>
         </div>
 
-        <div class="section">
-        <h4>Receipt No: {{ $fee->receipt_no ?? '-' }}</h4>
+        <!-- RECEIPT TO + PAYMENT DETAILS -->
+        <div class="flex-row">
 
-            <p><strong>
-                    {{ $user ? $user->firstname . ' ' . $user->lastname : '-' }}
-                </strong></p>
+            <!-- LEFT -->
+            <div class="left-box" style="width:60%;">
+                <div class="section-title">Receipt To:</div>
 
-            <p>Father Name: {{ $student->father_name ?? '-' }}</p>
-            <p>Reg. No: {{ $student->reg_no ?? '-' }}</p>
-            <p>Address: {{ $student->correspondence_add ?? '-' }}</p>
+                <p><strong>{{ $user?->firstname }} {{ $user?->lastname }}</strong></p>
+                <p>Father Name: {{ $student->father_name ?? '-' }}</p>
+                <p>Reg No: {{ $student->reg_no ?? '-' }}</p>
+                <p>{{ $student->correspondence_add ?? '-' }}</p>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="right-box" style="width:35%;">
+                <div class="section-title">Payment Details:</div>
+
+                <p>
+                    Total Course Fee:
+                    <strong>₹{{ number_format($totalFee, 2) }}</strong>
+                </p>
+
+                <p>
+                    Total Received Amount:
+                    <strong>₹{{ number_format($totalPaid, 2) }}</strong>
+                </p>
+
+                <p>
+                    Current Due Amount:
+                    <strong>₹{{ number_format($dueAmount, 2) }}</strong>
+                </p>
+            </div>
+
         </div>
 
-        <div class="section">
-            <h4>Payment Description</h4>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th> Course Fee</th>
-                        <!-- <th>Amount Received</th> -->
-                        <th>IGST</th>
-                        <!-- <th>Discount</th> -->
-                        <th>Total Fees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            {{ $course->name ?? '-' }} <br>
-                            <small style="color:#777">
-                                {{ $course->short_description ?? '' }}
-                            </small>
-                        </td>
-                        <td>₹{{ number_format($courseFee, 2) }}</td>
-                        <!-- <td>₹{{ number_format($receivedAmount, 2) }}</td> -->
-                        <td>₹{{ number_format($gstAmount, 2) }}</td>
-                        <!-- <td>₹{{ number_format($discountAmount, 2) }}</td> -->
-                        <td>₹{{ number_format($totalFee, 2) }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="section">
-    <h4>Payment History</h4>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Receipt No</th>
-                <th>Payment Mode</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($allPayments as $payment)
+        <!-- COURSE TABLE -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Payment Description</th>
+                    <th style="text-align:right;">Course Fee</th>
+                    <th style="text-align:right;">IGST</th>
+                    <th style="text-align:right;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td>
-                        {{ $payment->received_on 
-                            ? \Carbon\Carbon::parse($payment->received_on)->format('d/m/Y') 
-                            : '-' 
-                        }}
+                        {{ $course->name ?? '-' }}<br>
+                        <small>{{ $course->short_description ?? '' }}</small>
                     </td>
-                    <td>{{ $payment->receipt_no }}</td>
-                    <td>{{ ucfirst($payment->payment_mode) }}</td>
-                    <td>₹{{ number_format($payment->fee_amount, 2) }}</td>
+                    <td style="text-align:right;">
+                        ₹{{ number_format($courseFee, 2) }}
+                    </td>
+                    <td style="text-align:right;">
+                        ₹{{ number_format($igst, 2) }}
+                    </td>
+                    <td style="text-align:right;">
+                        ₹{{ number_format($totalFee, 2) }}
+                    </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+
+        <!-- RECEIVED -->
+        <div class="received">
+            Received Amount: ₹{{ number_format($receivedAmount, 2) }}
         </div>
 
-        <div class="summary">
-            <p>Total Course Fee: ₹{{ number_format($totalFee, 2) }}</p>
-            <p>Received : ₹{{ number_format($totalPaid, 2) }}</p>
-            <p class="total">Current Due: ₹{{ number_format($dueAmount, 2) }}</p>
         </div>
 
-    </div>
+        @if($i == 0)
+        <div class="divider"></div>
+        @endif
+
+        @endfor
 
 </body>
 

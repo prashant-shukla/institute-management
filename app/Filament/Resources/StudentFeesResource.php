@@ -446,49 +446,49 @@ class StudentFeesResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 // Manual WhatsApp Web link
-                Tables\Actions\Action::make('whatsapp')
-                ->label('Send via WhatsApp')
-                ->icon('heroicon-o-chat-bubble-left-ellipsis')
-                ->url(function ($record) {
+                // Tables\Actions\Action::make('whatsapp')
+                // ->label('Send via WhatsApp')
+                // ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                // ->url(function ($record) {
             
-                    if (!$record->student) {
-                        return '#';
-                    }
+                //     if (!$record->student) {
+                //         return '#';
+                //     }
             
-                    $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
+                //     $phone = preg_replace('/[^0-9]/', '', $record->student->mobile_no ?? '');
             
-                    if (!$phone) {
-                        return '#';
-                    }
+                //     if (!$phone) {
+                //         return '#';
+                //     }
             
-                    if (substr($phone, 0, 2) !== '91') {
-                        $phone = '91' . $phone;
-                    }
+                //     if (substr($phone, 0, 2) !== '91') {
+                //         $phone = '91' . $phone;
+                //     }
             
-                    $amount = number_format($record->fee_amount ?? 0, 2);
+                //     $amount = number_format($record->fee_amount ?? 0, 2);
             
-                    $date = $record->received_on
-                        ? \Carbon\Carbon::parse($record->received_on)->format('d M Y')
-                        : '-';
+                //     $date = $record->received_on
+                //         ? \Carbon\Carbon::parse($record->received_on)->format('d M Y')
+                //         : '-';
             
-                    $name = trim(
-                        optional($record->student?->user)->firstname . ' ' .
-                        optional($record->student?->user)->lastname
-                    );
+                //     $name = trim(
+                //         optional($record->student?->user)->firstname . ' ' .
+                //         optional($record->student?->user)->lastname
+                //     );
             
-                    // ✅ SAFE COURSE ACCESS
-                    $courseName = $record->course?->name ?? 'Course Not Assigned';
+                //     // ✅ SAFE COURSE ACCESS
+                //     $courseName = $record->course?->name ?? 'Course Not Assigned';
             
-                    $message = "Hello {$name},\n\n"
-                        . "We have received your fee payment.\n"
-                        . "Amount: ₹{$amount}\n"
-                        . "Date: {$date}\n"
-                        . "Course: {$courseName}\n\n"
-                        . "Thank you!";
+                //     $message = "Hello {$name},\n\n"
+                //         . "We have received your fee payment.\n"
+                //         . "Amount: ₹{$amount}\n"
+                //         . "Date: {$date}\n"
+                //         . "Course: {$courseName}\n\n"
+                //         . "Thank you!";
             
-                    return "https://wa.me/{$phone}?text=" . urlencode($message);
-                })
-                ->openUrlInNewTab(),
+                //     return "https://wa.me/{$phone}?text=" . urlencode($message);
+                // })
+                // ->openUrlInNewTab(),
 
                 Tables\Actions\Action::make('print')
                     ->label('Print')
